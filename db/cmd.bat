@@ -1,0 +1,1 @@
+mysqldump -uroot -p tuyensinh_online > db.sql
