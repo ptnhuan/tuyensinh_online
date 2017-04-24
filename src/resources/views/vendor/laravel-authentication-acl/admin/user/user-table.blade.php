@@ -1,6 +1,6 @@
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title bariol-thin"><i class="fa fa-user"></i> {!! $request->all() ? 'Search results:' : 'Users' !!}</h3>
+        <h3 class="panel-title bariol-thin"><i class="fa fa-user"></i> {!! $request->all() ? trans('tuyensinh.user_heading') : trans('tuyensinh.user_heading') !!}</h3>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -18,7 +18,7 @@
                 {!! Form::close() !!}
             </div>
             <div class="col-lg-2 col-md-3 col-sm-3">
-                    <a href="{!! URL::route('users.edit') !!}" class="btn btn-info"><i class="fa fa-plus"></i> Add New</a>
+                    <a href="{!! URL::route('users.edit') !!}" class="btn btn-info"><i class="fa fa-plus"></i> {{trans('tuyensinh.user_Add')}}</a>
             </div>
         </div>
       <div class="row">
@@ -27,12 +27,12 @@
               <table class="table table-hover">
                       <thead>
                           <tr>
-                              <th>Email</th>
-                              <th class="hidden-xs">First name</th>
-                              <th class="hidden-xs">Last name</th>
-                              <th>Active</th>
-                              <th class="hidden-xs">Last login</th>
-                              <th>Operations</th>
+                              <th>{{trans('tuyensinh.user_email')}}</th>
+                              <th class="hidden-xs">{{trans('tuyensinh.user_FirstName')}}</th>
+                              <th class="hidden-xs">{{trans('tuyensinh.user_LastName')}}</th>
+                              <th>{{trans('tuyensinh.user_Active')}}</th>
+                              <th class="hidden-xs">{{trans('tuyensinh.user_LastLogin')}}</th>
+                              <th>{{trans('tuyensinh.user_Operations')}}</th>
                           </tr>
                       </thead>
                       <tbody>

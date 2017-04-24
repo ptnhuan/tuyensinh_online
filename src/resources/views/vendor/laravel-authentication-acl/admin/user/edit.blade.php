@@ -20,59 +20,59 @@ Admin area: edit user
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="panel-title bariol-thin">{!! isset($user->id) ? '<i class="fa fa-pencil"></i> Edit' : '<i class="fa fa-user"></i> Create' !!} user</h3>
+                        <h3 class="panel-title bariol-thin">{!! isset($user->id) ? trans('tuyensinh.user_Edit') : trans('tuyensinh.user_Add') !!} </h3>
                     </div>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
-                        <a href="{!! URL::route('users.profile.edit',['user_id' => $user->id]) !!}" class="btn btn-info pull-right" {!! ! isset($user->id) ? 'disabled="disabled"' : '' !!}><i class="fa fa-user"></i> Edit profile</a>
+                        <a href="{!! URL::route('users.profile.edit',['user_id' => $user->id]) !!}" class="btn btn-info pull-right" {!! ! isset($user->id) ? 'disabled="disabled"' : '' !!}><i class="fa fa-user"></i> {{trans('tuyensinh.user_Edit')}}</a>
                     </div>
                 </div>
                 <div class="col-md-6 col-xs-12">
-                    <h4>Login data</h4>
+                    <h4>{{trans('tuyensinh.user_LoadData')}}</h4>
                     {!! Form::model($user, [ 'url' => URL::route('users.edit')] )  !!}
                     {{-- Field hidden to fix chrome and safari autocomplete bug --}}
                     {!! Form::password('__to_hide_password_autocomplete', ['class' => 'hidden']) !!}
                     <!-- email text field -->
                     <div class="form-group">
-                        {!! Form::label('email','Email: *') !!}
+                        {!! Form::label('email',trans('tuyensinh.user_Email')) !!}
                         {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'user email', 'autocomplete' => 'off']) !!}
                     </div>
                     <span class="text-danger">{!! $errors->first('email') !!}</span>
                     <!-- password text field -->
                     <div class="form-group">
-                        {!! Form::label('password',isset($user->id) ? "Change password: " : "Password: ") !!}
+                        {!! Form::label('password',isset($user->id) ? trans('tuyensinh.user_PassNew') : trans('tuyensinh.user_Pass')) !!}
                         {!! Form::password('password', ['class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => '']) !!}
                     </div>
                     <span class="text-danger">{!! $errors->first('password') !!}</span>
                     <!-- password_confirmation text field -->
                     <div class="form-group">
-                        {!! Form::label('password_confirmation',isset($user->id) ? "Confirm change password: " : "Confirm password: ") !!}
+                        {!! Form::label('password_confirmation',isset($user->id) ? trans('tuyensinh.user_PassNewRe') : trans('tuyensinh.user_PassNewRe')) !!}
                         {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => '','autocomplete' => 'off']) !!}
                     </div>
                     <span class="text-danger">{!! $errors->first('password_confirmation') !!}</span>
                     <div class="form-group">
-                        {!! Form::label("activated","User active: ") !!}
+                        {!! Form::label("activated",trans('tuyensinh.user_Active')) !!}
                         {!! Form::select('activated', ["1" => "Yes", "0" => "No"], (isset($user->activated) && $user->activated) ? $user->activated : "0", ["class"=> "form-control"] ) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label("banned","Banned: ") !!}
+                        {!! Form::label("banned",trans('tuyensinh.user_unlock')) !!}
                         {!! Form::select('banned', ["1" => "Yes", "0" => "No"], (isset($user->banned) && $user->banned) ? $user->banned : "0", ["class"=> "form-control"] ) !!}
                     </div>
                     {!! Form::hidden('id') !!}
                     {!! Form::hidden('form_name','user') !!}
-                    <a href="{!! URL::route('users.delete',['id' => $user->id, '_token' => csrf_token()]) !!}" class="btn btn-danger pull-right margin-left-5 delete">Delete user</a>
-                    {!! Form::submit('Save', array("class"=>"btn btn-info pull-right ")) !!}
+                    <a href="{!! URL::route('users.delete',['id' => $user->id, '_token' => csrf_token()]) !!}" class="btn btn-danger pull-right margin-left-5 delete">{{trans('tuyensinh.user_delete')}}</a>
+                    {!! Form::submit(trans('tuyensinh.user_save'), array("class"=>"btn btn-info pull-right ")) !!}
                     {!! Form::close() !!}
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <h4><i class="fa fa-users"></i> Groups</h4>
+                        <h4><i class="fa fa-users"></i> {{trans('tuyensinh.user_Group')}}</h4>
                         @include('laravel-authentication-acl::admin.user.groups')
 
                         {{-- group permission form --}}
-                        <h4><i class="fa fa-lock"></i> Permission</h4>
+                        <h4><i class="fa fa-lock"></i> {{trans('tuyensinh.user_permission')}}</h4>
                         {{-- permissions --}}
                         @include('laravel-authentication-acl::admin.user.perm')
                     </div>
