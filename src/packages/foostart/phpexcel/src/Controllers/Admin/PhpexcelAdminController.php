@@ -43,20 +43,19 @@ class PhpexcelAdminController extends PhpexcelController {
      */
 
     public function edit(Request $request) {
-        $api = NULL;
-        $api_id = (int) $request->get('id');
+        $phpexcel = NULL;
+        $phpexcel_id = (int) $request->get('id');
 
-        if (!empty($api_id) && (is_int($api_id))) {
-            $api = $this->obj_api->find($api_id);
+        if (!empty($phpexcel_id) && (is_int($phpexcel_id))) {
+            $phpexcel = $this->obj_phpexcels->find($phpexcel_id);
         }
 
-
-        $this->data_view = array_merge($this->data_view, array(
-            'api' => $api,
+        $this->data = array_merge($this->data, array(
+            'phpexcel' => $phpexcel,
             'request' => $request,
         ));
 
-        return view('api::api.admin.api_edit', $this->data_view);
+        return view('phpexcel::admin.phpexcel_edit', $this->data);
     }
 
     /**

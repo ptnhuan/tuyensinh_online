@@ -1,8 +1,8 @@
 <!-- SAMPLE INPUT NAME -->
 <div class="form-group">
 
-    {!! Form::label('key', trans('api::api_admin.api_key').':') !!}
-    {!! Form::text('key', $api->api_key, ['class' => 'form-control', 'placeholder' => trans('api::api_admin.name').'']) !!}
+    {!! Form::label('key', trans('phpexcel::phpexcel_admin.phpexcel_key').':') !!}
+    {!! Form::text('key', $phpexcel->phpexcel_key, ['class' => 'form-control', 'placeholder' => trans('phpexcel::phpexcel_admin.name').'']) !!}
 
 </div>
 <!-- /END SAMPLE INPUT NAME -->

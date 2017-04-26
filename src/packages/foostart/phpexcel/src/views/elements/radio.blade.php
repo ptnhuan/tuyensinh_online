@@ -7,11 +7,11 @@
         $locked = 0;
         $running = 1;
     ?>
-    <fieldset> 
+    <fieldset>
 
-        <input type="radio" value="<?php echo $locked ?>" name="api_status" checked>Locked
-        <input type="radio" value="<?php echo $running ?>" name="api_status" <?php if ($running == $api->api_status) echo 'checked' ?>>Running
-        
+        <input type="radio" value="<?php echo $locked ?>" name="phpexcel_status" checked>Locked
+        <input type="radio" value="<?php echo $running ?>" name="phpexcel_status" <?php if ($running == $phpexcel->phpexcel_status) echo 'checked' ?>>Running
+
     </fieldset>
 
 </div>

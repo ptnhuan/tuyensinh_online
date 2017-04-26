@@ -581,3 +581,5 @@
 127.0.0.1 - - [26/Apr/2017:16:59:25 +0700] "GET /admin/phpexcel HTTP/1.1" 200 6578
 127.0.0.1 - - [26/Apr/2017:16:59:26 +0700] "GET /favicon.ico HTTP/1.1" 200 -
 127.0.0.1 - - [26/Apr/2017:17:00:34 +0700] "GET /admin/phpexcel/edit?id=1 HTTP/1.1" 500 23429
+127.0.0.1 - - [26/Apr/2017:17:01:01 +0700] "GET /admin/phpexcel/edit?id=1 HTTP/1.1" 200 220
+127.0.0.1 - - [26/Apr/2017:17:01:02 +0700] "GET /favicon.ico HTTP/1.1" 200 -
