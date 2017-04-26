@@ -1,6 +1,4 @@
-<?php
-
-namespace Foostart\Phpexcel\Models;
+<?php namespace Foostart\Phpexcel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,12 +8,8 @@ class Phpexcels extends Model {
     public $timestamps = false;
     protected $fillable = [
         'phpexcel_name',
-        'category_id',
-        'phpexcel_image',
-        'phpexcel_overview',
-        'phpexcel_description',
-        'slideshow_id'
     ];
+
     protected $primaryKey = 'phpexcel_id';
 
     /**
@@ -24,16 +18,8 @@ class Phpexcels extends Model {
      * @return type
      */
     public function get_phpexcels($params = array()) {
-        $eloquent = self::orderBy('phpexcel_id');
-
-        //phpexcel_name
-        if (!empty($params['phpexcel_name'])) {
-            $eloquent->where('phpexcel_name', 'like', '%'. $params['phpexcel_name'].'%');
-        }
-
-        $phpexcels = $eloquent->paginate(10);//TODO: change number of item per page to configs
-
-        return $phpexcels;
+        $api = self::get();
+        return $api;
     }
 
 
@@ -41,29 +27,26 @@ class Phpexcels extends Model {
     /**
      *
      * @param type $input
-     * @param type $phpexcel_id
+     * @param type $api_id
      * @return type
      */
-    public function update_phpexcel($input, $phpexcel_id = NULL) {
+    public function update_api($input, $api_id = NULL) {
 
-        if (empty($phpexcel_id)) {
-            $phpexcel_id = $input['phpexcel_id'];
+        if (empty($api_id)) {
+            $api_id = $input['api_id'];
         }
 
-        $phpexcel = self::find($phpexcel_id);
+        $api = self::find($api_id);
 
-        if (!empty($phpexcel)) {
+        if (!empty($api)) {
 
-            $phpexcel->phpexcel_name = $input['phpexcel_name'];
-            $phpexcel->category_id = $input['category_id'];
-            $phpexcel->phpexcel_image = $input['phpexcel_image'];
-            $phpexcel->phpexcel_overview = $input['phpexcel_overview'];
-            $phpexcel->phpexcel_description = $input['phpexcel_description'];
-            $phpexcel->slideshow_id = $input['slideshow_id'];
+            $api->api_key = $input['_token'];
+            $api->api_status = (int)$input['api_status'];
+            $api->api_updated_at = time();
 
-            $phpexcel->save();
+            $api->save();
 
-            return $phpexcel;
+            return $api;
         } else {
             return NULL;
         }
@@ -74,16 +57,18 @@ class Phpexcels extends Model {
      * @param type $input
      * @return type
      */
-    public function add_phpexcel($input) {
+    public function add_api($input) {
 
-        $phpexcel = self::create([
-                    'phpexcel_name' => @$input['phpexcel_name'],
-                    'category_id' => @$input['category_id'],
-                    'phpexcel_image' => @$input['phpexcel_image'],
-                    'phpexcel_overview' => @$input['phpexcel_overview'],
-                    'phpexcel_description' => @$input['phpexcel_description'],
-                    'slideshow_id' => @$input['slideshow_id'],
+        $api = self::create([
+                    'api_key' => @$input['_token'],
+                    'api_status' => @$input['api_status'],
+                    'api_created_at' => time(),
+                    'api_updated_at' => time(),
         ]);
-        return $phpexcel;
+
+        return $api;
     }
+
+
+
 }

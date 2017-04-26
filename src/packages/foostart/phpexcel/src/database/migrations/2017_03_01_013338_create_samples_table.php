@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatephpexcelsTable extends Migration {
+class CreateSamplesTable extends Migration {
 
     private $_table = NULL;
     private $fileds = NULL;
 
     public function __construct() {
-        $this->_table = 'phpexcels';
+        $this->_table = 'samples';
     }
 
     /**
@@ -25,24 +25,24 @@ class CreatephpexcelsTable extends Migration {
          */
         if (!Schema::hasTable($this->_table)) {
             Schema::create($this->_table, function (Blueprint $table) {
-                $table->increments('phpexcel_id');
-                $table->string('phpexcel_name');
+                $table->increments('sample_id');
+                $table->string('sample_name');
             });
         }
 
         /**
          * Existing fields
          */
-        //phpexcel_id
-        if (!Schema::hasColumn($this->_table, 'phpexcel_id')) {
+        //sample_id
+        if (!Schema::hasColumn($this->_table, 'sample_id')) {
             Schema::table($this->_table, function (Blueprint $table) {
-                $table->increments('phpexcel_id');
+                $table->increments('sample_id');
             });
         }
-        //phpexcel_name
-        if (!Schema::hasColumn($this->_table, 'phpexcel_name')) {
+        //sample_name
+        if (!Schema::hasColumn($this->_table, 'sample_name')) {
             Schema::table($this->_table, function (Blueprint $table) {
-                $table->string('phpexcel_name', 255);
+                $table->string('sample_name', 255);
             });
         }
         //category_id
@@ -52,10 +52,10 @@ class CreatephpexcelsTable extends Migration {
             });
         }
 
-        //phpexcel_image
-        if (!Schema::hasColumn($this->_table, 'phpexcel_image')) {
+        //sample_image
+        if (!Schema::hasColumn($this->_table, 'sample_image')) {
             Schema::table($this->_table, function (Blueprint $table) {
-                $table->string('phpexcel_image', 255);
+                $table->string('sample_image', 255);
             });
         }
         //status_id
@@ -72,7 +72,7 @@ class CreatephpexcelsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('phpexcels');
+        Schema::dropIfExists('samples');
     }
 
 }

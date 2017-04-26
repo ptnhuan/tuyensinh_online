@@ -1,26 +1,21 @@
 <?php namespace Foostart\Phpexcel\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Foostart\Phpexcel\Controllers\Admin\PhpexcelController;
+use Foostart\Phpexcel\Controllers\Admin\ApiController;
 use URL;
 use Route,
     Redirect;
 use Foostart\Phpexcel\Models\Phpexcels;
-use Foostart\Phpexcel\Models\PhpexcelCategories;
-use Foostart\Slideshow\Models\Slideshows;
+
 /**
  * Validators
  */
-use Foostart\Phpexcel\Validators\PhpexcelAdminValidator;
+class PhpexcelAdminController extends PhpexcelController {
 
-class PhpexcelAdminController extends MyController {
-
-    private $obj_phpexcel = NULL;
-    private $obj_phpexcel_categories = NULL;
-    private $obj_validator = NULL;
+    public $obj_phpexcels = NULL;
 
     public function __construct() {
-        $this->obj_phpexcel = new Phpexcels();
+        $this->obj_phpexcels = new Phpexcels();
     }
 
     /**
@@ -28,45 +23,40 @@ class PhpexcelAdminController extends MyController {
      * @return type
      */
     public function index(Request $request) {
-        var_dump(22);
-        die();
 
         $params = $request->all();
 
-        $list_phpexcel = $this->obj_phpexcel->get_phpexcels($params);
+        $phpexcels = $this->obj_phpexcels->get_phpexcels($params);
+
 
         $this->data = array_merge($this->data, array(
-            'phpexcels' => $list_phpexcel,
+            'phpexcels' => $phpexcels,
             'request' => $request,
             'params' => $params
         ));
-        return view('phpexcel::phpexcel.admin.phpexcel_list', $this->data);
+
+        return view('phpexcel::admin.phpexcel_list', $this->data);
     }
 
-    /**
-     *
-     * @return type
+    /*
+     * Edit
      */
+
     public function edit(Request $request) {
+        $api = NULL;
+        $api_id = (int) $request->get('id');
 
-        $phpexcel = NULL;
-        $phpexcel_id = (int) $request->get('id');
-
-        $obj_slideshow = new Slideshows();
-
-        if (!empty($phpexcel_id) && (is_int($phpexcel_id))) {
-            $phpexcel = $this->obj_phpexcel->find($phpexcel_id);
+        if (!empty($api_id) && (is_int($api_id))) {
+            $api = $this->obj_api->find($api_id);
         }
 
-        $this->obj_phpexcel_categories = new phpexcelsCategories();
 
-        $this->data = array_merge($this->data, array(
-            'phpexcel' => $phpexcel,
+        $this->data_view = array_merge($this->data_view, array(
+            'api' => $api,
             'request' => $request,
-            'categories' => array(0 => 'None') + $this->obj_phpexcel_categories->pluckSelect()->toArray(),
-            'slideshows' => array(0 => 'None') + $obj_slideshow->pluckSelect()->toArray()
         ));
-        return view('phpexcel::phpexcel.admin.phpexcel_edit', $this->data);
+
+        return view('api::api.admin.api_edit', $this->data_view);
     }
 
     /**
@@ -75,98 +65,50 @@ class PhpexcelAdminController extends MyController {
      */
     public function post(Request $request) {
 
-        $this->obj_validator = new phpexcelAdminValidator();
-        $this->obj_phpexcel_categories = new phpexcelsCategories();
-
-        $obj_slideshow = new Slideshows();
         $input = $request->all();
-
-
-        $phpexcel_id = (int) $request->get('id');
-        $phpexcel = NULL;
+        var_dump($input);
+        die();
+        $api_id = (int) $request->get('id');
+        $api = NULL;
 
         $data = array();
+        if (!empty($api_id) && is_int($api_id)) {
 
-        if (!$this->obj_validator->validate($input)) {
+            $api = $this->obj_api->find($api_id);
+            $input['api_id'] = $api_id;
 
-            $data['errors'] = $this->obj_validator->getErrors();
-
-            if (!empty($phpexcel_id) && is_int($phpexcel_id)) {
-
-                $phpexcel = $this->obj_phpexcel->find($phpexcel_id);
+            if (!isset($input['api_status'])) {
+                $input['_token'] = csrf_token();
+                $input['api_status'] = $api->api_status;
             }
+
+            $api = $this->obj_api->update_api($input);
+
+            return Redirect(route('admin_api'));
         } else {
-            if (!empty($phpexcel_id) && is_int($phpexcel_id)) {
 
-                $phpexcel = $this->obj_phpexcel->find($phpexcel_id);
+            $api = $this->obj_api->add_api($input);
 
-                if (!empty($phpexcel)) {
-
-                    $input['phpexcel_id'] = $phpexcel_id;
-                    $phpexcel = $this->obj_phpexcel->update_phpexcel($input);
-
-                    //Message
-                    $this->addFlashMessage('message', trans('phpexcel::phpexcel_admin.message_update_successfully'));
-                    return Redirect::route("admin_phpexcel.edit", ["id" => $phpexcel->phpexcel_id]);
-                } else {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('phpexcel::phpexcel_admin.message_update_unsuccessfully'));
-                }
-            } else {
-
-                $phpexcel = $this->obj_phpexcel->add_phpexcel($input);
-
-                if (!empty($phpexcel)) {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('phpexcel::phpexcel_admin.message_add_successfully'));
-                    return Redirect::route("admin_phpexcel.edit", ["id" => $phpexcel->phpexcel_id]);
-                } else {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('phpexcel::phpexcel_admin.message_add_unsuccessfully'));
-                }
-            }
+            return Redirect(route('admin_api'));
         }
-
-        $this->data = array_merge($this->data_view, array(
-            'phpexcel' => $phpexcel,
-            'request' => $request,
-            'categories' =>  array(0 => 'None') + $this->obj_phpexcel_categories->pluckSelect()->toArray(),
-            'slideshows' => array(0 => 'None') + $obj_slideshow->pluckSelect()->toArray()
-        ), $data);
-
-        return view('phpexcel::phpexcel.admin.phpexcel_edit', $this->data);
     }
 
-    /**
-     *
-     * @return type
+    /*
+     * get json posts
      */
-    public function delete(Request $request) {
+    public function get_posts(Request $request) {
+        $input = $request->all();
+        $obj_posts = new Posts();
+        $obj_api = new API();
 
-        $phpexcel = NULL;
-        $phpexcel_id = $request->get('id');
+        if (isset($input['_token'])) {
+            $check_api = $obj_api->check_api_key($input['_token']);
 
-        if (!empty($phpexcel_id)) {
-            $phpexcel = $this->obj_phpexcel->find($phpexcel_id);
-
-            if (!empty($phpexcel)) {
-                //Message
-                $this->addFlashMessage('message', trans('phpexcel::phpexcel_admin.message_delete_successfully'));
-
-                $phpexcel->delete();
+            if ($check_api) {
+                $posts = $obj_posts->get_posts($input);
+                return response()->json($posts);
             }
-        } else {
-
         }
-
-        $this->data = array_merge($this->data, array(
-            'phpexcel' => $phpexcel,
-        ));
-
-        return Redirect::route("admin_phpexcel");
     }
 
 }

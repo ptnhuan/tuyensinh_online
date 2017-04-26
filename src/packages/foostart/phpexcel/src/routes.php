@@ -3,15 +3,51 @@
 use Illuminate\Session\TokenMismatchException;
 
 /**
- * GUEST
+ * REQEUST
  */
-Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Phpexcel\Controllers\Guest'], function () {
-    Route::get('phpexcel', [
-        'as' => 'phpexcel',
-        'uses' => 'PhpexcelFrontController@index'
-    ]);
-});
+Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Phpexcel\Controllers'], function () {
 
+
+    ////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////POST///////////////////////////////////////
+    /**
+     * Get list of posts with conditions
+     * -per_page
+     * -page
+     * -aid
+     * -uid
+     */
+    Route::get('phpexcel/posts', [
+        'as' => 'phpexcel_get_posts',
+        'uses' => 'PhpexcelAdminController@get_posts'
+    ]);
+
+    /**
+     * Add new post
+     */
+    Route::post('phpexcel/add_post', [
+        'as' => 'phpexcel_add_post',
+        'uses' => 'PostController@add_post'
+    ]);
+
+    /**
+     * Update existing post
+     */
+    Route::put('phpexcel/put_post', [
+        'as' => 'phpexcel_put_post',
+        'uses' => 'PostController@put_post'
+    ]);
+
+    /**
+     * Delete existing post
+     */
+    Route::delete('phpexcel/delete_post', [
+        'as' => 'phpexcel_delete_post',
+        'uses' => 'PostController@delete_post'
+    ]);
+
+
+});
 
 /**
  * ADMINISTRATOR
@@ -21,71 +57,37 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Phpexcel\Control
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
         ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////PHPEXCEL////////////////////////////////////
+        ////////////////////////////SAMPLES ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         /**
-         * list
+         * phpexcel
          */
         Route::get('admin/phpexcel', [
             'as' => 'admin_phpexcel',
             'uses' => 'PhpexcelAdminController@index'
         ]);
-
         /**
-         * edit-add
+         * phpexcel edit
          */
         Route::get('admin/phpexcel/edit', [
             'as' => 'admin_phpexcel.edit',
             'uses' => 'PhpexcelAdminController@edit'
         ]);
-
-        /**
-         * post
-         */
-        Route::post('admin/phpexcel/edit', [
+        Route::post('admin/phpexcel/post', [
             'as' => 'admin_phpexcel.post',
             'uses' => 'PhpexcelAdminController@post'
         ]);
-
-        /**
-         * delete
-         */
-        Route::get('admin/phpexcel/delete', [
+         Route::post('admin/phpexcel/delete', [
             'as' => 'admin_phpexcel.delete',
             'uses' => 'PhpexcelAdminController@delete'
         ]);
-
-
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES//////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        Route::get('admin/phpexcel_category', [
-            'as' => 'admin_phpexcel_category',
-            'uses' => 'PhpexcelCategoryAdminController@index'
-        ]);
-
         /**
-         * edit-add
+         * phpexcel post
          */
-        Route::get('admin/phpexcel_category/edit', [
-            'as' => 'admin_phpexcel_category.edit',
-            'uses' => 'PhpexcelCategoryAdminController@edit'
-        ]);
-
-        /**
-         * post
-         */
-        Route::post('admin/phpexcel_category/edit', [
-            'as' => 'admin_phpexcel_category.post',
-            'uses' => 'PhpexcelCategoryAdminController@post'
-        ]);
-        
-        /**
-         * delete
-         */
-        Route::get('admin/phpexcel_category/delete', [
-            'as' => 'admin_phpexcel_category.delete',
-            'uses' => 'PhpexcelCategoryAdminController@delete'
+        Route::get('admin/phpexcel/generate', [
+            'as' => 'admin_phpexcel.generate',
+            'uses' => 'PhpexcelAdminController@post'
         ]);
     });
 });
+

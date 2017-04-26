@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class phpexcelsTableSeeder extends Seeder {
+class SamplesTableSeeder extends Seeder {
 
     /**
      * Run the database seeds.
@@ -13,8 +13,8 @@ class phpexcelsTableSeeder extends Seeder {
 
         //Create example data
         for ($i = 0; $i < 50; $i++) {
-            DB::table('phpexcels')->insert([
-                'phpexcel_name' => str_random(10)
+            DB::table('samples')->insert([
+                'sample_name' => str_random(10)
             ]);
         }
     }
