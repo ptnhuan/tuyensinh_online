@@ -71,5 +71,15 @@ return [
                 "permissions" => []
             ],
 
+        [
+                /*
+                 * Route to edit the current user profile
+                 */
+                "name"        => "Phpexcel",
+                "route"       => "admin_phpexcel",
+                "link"        => '/admin/phpexcel',
+                "permissions" => []
+            ],
+
     ]
 ];
