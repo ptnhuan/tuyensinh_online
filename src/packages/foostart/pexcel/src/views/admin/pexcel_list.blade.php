@@ -1,4 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
+@section('sub_page_css')
+    {!! HTML::style('css/admin_tuyensinh.css') !!}
+@stop
 
 @section('title')
 Trang quản trị bài viết

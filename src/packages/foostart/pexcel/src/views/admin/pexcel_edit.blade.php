@@ -11,7 +11,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($post->post_id) ? '<i class="fa fa-pencil"></i>'.trans('post::post_admin.form_edit') : '<i class="fa fa-users"></i>'.trans('post::post_admin.form_add') !!}
+                        {!! !empty($pexcel->pexcel_id) ? '<i class="fa fa-pencil"></i>'.trans('pexcel::pexcel.form_edit') : '<i class="fa fa-users"></i>'.trans('pexcel::pexcel.form_add') !!}
                     </h3>
                 </div>
 
@@ -30,10 +30,10 @@ Trang quản trị bài viết
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <!--SAMPLE TITLE FORM EDIT-->
-                            <h4>{!! trans('post::post_admin.form_heading') !!}</h4>
+                            <h4>{!! trans('pexcel::pexcel.form_heading') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
-                            {!! Form::open(['route'=>['admin_post.post', 'id' => @$post->post_id],  'files'=>true, 'method' => 'post'])  !!}
+                            {!! Form::open(['route'=>['admin_pexcel.post', 'id' => @$pexcel->pexcel_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -43,7 +43,7 @@ Trang quản trị bài viết
                                 <!--TAB HOME-->
                                 <li class="active">
                                     <a data-toggle="tab" href="#home">
-                                        {!! trans('post::post_admin.tab_overview') !!}
+                                        {!! trans('pexcel::pexcel.tab_overview') !!}
                                     </a>
                                 </li>
                                 <!--/END TAB HOME-->
@@ -51,7 +51,7 @@ Trang quản trị bài viết
                                 <!--TAB ATTRIBUTES-->
                                 <li>
                                     <a data-toggle="tab" href="#attributes">
-                                        {!! trans('post::post_admin.tab_attributes') !!}
+                                        {!! trans('pexcel::pexcel.tab_attributes') !!}
                                     </a>
                                 </li>
                                 <!--/END TAB ATTRIBUTES-->
@@ -59,7 +59,7 @@ Trang quản trị bài viết
                                 <!--TAB IMAGE-->
                                 <li>
                                     <a data-toggle="tab" href="#image">
-                                        {!! trans('post::post_admin.tab_image') !!}
+                                        {!! trans('pexcel::pexcel.tab_image') !!}
                                     </a>
                                 </li>
                                 <!--/END TAB IMAGE-->
@@ -74,11 +74,11 @@ Trang quản trị bài viết
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
                                     <!--INPUT-->
-                                    @include('post::post.elements.input', ['name' => 'post_name'])
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_name'])
                                     <!--/END INPUT-->
 
                                      <!--TEXT-->
-                                    @include('post::post.elements.text', ['name' => 'post_name'])
+                                    @include('pexcel::elements.text', ['name' => 'pexcel_name'])
                                     <!--/END TEXT-->
                                 </div>
                                 <!--/END TAB OVERVIEW-->
@@ -86,7 +86,6 @@ Trang quản trị bài viết
                                 <!--TAB ATTRIBUTES-->
                                 <div id="attributes" class="tab-pane fade">
                                     <!--SELECT-->
-                                    @include('post::post.elements.select')
                                     <!--/END SELECT-->
                                 </div>
                                 <!--TAB ATTRIBUTES-->
@@ -94,17 +93,17 @@ Trang quản trị bài viết
                                 <!--TAB IMAGE-->
                                 <div id="image" class="tab-pane fade">
                                     <!--IMAGE-->
-                                    @include('post::post.elements.image', ['name' => 'post_image'])
+                                    @include('pexcel::elements.image', ['name' => 'pexcel_image'])
                                     <!--/END IMAGE-->
                                 </div>
                                 <!--TAB IMAGE-->
 
                             </div>
 
-                            {!! Form::hidden('id',@$post->post_id) !!}
+                            {!! Form::hidden('id',@$pexcel->pexcel_id) !!}
 
                             <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_post.delete',['id' => @$post->post_id, '_token' => csrf_token()]) !!}"
+                            <a href="{!! URL::route('admin_pexcel.delete',['id' => @$pexcel->pexcel_id, '_token' => csrf_token()]) !!}"
                                class="btn btn-danger pull-right margin-left-5 delete">
                                 Xóa
                             </a>
@@ -122,7 +121,7 @@ Trang quản trị bài viết
         </div>
 
         <div class='col-md-4'>
-            @include('post::post.admin.post_search')
+            @include('pexcel::admin.pexcel_search')
         </div>
 
     </div>

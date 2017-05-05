@@ -66,7 +66,7 @@ return [
     'tab_attributes' => 'Thuộc tính',
     'tab_image' => 'Hình đại diện',
 
-    'pexcel_item_created' => 'Ngày viết',
+    'pexcel_item_created' => 'Ngày gửi',
     'pexcel_item_title' => 'Tiêu đề',
     'pexcel_admin' => 'Quản lý file',
 

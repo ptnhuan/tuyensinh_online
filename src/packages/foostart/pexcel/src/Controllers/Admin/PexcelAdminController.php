@@ -54,21 +54,17 @@ class PexcelAdminController extends PexcelController {
         $pexcel = NULL;
         $pexcel_id = (int) $request->get('id');
 
-        $obj_slideshow = new Slideshows();
 
         if (!empty($pexcel_id) && (is_int($pexcel_id))) {
             $pexcel = $this->obj_pexcel->find($pexcel_id);
         }
 
-        $this->obj_pexcel_categories = new PexcelsCategories();
 
         $this->data = array_merge($this->data, array(
             'pexcel' => $pexcel,
             'request' => $request,
-            'categories' => array(0 => '...') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
-            'slideshows' => array(0 => '...') + $obj_slideshow->pluckSelect()->toArray()
         ));
-        return view('pexcel::pexcel.admin.pexcel_edit', $this->data);
+        return view('pexcel::admin.pexcel_edit', $this->data);
     }
 
     /**

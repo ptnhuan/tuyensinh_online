@@ -17,6 +17,8 @@
     {!! HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css') !!}
 
     @yield('head_css')
+    @yield('sub_page_css')
+
     {{-- End head css --}}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -42,6 +44,8 @@
         {!! HTML::script('packages/jacopo/laravel-authentication-acl/js/vendor/bootstrap.min.js') !!}
 
         @yield('footer_scripts')
+
+        @yield('sub_page_scripts')
         {{-- End footer scripts --}}
     </body>
 </html>
