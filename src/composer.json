@@ -22,7 +22,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Foostart\\Phpexcel\\": "packages/foostart/phpexcel/src/"
+            "Foostart\\Pexcel\\": "packages/foostart/pexcel/src/"
         }
     },
     "autoload-dev": {

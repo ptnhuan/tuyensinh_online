@@ -75,9 +75,9 @@ return [
                 /*
                  * Route to edit the current user profile
                  */
-                "name"        => "Phpexcel",
-                "route"       => "admin_phpexcel",
-                "link"        => '/admin/phpexcel',
+                "name"        => "Pexcel",
+                "route"       => "admin_pexcel",
+                "link"        => '/admin/pexcel',
                 "permissions" => []
             ],
 

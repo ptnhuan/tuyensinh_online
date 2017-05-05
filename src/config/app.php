@@ -154,7 +154,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         LaravelAcl\Authentication\AuthenticationServiceProvider::class,
 
-        Foostart\Phpexcel\PhpexcelServiceProvider::class,
+        Foostart\Pexcel\PexcelServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------
