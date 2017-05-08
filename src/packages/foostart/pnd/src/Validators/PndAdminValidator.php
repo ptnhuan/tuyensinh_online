@@ -8,9 +8,9 @@ use Illuminate\Support\MessageBag as MessageBag;
 class PndAdminValidator extends AbstractValidator
 {
     protected static $rules = array(
-        'pnd_name' => 'required',
-        'pnd_description' => 'required',
-        'pnd_file_path' => 'required',
+        'student_first_name' => 'required',
+        'student_last_name' => 'required',
+        'student_email' => 'required',
     );
 
     protected static $messages = [];
@@ -64,9 +64,9 @@ class PndAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'pnd_name.required' => 'Yêu cầu nhập tiêu đề.',
-            'pnd_description.required' => 'Yêu cầu nhập nội dung bài viết.',
-            'pnd_file_path.required' => 'Yêu cầu gửi file đính kèm.',
+            'student_first_name.required' => 'Yêu cầu nhập họ học viên.',
+            'student_last_name.required' => 'Yêu cầu nhập tên học viên.',
+            'student_email.required' => 'Yêu cầu nhâp email học viên.',
         ];
     }
 

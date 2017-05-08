@@ -71,28 +71,25 @@ class Students extends Model {
      * @param type $pexcel_id
      * @return type
      */
-    public function update_pexcel($input, $pexcel_id = NULL) {
+    public function update_student($input, $student_id = NULL) {
 
-        if (empty($pexcel_id)) {
-            $pexcel_id = $input['pexcel_id'];
+        if (empty($student_id)) {
+            $student_id = $input['student_id'];
         }
+        
+        $student = self::find($student_id);
 
-        $pexcel = self::find($pexcel_id);
+        if (!empty($student)) {
 
-        if (!empty($pexcel)) {
+            $student->student_first_name = $input['student_first_name'];
+            $student->student_last_name = $input['student_last_name'];
 
-            $pexcel->pexcel_name = $input['pexcel_name'];
-            $pexcel->pexcel_description = $input['pexcel_description'];
+            $student->student_email = $input['student_email'];
+   
 
-            $pexcel->pexcel_category_id = $input['pexcel_category_id'];
-
-            $pexcel->pexcel_file_path = $input['pexcel_file_path'];
-
-            $pexcel->pexcel_updated_at = time();
-
-            $pexcel->save();
-
-            return $pexcel;
+            $student->save();
+ 
+            return $student;
         } else {
             return NULL;
         }
@@ -171,8 +168,8 @@ class Students extends Model {
         return $pexcels;
     }
 
-    public function delete_old_data($pexcel_id) {
-        $eloquent = self::where('pexcel_id', $pexcel_id)->delete();
+    public function delete_student($student_id) {
+        $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 

@@ -19,15 +19,17 @@ use Foostart\Pnd\Helper\Parse;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndAdminController extends PndController {
+class PndAdminController extends PndController
+{
 
-    private $obj_students= NULL;
+    private $obj_students = NULL;
     private $obj_pnd_categories = NULL;
     private $obj_validator = NULL;
 
-    public function __construct() {
+    public function __construct()
+    {
 
-        $this->obj_students= new Students();
+        $this->obj_students = new Students();
         $this->obj_pnd_categories = new PndCategories();
     }
 
@@ -35,10 +37,11 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $params = $request->all();
-        
+
         $students = $this->obj_students->get_students($params);
 
         $this->data = array_merge($this->data, array(
@@ -53,20 +56,24 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
 
-        $students = NULL;
-        $school_id = (int) $request->get('id');
+        $student = NULL;
+        $student_id = (int)$request->get('id');
 
 
-        if (!empty($school_id) && (is_int($school_id))) {
-            $students = $this->obj_students->find($school_id);
+        if (!empty($student_id) && (is_int($student_id))) {
+
+            $student = $this->obj_students->find($student_id);
+
         }
 
         $this->data = array_merge($this->data, array(
-            'pnd' => $students,
-            'request' => $request, 
+            'student' => $student,
+            'request' => $request,
         ));
+
         return view('pnd::admin.pnd_edit', $this->data);
     }
 
@@ -75,7 +82,8 @@ class PndAdminController extends PndController {
      * @param Request $request
      * @return type
      */
-    public function post(Request $request) {
+    public function post(Request $request)
+    {
 
         $this->isAuthentication();
 
@@ -85,34 +93,35 @@ class PndAdminController extends PndController {
 
         $input['user_id'] = $this->current_user->id;
 
-        $school_id = (int) $request->get('id');
+        $student_id = (int)$request->get('id');
 
         $students = NULL;
 
         $data = array();
 
+
         if (!$this->obj_validator->adminValidate($input)) {
 
             $data['errors'] = $this->obj_validator->getErrors();
 
-            if (!empty($school_id) && is_int($school_id)) {
-                $students = $this->obj_students->find($school_id);
+            if (!empty($student_id) && is_int($student_id)) {
+                $student = $this->obj_students->find($student_id);
             }
         } else {
+            if (!empty($student_id) && is_int($student_id)) {
 
-            if (!empty($school_id) && is_int($school_id)) {
+                $student = $this->obj_students->find($student_id);
 
-                $students = $this->obj_students->find($school_id);
+                if (!empty($student)) {
 
-                if (!empty($students)) {
+                    $input['student_id'] = $student_id;
 
-                    $input['pnd_id'] = $school_id;
-                    $students = $this->obj_students->update_pnd($input);
+                    $student = $this->obj_students->update_student($input);
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
-
-                    return Redirect::route("admin_pnd.parse", ["id" => $students->pnd_id]);
+                   
+                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
 
@@ -121,8 +130,7 @@ class PndAdminController extends PndController {
                 }
             } else {
 
-                $input = array_merge($input, array(
-                ));
+                $input = array_merge($input, array());
 
                 $students = $this->obj_students->add_pnd($input);
 
@@ -144,7 +152,7 @@ class PndAdminController extends PndController {
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,
-                ), $data);
+        ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
     }
@@ -153,32 +161,34 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
 
-        $students = NULL;
-        $school_id = $request->get('id');
+        $student = NULL;
+        $student_id = $request->get('id');
 
-        if (!empty($school_id)) {
-            $students = $this->obj_students->find($school_id);
+        if (!empty($student_id)) {
+            $student = $this->obj_students->find($student_id);
 
-            if (!empty($students)) {
+            if (!empty($student)) {
                 //Message
                 $this->addFlashMessage('message', trans('pnd::pnd.message_delete_successfully'));
 
-                $students->delete();
+                $student->delete();
             }
         } else {
 
         }
 
         $this->data = array_merge($this->data, array(
-            'students' => $students,
+            'student' => $student,
         ));
 
         return Redirect::route("admin_pnd");
     }
 
-    public function parse(Request $request) {
+    public function parse(Request $request)
+    {
 
         $obj_parse = new Parse();
         $obj_students = new Students();
