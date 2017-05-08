@@ -21,20 +21,20 @@ return [
     /**
      * Form
      */
-    'form_heading' => 'Nội dung file',
-    'form_add' => 'Tạo file mới',
-    'form_edit' => 'Cập nhật file',
-    'name' => 'Tiêu đề file',
+    'form_heading' => 'Nội dung Tập tin',
+    'form_add' => 'Tạo Tập tin mới',
+    'form_edit' => 'Cập nhật Tập tin',
+    'name' => 'Tiêu đề Tập tin',
     'slug' => 'Slug',
     'pexcel_required_name' => 'Required name',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
     'pexcel_overview' => 'Mô tả ngắn',
-    'pexcel_description' => 'Nội dung file',
+    'pexcel_description' => 'Nội dung Tập tin',
     'pexcel_name_label' => 'Từ khóa:',
     'pexcel_name_placeholder' => 'Từ khóa',
     'pexcel_category_name'=> 'Từ khóa',
-    'pexcel_image_choose' => 'Choose',
+    'pexcel_image_choose' => 'Chọn Tập tin',
     'slideshow_name' => 'Slideshow',
 
     /**
@@ -65,6 +65,7 @@ return [
     'tab_overview' => 'Mô tả',
     'tab_attributes' => 'Thuộc tính',
     'tab_image' => 'Hình đại diện',
+    'tab_file' => 'Tập tin ',
 
     'pexcel_item_created' => 'Ngày gửi',
     'pexcel_item_title' => 'Tiêu đề',

@@ -27,7 +27,7 @@ return [
      'user_Group' => 'Thuộc nhóm',
      'user_permission' => 'Có quyền',
      'user_unlock' => 'Khóa',
-     'user_login' => 'Đăng nhập hệ thống tuyển sinh',
+     'user_login' => 'ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH',
     'user_delete' => 'Xóa',
     'user_save' => 'Lưu',
 ];

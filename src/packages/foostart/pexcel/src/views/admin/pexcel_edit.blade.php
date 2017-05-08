@@ -56,13 +56,13 @@ Trang quản trị bài viết
                                 </li>
                                 <!--/END TAB ATTRIBUTES-->
 
-                                <!--TAB IMAGE-->
+                                <!--TAB FILE-->
                                 <li>
-                                    <a data-toggle="tab" href="#image">
-                                        {!! trans('pexcel::pexcel.tab_image') !!}
+                                    <a data-toggle="tab" href="#file">
+                                        {!! trans('pexcel::pexcel.tab_file') !!}
                                     </a>
                                 </li>
-                                <!--/END TAB IMAGE-->
+                                <!--/END TAB FILE-->
 
 
                             </ul>
@@ -91,13 +91,13 @@ Trang quản trị bài viết
                                 </div>
                                 <!--TAB ATTRIBUTES-->
 
-                                <!--TAB IMAGE-->
-                                <div id="image" class="tab-pane fade">
-                                    <!--IMAGE-->
+                                <!--TAB FILE-->
+                                <div id="file" class="tab-pane fade">
+                                    <!--FILE-->
                                     @include('pexcel::elements.image', ['name' => 'pexcel_file_path'])
-                                    <!--/END IMAGE-->
+                                    <!--/END FILE-->
                                 </div>
-                                <!--TAB IMAGE-->
+                                <!--TAB FILE-->
 
                             </div>
 
