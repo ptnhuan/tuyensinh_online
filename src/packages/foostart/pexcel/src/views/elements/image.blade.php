@@ -4,7 +4,7 @@
 
     <span class="input-group-btn">
         <a id="lfm" data-input="thumbnail"  class="btn btn-primary">
-            <i class="fa fa-picture-o"></i> {{ trans('pexcel::pexcel.pexcel_image_choose') }}
+            <i class="fa fa-file-o"></i> {{ trans('pexcel::pexcel.pexcel_image_choose') }}
         </a>
     </span>
 

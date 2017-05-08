@@ -7,7 +7,7 @@ Admin login
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin">{{trans('tuyensinh.user_login')}} {!!Config::get('acl_base.app_name')!!}</h3>
+                    <h3 class="panel-title bariol-thin">{{trans('tuyensinh.user_login')}} {{--{!!Config::get('acl_base.app_name')!!}--}}</h3>
                 </div>
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
@@ -40,13 +40,13 @@ Admin login
                             </div>
                         </div>
                     </div>
-                    {!! Form::label('remember','Remember me') !!}
+                    {!! Form::label('remember','Ghi nhớ thông tin đăng nhập') !!}
                     {!! Form::checkbox('remember') !!}
-                    <input type="submit" value="Login" class="btn btn-info btn-block">
+                    <input type="submit" value="Đăng nhập" class="btn btn-info btn-block">
                     {!! Form::close() !!}
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 margin-top-10">
-                            {!! link_to_route('user.reminder.process','Forgot password?') !!}
+                            {!! link_to_route('user.reminder.process','Quên mật khẩu?') !!}
                        </div>
                    </div>
                 </div>
