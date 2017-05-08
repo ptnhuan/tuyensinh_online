@@ -9,6 +9,7 @@ class Pexcel extends Model {
     protected $fillable = [
         'pexcel_name',
         'pexcel_description',
+        'pexcel_category_id',
         'user_id',
         'pexcel_file_path',
         'pexcel_created_at',
@@ -53,6 +54,8 @@ class Pexcel extends Model {
             $pexcel->pexcel_name = $input['pexcel_name'];
             $pexcel->pexcel_description = $input['pexcel_description'];
 
+            $pexcel->pexcel_category_id = $input['pexcel_category_id'];
+
             $pexcel->pexcel_file_path = $input['pexcel_file_path'];
 
             $pexcel->pexcel_updated_at = time();
@@ -76,7 +79,10 @@ class Pexcel extends Model {
                     'pexcel_name' => @$input['pexcel_name'],
                     'pexcel_description' => @$input['pexcel_description'],
                     'pexcel_file_path' => @$input['pexcel_file_path'],
+
                     'user_id' => @$input['user_id'],
+                    'pexcel_category_id' => @$input['pexcel_category_id'],
+
                     'pexcel_created_at' => time(),
                     'pexcel_updated_at' => time(),
         ]);
@@ -110,21 +116,6 @@ class Pexcel extends Model {
         $pexcels = $eloquent->paginate(config('buoumau.user_pexcel_per_page'));
 
         return $pexcels;
-    }
-
-    public function addLike($pexcel_id) {
-
-        $pexcel = self::find($pexcel_id);
-
-        if (!empty($pexcel)) {
-
-            $pexcel->pexcel_likes = $pexcel->pexcel_likes + 1;
-            $pexcel->save();
-
-            return $pexcel;
-        } else {
-            return NULL;
-        }
     }
 
 }

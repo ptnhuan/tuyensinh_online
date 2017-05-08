@@ -1,17 +1,18 @@
-<?php namespace Foostart\Pexcel\Controllers\Admin;
+<?php
+
+namespace Foostart\Pexcel\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Foostart\Pexcel\Controllers\Admin\PexcelController;
 use URL;
 use Route,
     Redirect;
-
 /**
  * Models
  */
 use Foostart\Pexcel\Models\Pexcel;
-use Foostart\Slideshow\Models\Slideshows;
-
+use Foostart\Pexcel\Models\PexcelCategories;
+use Foostart\Pexcel\Helper\Parse;
 /**
  * Validators
  */
@@ -24,7 +25,9 @@ class PexcelAdminController extends PexcelController {
     private $obj_validator = NULL;
 
     public function __construct() {
+
         $this->obj_pexcel = new Pexcel();
+        $this->obj_pexcel_categories = new PexcelCategories();
     }
 
     /**
@@ -63,6 +66,7 @@ class PexcelAdminController extends PexcelController {
         $this->data = array_merge($this->data, array(
             'pexcel' => $pexcel,
             'request' => $request,
+            'categories' => array(0 => '...') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
         ));
         return view('pexcel::admin.pexcel_edit', $this->data);
     }
@@ -108,13 +112,13 @@ class PexcelAdminController extends PexcelController {
 
                     //Message
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
-                    return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
 
+                    return Redirect::route("admin_pexcel.parse", ["id" => $pexcel->pexcel_id]);
+                    //return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
                 } else {
 
                     //Message
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_unsuccessfully'));
-
                 }
             } else {
 
@@ -127,7 +131,9 @@ class PexcelAdminController extends PexcelController {
 
                     //Message
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_successfully'));
-                    return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
+
+                    return Redirect::route("admin_pexcel.parse", ["id" => $pexcel->pexcel_id]);
+                    //return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
                 } else {
 
                     //Message
@@ -139,7 +145,7 @@ class PexcelAdminController extends PexcelController {
         $this->data = array_merge($this->data, array(
             'pexcel' => $pexcel,
             'request' => $request,
-        ), $data);
+                ), $data);
 
         return view('pexcel::admin.pexcel_edit', $this->data);
     }
@@ -172,4 +178,33 @@ class PexcelAdminController extends PexcelController {
 
         return Redirect::route("admin_pexcel");
     }
+
+    public function parse(Request $request) {
+
+        $obj_parse = new Parse();
+
+        $input = $request->all();
+
+        $pexcel_id = $request->get('id');
+        $pexcel = $this->obj_pexcel->find($pexcel_id);
+
+
+        $students = $obj_parse->get_students($pexcel);
+
+        var_dump($students);
+        die();
+
+        $students = (object) array(
+            0 => [
+                'id' => 1
+            ]
+        );
+        $this->data = array_merge($this->data, array(
+            'students' => $students,
+            'request' => $request,
+        ));
+
+        return view('pexcel::admin.pexcel_parse', $this->data);
+    }
+
 }

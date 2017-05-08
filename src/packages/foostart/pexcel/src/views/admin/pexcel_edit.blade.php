@@ -74,8 +74,7 @@ Trang quản trị bài viết
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
                                     <!--INPUT-->
-                                       <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
-                                    @include('pexcel::elements.input', ['name' => 'pexcel_name'])
+                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_name'])
                                     <!--/END INPUT-->
 
                                      <!--TEXT-->
@@ -87,6 +86,7 @@ Trang quản trị bài viết
                                 <!--TAB ATTRIBUTES-->
                                 <div id="attributes" class="tab-pane fade">
                                     <!--SELECT-->
+                                     @include('pexcel::elements.pexcel_select')
                                     <!--/END SELECT-->
                                 </div>
                                 <!--TAB ATTRIBUTES-->

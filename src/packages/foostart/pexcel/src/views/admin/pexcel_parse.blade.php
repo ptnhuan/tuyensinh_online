@@ -34,8 +34,7 @@ Trang quản trị bài viết
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body">
-                    @include('pexcel::admin.pexcel-message')
-                    @include('pexcel::admin.pexcel_item')
+                    @include('pexcel::admin.pexcel_parse_item')
                 </div>
             </div>
         </div>
@@ -44,15 +43,4 @@ Trang quản trị bài viết
         </div>
     </div>
 </div>
-@stop
-
-
-@section('footer_scripts')
-<!-- DELETE CONFIRM -->
-<script>
-    $(".delete").click(function () {
-        return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
-    });
-</script>
-<!-- /END DELETE CONFIRM -->
 @stop

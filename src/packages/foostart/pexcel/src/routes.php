@@ -133,6 +133,14 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
             'uses' => 'PexcelAdminController@delete'
         ]);
 
+        /**
+         * parse
+         */
+        Route::get('admin/pexcel/parse', [
+            'as' => 'admin_pexcel.parse',
+            'uses' => 'PexcelAdminController@parse'
+        ]);
+
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////CATEGORIES ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
