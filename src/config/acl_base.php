@@ -23,7 +23,7 @@ return [
   |
   */
 
-  "email_confirmation" => true,
+  "email_confirmation" => false,
 
   /*
   |--------------------------------------------------------------------------

@@ -2,10 +2,19 @@
 
 use Illuminate\Session\TokenMismatchException;
 
+Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], function () {
+//    Route::post('/user/login', [
+//        "uses" => 'VendorController@postAdminLogin',
+//        "as" => "user.login.process"
+//    ]);
+});
+
+
+
 /**
  * USER
  */
-Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
         ////////////////////////////////////////////////////////////////////////
@@ -46,7 +55,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], funct
         /**
          * like
          */
-        Route::post('user/pnd/like',[
+        Route::post('user/pnd/like', [
             'as' => 'user_pnd.like',
             'uses' => 'PndUserController@like'
         ]);
@@ -94,7 +103,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], funct
 /**
  * ADMINISTRATOR
  */
-Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
@@ -141,7 +150,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers
             'uses' => 'PndAdminController@parse'
         ]);
 
-        
+
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -177,8 +186,8 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers
             'uses' => 'PndSchoolAdminController@delete'
         ]);
 
-       
-        
+
+
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////CATEGORIES ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
