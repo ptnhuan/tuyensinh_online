@@ -164,24 +164,24 @@ class PndAdminController extends PndController
     public function delete(Request $request)
     {
 
-        $students = NULL;
-        $school_id = $request->get('id');
+        $student = NULL;
+        $student_id = $request->get('id');
 
         if (!empty($school_id)) {
-            $students = $this->obj_students->find($school_id);
+            $student = $this->obj_students->find($student_id);
 
-            if (!empty($students)) {
+            if (!empty($student)) {
                 //Message
                 $this->addFlashMessage('message', trans('pnd::pnd.message_delete_successfully'));
 
-                $students->delete();
+                $student->delete();
             }
         } else {
 
         }
 
         $this->data = array_merge($this->data, array(
-            'students' => $students,
+            'student' => $student,
         ));
 
         return Redirect::route("admin_pnd");

@@ -168,8 +168,8 @@ class Students extends Model {
         return $pexcels;
     }
 
-    public function delete_old_data($pexcel_id) {
-        $eloquent = self::where('pexcel_id', $pexcel_id)->delete();
+    public function delete_student($student_id) {
+        $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 
