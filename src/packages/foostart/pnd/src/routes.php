@@ -5,7 +5,7 @@ use Illuminate\Session\TokenMismatchException;
 /**
  * USER
  */
-Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
         ////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::get('user/pnd', [
             'as' => 'user_pnd',
-            'uses' => 'PexcelUserController@index'
+            'uses' => 'PndUserController@index'
         ]);
 
         /**
@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::get('user/pnd/edit', [
             'as' => 'user_pnd.edit',
-            'uses' => 'PexcelUserController@edit'
+            'uses' => 'PndUserController@edit'
         ]);
 
         /**
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::post('user/pnd/post', [
             'as' => 'user_pnd.post',
-            'uses' => 'PexcelUserController@post'
+            'uses' => 'PndUserController@post'
         ]);
 
         /**
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::get('user/pnd/delete', [
             'as' => 'user_pnd.delete',
-            'uses' => 'PexcelUserController@delete'
+            'uses' => 'PndUserController@delete'
         ]);
 
         /**
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::post('user/pnd/like',[
             'as' => 'user_pnd.like',
-            'uses' => 'PexcelUserController@like'
+            'uses' => 'PndUserController@like'
         ]);
 
         ////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
         ////////////////////////////////////////////////////////////////////////
         Route::get('user/pnd_category', [
             'as' => 'user_pnd_category',
-            'uses' => 'PexcelCategoryUserController@index'
+            'uses' => 'PndCategoryUserController@index'
         ]);
 
         /**
@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::get('user/pnd_category/edit', [
             'as' => 'user_pnd_category.edit',
-            'uses' => 'PexcelCategoryUserController@edit'
+            'uses' => 'PndCategoryUserController@edit'
         ]);
 
         /**
@@ -75,14 +75,14 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
          */
         Route::post('user/pnd_category/edit', [
             'as' => 'user_pnd_category.post',
-            'uses' => 'PexcelCategoryUserController@post'
+            'uses' => 'PndCategoryUserController@post'
         ]);
         /**
          * delete
          */
         Route::get('user/pnd_category/delete', [
             'as' => 'user_pnd_category.delete',
-            'uses' => 'PexcelCategoryUserController@delete'
+            'uses' => 'PndCategoryUserController@delete'
         ]);
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////CATEGORIES///////////////////////////////
@@ -94,7 +94,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
 /**
  * ADMINISTRATOR
  */
-Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
@@ -106,7 +106,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::get('admin/pnd', [
             'as' => 'admin_pnd',
-            'uses' => 'PexcelAdminController@index'
+            'uses' => 'PndAdminController@index'
         ]);
 
         /**
@@ -114,7 +114,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::get('admin/pnd/edit', [
             'as' => 'admin_pnd.edit',
-            'uses' => 'PexcelAdminController@edit'
+            'uses' => 'PndAdminController@edit'
         ]);
 
         /**
@@ -122,7 +122,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::post('admin/pnd/edit', [
             'as' => 'admin_pnd.post',
-            'uses' => 'PexcelAdminController@post'
+            'uses' => 'PndAdminController@post'
         ]);
 
         /**
@@ -130,7 +130,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::get('admin/pnd/delete', [
             'as' => 'admin_pnd.delete',
-            'uses' => 'PexcelAdminController@delete'
+            'uses' => 'PndAdminController@delete'
         ]);
 
         /**
@@ -138,7 +138,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::get('admin/pnd/parse', [
             'as' => 'admin_pnd.parse',
-            'uses' => 'PexcelAdminController@parse'
+            'uses' => 'PndAdminController@parse'
         ]);
 
         ////////////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
         ////////////////////////////////////////////////////////////////////////
         Route::get('admin/pnd_category', [
             'as' => 'admin_pnd_category',
-            'uses' => 'PexcelCategoryAdminController@index'
+            'uses' => 'PndCategoryAdminController@index'
         ]);
 
         /**
@@ -154,7 +154,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::get('admin/pnd_category/edit', [
             'as' => 'admin_pnd_category.edit',
-            'uses' => 'PexcelCategoryAdminController@edit'
+            'uses' => 'PndCategoryAdminController@edit'
         ]);
 
         /**
@@ -162,14 +162,14 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
          */
         Route::post('admin/pnd_category/edit', [
             'as' => 'admin_pnd_category.post',
-            'uses' => 'PexcelCategoryAdminController@post'
+            'uses' => 'PndCategoryAdminController@post'
         ]);
         /**
          * delete
          */
         Route::get('admin/pnd_category/delete', [
             'as' => 'admin_pnd_category.delete',
-            'uses' => 'PexcelCategoryAdminController@delete'
+            'uses' => 'PndCategoryAdminController@delete'
         ]);
     });
 });

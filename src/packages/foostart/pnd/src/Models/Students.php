@@ -1,6 +1,6 @@
 <?php
 
-namespace Foostart\Pexcel\Models;
+namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

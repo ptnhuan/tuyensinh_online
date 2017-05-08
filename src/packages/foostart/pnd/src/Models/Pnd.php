@@ -1,17 +1,47 @@
-<?php namespace Foostart\Pexcel\Models;
+<?php namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pexcel extends Model {
+class Pnd extends Model {
 
     protected $table = 'school_students';
     public $timestamps = false;
     protected $fillable = [
-        'pnd_name',
-        'pnd_description',
-        'pnd_category_id',
-        'user_id',
-        'pnd_file_path',
+        'student_first_name',
+        'student_last_name',
+        'student_sex',
+        'student_birth',
+        'student_birth_day',
+        'student_birth_month',
+        'student_birth_year',
+        'student_birth_place',
+        'school_id',
+        'school_district_id',
+        'student_class',
+        'student_capacity_6',
+        'student_conduct_6',
+        'student_capacity_7',
+        'student_conduct_7',
+        'student_capacity_8',
+        'student_conduct_8',
+        'student_capacity_9',
+        'student_conduct_9',
+        'student_average',
+        'student_average_1',
+        'student_average_2',
+        'student_graduate',
+        'student_score_prior',
+        'student_score_prior_comment',
+        'student_nominate',
+        'school_id_option',
+        'school_class_code',
+        'school_code_option_1',
+        'school_code_option_2',
+        'student_email',
+        'student_phone',
+
+        'student_user',
+        'student_pass',
         'pnd_created_at',
         'pnd_updated_at',
     ];
@@ -23,7 +53,7 @@ class Pexcel extends Model {
      * @return type
      */
     public function get_pnds($params = array()) {
-        $eloquent = self::orderBy('pnd_id', 'DESC');
+        $eloquent = self::orderBy('school_id', 'DESC');
 
         //pnd_name
         if (!empty($params['pnd_name'])) {
@@ -41,13 +71,13 @@ class Pexcel extends Model {
      * @param type $pnd_id
      * @return type
      */
-    public function update_pnd($input, $pnd_id = NULL) {
+    public function update_pnd($input, $school_id = NULL) {
 
-        if (empty($pnd_id)) {
-            $pnd_id = $input['pnd_id'];
+        if (empty($school_id)) {
+            $school_id = $input['school_id'];
         }
 
-        $pnd = self::find($pnd_id);
+        $pnd = self::find($school_id);
 
         if (!empty($pnd)) {
 

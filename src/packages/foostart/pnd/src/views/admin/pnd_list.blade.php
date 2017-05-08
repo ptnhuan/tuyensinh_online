@@ -16,7 +16,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pexcel::pexcel.page_search') : trans('pexcel::pexcel.page_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,13 +34,13 @@ Trang quản trị bài viết
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body">
-                    @include('pexcel::admin.pexcel-message')
-                    @include('pexcel::admin.pexcel_item')
+                    @include('pnd::admin.pnd-message')
+                    @include('pnd::admin.pnd_item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pexcel::admin.pexcel_search')
+            @include('pnd::admin.pnd_search')
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@ Trang quản trị bài viết
 <!-- DELETE CONFIRM -->
 <script>
     $(".delete").click(function () {
-        return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
+        return confirm("{{ trans('pnd::pnd.delete_confirm') }}");
     });
 </script>
 <!-- /END DELETE CONFIRM -->

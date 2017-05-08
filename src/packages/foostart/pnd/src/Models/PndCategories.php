@@ -1,10 +1,10 @@
 <?php
 
-namespace Foostart\Pexcel\Models;
+namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PexcelCategories extends Model {
+class PndCategories extends Model {
 
     protected $table = 'pexcel_categories';
     public $timestamps = false;

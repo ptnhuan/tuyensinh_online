@@ -12,9 +12,9 @@ return [
      * Page
      */
 
-    'page_list' => 'Danh sách file',
-    'page_add' => 'Thêm file mới',
-    'page_edit' => 'Cập nhật file',
+    'page_list' => 'Danh sách',
+    'page_add' => 'Thêm item mới',
+    'page_edit' => 'Cập nhật item',
     'page_search' => 'Tìm kiếm file',
     'page_category'=> 'Danh mục file',
 
@@ -26,7 +26,6 @@ return [
     'form_edit' => 'Cập nhật file',
     'name' => 'Tiêu đề file',
     'slug' => 'Slug',
-    'pnd_required_name' => 'Required name',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
     'pnd_overview' => 'Mô tả ngắn',
