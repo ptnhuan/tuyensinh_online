@@ -1,15 +1,15 @@
 <?php
-namespace Foostart\Post\Validators;
+namespace Foostart\Pexcel\Validators;
 
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class PostCategoryAdminValidator extends AbstractValidator
+class PexcelCategoryAdminValidator extends AbstractValidator
 {
     protected static $rules = array(
-        'post_category_name' => 'required',
+        'pexcel_category_name' => 'required',
     );
 
     protected static $messages = [];
@@ -36,7 +36,7 @@ class PostCategoryAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'post_category_name.required' => 'Yêu cầu nhập tên danh mục.'
+            'pexcel_category_name.required' => 'Yêu cầu nhập tên danh mục.'
         ];
     }
 
@@ -44,14 +44,14 @@ class PostCategoryAdminValidator extends AbstractValidator
 
         $flag = TRUE;
 
-        $min_lenght = config('buoumau.length_category_name_min');
-        $max_lenght = config('buoumau.length_category_name_max');
+        $min_lenght = config('pexcel.length_category_name_min');
+        $max_lenght = config('pexcel.length_category_name_max');
 
-        $post_category_name = @$input['post_category_name'];
+        $pexcel_category_name = @$input['pexcel_category_name'];
 
 
-        if ((strlen($post_category_name) < $min_lenght)  || ((strlen($post_category_name) > $max_lenght))) {
-            $this->errors->add('length_category_name', trans('post::post_admin.length_category_name', ['LENGTH_CATEGORY_NAME_MIN' => $min_lenght, 'LENGTH_CATEGORY_NAME_MAX' => $max_lenght]));
+        if ((strlen($pexcel_category_name) < $min_lenght)  || ((strlen($pexcel_category_name) > $max_lenght))) {
+            $this->errors->add('length_category_name', trans('pexcel::pexcel.length_category_name', ['LENGTH_CATEGORY_NAME_MIN' => $min_lenght, 'LENGTH_CATEGORY_NAME_MAX' => $max_lenght]));
             $flag = FALSE;
         }
 

@@ -5,10 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 class Pexcel extends Model {
 
     protected $table = 'pexcel';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
         'pexcel_name',
+        'pexcel_description',
         'user_id',
+        'pexcel_file_path',
         'pexcel_created_at',
         'pexcel_updated_at',
     ];
@@ -49,18 +51,11 @@ class Pexcel extends Model {
         if (!empty($pexcel)) {
 
             $pexcel->pexcel_name = $input['pexcel_name'];
-            $pexcel->pexcel_slug = $input['pexcel_slug'];
-
-            $pexcel->category_id = $input['category_id'];
-            $pexcel->slideshow_id = $input['slideshow_id'];
-
-            $pexcel->pexcel_image_name = @$input['pexcel_image_name'];
-            $pexcel->pexcel_image_dir = @$input['sub_path'];
-
-            $pexcel->pexcel_overview = $input['pexcel_overview'];
             $pexcel->pexcel_description = $input['pexcel_description'];
 
-            $pexcel->updated_at = time();
+            $pexcel->pexcel_file_path = $input['pexcel_file_path'];
+
+            $pexcel->pexcel_updated_at = time();
 
             $pexcel->save();
 
@@ -79,15 +74,9 @@ class Pexcel extends Model {
 
         $pexcel = self::create([
                     'pexcel_name' => @$input['pexcel_name'],
-                    'pexcel_slug' => @$input['pexcel_slug'],
-                    'category_id' => @$input['category_id'],
-                    'user_id' => $input['user_id'],
-                    'pexcel_image_name' => @$input['pexcel_image_name'],
-                    'pexcel_image_dir' => @$input['sub_path'],
-                    'pexcel_overview' => @$input['pexcel_overview'],
                     'pexcel_description' => @$input['pexcel_description'],
-                    'slideshow_id' => @$input['slideshow_id'],
-                    'status_id' => $this->status_id['NEW_POST'],
+                    'pexcel_file_path' => @$input['pexcel_file_path'],
+                    'user_id' => @$input['user_id'],
                     'pexcel_created_at' => time(),
                     'pexcel_updated_at' => time(),
         ]);

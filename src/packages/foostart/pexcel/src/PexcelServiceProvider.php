@@ -4,10 +4,9 @@ namespace Foostart\Pexcel;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
-
-use URL, Route;
+use URL,
+    Route;
 use Illuminate\Http\Request;
-
 
 class PexcelServiceProvider extends ServiceProvider {
 
@@ -17,20 +16,16 @@ class PexcelServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot(Request $request) {
-        /**
-         * Publish
-         */
-         $this->publishes([
-            __DIR__.'/config/pexcel.php' => config_path('pexcel.php'),
-        ],'config');
 
+        /**
+         * views
+         */
         $this->loadViewsFrom(__DIR__ . '/views', 'pexcel');
 
-
         /**
-         * Translations
+         * translation
          */
-         $this->loadTranslationsFrom(__DIR__.'/lang', 'pexcel');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'pexcel');
 
 
         /**
@@ -38,10 +33,23 @@ class PexcelServiceProvider extends ServiceProvider {
          */
         $this->postViewComposer($request);
 
-         $this->publishes([
-                __DIR__.'/../database/migrations/' => database_path('migrations')
-            ], 'migrations');
 
+        /**
+         * Publishes
+         */
+        $this->publishes([
+            __DIR__ . '/config/pexcel.php' => config_path('pexcel.php'),
+                ], 'pexcel_config');
+
+        $this->publishes([
+            __DIR__.'/views'  => base_path('resources/views/vendor/pexcel'),
+        ], 'pexcel_views');
+        $this->publishes([
+            __DIR__ . '/../database/migrations/' => database_path('migrations')
+                ], 'pexcel_migrations');
+        $this->publishes([
+            __DIR__.'/public' => public_path('vendor/pexcel'),
+        ], 'pexcel_public');
     }
 
     /**
@@ -51,17 +59,6 @@ class PexcelServiceProvider extends ServiceProvider {
      */
     public function register() {
         include __DIR__ . '/routes.php';
-
-        /**
-         * Load controllers
-         */
-        $this->app->make('Foostart\Pexcel\Controllers\Admin\PexcelAdminController');
-        $this->app->make('Foostart\Pexcel\Controllers\User\PexcelUserController');
-
-         /**
-         * Load Views
-         */
-        $this->loadViewsFrom(__DIR__ . '/views', 'pexcel');
     }
 
     /**
@@ -76,7 +73,7 @@ class PexcelServiceProvider extends ServiceProvider {
 
             global $request;
             $pexcel_id = $request->get('id');
-            $is_action = empty($pexcel_id)?'page_add':'page_edit';
+            $is_action = empty($pexcel_id) ? 'page_add' : 'page_edit';
 
             $authentication = \App::make('authenticator');
             $current_user = $authentication->getLoggedUser();
@@ -93,7 +90,6 @@ class PexcelServiceProvider extends ServiceProvider {
             }
 
             $view->with('sidebar_items', array_merge([
-
                 /**
                  * Pexcels
                  */
@@ -103,11 +99,10 @@ class PexcelServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-list" aria-hidden="true"></i>'
                 ],
                 //add
-                trans('pexcel::pexcel.'.$is_action) => [
+                trans('pexcel::pexcel.' . $is_action) => [
                     'url' => URL::route('user_pexcel.edit'),
                     "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
                 ],
-
                 /**
                  * Categories
                  */
@@ -116,20 +111,19 @@ class PexcelServiceProvider extends ServiceProvider {
                     'url' => URL::route('user_pexcel_category'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-            ], $admin_pexcels));
+                            ], $admin_pexcels));
             //
         });
 
         /**
          * ADMIN sidebar menu
          */
-        view()->composer(['pexcel::admin.*','pexcel::pexcel_category.admin.*'], function ($view) {
+        view()->composer(['pexcel::admin.*', 'pexcel::pexcel_category.admin.*'], function ($view) {
             global $request;
             $pexcel_id = $request->get('id');
-            $is_action = empty($pexcel_id)?'page_add':'page_edit';
+            $is_action = empty($pexcel_id) ? 'page_add' : 'page_edit';
 
             $view->with('sidebar_items', [
-
                 /**
                  * Pexcels
                  */
@@ -139,11 +133,10 @@ class PexcelServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-list" aria-hidden="true"></i>'
                 ],
                 //add
-                trans('pexcel::pexcel.'.$is_action) => [
+                trans('pexcel::pexcel.' . $is_action) => [
                     'url' => URL::route('admin_pexcel.edit'),
                     "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
                 ],
-
                 /**
                  * Categories
                  */

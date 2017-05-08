@@ -74,6 +74,7 @@ Trang quản trị bài viết
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
                                     <!--INPUT-->
+                                       <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
                                     @include('pexcel::elements.input', ['name' => 'pexcel_name'])
                                     <!--/END INPUT-->
 
@@ -93,7 +94,7 @@ Trang quản trị bài viết
                                 <!--TAB IMAGE-->
                                 <div id="image" class="tab-pane fade">
                                     <!--IMAGE-->
-                                    @include('pexcel::elements.image', ['name' => 'pexcel_image'])
+                                    @include('pexcel::elements.image', ['name' => 'pexcel_file_path'])
                                     <!--/END IMAGE-->
                                 </div>
                                 <!--TAB IMAGE-->
@@ -128,15 +129,15 @@ Trang quản trị bài viết
 </div>
 @stop
 
-@section('footer_scripts_more')
+@section('sub_page_scripts')
 
-{!! HTML::script('vendor/laravel-filemanager/js/tinymce.min.js') !!}
-{!! HTML::script('vendor/laravel-filemanager/js/tinymce-configs.js') !!}
-{!! HTML::script('vendor/laravel-filemanager/js/lfm_sample.js') !!}
+{!! HTML::script('js/tinymce/tinymce.min.js') !!}
+{!! HTML::script('js/tinymce/tinymce-config.js') !!}
+{!! HTML::script('vendor/laravel-filemanager/js/lfm_pexcel.js') !!}
 
 <script type='text/javascript'>
     $(document).ready(function () {
-        $('#lfm').filemanager('image');
+        $('#lfm').filemanager('file');
     });
 </script>
 @stop

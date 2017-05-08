@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.14, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tuyensinh_online
 -- ------------------------------------------------------
--- Server version	5.7.14
+-- Server version	5.7.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -123,6 +123,63 @@ INSERT INTO `permission` VALUES (1,'superadmin','_superadmin',0,'2017-04-23 00:5
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pexcel`
+--
+
+DROP TABLE IF EXISTS `pexcel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pexcel` (
+  `pexcel_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `pexcel_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `pexcel_description` text COLLATE utf8_unicode_ci,
+  `pexcel_file_path` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `pexcel_status` tinyint(4) DEFAULT NULL,
+  `pexcel_created_at` int(11) DEFAULT NULL,
+  `pexcel_updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pexcel_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pexcel`
+--
+
+LOCK TABLES `pexcel` WRITE;
+/*!40000 ALTER TABLE `pexcel` DISABLE KEYS */;
+INSERT INTO `pexcel` VALUES (3,1,'11111111111111111111','<p>1111111111111111111111</p>','/files/1/590e8011015c6.xlsx',NULL,1494123027,1494123027);
+/*!40000 ALTER TABLE `pexcel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pexcel_categories`
+--
+
+DROP TABLE IF EXISTS `pexcel_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pexcel_categories` (
+  `pexcel_category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pexcel_category_name` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `pexcel_category_created_at` int(11) DEFAULT NULL,
+  `pexcel_category_updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pexcel_category_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pexcel_categories`
+--
+
+LOCK TABLES `pexcel_categories` WRITE;
+/*!40000 ALTER TABLE `pexcel_categories` DISABLE KEYS */;
+INSERT INTO `pexcel_categories` VALUES (2,'rrrrrrrrrrrrrrrrrrrrrr',1,1494211646,1494211646);
+/*!40000 ALTER TABLE `pexcel_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `profile_field`
 --
 
@@ -177,6 +234,133 @@ LOCK TABLES `profile_field_type` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `school_categories`
+--
+
+DROP TABLE IF EXISTS `school_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `school_categories` (
+  `school_category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_category_code` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_category_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`school_category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `school_categories`
+--
+
+LOCK TABLES `school_categories` WRITE;
+/*!40000 ALTER TABLE `school_categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `school_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `school_courses`
+--
+
+DROP TABLE IF EXISTS `school_courses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `school_courses` (
+  `school_course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_course_name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`school_course_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `school_courses`
+--
+
+LOCK TABLES `school_courses` WRITE;
+/*!40000 ALTER TABLE `school_courses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `school_courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `school_students`
+--
+
+DROP TABLE IF EXISTS `school_students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `school_students` (
+  `student_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `student_last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `option_id_1` int(11) DEFAULT NULL,
+  `option_id_2` int(11) DEFAULT NULL,
+  `option_id_3` int(11) DEFAULT NULL,
+  `school_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_upload_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `school_students`
+--
+
+LOCK TABLES `school_students` WRITE;
+/*!40000 ALTER TABLE `school_students` DISABLE KEYS */;
+/*!40000 ALTER TABLE `school_students` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `school_upload`
+--
+
+DROP TABLE IF EXISTS `school_upload`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `school_upload` (
+  `school_upload_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `course_id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`school_upload_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `school_upload`
+--
+
+LOCK TABLES `school_upload` WRITE;
+/*!40000 ALTER TABLE `school_upload` DISABLE KEYS */;
+/*!40000 ALTER TABLE `school_upload` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schools`
+--
+
+DROP TABLE IF EXISTS `schools`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schools` (
+  `school_id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_category_id` int(11) DEFAULT NULL,
+  `school_level_id` tinyint(4) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`school_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schools`
+--
+
+LOCK TABLES `schools` WRITE;
+/*!40000 ALTER TABLE `schools` DISABLE KEYS */;
+/*!40000 ALTER TABLE `schools` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `throttle`
 --
 
@@ -195,7 +379,7 @@ CREATE TABLE `throttle` (
   `banned_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `throttle_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +388,7 @@ CREATE TABLE `throttle` (
 
 LOCK TABLES `throttle` WRITE;
 /*!40000 ALTER TABLE `throttle` DISABLE KEYS */;
-INSERT INTO `throttle` VALUES (1,1,'127.0.0.1',0,0,0,NULL,NULL,NULL),(2,2,'127.0.0.1',0,0,0,NULL,NULL,NULL);
+INSERT INTO `throttle` VALUES (1,1,'127.0.0.1',0,0,0,NULL,NULL,NULL),(2,2,'127.0.0.1',0,0,0,NULL,NULL,NULL),(3,3,'127.0.0.1',0,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `throttle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +417,7 @@ CREATE TABLE `user_profile` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_profile_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +426,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-04-23 00:58:57','2017-04-23 00:58:57'),(2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-04-23 01:01:57','2017-04-23 01:01:57');
+INSERT INTO `user_profile` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-04-23 00:58:57','2017-04-23 00:58:57'),(2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-04-23 01:01:57','2017-04-23 01:01:57'),(3,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-04-23 01:22:46','2017-04-23 01:22:46');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +456,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_activation_code_index` (`activation_code`),
   KEY `users_reset_password_code_index` (`reset_password_code`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,7 +465,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@admin.com','$2y$10$1xosUmQdzkyfinR36fqRfu5Nen3eFWUulHHLu7rmwNJF6D4h0Ysra',NULL,1,0,NULL,NULL,'2017-04-23 01:01:35','$2y$10$0ZAFYIAi1IyeJIA1mAQOl.gagXfWruVfwNSKj6SrSJTOUK4BlXb0m',NULL,0,'2017-04-23 00:58:57','2017-04-23 01:01:35'),(2,'a@b.c','$2y$10$7m4HupdBJOG/eSo0kAxv5uo2H1M5uVe2nn1OpOd5q7e0f.pmJXkT2',NULL,1,0,NULL,NULL,'2017-04-23 01:08:18','$2y$10$3V2tmv73tEfGdd3v2er0peEjvUiuc2JaTFi0b8gXbg5vP.qjC3iY2',NULL,0,'2017-04-23 01:01:57','2017-04-23 01:08:18');
+INSERT INTO `users` VALUES (1,'admin@admin.com','$2y$10$1xosUmQdzkyfinR36fqRfu5Nen3eFWUulHHLu7rmwNJF6D4h0Ysra',NULL,1,0,NULL,NULL,'2017-05-07 19:21:17','$2y$10$u5lmJNhxlfr36jHfXpX8Z.ixXQy8PIIlf5EMIIa/Ihl0fygvWMxpS',NULL,0,'2017-04-23 00:58:57','2017-05-07 19:21:17'),(3,'ketoan@gmail.com','$2y$10$./Vm7f7pDWi77dXtIMzUo.cSo/DEk.cVPV3yTabBie6yRs6vlWDY.',NULL,1,0,NULL,NULL,'2017-04-23 01:23:10','$2y$10$kPgG5Vf6MtqoiHzxZcBjUOe3yxDUUpJYzv8opUKONNRshyXK6eFae',NULL,0,'2017-04-23 01:22:46','2017-04-23 01:23:10');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,7 +489,7 @@ CREATE TABLE `users_groups` (
 
 LOCK TABLES `users_groups` WRITE;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
-INSERT INTO `users_groups` VALUES (1,1);
+INSERT INTO `users_groups` VALUES (1,1),(3,2);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -318,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-23 15:09:19
+-- Dump completed on 2017-05-08 10:04:36

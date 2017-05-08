@@ -72,15 +72,13 @@ class PexcelAdminController extends PexcelController {
      * @param Request $request
      * @return type
      */
-    public function pexcel(Request $request) {
+    public function post(Request $request) {
 
         $this->isAuthentication();
 
         $this->obj_validator = new PexcelAdminValidator();
-        $this->obj_pexcel_categories = new PexcelsCategories();
-        $obj_slideshow = new Slideshows();
 
-        $input = array_merge($request->all(),$this->parseImagePath($request->get('pexcel_image_path')));
+        $input = $request->all();
 
         $input['user_id'] = $this->current_user->id;
 
@@ -98,6 +96,7 @@ class PexcelAdminController extends PexcelController {
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
             }
         } else {
+
             if (!empty($pexcel_id) && is_int($pexcel_id)) {
 
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
@@ -108,13 +107,13 @@ class PexcelAdminController extends PexcelController {
                     $pexcel = $this->obj_pexcel->update_pexcel($input);
 
                     //Message
-                    $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_update_successfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
                     return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
 
                 } else {
 
                     //Message
-                    $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_update_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_unsuccessfully'));
 
                 }
             } else {
@@ -127,12 +126,12 @@ class PexcelAdminController extends PexcelController {
                 if (!empty($pexcel)) {
 
                     //Message
-                    $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_add_successfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_successfully'));
                     return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
                 } else {
 
                     //Message
-                    $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_add_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_unsuccessfully'));
                 }
             }
         }
@@ -140,11 +139,9 @@ class PexcelAdminController extends PexcelController {
         $this->data = array_merge($this->data, array(
             'pexcel' => $pexcel,
             'request' => $request,
-            'categories' =>  array(0 => 'None') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
-            'slideshows' => array(0 => 'None') + $obj_slideshow->pluckSelect()->toArray()
         ), $data);
 
-        return view('pexcel::pexcel.admin.pexcel_edit', $this->data);
+        return view('pexcel::admin.pexcel_edit', $this->data);
     }
 
     /**
@@ -161,7 +158,7 @@ class PexcelAdminController extends PexcelController {
 
             if (!empty($pexcel)) {
                 //Message
-                $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_delete_successfully'));
+                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
 
                 $pexcel->delete();
             }
@@ -175,19 +172,4 @@ class PexcelAdminController extends PexcelController {
 
         return Redirect::route("admin_pexcel");
     }
-
-
-    public function parseImagePath($url) {
-
-        $patern = '/http:\/\/.*?\/(.*?)\/[a-z0-9-_\.]*$/';
-        preg_match($patern, $url, $parse_url);
-
-        $image_info = array(
-            'full_path' => $url,
-            'sub_path' => @$parse_url[1],
-        );
-
-        return $image_info;
-    }
-
 }

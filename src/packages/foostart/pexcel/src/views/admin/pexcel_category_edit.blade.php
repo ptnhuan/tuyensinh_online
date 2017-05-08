@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Admin area: {{ trans('post::post_admin.page_edit') }}
+Admin area: {{ trans('pexcel::pexcel.page_edit') }}
 @stop
 @section('content')
 
@@ -13,7 +13,7 @@ Admin area: {{ trans('post::post_admin.page_edit') }}
                 <!--SAMPLE TITLE-->
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($post_category->post_category_id) ? '<i class="fa fa-pencil"></i>'.trans('post::post_admin.post_category_update') : '<i class="fa fa-users"></i>'.trans('post::post_admin.post_category_new') !!}
+                        {!! !empty($pexcel_category->pexcel_category_id) ? '<i class="fa fa-pencil"></i>'.trans('pexcel::pexcel.pexcel_category_update') : '<i class="fa fa-users"></i>'.trans('pexcel::pexcel.pexcel_category_new') !!}
                     </h3>
                 </div>
                 <!--/END SAMPLE TITLE-->
@@ -33,19 +33,20 @@ Admin area: {{ trans('post::post_admin.page_edit') }}
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <!-- SAMPLE CATEGORIES ID -->
-                            <h4>{!! trans('post::post_admin.form_heading') !!}</h4>
-                            {!! Form::open(['route'=>['admin_post_category.post', 'id' => @$post_category->post_category_id],  'files'=>true, 'method' => 'post'])  !!}
+                            <h4>{!! trans('pexcel::pexcel.form_heading') !!}</h4>
+                            {!! Form::open(['route'=>['admin_pexcel_category.post', 'id' => @$pexcel_category->pexcel_category_id],  'files'=>true, 'method' => 'pexcel'])  !!}
 
                             <!--END SAMPLE CATEGORIES ID  -->
 
                             <!-- SAMPLE NAME TEXT-->
-                            @include('post::post_category.elements.text', ['name' => 'post_category_name'])
+                             <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
+                            @include('pexcel::elements.input', ['name' => 'pexcel_category_name', 'value' => $pexcel_category_name])
                             <!-- /END SAMPLE NAME TEXT -->
 
-                            {!! Form::hidden('id',@$post_category->post_category_id) !!}
+                            {!! Form::hidden('id',@$pexcel_category->pexcel_category_id) !!}
 
                             <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_post_category.delete',['id' => @$post_category->post_category_id, '_token' => csrf_token()]) !!}"
+                            <a href="{!! URL::route('admin_pexcel_category.delete',['id' => @$pexcel_category->pexcel_category_id, '_token' => csrf_token()]) !!}"
                                class="btn btn-danger pull-right margin-left-5 delete">
                                 Xóa
                             </a>
@@ -64,7 +65,7 @@ Admin area: {{ trans('post::post_admin.page_edit') }}
 
         <!--SAMLE SEARCH-->
         <div class='col-md-4'>
-            @include('post::post_category.admin.post_category_search')
+            @include('pexcel::admin.pexcel_category_search')
         </div>
         <!--/END SAMPLE SEARCH-->
     </div>

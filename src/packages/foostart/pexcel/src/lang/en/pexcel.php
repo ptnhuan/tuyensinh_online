@@ -68,7 +68,7 @@ return [
 
     'pexcel_item_created' => 'Ngày gửi',
     'pexcel_item_title' => 'Tiêu đề',
-    'pexcel_admin' => 'Quản lý file',
+    'pexcel' => 'Quản lý file',
 
 
     ////////////////////////////////////////////////////////////////////////////

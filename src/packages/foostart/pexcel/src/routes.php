@@ -28,9 +28,9 @@ Route::group(['middleware' => ['web'],  'Foostart\Pexcel\Controllers\Admin'], fu
         ]);
 
         /**
-         * pexcel
+         * post
          */
-        Route::post('user/pexcel/edit', [
+        Route::post('user/pexcel/post', [
             'as' => 'user_pexcel.post',
             'uses' => 'PexcelUserController@post'
         ]);

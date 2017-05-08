@@ -3,24 +3,23 @@
 namespace Foostart\Pexcel\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Foostart\Pexcel\Controllers\Admin\MyController;
+use Foostart\Pexcel\Controllers\Admin\PexcelController;
 use URL;
 use Route,
     Redirect;
-use Foostart\Pexcel\Models\PexcelsCategories;
+use Foostart\Pexcel\Models\PexcelCategories;
 /**
  * Validators
  */
 use Foostart\Pexcel\Validators\PexcelCategoryAdminValidator;
 
-class PexcelCategoryAdminController extends MyController {
+class PexcelCategoryAdminController extends PexcelController {
 
-    public $data_view = array();
-    private $obj_post_category = NULL;
+    private $obj_pexcel_category = NULL;
     private $obj_validator = NULL;
 
     public function __construct() {
-        $this->obj_post_category = new PexcelsCategories();
+        $this->obj_pexcel_category = new PexcelCategories();
     }
 
     /**
@@ -31,14 +30,14 @@ class PexcelCategoryAdminController extends MyController {
 
         $params = $request->all();
 
-        $list_post_category = $this->obj_post_category->get_posts_categories($params);
+        $list_pexcel_category = $this->obj_pexcel_category->get_pexcels_categories($params);
 
-        $this->data_view = array_merge($this->data_view, array(
-            'posts_categories' => $list_post_category,
+        $this->data = array_merge($this->data, array(
+            'pexcels_categories' => $list_pexcel_category,
             'request' => $request,
             'params' => $params
         ));
-        return view('post::post_category.admin.post_category_list', $this->data_view);
+        return view('pexcel::admin.pexcel_category_list', $this->data);
     }
 
     /**
@@ -47,19 +46,20 @@ class PexcelCategoryAdminController extends MyController {
      */
     public function edit(Request $request) {
 
-        $post_category = NULL;
-        $post_category_id = (int) $request->get('id');
+        $pexcel_category = NULL;
+        $pexcel_category_id = (int) $request->get('id');
 
 
-        if (!empty($post_category_id) && (is_int($post_category_id))) {
-            $post_category = $this->obj_post_category->find($post_category_id);
+        if (!empty($pexcel_category_id) && (is_int($pexcel_category_id))) {
+            $pexcel_category = $this->obj_pexcel_category->find($pexcel_category_id);
         }
 
-        $this->data_view = array_merge($this->data_view, array(
-            'post_category' => $post_category,
+        $this->data = array_merge($this->data, array(
+            'pexcel_category' => $pexcel_category,
             'request' => $request
         ));
-        return view('post::post_category.admin.post_category_edit', $this->data_view);
+
+        return view('pexcel::admin.pexcel_category_edit', $this->data);
     }
 
     /**
@@ -75,9 +75,9 @@ class PexcelCategoryAdminController extends MyController {
         $input = $request->all();
         $input['user_id'] = $this->current_user->id;
 
-        $post_category_id = (int) $request->get('id');
+        $pexcel_category_id = (int) $request->get('id');
 
-        $post_category = NULL;
+        $pexcel_category = NULL;
 
         $data = array();
 
@@ -85,51 +85,51 @@ class PexcelCategoryAdminController extends MyController {
 
             $data['errors'] = $this->obj_validator->getErrors();
 
-            if (!empty($post_category_id) && is_int($post_category_id)) {
+            if (!empty($pexcel_category_id) && is_int($pexcel_category_id)) {
 
-                $post_category = $this->obj_post_category->find($post_category_id);
+                $pexcel_category = $this->obj_pexcel_category->find($pexcel_category_id);
             }
         } else {
-            if (!empty($post_category_id) && is_int($post_category_id)) {
+            if (!empty($pexcel_category_id) && is_int($pexcel_category_id)) {
 
-                $post_category = $this->obj_post_category->find($post_category_id);
+                $pexcel_category = $this->obj_pexcel_category->find($pexcel_category_id);
 
-                if (!empty($post_category)) {
+                if (!empty($pexcel_category)) {
 
-                    $input['post_category_id'] = $post_category_id;
-                    $post_category = $this->obj_post_category->update_post_category($input);
+                    $input['pexcel_category_id'] = $pexcel_category_id;
+                    $pexcel_category = $this->obj_pexcel_category->update_pexcel_category($input);
 
                     //Message
-                    $this->addFlashMessage('message', trans('post::post_admin.message_update_successfully'));
-                    return Redirect::route("admin_post_category.edit", ["id" => $post_category->post_category_id]);
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
+                    return Redirect::route("admin_pexcel_category.edit", ["id" => $pexcel_category->pexcel_category_id]);
                 } else {
 
                     //Message
-                    $this->addFlashMessage('message', trans('post::post_admin.message_update_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_unsuccessfully'));
                 }
             } else {
 
-                $post_category = $this->obj_post_category->add_post_category($input);
+                $pexcel_category = $this->obj_pexcel_category->add_pexcel_category($input);
 
-                if (!empty($post_category)) {
+                if (!empty($pexcel_category)) {
 
                     //Message
-                    $this->addFlashMessage('message', trans('post::post_admin.message_add_successfully'));
-                    return Redirect::route("admin_post_category.edit", ["id" => $post_category->post_category_id]);
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_successfully'));
+                    return Redirect::route("admin_pexcel_category.edit", ["id" => $pexcel_category->pexcel_category_id]);
                 } else {
 
                     //Message
-                    $this->addFlashMessage('message', trans('post::post_admin.message_add_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_unsuccessfully'));
                 }
             }
         }
 
-        $this->data_view = array_merge($this->data_view, array(
-            'post_category' => $post_category,
+        $this->data = array_merge($this->data, array(
+            'pexcel_category' => $pexcel_category,
             'request' => $request,
                 ), $data);
 
-        return view('post::post_category.admin.post_category_edit', $this->data_view);
+        return view('pexcel::admin.pexcel_category_edit', $this->data);
     }
 
     /**
@@ -138,28 +138,28 @@ class PexcelCategoryAdminController extends MyController {
      */
     public function delete(Request $request) {
 
-        $post_category = NULL;
-        $post_category_id = $request->get('id');
+        $pexcel_category = NULL;
+        $pexcel_category_id = $request->get('id');
 
-        if (!empty($post_category_id)) {
-            $post_category = $this->obj_post_category->find($post_category_id);
+        if (!empty($pexcel_category_id)) {
+            $pexcel_category = $this->obj_pexcel_category->find($pexcel_category_id);
 
-            if (!empty($post_category)) {
+            if (!empty($pexcel_category)) {
                 //Message
-                $this->addFlashMessage('message', trans('post::post_admin.message_delete_successfully'));
+                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
 
-                $post_category->delete();
+                $pexcel_category->delete();
             }
         } else {
 
         }
 
-        $this->data_view = array_merge($this->data_view, array(
-            'post_category' => $post_category,
+        $this->data = array_merge($this->data, array(
+            'pexcel_category' => $pexcel_category,
         ));
 
 
-        return Redirect::route("admin_post_category");
+        return Redirect::route("admin_pexcel_category");
     }
 
 }

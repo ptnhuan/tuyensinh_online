@@ -1,6 +1,10 @@
 <?php
+
 return [
 
-    'name_min_length' => 5, 
-    'name_max_length' => 255, 
+    /**
+     * NUMBERS
+     */
+    'per_page' => 10,
+
 ];

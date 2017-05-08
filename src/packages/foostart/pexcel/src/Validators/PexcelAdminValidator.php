@@ -1,15 +1,16 @@
-<?php namespace Foostart\Post\Validators;
+<?php namespace Foostart\Pexcel\Validators;
 
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class PostAdminValidator extends AbstractValidator
+class PexcelAdminValidator extends AbstractValidator
 {
     protected static $rules = array(
-        'post_name' => 'required',
-        'post_description' => 'required',
+        'pexcel_name' => 'required',
+        'pexcel_description' => 'required',
+        'pexcel_file_path' => 'required',
     );
 
     protected static $messages = [];
@@ -29,9 +30,8 @@ class PostAdminValidator extends AbstractValidator
 
         $this->errors = $this->errors?$this->errors:new MessageBag();
 
-        $flag = $this->isValidTitle($input)?$flag:FALSE;
-        $flag = $this->isValidOverview($input)?$flag:FALSE;
-        $flag = $this->isValidDescription($input)?$flag:FALSE;
+//        $flag = $this->isValidTitle($input)?$flag:FALSE;
+//        $flag = $this->isValidDescription($input)?$flag:FALSE;
 
         return $flag;
     }
@@ -64,8 +64,9 @@ class PostAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'post_name.required' => 'Yêu cầu nhập tiêu đề.',
-            'post_description.required' => 'Yêu cầu nhập nội dung bài viết.',
+            'pexcel_name.required' => 'Yêu cầu nhập tiêu đề.',
+            'pexcel_description.required' => 'Yêu cầu nhập nội dung bài viết.',
+            'pexcel_file_path.required' => 'Yêu cầu gửi file đính kèm.',
         ];
     }
 
@@ -76,10 +77,10 @@ class PostAdminValidator extends AbstractValidator
         $min_lenght = config('buoumau.length_name_min');
         $max_lenght = config('buoumau.length_name_max');
 
-        $post_name = @$input['post_name'];
+        $pexcel_name = @$input['pexcel_name'];
 
-        if ((strlen($post_name) < $min_lenght)  || ((strlen($post_name) > $max_lenght))) {
-            $this->errors->add('length_name', trans('post::post_admin.length_name', ['LENGTH_NAME_MIN' => $min_lenght, 'LENGTH_NAME_MAX' => $max_lenght]));
+        if ((strlen($pexcel_name) < $min_lenght)  || ((strlen($pexcel_name) > $max_lenght))) {
+            $this->errors->add('length_name', trans('pexcel::pexcel.length_name', ['LENGTH_NAME_MIN' => $min_lenght, 'LENGTH_NAME_MAX' => $max_lenght]));
             $flag = FALSE;
         }
 
@@ -93,10 +94,10 @@ class PostAdminValidator extends AbstractValidator
         $min_lenght = config('buoumau.length_overview_min') + 7;
         $max_lenght = config('buoumau.length_overview_max');
 
-        $post_overiew = @$input['post_overview'];
+        $pexcel_overiew = @$input['pexcel_overview'];
 
-        if ((strlen($post_overiew) < $min_lenght)  || ((strlen($post_overiew) > $max_lenght))) {
-            $this->errors->add('length_overview', trans('post::post_admin.length_overview', ['LENGTH_OVERVIEW_MIN' => 10, 'LENGTH_OVERVIEW_MAX' => $max_lenght]));
+        if ((strlen($pexcel_overiew) < $min_lenght)  || ((strlen($pexcel_overiew) > $max_lenght))) {
+            $this->errors->add('length_overview', trans('pexcel::pexcel.length_overview', ['LENGTH_OVERVIEW_MIN' => 10, 'LENGTH_OVERVIEW_MAX' => $max_lenght]));
             $flag = FALSE;
         }
 
@@ -109,10 +110,10 @@ class PostAdminValidator extends AbstractValidator
 
         $min_lenght = config('buoumau.length_description_min');
 
-        $post_overiew = @$input['post_description'];
+        $pexcel_overiew = @$input['pexcel_description'];
 
-        if (strlen($post_overiew) < $min_lenght) {
-            $this->errors->add('length_description', trans('post::post_admin.length_description', ['LENGTH_DESCRIPTION_MIN' => $min_lenght]));
+        if (strlen($pexcel_overiew) < $min_lenght) {
+            $this->errors->add('length_description', trans('pexcel::pexcel.length_description', ['LENGTH_DESCRIPTION_MIN' => $min_lenght]));
             $flag = FALSE;
         }
 
