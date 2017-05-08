@@ -167,7 +167,7 @@ class PndAdminController extends PndController
         $student = NULL;
         $student_id = $request->get('id');
 
-        if (!empty($school_id)) {
+        if (!empty($student_id)) {
             $student = $this->obj_students->find($student_id);
 
             if (!empty($student)) {
