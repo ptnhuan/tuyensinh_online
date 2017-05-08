@@ -141,6 +141,44 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers
             'uses' => 'PndAdminController@parse'
         ]);
 
+        
+        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        /**
+         * list
+         */
+        Route::get('admin/pnd_school', [
+            'as' => 'admin_pnd_school',
+            'uses' => 'PndSchoolAdminController@index'
+        ]);
+
+        /**
+         * edit-add
+         */
+        Route::get('admin/pnd_school/edit', [
+            'as' => 'admin_pnd_school.edit',
+            'uses' => 'PndSchoolAdminController@edit'
+        ]);
+
+        /**
+         * pnd
+         */
+        Route::post('admin/pnd_school/edit', [
+            'as' => 'admin_pnd_school.post',
+            'uses' => 'PndSchoolAdminController@post'
+        ]);
+
+        /**
+         * delete
+         */
+        Route::get('admin/pnd_school/delete', [
+            'as' => 'admin_pnd_school.delete',
+            'uses' => 'PndSchoolAdminController@delete'
+        ]);
+
+       
+        
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////CATEGORIES ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
