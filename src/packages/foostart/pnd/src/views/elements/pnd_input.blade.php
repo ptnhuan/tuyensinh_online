@@ -1,5 +1,5 @@
 <div class="form-group">
-    <?php $pnd_name = $request->get('pnd_name') ? $request->get('pnd_name') : @$pnd->pnd_name ?>
-    {!! Form::label($name, trans('pnd::pnd.name').':') !!}
-    {!! Form::text($name, $pnd_name, ['class' => 'form-control pnd_name', 'placeholder' => trans('pnd::pnd.name'), 'id' => 'pnd_name']) !!}
+    <?php $request_name = $request->get($name) ? $request->get($name) : $value ?>
+    {!! Form::label($name, trans('pnd::pnd.'.$name).':') !!}
+    {!! Form::text($name, $request_name, ['class' => 'form-control pnd_name', 'placeholder' => trans('pnd::pnd.'.$name), 'id' => $name]) !!}
 </div>

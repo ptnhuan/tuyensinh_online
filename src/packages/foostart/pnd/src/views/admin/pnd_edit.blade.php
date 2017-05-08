@@ -11,7 +11,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($students->school_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
+                        {!! !empty($students->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
                     </h3>
                 </div>
 
@@ -33,7 +33,7 @@ Trang quản trị bài viết
                             <h4>{!! trans('pnd::pnd.form_heading') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
-                            {!! Form::open(['route'=>['admin_pnd.post', 'id' => @$students->school_id],  'files'=>true, 'method' => 'post'])  !!}
+                            {!! Form::open(['route'=>['admin_pnd.post', 'id' => @$student->student_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -64,10 +64,21 @@ Trang quản trị bài viết
 
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
+                                                                     
                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'pnd_name'])
+                                    @include('pnd::elements.pnd_input', ['name' => 'student_first_name','value'=> @$student->student_first_name])
                                     <!--/END INPUT-->
- 
+                                    
+                                    <!--INPUT-->
+                                    @include('pnd::elements.pnd_input', ['name' => 'student_last_name','value'=> @$student->student_last_name])
+                                    <!--/END INPUT-->
+
+                                    <!--INPUT-->
+                                    @include('pnd::elements.pnd_input', ['name' => 'student_email','value'=> @$student->student_email])
+                                    <!--/END INPUT-->
+                                     
+                                    <!--/END INPUT-->
+
                                 </div>
                                 <!--/END TAB OVERVIEW-->
 
@@ -82,10 +93,10 @@ Trang quản trị bài viết
 
                             </div>
 
-                            {!! Form::hidden('id',@$students->school_id) !!}
+                            {!! Form::hidden('id',@$students->student_id) !!}
 
                             <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_pnd.delete',['id' => @$students->school_id, '_token' => csrf_token()]) !!}"
+                            <a href="{!! URL::route('admin_pnd.delete',['id' => @$students->student_id, '_token' => csrf_token()]) !!}"
                                class="btn btn-danger pull-right margin-left-5 delete">
                                 Xóa
                             </a>
