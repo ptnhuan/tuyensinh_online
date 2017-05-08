@@ -9,9 +9,8 @@ use Route,
     Redirect;
 /**
  * Models
- */
+ */ 
 use Foostart\Pnd\Models\Students;
-use Foostart\Pnd\Models\PexcelCategories;
 /**
  * Validators
  */
@@ -20,15 +19,13 @@ use Foostart\Pnd\Validators\PndAdminValidator;
 class PndAdminController extends PndController
 {
 
-    private $obj_students = NULL;
-    private $obj_categories = NULL;
+    private $obj_students = NULL; 
     private $obj_validator = NULL;
 
     public function __construct()
     {
 
-        $this->obj_students = new Students();
-        $this->obj_categories = new PexcelCategories();
+        $this->obj_students = new Students(); 
     }
 
     /**
@@ -37,19 +34,13 @@ class PndAdminController extends PndController
      */
     public function index(Request $request)
     {
+
         $params = $request->all();
 
-        $this->isAuthentication();
-
-        $params['user_id'] = $this->current_user->id;
-
         $students = $this->obj_students->get_students($params);
-        $categories = $this->obj_categories->pluckSelect($params['pexcel_category_id']);
-
 
         $this->data = array_merge($this->data, array(
             'students' => $students,
-            'categories' => $categories,
             'request' => $request,
             'params' => $params
         ));
@@ -124,7 +115,7 @@ class PndAdminController extends PndController
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
-
+                   
                     return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
@@ -154,7 +145,7 @@ class PndAdminController extends PndController
         }
 
         $this->data = array_merge($this->data, array(
-            'student' => $student,
+            '$student' => $student,
             'request' => $request,
         ), $data);
 
@@ -190,5 +181,5 @@ class PndAdminController extends PndController
 
         return Redirect::route("admin_pnd");
     }
-
+ 
 }
