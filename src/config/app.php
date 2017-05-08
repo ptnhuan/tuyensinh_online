@@ -155,6 +155,8 @@ return [
         LaravelAcl\Authentication\AuthenticationServiceProvider::class,
 
         Foostart\Pexcel\PexcelServiceProvider::class,
+        Foostart\Pnd\PndServiceProvider::class,
+
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,

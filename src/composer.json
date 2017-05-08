@@ -23,7 +23,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Foostart\\Pexcel\\": "packages/foostart/pexcel/src/"
+            "Foostart\\Pexcel\\": "packages/foostart/pexcel/src/",
+            "Foostart\\Pnd\\": "packages/foostart/pnd/src/"
         }
     },
     "autoload-dev": {
