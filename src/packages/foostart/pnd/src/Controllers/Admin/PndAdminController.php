@@ -95,7 +95,7 @@ class PndAdminController extends PndController
 
         $student_id = (int)$request->get('id');
 
-        $students = NULL;
+        $student = NULL;
 
         $data = array();
 
@@ -132,14 +132,14 @@ class PndAdminController extends PndController
 
                 $input = array_merge($input, array());
 
-                $students = $this->obj_students->add_pnd($input);
+                $student = $this->obj_students->add_student($input);
 
-                if (!empty($students)) {
+                if (!empty($student)) {
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
 
-                    return Redirect::route("admin_pnd.parse", ["id" => $students->pnd_id]);
+                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
 
@@ -150,7 +150,7 @@ class PndAdminController extends PndController
         }
 
         $this->data = array_merge($this->data, array(
-            'students' => $students,
+            '$student' => $student,
             'request' => $request,
         ), $data);
 

@@ -53,7 +53,7 @@ class Students extends Model {
      * @return type
      */
     public function get_students($params = array()) {
-        $eloquent = self::orderBy('student_last_name', 'ASC');
+        $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //pexcel_name
         if (!empty($params['pexcel_id'])) {
@@ -120,14 +120,13 @@ class Students extends Model {
         $student->save();
     }
 
-    public function add_student($input, $pexcel_id) {
+    public function add_student($input) {
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
-
-        $student['pexcel_id'] = $pexcel_id;
+ 
         $student = self::create($student);
-
+                
         $student = $this->createAccount($student);
         return $student;
     }
