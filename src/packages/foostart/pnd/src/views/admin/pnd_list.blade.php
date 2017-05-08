@@ -34,13 +34,14 @@ Trang quản trị bài viết
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body">
-                    @include('pnd::admin.pnd-message')
+                    
                     @include('pnd::admin.pnd_item')
+                    
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_search')
+            @include('pnd::admin.pnd_categories')
         </div>
     </div>
 </div>

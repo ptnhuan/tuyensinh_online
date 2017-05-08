@@ -7,7 +7,7 @@ use Foostart\Pnd\Controllers\Admin\PndController;
 use URL;
 use Route,
     Redirect;
-use Foostart\Pnd\Models\PndCategories;
+use Foostart\Pnd\Models\PexcelCategories;
 /**
  * Validators
  */
@@ -19,7 +19,7 @@ class PndCategoryAdminController extends PndController {
     private $obj_validator = NULL;
 
     public function __construct() {
-        $this->obj_pnd_category = new PndCategories();
+        $this->obj_pnd_category = new PexcelCategories();
     }
 
     /**

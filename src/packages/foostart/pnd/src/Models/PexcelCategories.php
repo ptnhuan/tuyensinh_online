@@ -4,7 +4,7 @@ namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PndCategories extends Model {
+class PexcelCategories extends Model {
 
     protected $table = 'pexcel_categories';
     public $timestamps = false;
@@ -23,6 +23,7 @@ class PndCategories extends Model {
             $eloquent->where('pexcel_category_name', 'like', '%' . $params['pexcel_category_name'] . '%');
         }
         $pexcels_category = $eloquent->paginate(config('pexcel.per_page'));
+       
         return $pexcels_category;
     }
 
@@ -75,12 +76,13 @@ class PndCategories extends Model {
      * @return type
      */
     public function pluckSelect($category_id = NULL) {
+        
         if ($category_id) {
             $categories = self::where('pexcel_category_id', '!=', $category_id)
-                    ->orderBy('pexcel_category_name', 'ASC')
+                    ->orderBy('pexcel_category_name', 'DESC')
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         } else {
-            $categories = self::orderBy('pexcel_category_name', 'ASC')
+            $categories = self::orderBy('pexcel_category_name', 'DESC')
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         }
         return $categories;
