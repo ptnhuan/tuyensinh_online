@@ -12,7 +12,7 @@ use Route,
  */
 use Foostart\Pnd\Models\Pnd;
 use Foostart\Pnd\Models\Schools;
-use Foostart\Pnd\Models\PndCategories;
+use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Helper\Parse;
 /**
  * Validators
@@ -23,14 +23,14 @@ class PndSchoolAdminController extends PndController
 {
 
     private $obj_schools = NULL;
-    private $obj_pnd_categories = NULL;
+    private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
 
     public function __construct()
     {
 
         $this->obj_schools = new Schools();
-        $this->obj_pnd_categories = new PndCategories();
+        $this->obj_pexcel_categories = new PexcelCategories();
     }
 
     /**
