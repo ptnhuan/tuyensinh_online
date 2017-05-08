@@ -28,7 +28,7 @@ return [
         'student_birth_place' => 8,
 
         'school_id' => 9,
-        'school_distric_id' => 10,
+        'school_district_id' => 10,
 
         'student_class' => 11,
 
@@ -54,8 +54,9 @@ return [
 
         'student_nominate' => 26,
 
-        'school_class_code' => 27,
-        'school_code_class' => 28,
+        'school_id_option' => 27,
+        'school_class_code' => 28,
+
         'school_code_option_1' => 29,
         'school_code_option_2' => 30,
 
