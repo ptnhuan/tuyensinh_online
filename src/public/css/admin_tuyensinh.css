@@ -16,12 +16,22 @@
     background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
     background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
- .add-new a:hover {
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .add-new a{
-        color: #f4645f;
-        font-size: 11px;
-        font-style: italic;
-    }
+.add-new a:hover {
+    text-decoration: none;
+    font-weight: bold;
+}
+.add-new a{
+    color: #f4645f;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.pexcel-edit {
+    background-color: #edb96f !important;
+    border-color: #edb96f !important;
+}
+
+.pexcel-delete{
+    background-color: #e75f5a !important;
+    border-color: #e75f5a !important;
+}

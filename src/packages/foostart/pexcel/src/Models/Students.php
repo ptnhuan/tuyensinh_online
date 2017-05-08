@@ -41,6 +41,9 @@ class Students extends Model {
         'school_code_option_2',
         'student_email',
         'student_phone',
+
+        'student_user',
+        'student_pass'
     ];
     protected $primaryKey = 'student_id';
 
@@ -110,14 +113,26 @@ class Students extends Model {
         return $student;
     }
 
+    public function createAccount($student) {
+
+        $user_name = $this->generateAccount($student->school_id, $student->student_id);
+
+        $student->student_user = $user_name;
+        $student->student_pass = $user_name;
+
+        $student->save();
+    }
+
     public function add_student($input, $pexcel_id) {
 
         $student = $this->validRow($input);
-        $student['student_birth'] = strtotime($student['student_birth_month'].'/'.$student['student_birth_day'].'/'.$student['student_birth_year']);
+        $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
 
         $student['pexcel_id'] = $pexcel_id;
-        $pexcel = self::create($student);
-        return $pexcel;
+        $student = self::create($student);
+
+        $student = $this->createAccount($student);
+        return $student;
     }
 
     public function add_students($students, $pexcel_id) {
@@ -160,4 +175,29 @@ class Students extends Model {
         $eloquent = self::where('pexcel_id', $pexcel_id)->delete();
         return $eloquent;
     }
+
+    public function generateAccount($school_id, $student_id) {
+
+        $school_id .= '';
+        $student_id .= '';
+
+        $user_name = array();
+        $account_max_length = config('pexcel.account_max_length');
+
+
+        for ($i = 0; $i < $account_max_length; $i++) {
+            $user_name[] = 0;
+        }
+
+        for ($i = 0; $i < strlen($school_id); $i++) {
+            $user_name[$i] = $school_id[$i];
+        }
+
+        for ($i = 0; $i < strlen($student_id); $i++) {
+            $user_name[$account_max_length - $i - 1] = $student_id[$i];
+        }
+
+        return implode($user_name);
+    }
+
 }

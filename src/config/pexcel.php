@@ -7,6 +7,8 @@ return [
      */
     'per_page' => 10,
 
+    'account_max_length' => 7,
+
     /**
      * VALIDATORS
      */

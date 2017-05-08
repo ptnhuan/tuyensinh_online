@@ -152,7 +152,7 @@ CREATE TABLE `pexcel` (
 
 LOCK TABLES `pexcel` WRITE;
 /*!40000 ALTER TABLE `pexcel` DISABLE KEYS */;
-INSERT INTO `pexcel` VALUES (4,0,1,9,13,NULL,'1111111111111111111','<p>111111111111111111111111</p>','/files/1/file/test.xlsx',NULL,1494221518,1494222832);
+INSERT INTO `pexcel` VALUES (4,0,1,9,21,NULL,'1111111111111111111','<p>111111111111111111111111</p>','/files/1/file/test.xlsx',NULL,1494221518,1494238473);
 /*!40000 ALTER TABLE `pexcel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,9 +297,11 @@ DROP TABLE IF EXISTS `school_courses`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `school_courses` (
   `school_course_id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_course_name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_course_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_course_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `flat` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`school_course_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,6 +310,7 @@ CREATE TABLE `school_courses` (
 
 LOCK TABLES `school_courses` WRITE;
 /*!40000 ALTER TABLE `school_courses` DISABLE KEYS */;
+INSERT INTO `school_courses` VALUES (1,'2016-2017','Năm học 2016-2017',0);
 /*!40000 ALTER TABLE `school_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,10 +388,10 @@ CREATE TABLE `school_students` (
   `student_phone` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `student_user` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `student_pass` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `school_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `school_course_code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pexcel_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=483 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,6 +400,7 @@ CREATE TABLE `school_students` (
 
 LOCK TABLES `school_students` WRITE;
 /*!40000 ALTER TABLE `school_students` DISABLE KEYS */;
+INSERT INTO `school_students` VALUES (482,'HỒ THỊ NGỌC','ÁNH','Nữ',1001782800,'30','9','2001','Tuy hòa, Phú Yên',308,33,'9A','TB','TB',NULL,'TB','K',NULL,'TB','K',NULL,'TB','K',NULL,6,6,5.9,'TB',NULL,NULL,1,9900,'TOANTIN',NULL,'3300',NULL,'3302','anh@yahoo.com','0909090909','3080284','3080284',NULL,NULL),(481,'NGUYỄN THỊ VÂN','ANH','Nữ',976122000,'7','12','2000','Thái Bình',308,33,'9A','TB','T',NULL,'TB','T',NULL,'TB','T',NULL,'TB','T',NULL,5.6,6.5,7.3,'TB',NULL,NULL,NULL,NULL,NULL,NULL,'3300',NULL,'9906','vananh@gmail.com','0914188188\'','3080184','3080184',NULL,NULL),(480,'NGÔ VÂN','ANH','Nam',1005498000,'12','11','2001','Tuy Hòa, Phú Yên',308,33,'9A','K','T',NULL,'TB','T',NULL,'K','T',NULL,'K','T',NULL,7.5,7.6,8,'K',NULL,NULL,NULL,9901,NULL,NULL,'3300',NULL,'3301','nvanh@gmail.com','0903556635','3080084','3080084',NULL,NULL),(479,'MAI THỊ HỒNG','ANH','Nam',1001955600,'2','10','2001','Tuy Hòa, Phú Yên',308,33,'9A','G','T',NULL,'K','K',NULL,'K','T',NULL,'G','T',NULL,8.5,8.3,8.5,'G',2.5,'cc',NULL,9900,'TOAN',NULL,'3300',NULL,'3302','mthanh@gmail.com','0913445058','3080974','3080974',NULL,NULL),(478,'HỒ THỊ NGỌC','ÁNH','Nữ',1001782800,'30','9','2001','Tuy hòa, Phú Yên',308,33,'9A','TB','TB',NULL,'TB','K',NULL,'TB','K',NULL,'TB','K',NULL,6,6,5.9,'TB',NULL,NULL,1,9900,'TOANTIN',NULL,'3300',NULL,'3302','anh@yahoo.com','0909090909','3080874','3080874',NULL,NULL),(477,'NGUYỄN THỊ VÂN','ANH','Nữ',976122000,'7','12','2000','Thái Bình',308,33,'9A','TB','T',NULL,'TB','T',NULL,'TB','T',NULL,'TB','T',NULL,5.6,6.5,7.3,'TB',NULL,NULL,NULL,NULL,NULL,NULL,'3300',NULL,'9906','vananh@gmail.com','0914188188\'','3080774','3080774',NULL,NULL),(475,'MAI THỊ HỒNG','ANH','Nam',1001955600,'2','10','2001','Tuy Hòa, Phú Yên',308,33,'9A','G','T',NULL,'K','K',NULL,'K','T',NULL,'G','T',NULL,8.5,8.3,8.5,'G',2.5,'bb',NULL,9900,'TOAN',NULL,'3300',NULL,'3302','mthanh@gmail.com','0913445058','3080574','3080574',NULL,NULL),(476,'NGÔ VÂN','ANH','Nam',1005498000,'12','11','2001','Tuy Hòa, Phú Yên',308,33,'9A','K','T',NULL,'TB','T',NULL,'K','T',NULL,'K','T',NULL,7.5,7.6,8,'K',NULL,NULL,NULL,9901,NULL,NULL,'3300',NULL,'3301','nvanh@gmail.com','0903556635','3080674','3080674',NULL,NULL),(474,'HỒ THỊ NGỌC','ÁNH','Nữ',1001782800,'30','9','2001','Tuy hòa, Phú Yên',308,33,'9A','TB','TB',NULL,'TB','K',NULL,'TB','K',NULL,'TB','K',NULL,6,6,5.9,'TB',NULL,NULL,1,9900,'TOANTIN',NULL,'3300',NULL,'3302','anh@yahoo.com','0909090909','3080474','3080474',NULL,NULL),(473,'NGUYỄN THỊ VÂN','ANH','Nữ',976122000,'7','12','2000','Thái Bình',308,33,'9A','TB','T',NULL,'TB','T',NULL,'TB','T',NULL,'TB','T',NULL,5.6,6.5,7.3,'TB',NULL,NULL,NULL,NULL,NULL,NULL,'3300',NULL,'9906','vananh@gmail.com','0914188188\'','3080374','3080374',NULL,NULL),(472,'NGÔ VÂN','ANH','Nam',1005498000,'12','11','2001','Tuy Hòa, Phú Yên',308,33,'9A','K','T',NULL,'TB','T',NULL,'K','T',NULL,'K','T',NULL,7.5,7.6,8,'K',NULL,NULL,NULL,9901,NULL,NULL,'3300',NULL,'3301','nvanh@gmail.com','0903556635','3080274','3080274',NULL,NULL),(471,'MAI THỊ HỒNG','ANH','Nam',1001955600,'2','10','2001','Tuy Hòa, Phú Yên',308,33,'9A','G','T',NULL,'K','K',NULL,'K','T',NULL,'G','T',NULL,8.5,8.3,8.5,'G',2.5,'xx',NULL,9900,'TOAN',NULL,'3300',NULL,'3302','mthanh@gmail.com','0913445058','3080174','3080174',NULL,NULL);
 /*!40000 ALTER TABLE `school_students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,4 +603,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-08 16:33:23
+-- Dump completed on 2017-05-08 17:43:55
