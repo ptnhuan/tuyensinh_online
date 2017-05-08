@@ -138,6 +138,7 @@ CREATE TABLE `pexcel` (
   `pexcel_status` tinyint(4) DEFAULT NULL,
   `pexcel_created_at` int(11) DEFAULT NULL,
   `pexcel_updated_at` int(11) DEFAULT NULL,
+  `pexcel_value` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`pexcel_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -148,7 +149,7 @@ CREATE TABLE `pexcel` (
 
 LOCK TABLES `pexcel` WRITE;
 /*!40000 ALTER TABLE `pexcel` DISABLE KEYS */;
-INSERT INTO `pexcel` VALUES (3,1,'11111111111111111111','<p>1111111111111111111111</p>','/files/1/590e8011015c6.xlsx',NULL,1494123027,1494123027);
+INSERT INTO `pexcel` VALUES (3,1,'11111111111111111111','<p>1111111111111111111111</p>','/files/1/590e8011015c6.xlsx',NULL,1494123027,1494123027,NULL);
 /*!40000 ALTER TABLE `pexcel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,10 +164,12 @@ CREATE TABLE `pexcel_categories` (
   `pexcel_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `pexcel_category_name` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `pexcel_category_from` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pexcel_category_to` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pexcel_category_created_at` int(11) DEFAULT NULL,
   `pexcel_category_updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`pexcel_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +178,7 @@ CREATE TABLE `pexcel_categories` (
 
 LOCK TABLES `pexcel_categories` WRITE;
 /*!40000 ALTER TABLE `pexcel_categories` DISABLE KEYS */;
-INSERT INTO `pexcel_categories` VALUES (2,'rrrrrrrrrrrrrrrrrrrrrr',1,1494211646,1494211646);
+INSERT INTO `pexcel_categories` VALUES (4,'Năm học 2017 - 2018',1,NULL,NULL,1494214137,1494214137),(3,'Năm học 2016 - 2017',1,NULL,NULL,1494214118,1494214118);
 /*!40000 ALTER TABLE `pexcel_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,6 +300,7 @@ CREATE TABLE `school_students` (
   `school_code` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   `school_upload_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `pexcel_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -502,4 +506,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-08 10:04:36
+-- Dump completed on 2017-05-08 10:37:54
