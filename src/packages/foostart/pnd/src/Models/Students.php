@@ -63,10 +63,14 @@ class Students extends Model
 
         })->join('pexcel_categories', function ($join) use ($params) {
             $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
-                ->where('pexcel_categories.user_id', $params['user_id'])
-                ->where('pexcel_categories.pexcel_category_id', $params['pexcel_category_id']);
+                ->where('pexcel_categories.user_id', $params['user_id']);
         });
 
+        if (!empty(@$params['pexcel_category_id'])) {
+            $eloquent->where('pexcel_categories.pexcel_category_id', $params['pexcel_category_id']);
+        }else{
+            $eloquent->max('pexcel_categories.pexcel_category_id');
+        }
         //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent->where('pexcel_id', $params['pexcel_id']);
