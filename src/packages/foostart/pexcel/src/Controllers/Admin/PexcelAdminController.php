@@ -11,6 +11,7 @@ use Route,
  * Models
  */
 use Foostart\Pexcel\Models\Pexcel;
+use Foostart\Pexcel\Models\Students;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pexcel\Helper\Parse;
 /**
@@ -182,6 +183,7 @@ class PexcelAdminController extends PexcelController {
     public function parse(Request $request) {
 
         $obj_parse = new Parse();
+        $obj_students = new Students();
 
         $input = $request->all();
 
@@ -191,14 +193,14 @@ class PexcelAdminController extends PexcelController {
 
         $students = $obj_parse->get_students($pexcel);
 
-        var_dump($students);
-        die();
+        /**
+         * Import data
+         */
+        $obj_students->delete_old_data($pexcel->pexel_id);
+        $obj_students->add_students($students, $pexcel->pexcel_id);
 
-        $students = (object) array(
-            0 => [
-                'id' => 1
-            ]
-        );
+        $students = $obj_students->get_students();
+
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,
