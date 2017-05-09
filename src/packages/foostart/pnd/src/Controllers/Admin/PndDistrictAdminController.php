@@ -139,7 +139,7 @@ class PndDistrictAdminController extends PndController
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
 
-                    return Redirect::route("admin_pnd.parse", ["id" => $districts->pnd_id]);
+                  //  return Redirect::route("admin_pnd.parse", ["id" => $districts->pnd_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
 

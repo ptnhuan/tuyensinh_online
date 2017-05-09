@@ -147,6 +147,15 @@ class PndServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 
+                /**
+                 * Districts
+                 */
+                //list
+                trans('pnd::pnd.page_district_list') => [
+                    'url' => URL::route('admin_pnd_district'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
             ]);
             //
         });

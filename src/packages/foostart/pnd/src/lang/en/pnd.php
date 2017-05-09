@@ -22,6 +22,9 @@ return [
     
     'page_district_list'=> 'Danh sách huyện',
  'page_district_search' => 'Tìm kiếm thông tin huyện',
+    
+      'page_specialist_list'=> 'Danh sách lớp chuyên',
+ 'page_specialist_search' => 'Tìm kiếm thông tin lớp chuyên',
     /**
      * Form
      */
@@ -34,6 +37,9 @@ return [
     
       'form_district_add' => 'Tạo thông tin huyện',
     'form_district_edit' => 'Cập nhật thông tin huyện',
+    
+       'form_class_add' => 'Tạo thông tin lớp chuyên',
+    'form_class_edit' => 'Cập nhật thông lớp chuyên',
     
     'name' => 'Tiêu đề file',
     'slug' => 'Slug',
@@ -52,6 +58,13 @@ return [
     'school_email' => 'Email',
     'school_contact' => 'Liên hệ',
     'school_district_id' => 'Mã huyện',
+      'school_district_code' => 'Mã huyện',
+      'school_district_name' => 'Tên huyện',
+    
+     'school_specialist_code' => 'Mã lớp chuyên',
+      'school_specialist_name' => 'Tên lớp chuyên',
+    
+    
     'school_level_id' => 'Cấp học',
     'school_user' => 'Tên đăng nhập',
     'school_pass' => 'Mật khẩu',
@@ -106,7 +119,9 @@ return [
     ////////////////////////////////////////////////////////////////////////////
     'page_category_list' => 'Danh mục',
     'pnd_category_add_button' => 'Thêm danh mục mới',
+    'add_specialist' => 'Thêm lớp chuyên',
     'add_school' => 'Thêm trường',
+    'add_district' => 'Thêm huyện',
     'pnd_categoty_id' => 'Category ID',
     'pnd_categoty_name' => 'Tên danh mục',
     'pnd_categoty_created' => 'Ngày tạo',

@@ -221,6 +221,40 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
             'uses' => 'PndDistrictAdminController@delete'
         ]);
 
-        
+          ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////PND DISTRICT ROUTE///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        /**
+         * list
+         */
+        Route::get('admin/pnd_specialist', [
+            'as' => 'admin_pnd_specialist',
+            'uses' => 'PndSpecialistAdminController@index'
+        ]);
+
+        /**
+         * edit-add
+         */
+        Route::get('admin/pnd_specialist/edit', [
+            'as' => 'admin_pnd_specialist.edit',
+            'uses' => 'PndSpecialistAdminController@edit'
+        ]);
+
+        /**
+         * pnd
+         */
+        Route::post('admin/pnd_specialist/edit', [
+            'as' => 'admin_pnd_specialist.post',
+            'uses' => 'PndSpecialistAdminController@post'
+        ]);
+
+        /**
+         * delete
+         */
+        Route::get('admin/pnd_specialist/delete', [
+            'as' => 'admin_pnd_specialist.delete',
+            'uses' => 'PndSpecialistAdminController@delete'
+        ]);
+
     });
 });

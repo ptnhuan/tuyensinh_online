@@ -33,7 +33,7 @@ Trang quản trị bài viết
                             <h4>{!! trans('pnd::pnd.form_heading') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
-                            {!! Form::open(['route'=>['admin_pnd_district.post', 'id' => @$school->school_district_id],  'files'=>true, 'method' => 'post'])  !!}
+                            {!! Form::open(['route'=>['admin_pnd_district.post', 'id' => @$district->school_district_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -73,7 +73,7 @@ Trang quản trị bài viết
                                     @include('pnd::elements.pnd_input', ['name' => 'school_district_name','value'=> @$district->school_district_name])
                                     <!--/END INPUT-->
 
-                                 
+                                      
                                     
                                     <!--/END INPUT-->
 
@@ -91,7 +91,7 @@ Trang quản trị bài viết
 
                             </div>
 
-                            {!! Form::hidden('id',@$districts->school_district_id) !!}
+                            {!! Form::hidden('id',@$schools->school_district_id) !!}
 
                             <!-- DELETE BUTTON -->
                             <a href="{!! URL::route('admin_pnd_district.delete',['id' => @$districts->school_district_id, '_token' => csrf_token()]) !!}"

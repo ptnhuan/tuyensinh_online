@@ -77,19 +77,18 @@ class Districts extends Model {
 
    
 
-    public function add_school($input) {
+    public function add_district($input) {
 
         $district = $this->validRow($input);
  
         $district = self::create($district);
 
-        $district = $this->createAccount($district);
-        return $district;
+             return $district;
     }
 
    
 
-    public function delete_school($school_district_id) {
+    public function delete_district($school_district_id) {
         $eloquent = self::where('school_district_id', $school_district_id)->delete();
         return $eloquent;
     }
