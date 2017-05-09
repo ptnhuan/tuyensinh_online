@@ -217,5 +217,5 @@ class PndAdminController extends PndController
         ));
         return view('pnd::admin.pnd_list', $this->data);
     }
-
+        
 }
