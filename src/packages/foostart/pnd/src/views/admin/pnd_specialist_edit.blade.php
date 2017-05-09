@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Trang quản trị bài viết
+Trang quản trị lớp chuyên
 @stop
 @section('content')
 <div class="row">
@@ -11,7 +11,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($specialists->school_specialist_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_class_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_class_add') !!}
+                        {!! !empty($specialists->school_class_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_class_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_class_add') !!}
                     </h3>
                 </div>
 
@@ -66,11 +66,11 @@ Trang quản trị bài viết
                                 <div id="home" class="tab-pane fade in active">
                                                                      
                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_specialist_code','value'=> @$specialist->school_class_code])
+                                    @include('pnd::elements.pnd_input', ['name' => 'school_class_code','value'=> @$specialist->school_class_code])
                                     <!--/END INPUT-->
                                     
                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_specialist_name','value'=> @$specialist->school_class_name])
+                                    @include('pnd::elements.pnd_input', ['name' => 'school_class_name','value'=> @$specialist->school_class_name])
                                     <!--/END INPUT-->
 
                                       
@@ -91,7 +91,7 @@ Trang quản trị bài viết
 
                             </div>
 
-                            {!! Form::hidden('id',@$schools->school_specialist_id) !!}
+                            {!! Form::hidden('id',@$schools->school_class_id) !!}
 
                             <!-- DELETE BUTTON -->
                             <a href="{!! URL::route('admin_pnd_specialist.delete',['id' => @$specialists->school_class_id, '_token' => csrf_token()]) !!}"

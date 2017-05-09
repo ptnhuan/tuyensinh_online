@@ -61,8 +61,8 @@ return [
       'school_district_code' => 'Mã huyện',
       'school_district_name' => 'Tên huyện',
     
-     'school_specialist_code' => 'Mã lớp chuyên',
-      'school_specialist_name' => 'Tên lớp chuyên',
+     'school_class_code' => 'Mã lớp chuyên',
+      'school_class_name' => 'Tên lớp chuyên',
     
     
     'school_level_id' => 'Cấp học',

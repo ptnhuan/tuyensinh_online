@@ -156,6 +156,17 @@ class PndServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 
+                
+                /**
+                 * Class=specialist
+                 */
+                //list
+                trans('pnd::pnd.page_specialist_list') => [
+                    'url' => URL::route('admin_pnd_specialist'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                
             ]);
             //
         });

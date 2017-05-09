@@ -5,11 +5,11 @@ use \LaravelAcl\Library\Validators\AbstractValidator;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class PndDistrictAdminValidator extends AbstractValidator
+class PndSpecialistAdminValidator extends AbstractValidator
 {
     protected static $rules = array(
-        'school_district_code' => 'required',
-        'school_district_name' => 'required'     
+        'school_class_code' => 'required',
+        'school_class_name' => 'required'     
                
     );
 
@@ -64,13 +64,9 @@ class PndDistrictAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'school_first_name.required' => 'Yêu cầu nhập họ học viên.',
-            'school_last_name.required' => 'Yêu cầu nhập tên học viên.',
-            'school_email.required' => 'Yêu cầu nhâp email học viên.',
-            
-            
-             'school_district_code.required' => 'Nhập mã huyện',
-        'school_district_name.required' => 'Nhập tên huyện'
+                    
+             'school_class_code.required' => 'Nhập mã lớp chuyên',
+        'school_class_name.required' => 'Nhập tên lớp chuyên'
                              
             
             
