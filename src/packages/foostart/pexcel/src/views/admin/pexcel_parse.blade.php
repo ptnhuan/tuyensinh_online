@@ -11,7 +11,6 @@ Trang quản trị bài viết
 
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-8">
 
             <div class="panel panel-info">
 
@@ -37,10 +36,7 @@ Trang quản trị bài viết
                     @include('pexcel::admin.pexcel_parse_item')
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            @include('pexcel::admin.pexcel_search')
-        </div>
+
     </div>
 </div>
 @stop

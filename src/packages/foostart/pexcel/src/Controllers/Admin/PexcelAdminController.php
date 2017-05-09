@@ -193,13 +193,14 @@ class PexcelAdminController extends PexcelController {
 
         $students = $obj_parse->get_students($pexcel);
 
+        $pexcel->pexcel_value = json_encode($students);
+        $pexcel->save();
+
+
         /**
          * Import data
          */
-        $obj_students->delete_old_data($pexcel->pexel_id);
-        $obj_students->add_students($students, $pexcel->pexcel_id);
 
-        $students = $obj_students->get_students();
 
         $this->data = array_merge($this->data, array(
             'students' => $students,
