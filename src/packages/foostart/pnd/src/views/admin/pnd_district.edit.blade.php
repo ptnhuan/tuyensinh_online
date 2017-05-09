@@ -11,7 +11,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($schools->school_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_school__edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_school_add') !!}
+                        {!! !empty($districts->school_district_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_district_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_district_add') !!}
                     </h3>
                 </div>
 
@@ -33,7 +33,7 @@ Trang quản trị bài viết
                             <h4>{!! trans('pnd::pnd.form_heading') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
-                            {!! Form::open(['route'=>['admin_pnd_school.post', 'id' => @$school->school_id],  'files'=>true, 'method' => 'post'])  !!}
+                            {!! Form::open(['route'=>['admin_pnd_district.post', 'id' => @$school->school_district_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -66,38 +66,14 @@ Trang quản trị bài viết
                                 <div id="home" class="tab-pane fade in active">
                                                                      
                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
+                                    @include('pnd::elements.pnd_input', ['name' => 'school_district_code','value'=> @$district->school_district_code])
                                     <!--/END INPUT-->
                                     
                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_name','value'=> @$school->school_name])
+                                    @include('pnd::elements.pnd_input', ['name' => 'school_district_name','value'=> @$district->school_district_name])
                                     <!--/END INPUT-->
 
-                                    <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_address','value'=> @$school->school_address])
-                                    <!--/END INPUT-->
-                                       <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_phone','value'=> @$school->school_phone])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
-                                    <!--/END INPUT-->
-                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_district_id','value'=> @$school->school_district_id])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_user','value'=> @$school->school_user])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_pass','value'=> @$school->school_pass])
-                                    <!--/END INPUT-->
-                                      
+                                 
                                     
                                     <!--/END INPUT-->
 
@@ -115,10 +91,10 @@ Trang quản trị bài viết
 
                             </div>
 
-                            {!! Form::hidden('id',@$schools->school_id) !!}
+                            {!! Form::hidden('id',@$districts->school_district_id) !!}
 
                             <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_pnd_school.delete',['id' => @$schools->school_id, '_token' => csrf_token()]) !!}"
+                            <a href="{!! URL::route('admin_pnd_district.delete',['id' => @$districts->school_district_id, '_token' => csrf_token()]) !!}"
                                class="btn btn-danger pull-right margin-left-5 delete">
                                 Xóa
                             </a>

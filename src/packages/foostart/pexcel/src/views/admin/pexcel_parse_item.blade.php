@@ -6,7 +6,7 @@
         <div class="payroll-status">
             <span class="payroll-status-title">Trạng thái</span>
             <span class="payroll-status-val">
-                Bảng lương đã được duyệt
+                Danh sách học sinh  đã được nhập dữ liệu
 
             </span>
         </div>

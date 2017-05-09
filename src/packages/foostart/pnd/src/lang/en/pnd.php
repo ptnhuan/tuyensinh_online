@@ -16,15 +16,25 @@ return [
     'page_add' => 'Thêm học sinh',
     'page_edit' => 'Cập nhật item',
     'page_search' => 'Tìm kiếm file',
+    'page_school_search' => 'Tìm kiếm thông tin trường',
     'page_category'=> 'Danh mục file',
     'page_school_list'=> 'Danh sách trường',
-
+    
+    'page_district_list'=> 'Danh sách huyện',
+ 'page_district_search' => 'Tìm kiếm thông tin huyện',
     /**
      * Form
      */
     'form_heading' => 'Nội dung',
     'form_add' => 'Tạo thông tin học sinh mới',
     'form_edit' => 'Cập nhật thông tin học sinh',
+    
+     'form_school_add' => 'Tạo thông tin trường mới',
+    'form_school__edit' => 'Cập nhật thông tin trường',
+    
+      'form_district_add' => 'Tạo thông tin huyện',
+    'form_district_edit' => 'Cập nhật thông tin huyện',
+    
     'name' => 'Tiêu đề file',
     'slug' => 'Slug',
     'required' => 'is required',
@@ -43,6 +53,9 @@ return [
     'school_contact' => 'Liên hệ',
     'school_district_id' => 'Mã huyện',
     'school_level_id' => 'Cấp học',
+    'school_user' => 'Tên đăng nhập',
+    'school_pass' => 'Mật khẩu',
+    
     'slideshow_name' => 'Slideshow',
     'school_code' => 'Mã trường',
     'student_email' => 'Email',

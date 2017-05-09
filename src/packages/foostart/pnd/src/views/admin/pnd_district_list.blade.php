@@ -16,7 +16,7 @@ Trang quản trị bài viết
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_school_search') : trans('pnd::pnd.page_school_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_district_search') : trans('pnd::pnd.page_district_list') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,7 +34,7 @@ Trang quản trị bài viết
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
-                    @include('pnd::admin.pnd_school_item')
+                    @include('pnd::admin.pnd_district_item')
                 </div>
             </div>
         </div>

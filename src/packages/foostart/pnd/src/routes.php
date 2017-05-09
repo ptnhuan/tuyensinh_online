@@ -186,5 +186,41 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
             'uses' => 'PndSchoolAdminController@delete'
         ]);
 
+          ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////PND DISTRICT ROUTE///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        /**
+         * list
+         */
+        Route::get('admin/pnd_district', [
+            'as' => 'admin_pnd_district',
+            'uses' => 'PndDistrictAdminController@index'
+        ]);
+
+        /**
+         * edit-add
+         */
+        Route::get('admin/pnd_district/edit', [
+            'as' => 'admin_pnd_district.edit',
+            'uses' => 'PndDistrictAdminController@edit'
+        ]);
+
+        /**
+         * pnd
+         */
+        Route::post('admin/pnd_district/edit', [
+            'as' => 'admin_pnd_district.post',
+            'uses' => 'PndDistrictAdminController@post'
+        ]);
+
+        /**
+         * delete
+         */
+        Route::get('admin/pnd_district/delete', [
+            'as' => 'admin_pnd_district.delete',
+            'uses' => 'PndDistrictAdminController@delete'
+        ]);
+
+        
     });
 });
