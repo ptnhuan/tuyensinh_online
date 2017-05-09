@@ -78,7 +78,7 @@ return [
             "name" => "Pexcel",
             "route" => "admin_pexcel",
             "link" => '/admin/pexcel',
-            "permissions" => []
+            "permissions" => ['_superadmin', '_mod-level-2']
         ],
         [
             /*

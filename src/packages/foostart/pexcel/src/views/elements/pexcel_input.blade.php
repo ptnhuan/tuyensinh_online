@@ -1,5 +1,5 @@
 <div class="form-group">
-    <?php $pexcel_name = $request->get('pexcel_name') ? $request->get('pexcel_name') : @$pexcel->pexcel_name ?>
-    {!! Form::label($name, trans('pexcel::pexcel.name').':') !!}
-    {!! Form::text($name, $pexcel_name, ['class' => 'form-control pexcel_name', 'placeholder' => trans('pexcel::pexcel.name'), 'id' => 'pexcel_name']) !!}
+    <?php $pexcel_name = $request->get($name) ? $request->get($name) : @$pexcel->$name ?>
+    {!! Form::label($name, $label.':') !!}
+    {!! Form::text($name, $pexcel_name, ['class' => 'form-control pexcel_name', 'placeholder' => $label, 'id' => $name]) !!}
 </div>

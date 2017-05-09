@@ -48,14 +48,6 @@ Trang quản trị bài viết
                                 </li>
                                 <!--/END TAB HOME-->
 
-                                <!--TAB ATTRIBUTES-->
-                                <li>
-                                    <a data-toggle="tab" href="#attributes">
-                                        {!! trans('pexcel::pexcel.tab_attributes') !!}
-                                    </a>
-                                </li>
-                                <!--/END TAB ATTRIBUTES-->
-
                                 <!--TAB FILE-->
                                 <li>
                                     <a data-toggle="tab" href="#file">
@@ -74,7 +66,7 @@ Trang quản trị bài viết
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
                                     <!--INPUT-->
-                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_name'])
+                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_name', 'label' => 'Tiêu đề'])
                                     <!--/END INPUT-->
 
                                      <!--TEXT-->
@@ -83,19 +75,24 @@ Trang quản trị bài viết
                                 </div>
                                 <!--/END TAB OVERVIEW-->
 
-                                <!--TAB ATTRIBUTES-->
-                                <div id="attributes" class="tab-pane fade">
+                                <!--TAB FILE-->
+                                <div id="file" class="tab-pane fade">
                                     <!--SELECT-->
                                      @include('pexcel::elements.pexcel_select')
                                     <!--/END SELECT-->
-                                </div>
-                                <!--TAB ATTRIBUTES-->
 
-                                <!--TAB FILE-->
-                                <div id="file" class="tab-pane fade">
                                     <!--FILE-->
                                     @include('pexcel::elements.image', ['name' => 'pexcel_file_path'])
                                     <!--/END FILE-->
+
+                                    <!--INPUT-->
+                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_fromrow', 'label' => 'Đọc dữ liệu từ dòng'])
+                                    <!--/END INPUT-->
+                                    <!--INPUT-->
+                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_torow', 'label' => 'Đọc dữ liệu đến dòng'])
+                                    <!--/END INPUT-->
+
+
                                 </div>
                                 <!--TAB FILE-->
 
