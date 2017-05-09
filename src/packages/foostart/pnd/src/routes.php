@@ -2,6 +2,15 @@
 
 use Illuminate\Session\TokenMismatchException;
 
+Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], function () {
+//    Route::post('/user/login', [
+//        "uses" => 'VendorController@postAdminLogin',
+//        "as" => "user.login.process"
+//    ]);
+});
+
+
+
 /**
  * USER
  */
