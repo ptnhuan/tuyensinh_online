@@ -201,12 +201,13 @@ class PndAdminController extends PndController
 
         $this->isAuthentication();
 
+        $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-        $school = $this->obj_schools->get_school_by_user_id($this->current_user->id);
+        $school = $this->obj_schools->get_school_by_user_id($this->current_user->user_name);
 
         $params['school_code'] = $school->school_code;
-        
+              
         $students = $this->obj_students->get_students($params);
  
         $this->data = array_merge($this->data, array(

@@ -146,6 +146,7 @@ class Schools extends Model {
     public function get_school_by_user_id($user_id = null){
         $eloquent = self::where('school_user', $user_id)->first();
 
+         
         return $eloquent;
     }
 
