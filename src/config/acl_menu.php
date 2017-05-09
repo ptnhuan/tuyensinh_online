@@ -11,7 +11,7 @@ return [
     */
     "list" => [
         [
-            "name" => "Dashboard",
+            "name" => "Trang chủ",
             "route" => "dashboard",
             "link" => '/admin/users/dashboard',
             "permissions" => []
@@ -23,7 +23,7 @@ return [
              * but still want to handle permission with the 'can_see' filter
              * just leave this field empty.
              */
-            "name" => "Users",
+            "name" => "Người dùng",
             /* the route name associated to the link: used to set
              * the 'active' flag and to validate permissions of all
              * the subroutes associated(users.* will be validated for _superadmin and _group-editor permission)
@@ -50,13 +50,13 @@ return [
             "skip_permissions" => ["users.selfprofile.edit", "users.profile.edit", "users.profile.addfield", "users.profile.deletefield"]
         ],
         [
-            "name" => "Groups",
+            "name" => "Nhóm quyền",
             "route" => "groups",
             "link" => '/admin/groups/list',
             "permissions" => ["_superadmin", "_group-editor"]
         ],
         [
-            "name" => "Permission",
+            "name" => "Quyền",
             "route" => "permission",
             "link" => '/admin/permissions/list',
             "permissions" => ["_superadmin", "_permission-editor"]
@@ -75,7 +75,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Pexcel",
+            "name" => "Nhập excel",
             "route" => "admin_pexcel",
             "link" => '/admin/pexcel',
             "permissions" => ['_superadmin', '_mod_3']
@@ -84,7 +84,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Pnd",
+            "name" => "Hiển thị",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
             "permissions" => []

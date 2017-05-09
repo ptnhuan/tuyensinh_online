@@ -7,7 +7,7 @@ Admin area: dashboard
 @section('content')
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
-      <h3><i class="fa fa-dashboard"></i> Dashboard</h3>
+      <h3><i class="fa fa-dashboard"></i> Trang chủ</h3>
       <hr/>
   </div>
   <div class="col-md-12 col-sm-12 col-xs-12">

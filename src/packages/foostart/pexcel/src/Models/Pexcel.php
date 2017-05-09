@@ -8,6 +8,8 @@ class Pexcel extends Model {
     public $timestamps = false;
     protected $fillable = [
         'pexcel_name',
+        'pexcel_fromrow',
+        'pexcel_torow',
         'pexcel_description',
         'pexcel_category_id',
         'user_id',
@@ -46,7 +48,7 @@ class Pexcel extends Model {
         if (empty($pexcel_id)) {
             $pexcel_id = $input['pexcel_id'];
         }
-
+      
         $pexcel = self::find($pexcel_id);
 
         if (!empty($pexcel)) {
@@ -54,6 +56,10 @@ class Pexcel extends Model {
             $pexcel->pexcel_name = $input['pexcel_name'];
             $pexcel->pexcel_description = $input['pexcel_description'];
 
+            $pexcel->pexcel_fromrow = $input['pexcel_fromrow'];
+            $pexcel->pexcel_torow = $input['pexcel_torow'];
+
+            
             $pexcel->pexcel_category_id = $input['pexcel_category_id'];
 
             $pexcel->pexcel_file_path = $input['pexcel_file_path'];
@@ -75,8 +81,10 @@ class Pexcel extends Model {
      */
     public function add_pexcel($input) {
 
-        $pexcel = self::create([
+        $pexcel = self::create([                                      
                     'pexcel_name' => @$input['pexcel_name'],
+              'pexcel_fromrow' => @$input['pexcel_fromrow'],
+                    'pexcel_torow' => @$input['pexcel_torow'],      
                     'pexcel_description' => @$input['pexcel_description'],
                     'pexcel_file_path' => @$input['pexcel_file_path'],
 

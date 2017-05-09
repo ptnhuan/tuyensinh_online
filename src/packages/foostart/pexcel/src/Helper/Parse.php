@@ -20,6 +20,7 @@ class Parse {
         $data = \Excel::selectSheetsByIndex(0)->load($file_path, function($reader) {
                     // Getting all results
                     $reader->noHeading();
+                     
                     $reader->formatDates(false);
                 }, 'UTF-8')->get();
         $results = $data->toArray();
