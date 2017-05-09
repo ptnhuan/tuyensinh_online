@@ -5,7 +5,7 @@ use Illuminate\Session\TokenMismatchException;
 /**
  * USER
  */
-Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
         ////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], funct
         /**
          * like
          */
-        Route::post('user/pnd/like',[
+        Route::post('user/pnd/like', [
             'as' => 'user_pnd.like',
             'uses' => 'PndUserController@like'
         ]);
@@ -94,7 +94,7 @@ Route::group(['middleware' => ['web'],  'Foostart\Pnd\Controllers\Admin'], funct
 /**
  * ADMINISTRATOR
  */
-Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
@@ -134,14 +134,14 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers
         ]);
 
         /**
-         * parse
+         * search
          */
-        Route::get('admin/pnd/parse', [
-            'as' => 'admin_pnd.parse',
-            'uses' => 'PndAdminController@parse'
+        Route::get('admin/pnd/search', [
+            'as' => 'admin_pnd.search',
+            'uses' => 'PndAdminController@search'
         ]);
 
-        
+
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -177,37 +177,5 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pnd\Controllers
             'uses' => 'PndSchoolAdminController@delete'
         ]);
 
-       
-        
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES ROUTE///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        Route::get('admin/pnd_category', [
-            'as' => 'admin_pnd_category',
-            'uses' => 'PndCategoryAdminController@index'
-        ]);
-
-        /**
-         * edit-add
-         */
-        Route::get('admin/pnd_category/edit', [
-            'as' => 'admin_pnd_category.edit',
-            'uses' => 'PndCategoryAdminController@edit'
-        ]);
-
-        /**
-         * pnd
-         */
-        Route::post('admin/pnd_category/edit', [
-            'as' => 'admin_pnd_category.post',
-            'uses' => 'PndCategoryAdminController@post'
-        ]);
-        /**
-         * delete
-         */
-        Route::get('admin/pnd_category/delete', [
-            'as' => 'admin_pnd_category.delete',
-            'uses' => 'PndCategoryAdminController@delete'
-        ]);
     });
 });

@@ -146,11 +146,7 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_school'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                 //
-                trans('pnd::pnd.' . $is_action) => [
-                    'url' => URL::route('admin_pnd_school.edit'),
-                    "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
-                ],
+                
             ]);
             //
         });

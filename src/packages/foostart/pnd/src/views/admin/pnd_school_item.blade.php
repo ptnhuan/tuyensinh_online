@@ -1,3 +1,12 @@
+<!--ADD SCHOOL ITEM-->
+<div class="row margin-bottom-12">
+    <div class="col-md-12">
+        <a href="{!! URL::route('admin_pnd_school.edit') !!}" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i>{{trans('pnd::pnd.add_school')}}
+        </a>
+    </div>
+</div>
+<!--/END ADD SCHOOL ITEM-->
 
 @if( ! $schools->isEmpty())
     

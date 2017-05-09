@@ -14,7 +14,7 @@
         <tbody>
         <?php
         $nav = $students->toArray();
-        $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
+        $counter = 0;
         ?>
         @foreach($students as $student)
             <tr>
@@ -35,10 +35,7 @@
             </tr>
         @endforeach
         </tbody>
-    </table>
-    <div class="paginator">
-        {!! $students->appends($request->except(['page']) )->render() !!}
-    </div>
+    </table> 
     
 @else
     <span class="text-warning">

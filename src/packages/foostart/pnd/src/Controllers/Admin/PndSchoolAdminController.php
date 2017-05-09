@@ -132,7 +132,7 @@ class PndSchoolAdminController extends PndController
 
                 $input = array_merge($input, array());
 
-                $schools = $this->obj_schools->add_pnd($input);
+                $schools = $this->obj_schools->add_school($input);
 
                 if (!empty($schools)) {
 

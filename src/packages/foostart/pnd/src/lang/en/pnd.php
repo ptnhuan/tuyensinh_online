@@ -12,35 +12,53 @@ return [
      * Page
      */
 
-    'page_list' => 'Danh sách',
-    'page_add' => 'Thêm item mới',
+    'page_list' => 'Danh sách học sinh',
+    'page_add' => 'Thêm học sinh',
     'page_edit' => 'Cập nhật item',
     'page_search' => 'Tìm kiếm file',
     'page_category'=> 'Danh mục file',
+    'page_school_list'=> 'Danh sách trường',
 
     /**
      * Form
      */
-    'form_heading' => 'Nội dung file',
-    'form_add' => 'Tạo file mới',
-    'form_edit' => 'Cập nhật file',
+    'form_heading' => 'Nội dung',
+    'form_add' => 'Tạo thông tin học sinh mới',
+    'form_edit' => 'Cập nhật thông tin học sinh',
     'name' => 'Tiêu đề file',
     'slug' => 'Slug',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
     'pnd_overview' => 'Mô tả ngắn',
-    'pnd_description' => 'Nội dung file',
+    'pnd_description' => 'Nội dung',
     'pnd_name_label' => 'Từ khóa:',
     'pnd_name_placeholder' => 'Từ khóa',
     'pnd_category_name'=> 'Từ khóa',
     'pnd_image_choose' => 'Choose',
     'slideshow_name' => 'Slideshow',
+    'school_name' => 'Tên trường',
+    'school_address' => 'Địa chỉ',
+    'school_phone' => 'Số điện thoại',
+    'school_email' => 'Email',
+    'school_contact' => 'Liên hệ',
+    'school_district_id' => 'Mã huyện',
+    'school_level_id' => 'Cấp học',
+    'slideshow_name' => 'Slideshow',
+    'school_code' => 'Mã trường',
+    'student_email' => 'Email',
+    'student_last_name' => 'Tên học sinh',
+    'student_first_name' => 'Họ học sinh',
+    'page_categories' => 'Danh mục',
+    'pnd_categories_label' => 'Danh mục',
+    'filter' => 'Lọc',
+
 
     /**
      * Message
      */
     'message_update_successfully' => 'Cập nhật thành công',
     'message_add_successfully' => 'Thêm mới thành công',
+    'message_add_unsuccessfully' => 'Thêm mới không thành công',
     'message_delete_successfully' => 'Xóa thành công',
     'message_find_failed' => 'Không tìm thấy',
 
@@ -75,6 +93,7 @@ return [
     ////////////////////////////////////////////////////////////////////////////
     'page_category_list' => 'Danh mục',
     'pnd_category_add_button' => 'Thêm danh mục mới',
+    'add_school' => 'Thêm trường',
     'pnd_categoty_id' => 'Category ID',
     'pnd_categoty_name' => 'Tên danh mục',
     'pnd_categoty_created' => 'Ngày tạo',

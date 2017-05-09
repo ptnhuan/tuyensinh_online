@@ -11,6 +11,7 @@ use Route,
  * Models
  */
 use Foostart\Pnd\Models\Students;
+use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 /**
  * Validators
@@ -21,6 +22,7 @@ class PndAdminController extends PndController
 {
 
     private $obj_students = NULL;
+    private $obj_schools = NULL;
     private $obj_categories = NULL;
     private $obj_validator = NULL;
 
@@ -28,6 +30,7 @@ class PndAdminController extends PndController
     {
 
         $this->obj_students = new Students();
+        $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
     }
 
@@ -189,6 +192,29 @@ class PndAdminController extends PndController
         ));
 
         return Redirect::route("admin_pnd");
+    }
+
+
+    public function search(Request $request)
+    {
+        $params = $request->all();
+
+        $this->isAuthentication();
+
+        $params['user_id'] = $this->current_user->id;
+
+        $school = $this->obj_schools->get_school_by_user_id($this->current_user->id);
+
+        $params['school_code'] = $school->school_code;
+        
+        $students = $this->obj_students->get_students($params);
+ 
+        $this->data = array_merge($this->data, array(
+            'students' => $students,
+            'request' => $request,
+            'params' => $params
+        ));
+        return view('pnd::admin.pnd_list', $this->data);
     }
 
 }
