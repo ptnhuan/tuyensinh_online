@@ -82,14 +82,9 @@ class PexcelCategories extends Model
     public function pluckSelect($category_id = NULL)
     {
 
-        if ($category_id) {
-            $categories = self::where('pexcel_category_id', '!=', $category_id)
-                ->orderBy('pexcel_category_name', 'DESC')
-                ->pluck('pexcel_category_name', 'pexcel_category_id');
-        } else {
             $categories = self::orderBy('pexcel_category_name', 'DESC')
                 ->pluck('pexcel_category_name', 'pexcel_category_id');
-        }
+     
         return $categories;
     }
 

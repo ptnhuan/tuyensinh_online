@@ -5,21 +5,30 @@
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => 'admin_pnd','method' => 'get']) !!}
-
+        {!! Form::open(['route' => 'admin_pnd.search','method' => 'get']) !!}
+  
         <!--TITLE-->
         <div class="form-group">
             <?php $categories = !empty(@$categories) ? $categories : array(); ?>
             <?php $category_id = $request->get('category_id') ? $request->get('category_id') : @$student->pexcel_category_id?>
-                
-            {!! Form::label('pexcel_categories', trans('pnd::pnd.pnd_categories_label')) !!}
 
-            {!! Form::select('pexcel_category_id', $categories, $category_id, ['class' => 'form-control']) !!}
-
+            <!--CATEGORIES-->
+            @include('pnd::elements.pnd_select', ['name' => 'pexcel_category_id',
+                                                 'categories'=> !empty(@$categories) ? $categories  : array(),
+                                                 'category_id'=>@$category_id])
             <!--SCHOOL OPTION-->
-            @include ('pnd::elements.input',['name'=>'school_option'])
+            @include('pnd::elements.pnd_select', ['name' => 'school_option',
+                                                 'categories'=> ['Tất cả','Nguyện vọng 1','Nguyện vọng 2'],
+                                                 'category_id'=> !empty(@$request->get('school_option')) ? @$request->get('school_option') : 0])
+
+
+            <!--SCHOOL OPTION CODE-->
+            @include ('pnd::elements.input',['name'=>'school_code_option',
+                                'value' => !empty(@$request->get('school_code_option')) ? $request->get('school_code_option') : ''])
+
             <!--NAME OR EMAIL STUDENT-->
-            @include ('pnd::elements.input',['name'=>'search_student'])
+            @include ('pnd::elements.input',['name'=>'search_student',
+                                'value' => !empty(@$request->get('search_student')) ? $request->get('search_student') : ''])
 
         </div>
         <!--/END TITLE-->
