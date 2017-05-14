@@ -58,17 +58,15 @@ class Students extends Model
         $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //By School
-        if (!empty(@$params['school_code'])) {
-            if (!empty(@$params['school_code_option_1'])) {
-                $eloquent = $eloquent->where('school_code_option_1', $params['school_code']);
-            } elseif (!empty(@$params['school_code_option_2'])) {
-                $eloquent = $eloquent->where('school_code_option_2', $params['school_code']);
-            } else {
-                $eloquent = $eloquent->where('school_code_option_1', $params['school_code'])->orWhere('school_code_option_1', $params['school_code']);
+        if (!empty($params['school_id'])) {
+            $eloquent = $eloquent->where('school_id',$params['school_id']);
+            if (!empty($params['school_code_option_1'])) {
+                $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option_1']);
+            } elseif (!empty($params['school_code_option_2'])) {
+                $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option_2']);
             }
-
         }
-
+       
         //By Categories
         $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
             $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
@@ -78,13 +76,12 @@ class Students extends Model
             $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
                 ->where('pexcel_categories.user_id', $params['user_id']);
         });
-
+ 
         if (!empty(@$params['pexcel_category_id'])) {
             $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $params['pexcel_category_id']);
         } else {
             $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $eloquent->max('pexcel_categories.pexcel_category_id'));
         }
-
 
         //pexcel_name
         if (!empty($params['pexcel_id'])) {

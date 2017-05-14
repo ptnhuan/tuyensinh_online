@@ -165,6 +165,15 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_specialist'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
+
+                /**
+                 * Search
+                 */
+                //list
+                trans('pnd::pnd.page_search') => [
+                    'url' => URL::route('admin_pnd.search'),
+                    "icon" => '<i class="fa fa-search" aria-hidden="true"></i>'
+                ],
                 
                 
             ]);

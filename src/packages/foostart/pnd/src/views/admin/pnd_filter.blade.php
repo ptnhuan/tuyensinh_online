@@ -15,6 +15,12 @@
             {!! Form::label('pexcel_categories', trans('pnd::pnd.pnd_categories_label')) !!}
 
             {!! Form::select('pexcel_category_id', $categories, $category_id, ['class' => 'form-control']) !!}
+
+            <!--SCHOOL OPTION-->
+            @include ('pnd::elements.input',['name'=>'school_option'])
+            <!--NAME OR EMAIL STUDENT-->
+            @include ('pnd::elements.input',['name'=>'search_student'])
+
         </div>
         <!--/END TITLE-->
 

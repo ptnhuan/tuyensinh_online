@@ -49,7 +49,6 @@ class PndAdminController extends PndController
         $students = $this->obj_students->get_students($params);
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
-
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'categories' => $categories,
@@ -198,24 +197,30 @@ class PndAdminController extends PndController
     public function search(Request $request)
     {
         $params = $request->all();
-
+        $students = null;
         $this->isAuthentication();
 
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-        $school = $this->obj_schools->get_school_by_user_id($this->current_user->user_name);
+        $school = $this->obj_schools->get_school_by_user_name($this->current_user->user_name);
+        
+        $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
-        $params['school_code'] = $school->school_code;
-              
-        $students = $this->obj_students->get_students($params);
- 
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $students = $this->obj_students->get_students($params);
+        }
+
         $this->data = array_merge($this->data, array(
             'students' => $students,
+            'categories' => $categories,
             'request' => $request,
-            'params' => $params
+            'params' => $params, 
         ));
+
         return view('pnd::admin.pnd_list', $this->data);
     }
-        
+
 }

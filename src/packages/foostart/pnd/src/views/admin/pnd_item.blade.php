@@ -1,5 +1,5 @@
-
-@if( ! $students->isEmpty())
+ 
+@if( ! empty($students))
     
     <table class="table table-hover">
         <thead>
