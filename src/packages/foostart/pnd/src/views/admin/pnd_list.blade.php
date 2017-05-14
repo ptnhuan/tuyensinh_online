@@ -11,6 +11,7 @@
 
 <div class="row">
     <div class="col-md-12">
+        
         <div class="col-md-8">
 
             <div class="panel panel-info">
@@ -40,8 +41,9 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-md-4">
-            @include('pnd::admin.pnd_categories')
+            @include('pnd::admin.pnd_filter')
         </div>
     </div>
 </div>
