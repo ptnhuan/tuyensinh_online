@@ -15,7 +15,18 @@ return [
     'length_category_name_min' => 10,
     'length_category_name_max' => 150,
 
+    /**
+     * STATUS
+     */
+    'status' => [
+        'new' => 11,
+        'deleted' => 22,
+        'confirmed' => 33,
+    ],
 
+    /**
+     * FIELDS
+     */
     'fields' => [
 
         'student_first_name' => 2,

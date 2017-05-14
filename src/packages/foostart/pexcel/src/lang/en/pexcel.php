@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 
 return [
 
-    "package_name" => 'Post',
-    "package_description" => 'Post package is for initial',
+    "package_name" => 'pexcel',
+    "package_description" => 'Quản lý file',
     "order" => '#',
     "operations" => 'Thao tác',
     'pexcel_category_name_label' => 'Từ khóa:',

@@ -142,7 +142,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
         ]);
 
         ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES ROUTE///////////////////////////////
+        ////////////////////////////CATEGORIES ROUTE////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         Route::get('admin/pexcel_category', [
             'as' => 'admin_pexcel_category',
@@ -170,6 +170,14 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
         Route::get('admin/pexcel_category/delete', [
             'as' => 'admin_pexcel_category.delete',
             'uses' => 'PexcelCategoryAdminController@delete'
+        ]);
+
+        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////IFRAME ROUTE////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        Route::get('admin/pexcel/parse_iframe', [
+            'as' => 'admin_pexcel.parse_iframe',
+            'uses' => 'PexcelAdminController@parse_iframe'
         ]);
     });
 });
