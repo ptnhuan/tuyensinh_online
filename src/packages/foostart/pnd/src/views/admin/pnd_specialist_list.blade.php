@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-Trang quản trị lớp chuyên
+{!! trans('pnd::pnd.school_class_title') !!}
 @stop
 
 @section('content')

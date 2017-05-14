@@ -8,8 +8,12 @@ return [
     "operations" => 'Thao tác',
     'pnd_category_name_label' => 'Từ khóa:',
     'package_name' => 'Đăng bài',
-    /**
-     * Page
+    
+    
+     /***************************************************************************
+     ***************************************************************************
+     *************************HOC SINH PAGE****************************************
+     ***************************************************************************
      */
 
     'page_list' => 'Danh sách học sinh',
@@ -45,24 +49,40 @@ return [
     'slug' => 'Slug',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
+    
+    
+    'pnd_title' => 'Quản lý thông tin học sinh',
     'pnd_overview' => 'Mô tả ngắn',
     'pnd_description' => 'Nội dung',
     'pnd_name_label' => 'Từ khóa:',
     'pnd_name_placeholder' => 'Từ khóa',
     'pnd_category_name'=> 'Từ khóa',
     'pnd_image_choose' => 'Choose',
+    
+    
+    
+    
+    'pnd_title' => 'Quản lý thông tin học sinh',
+    
     'slideshow_name' => 'Slideshow',
+    
+    'school_title' => 'Quản lý thông tin trường học',
+    'school_code' => 'Mã trường',
     'school_name' => 'Tên trường',
     'school_address' => 'Địa chỉ',
     'school_phone' => 'Số điện thoại',
-    'school_email' => 'Email',
+    'school_email' => 'Thư điện tử',
     'school_contact' => 'Liên hệ',
-    'school_district_id' => 'Mã huyện',
-      'school_district_code' => 'Mã huyện',
-      'school_district_name' => 'Tên huyện',
     
-     'school_class_code' => 'Mã lớp chuyên',
-      'school_class_name' => 'Tên lớp chuyên',
+    
+    'school_district_title' => 'Quản lý thông tin huyện',
+    'school_district_id' => 'Mã huyện',
+    'school_district_code' => 'Mã huyện',
+    'school_district_name' => 'Tên huyện',
+    
+    'school_class_title' => 'Quản lý thông tin lớp chuyên',
+    'school_class_code' => 'Mã lớp chuyên',
+    'school_class_name' => 'Tên lớp chuyên',
     
     
     'school_level_id' => 'Cấp học',
@@ -71,8 +91,10 @@ return [
     
     'slideshow_name' => 'Slideshow',
     'school_code' => 'Mã trường',
-    'student_email' => 'Email',
+    'student_email' => 'Thư điện tử',
+    'student_date' => 'Sinh ngày',
     'student_last_name' => 'Tên học sinh',
+     'student_name' => 'Họ và tên',
     'student_first_name' => 'Họ học sinh',
     'page_categories' => 'Danh mục',
     'pnd_categories_label' => 'Danh mục',

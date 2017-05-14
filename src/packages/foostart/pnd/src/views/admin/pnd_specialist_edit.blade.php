@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Trang quản trị lớp chuyên
+{!! trans('pnd::pnd.school_class_title') !!}
 @stop
 @section('content')
 <div class="row">

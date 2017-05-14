@@ -14,16 +14,16 @@
         <thead>
         <tr>
             <td style='width:5%'>{{ trans('pnd::pnd.order') }}</td>
-            <th style='width:30%'>Mã trường</th>
-            <th style='width:15%'>Tên trường</th>
-            <th style='width:15%'>Địa chỉ</th>
-            <th style='width:15%'>Điện thoại</th>
-            <th style='width:15%'>Thư điện tử</th>
-            <th style='width:15%'>Liên hệ</th>
-            <th style='width:15%'>Thuộc huyện</th>
-            <th style='width:15%'>Cấp học</th>
-            <th style='width:15%'>Tên đăng nhập</th>
-            <th style='width:15%'>Mật khẩu</th>
+            <th style='width:30%'>{{ trans('pnd::pnd.school_code') }} </th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_name') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_address') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_phone') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_email') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_contact') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_district_id') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_level_id') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_user') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_pass') }}</th>
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
         </thead>

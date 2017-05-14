@@ -5,9 +5,9 @@
         <thead>
         <tr>
             <td style='width:5%'>{{ trans('pnd::pnd.order') }}</td>
-            <th style='width:30%'>Họ và tên</th>
-            <th style='width:15%'>Email</th>
-            <th style='width:15%'>Ngày sinh</th>
+            <th style='width:30%'>  {{ trans('pnd::pnd.student_name') }}</th>
+            <th style='width:15%'> {{ trans('pnd::pnd.student_email') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.student_date') }}</th>
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
         </thead>

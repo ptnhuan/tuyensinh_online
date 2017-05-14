@@ -14,8 +14,8 @@
         <thead>
         <tr>
             <td style='width:5%'>{{ trans('pnd::pnd.order') }}</td>
-            <th style='width:30%'>Mã lớp chuyên</th>
-            <th style='width:15%'>Tên lớp chuyên</th>
+            <th style='width:30%'>{{ trans('pnd::pnd.school_class_code') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_class_name') }}</th>
           
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>

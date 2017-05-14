@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-Trang quản trị bài viết
+{!! trans('pnd::pnd.pnd_title') !!}
 @stop
 
 @section('content')
