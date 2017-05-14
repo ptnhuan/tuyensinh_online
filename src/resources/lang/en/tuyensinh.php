@@ -37,4 +37,13 @@ return [
      ***************************************************************************
      */
     'login_title' => 'Trang đăng nhập',
+    'login_head' => 'UBND TỈNH PHÚ YÊN <br>SỞ GIÁO DỤC VÀ ĐÀO TẠO',
+     'login_viewhead' => 'Trang thông tin tuyển sinh đầu cấp trực tuyến',
+    'login_contact' => 'Phòng Khảo thí và Kiểm định CLGD',
+    'login_phone' => 'Điện thoại:01236907788',
+    'login_email' => 'Thư điện tử: leanpha@phuyen.edu.vn',
+     'login_user' => 'Tên đăng nhập',
+     'login_pass' => 'Mật khẩu',
+     'login_login' => 'Đăng nhập',
+    
 ];

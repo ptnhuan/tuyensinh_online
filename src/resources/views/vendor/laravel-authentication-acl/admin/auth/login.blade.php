@@ -8,11 +8,11 @@
 
     <div class="container">
         <div class="loginbox">
-            <div class="logo-hvct"><img src="http://hrm.local/packages/jacopo/laravel-authentication-acl/images/hvct1.png" width="70" class="img-logo"></div>
-            <div class="mane-shool"><span>Trường Cao Đẳng Nghề Kỹ Thuật Công Nghệ<br>Thành Phố Hồ Chí Minh</span></div>
-            <div class="innerheading">
+            <div class="logo-hvct"><img src="<?php echo url('logo.jpg')?>" width="80" class="img-logo"></div>
+            <div class="mane-shool"><span> <?php echo trans('tuyensinh.login_head')?></span></div>
+              <div class="innerheading">
                 <h1>
-                    Trang tin nội bộ
+                  {{trans('tuyensinh.login_viewhead')}}
                 </h1>
             </div>
             <div style="padding-bottom: 25px;">
@@ -28,19 +28,16 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div id="uxHelperInfoBox" class="helpbox">
+                           
                             <p>
-                                <strong>
-                                </strong>
+                                <strong>Liên hệ</strong>
                             </p>
-                            <p>
-                                <strong>Gặp vấn đề</strong>
-                            </p>
-                            <p> Liên hệ Phòng Kế Toán</p>
+                            <p> {{trans('tuyensinh.login_contact')}}</p>
                             <p class="phone">
-                                <strong>08.37314063 - 34 <i style="font-weight: normal;">hoặc</i> 08.37310640</strong>
+                                <strong>{{trans('tuyensinh.login_phone')}} </strong>
                             </p>
                             <p>
-                                Email: phongketoantv@hvct.edu.vn
+                               {{trans('tuyensinh.login_email')}}
                             </p>
                         </div>
                     </div>
@@ -48,16 +45,16 @@
                         {!! Form::open(array('url' => URL::route("user.login.process"), 'method' => 'post') ) !!}
                             <div class="login-form">
                                 <label class="lb">
-                                    Tài khoản</label><br>
+                                    {{trans('tuyensinh.login_user')}}</label><br>
                                 <input id="email" class="form-control form-input" required="required" autocomplete="off" name="email" type="text" value="">
                                 <span id="RequiredFieldValidator5" title="User Name is required." class="failureNotification" style="visibility: hidden;">*</span>
                                 <label class="lb ps">
-                                    Mật khẩu</label><br>
+                                    {{trans('tuyensinh.login_pass')}}</label><br>
                                 <input id="password" class="form-control form-input" required="required" autocomplete="off" name="password" type="password" value="">
                                 <span id="RequiredFieldValidator6" title="Password is required." class="failureNotification" style="visibility: hidden;">*</span><br>
                                 <br>
                                 <div class="rmb">
-                                    <input type="submit" name="Login" value="Đăng nhập" class="btnn">
+                                    <input type="submit" name="Login" value="{{trans('tuyensinh.login_login')}}" class="btnn">
                                 </div>
                             </div>
                         </form>
