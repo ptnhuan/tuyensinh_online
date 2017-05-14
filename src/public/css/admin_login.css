@@ -1,0 +1,137 @@
+body {
+  background-color: #626262;
+}
+.loginbox {
+  background-color: #FFF;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  margin-top: 10%;
+  color: #626262;
+  width: 616px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+}
+.loginbox .site-image {
+  display: block;
+  width: 90px;
+  height: 30px;
+  padding: 25px;
+  background-image: url(../../..//images/notice-logo.jpg);
+  background-size: 80px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+}
+.loginbox .innerheading {
+  background: rgba(255,193,7,0.88);
+  padding: 2px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+  color: #FFF;
+  clear: both;
+}
+.loginbox .innerheading h1 {
+  margin: 0;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  font-size: 18px;
+  line-height: 32px;
+  padding-left: 10px;
+}
+.loginbox .helpbox {
+  margin: 15px 10px 0 14px;
+  padding: 1px 5px 5px 5px;
+  background-color: #EEE;
+  border-radius: 4px;
+}
+.loginbox .fgtn {
+  font-weight: normal;
+  color: #626262;
+}
+.loginbox .login-form {
+  width: 320px;
+  margin: auto;
+}
+.loginbox .login-form .lb {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 13px;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 200px;
+  margin: 15px 0px 5px 0px;
+}
+.loginbox .login-form .form-input {
+  width: 280px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  display: inline-block;
+  height: 30px;
+  margin-top: 3px;
+}
+.loginbox .login-form .ps {
+  margin-top: 21px;
+}
+.loginbox .login-form .btnn {
+  border-left: 1px solid #DCDCDC;
+  border-right: 1px solid #DCDCDC;
+  border-top: 1px solid #DCDCDC;
+  border-bottom: 1px solid #b3b3b3;
+  padding: 8px 20px 8px;
+  font-size: 13px;
+  color: #FFF;
+  vertical-align: middle;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgba(255,193,7,0.88);
+  width: 100px;
+  height: 34px;
+  float: right;
+  margin-right: 40px;
+}
+.loginbox .login-form .btnn:hover {
+  background-color: #FFC107;
+}
+.loginbox .textEntry {
+  margin-bottom: 15px;
+}
+.loginbox .logo-hvct {
+  float: left;
+  margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.loginbox .mane-shool {
+  text-align: center;
+  padding: 15px;
+  padding-top: 20px;
+}
+.loginbox .mane-shool span {
+  color: rgba(255,193,7,0.88);
+  font-size: 20px;
+}
+.loginbox .alert-danger {
+  padding: 15px 15px 15px 14px;
+}
+@media only screen and (max-width: 700px) {
+  .loginbox {
+    width: 380px;
+  }
+  .mane-shool span {
+    font-size: 16px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .loginbox {
+    width: 300px;
+  }
+  .loginbox .login-form {
+    width: 320px;
+    margin: auto;
+    margin-left: 11px;
+  }
+}

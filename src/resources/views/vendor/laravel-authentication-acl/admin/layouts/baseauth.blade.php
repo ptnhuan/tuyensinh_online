@@ -13,6 +13,7 @@
     {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/style.css') !!}
     {!! HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css') !!}
     {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/fonts.css') !!}
+    {!! HTML::style('css/admin_login.css') !!}
 
     @yield('head_css')
     {{-- End head css --}}

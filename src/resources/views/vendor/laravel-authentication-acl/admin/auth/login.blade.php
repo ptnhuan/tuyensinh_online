@@ -1,56 +1,73 @@
 @extends('laravel-authentication-acl::admin.layouts.baseauth')
 @section('title')
-Admin login
+    {{trans('tuyensinh.login_title')}}
 @stop
 @section('container')
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin">{{trans('tuyensinh.user_login')}} {{--{!!Config::get('acl_base.app_name')!!}--}}</h3>
+
+<div class="container">
+
+    <div class="container">
+        <div class="loginbox">
+            <div class="logo-hvct"><img src="http://hrm.local/packages/jacopo/laravel-authentication-acl/images/hvct1.png" width="70" class="img-logo"></div>
+            <div class="mane-shool"><span>Trường Cao Đẳng Nghề Kỹ Thuật Công Nghệ<br>Thành Phố Hồ Chí Minh</span></div>
+            <div class="innerheading">
+                <h1>
+                    Trang tin nội bộ
+                </h1>
+            </div>
+            <div style="padding-bottom: 25px;">
+                <div class="aspNetHidden">
+                    <input type="hidden" name="" id="" value="">
+                    <input type="hidden" name="" id="" value="">
+                    <input type="hidden" name="" id="" value="">
                 </div>
-                <?php $message = Session::get('message'); ?>
-                @if( isset($message) )
-                <div class="alert alert-success">{{$message}}</div>
-                @endif
-                @if($errors && ! $errors->isEmpty() )
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger">{{$error}}</div>
-                @endforeach
-                @endif
-                <div class="panel-body">
-                    {!! Form::open(array('url' => URL::route("user.login.process"), 'method' => 'post') ) !!}
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    {!! Form::text('email', '', ['id' => 'email', 'class' => 'form-control', 'placeholder' => 'Email address', 'required', 'autocomplete' => 'off']) !!}
-                                </div>
-                            </div>
+                <div class="aspNetHidden">
+
+                    <input type="hidden" name="" id="" value="">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div id="uxHelperInfoBox" class="helpbox">
+                            <p>
+                                <strong>
+                                </strong>
+                            </p>
+                            <p>
+                                <strong>Gặp vấn đề</strong>
+                            </p>
+                            <p> Liên hệ Phòng Kế Toán</p>
+                            <p class="phone">
+                                <strong>08.37314063 - 34 <i style="font-weight: normal;">hoặc</i> 08.37310640</strong>
+                            </p>
+                            <p>
+                                Email: phongketoantv@hvct.edu.vn
+                            </p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    {!! Form::password('password', ['id' => 'password', 'class' => 'form-control', 'placeholder' => 'Password', 'required', 'autocomplete' => 'off']) !!}
+                    <div class="col-md-6 col-sm-12">
+                        {!! Form::open(array('url' => URL::route("user.login.process"), 'method' => 'post') ) !!}
+                            <div class="login-form">
+                                <label class="lb">
+                                    Tài khoản</label><br>
+                                <input id="email" class="form-control form-input" required="required" autocomplete="off" name="email" type="text" value="">
+                                <span id="RequiredFieldValidator5" title="User Name is required." class="failureNotification" style="visibility: hidden;">*</span>
+                                <label class="lb ps">
+                                    Mật khẩu</label><br>
+                                <input id="password" class="form-control form-input" required="required" autocomplete="off" name="password" type="password" value="">
+                                <span id="RequiredFieldValidator6" title="Password is required." class="failureNotification" style="visibility: hidden;">*</span><br>
+                                <br>
+                                <div class="rmb">
+                                    <input type="submit" name="Login" value="Đăng nhập" class="btnn">
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
-                    {!! Form::label('remember','Ghi nhớ thông tin đăng nhập') !!}
-                    {!! Form::checkbox('remember') !!}
-                    <input type="submit" value="Đăng nhập" class="btn btn-info btn-block">
-                    {!! Form::close() !!}
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 margin-top-10">
-                            {!! link_to_route('user.reminder.process','Quên mật khẩu?') !!}
-                       </div>
-                   </div>
                 </div>
             </div>
+
         </div>
     </div>
+
+</div>
 @stop

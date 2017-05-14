@@ -17,7 +17,7 @@ return [
      'user_FirstName' => 'Họ ',
      'user_LastName' => 'Tên',
      'user_LastLogin' => 'Đăng nhập lần cuối',
-    'user_Operations' => 'Sửa/xóa',    
+    'user_Operations' => 'Sửa/xóa',
     'user_Pass' => 'Mật khẩu :',
     'user_PassNew' => 'Nhập mật khẩu mới :',
     'user_PassNewRe' => 'Nhập lại mật khẩu mới :',
@@ -30,4 +30,11 @@ return [
      'user_login' => 'ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH',
     'user_delete' => 'Xóa',
     'user_save' => 'Lưu',
+
+    /***************************************************************************
+     ***************************************************************************
+     *************************LOGIN PAGE****************************************
+     ***************************************************************************
+     */
+    'login_title' => 'Trang đăng nhập',
 ];
