@@ -1,7 +1,6 @@
-
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('pexcel::pexcel.page_search') ?></h3>
+        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('pnd::pnd.page_search'.@$name_search) ?></h3>
     </div>
     <div class="panel-body">
 

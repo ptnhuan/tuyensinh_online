@@ -1,11 +1,9 @@
 <!-- POST CATEGORY LIST -->
-<div class="form-group">
-    <?php $categories = !empty(@$categories) ? $categories : array(); ?>
-    <?php $category_id = $request->get('category_id') ? $request->get('category_id') : @$pexcel->category_id ?>
+<div class="form-group">  
+    
+    {!! Form::label(@$name, trans('pnd::pnd.'.@$name).':') !!}
 
-    {!! Form::label('pexcel_category_id', trans('pexcel::pexcel.pexcel_categoty_name').':') !!}
-
-    {!! Form::select('pexcel_category_id', $categories, $category_id, ['class' => 'form-control']) !!}
+    {!! Form::select(@$name, @$categories, @$category_id, ['class' => 'form-control']) !!}
 
 </div>
 <!-- /END POST CATEGORY LIST -->

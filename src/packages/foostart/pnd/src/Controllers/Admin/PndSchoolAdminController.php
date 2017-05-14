@@ -12,6 +12,7 @@ use Route,
  */
 use Foostart\Pnd\Models\Pnd;
 use Foostart\Pnd\Models\Schools;
+use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Helper\Parse;
 /**
@@ -25,11 +26,13 @@ class PndSchoolAdminController extends PndController
     private $obj_schools = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
+    private $obj_districts = NULL;
 
     public function __construct()
     {
 
         $this->obj_schools = new Schools();
+        $this->obj_districts = new Districts();
         $this->obj_pexcel_categories = new PexcelCategories();
     }
 
@@ -62,15 +65,17 @@ class PndSchoolAdminController extends PndController
         $school = NULL;
         $school_id = (int)$request->get('id');
 
-
+        $districts = $this->obj_districts->pluck_select();
+        
         if (!empty($school_id) && (is_int($school_id))) {
 
             $school = $this->obj_schools->find($school_id);
 
-        }
-
+        } 
+        
         $this->data = array_merge($this->data, array(
             'school' => $school,
+            'districts' => $districts,
             'request' => $request,
         ));
 
@@ -95,6 +100,7 @@ class PndSchoolAdminController extends PndController
 
         $school_id = (int)$request->get('id');
 
+        $districts = $this->obj_districts->pluck_select();
         $schools = NULL;
 
         $data = array();
@@ -151,6 +157,7 @@ class PndSchoolAdminController extends PndController
 
         $this->data = array_merge($this->data, array(
             'schools' => $schools,
+            'districts' => $districts,
             'request' => $request,
         ), $data);
 

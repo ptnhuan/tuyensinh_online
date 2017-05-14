@@ -36,7 +36,6 @@
                             {!! Form::open(['route'=>['admin_pnd_specialist.post', 'id' => @$specialist->school_class_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
-
                             <!--QUICK TABS-->
                             <ul class="nav nav-tabs">
 
@@ -64,10 +63,12 @@
 
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
-                                                                     
+                                       
+                                    
                                     <!--INPUT-->
                                     @include('pnd::elements.pnd_input', ['name' => 'school_class_code','value'=> @$specialist->school_class_code])
                                     <!--/END INPUT-->
+                                    
                                     
                                     <!--INPUT-->
                                     @include('pnd::elements.pnd_input', ['name' => 'school_class_name','value'=> @$specialist->school_class_name])
@@ -112,9 +113,14 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_search')
+            @include('pnd::admin.pnd_search',['name_search'=>'_class_specifics'])
         </div>
 
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('#lfm').filemanager('file');
+    });
+</script>
     </div>
 </div>
 @stop
@@ -125,9 +131,4 @@
 {!! HTML::script('js/tinymce/tinymce-config.js') !!}
 {!! HTML::script('vendor/laravel-filemanager/js/lfm_pnd.js') !!}
 
-<script type='text/javascript'>
-    $(document).ready(function () {
-        $('#lfm').filemanager('file');
-    });
-</script>
 @stop

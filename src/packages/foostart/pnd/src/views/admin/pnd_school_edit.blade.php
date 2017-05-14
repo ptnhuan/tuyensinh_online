@@ -17,13 +17,13 @@
 
                 <!--ERRORS POST-->
                 @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{!! $error !!}</div>
+                <div class="alert alert-danger">{!! $error !!}</div>
                 @endforeach
 
                 {{-- successful message --}}
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
-                    <div class="alert alert-success">{{$message}}</div>
+                <div class="alert alert-success">{{$message}}</div>
                 @endif
 
                 <div class="panel-body">
@@ -55,7 +55,7 @@
                                     </a>
                                 </li>
                                 <!--/END TAB ATTRIBUTES-->
- 
+
                             </ul>
                             <!--/END QUICK TABS-->
 
@@ -64,41 +64,71 @@
 
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
-                                                                     
-                                    <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
-                                    <!--/END INPUT-->
-                                    
-                                    <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_name','value'=> @$school->school_name])
-                                    <!--/END INPUT-->
 
-                                    <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_address','value'=> @$school->school_address])
-                                    <!--/END INPUT-->
-                                       <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_phone','value'=> @$school->school_phone])
-                                    <!--/END INPUT-->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_name','value'=> @$school->school_name])
+                                            <!--/END INPUT-->
+
+                                        </div>
+                                        <div class="col-md-5">
+
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_address','value'=> @$school->school_address])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
-                                    <!--/END INPUT-->
-                                     <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_district_id','value'=> @$school->school_district_id])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_user','value'=> @$school->school_user])
-                                    <!--/END INPUT-->
-                                        <!--INPUT-->
-                                    @include('pnd::elements.pnd_input', ['name' => 'school_pass','value'=> @$school->school_pass])
-                                    <!--/END INPUT-->
-                                      
-                                    
+                                        <div class="col-md-3">
+
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_phone','value'=> @$school->school_phone])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-5">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
+                                                    'categories'=> !empty(@$districts) ? $districts  : array(),
+                                                    'category_id'=>@$school->school_district_id])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_user','value'=> @$school->school_user])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_pass','value'=> @$school->school_pass])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+
                                     <!--/END INPUT-->
 
                                 </div>
@@ -107,11 +137,11 @@
                                 <!--TAB ATTRIBUTES-->
                                 <div id="attributes" class="tab-pane fade">
                                     <!--SELECT-->
-                                     @include('pnd::elements.pnd_select')
+                                    
                                     <!--/END SELECT-->
                                 </div>
                                 <!--TAB ATTRIBUTES-->
- 
+
 
                             </div>
 
@@ -136,7 +166,7 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_search')
+            @include('pnd::admin.pnd_search',['name_search'=>'_schools'])
         </div>
 
     </div>
