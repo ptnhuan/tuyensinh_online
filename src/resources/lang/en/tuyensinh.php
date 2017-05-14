@@ -37,7 +37,7 @@ return [
      */
     'login_title' => 'Trang đăng nhập',
     'login_head' => 'UBND TỈNH PHÚ YÊN <br>SỞ GIÁO DỤC VÀ ĐÀO TẠO',
-    'login_viewhead' => 'Trang thông tin tuyển sinh đầu cấp trực tuyến',
+    'login_viewhead' => 'HỆ THỐNG  THÔNG TIN TUYỂN SINH TRỰC TUYẾN',
     'login_contact_title' => 'Liên hệ:',
     'login_contact' => 'Phòng Khảo thí và Kiểm định CLGD',
     'login_phone' => 'Điện thoại:057.3842060',

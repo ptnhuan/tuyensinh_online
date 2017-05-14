@@ -10,7 +10,7 @@
         <div class="loginbox">
             <div class="logo-hvct"><img src="<?php echo url('logo.jpg') ?>" width="80" class="img-logo"></div>
             <div class="mane-shool"><span> <?php echo trans('tuyensinh.login_head') ?></span></div>
-            <div class="innerheading">
+            <div class="innerheading"  style="text-align: center" >
                 <h1>
                     {{trans('tuyensinh.login_viewhead')}}
                 </h1>
