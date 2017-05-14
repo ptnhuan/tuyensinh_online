@@ -60,26 +60,35 @@ class Students extends Model
         $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //By School
-        if (!empty($params['school_id'])) { 
+        if (!empty($params['school_id'])) {
             $eloquent = $eloquent->where('school_id', $params['school_id']);
             if (intval(@$params['school_option']) == 1) {
-                $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
+                if (!empty($params['school_code_option']))
+                    $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
+                else {
+                    $eloquent = $eloquent->whereNotNull('school_code_option_1');
+                    $eloquent = $eloquent->whereNull('school_code_option_2');
+                }
             } elseif (@intval($params['school_option']) == 2) {
-                $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
+                if (!empty($params['school_code_option']))
+                    $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
+                else {
+                    $eloquent = $eloquent->whereNotNull('school_code_option_2');
+                    $eloquent = $eloquent->whereNull('school_code_option_1');
+                }
             }
         }
-
 
         //SEARCH BY NAME OR EMAIL
         if (!empty($params['search_student'])) {
 
-            $eloquent = $eloquent->where(function($where) use($params){
+            $eloquent = $eloquent->where(function ($where) use ($params) {
                 $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
                     ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
             });
         }
-      
-        
+
+
         //By Categories
         $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
             $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
