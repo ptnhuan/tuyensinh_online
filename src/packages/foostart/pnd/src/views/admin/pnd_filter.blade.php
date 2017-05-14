@@ -16,15 +16,20 @@
             @include('pnd::elements.pnd_select', ['name' => 'pexcel_category_id',
                                                  'categories'=> !empty(@$categories) ? $categories  : array(),
                                                  'category_id'=>@$category_id])
-            <!--SCHOOL OPTION-->
-            @include('pnd::elements.pnd_select', ['name' => 'school_option',
-                                                 'categories'=> ['Tất cả','Nguyện vọng 1','Nguyện vọng 2'],
-                                                 'category_id'=> !empty(@$request->get('school_option')) ? @$request->get('school_option') : 0])
 
-
-            <!--SCHOOL OPTION CODE-->
-            @include ('pnd::elements.input',['name'=>'school_code_option',
-                                'value' => !empty(@$request->get('school_code_option')) ? $request->get('school_code_option') : ''])
+             <div class="row">
+                 <div class="col-md-6">
+                     <!--SCHOOL OPTION-->
+                     @include('pnd::elements.pnd_select', ['name' => 'school_option',
+                                                          'categories'=> ['Tất cả','Nguyện vọng 1','Nguyện vọng 2'],
+                                                          'category_id'=> !empty(@$request->get('school_option')) ? @$request->get('school_option') : 0])
+                 </div>
+                 <div class="col-md-6">
+                     <!--SCHOOL OPTION CODE-->
+                     @include ('pnd::elements.input',['name'=>'school_code_option',
+                                         'value' => !empty(@$request->get('school_code_option')) ? $request->get('school_code_option') : ''])
+                 </div>
+             </div>
 
             <!--NAME OR EMAIL STUDENT-->
             @include ('pnd::elements.input',['name'=>'search_student',
