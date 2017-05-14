@@ -83,7 +83,6 @@
                                 <!--TAB ATTRIBUTES-->
                                 <div id="attributes" class="tab-pane fade">
                                     <!--SELECT-->
-                                     @include('pnd::elements.pnd_select')
                                     <!--/END SELECT-->
                                 </div>
                                 <!--TAB ATTRIBUTES-->
