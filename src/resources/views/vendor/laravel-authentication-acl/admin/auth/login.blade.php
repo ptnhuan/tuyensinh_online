@@ -9,8 +9,9 @@
     <div class="container">
         <div class="loginbox">
             <div class="logo-hvct"><img src="<?php echo url('logo.jpg') ?>" width="80" class="img-logo"></div>
-            <div class="mane-shool"><span> <?php echo trans('tuyensinh.login_head') ?></span></div>
-            <div class="innerheading"  style="text-align: center" >
+            <div class="mane-shool-login"><span> <?php echo trans('tuyensinh.login_head') ?></span></div>
+            
+            <div class="innerheading_login"  style="text-align: center" >
                 <h1>
                     {{trans('tuyensinh.login_viewhead')}}
                 </h1>
@@ -63,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="innerheading" style="text-align: center" >
+            <div class="innerheading_login" style="text-align: center" >
                 <h1>
                     {{trans('tuyensinh.login_contact_support')}}
                 </h1>

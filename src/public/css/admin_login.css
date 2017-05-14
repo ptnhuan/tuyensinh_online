@@ -23,6 +23,37 @@ body {
   background-position: center;
   margin: 0 auto;
 }
+
+
+
+.loginbox .innerheading_login {
+  background:  dodgerblue;// rgba(255,193,7,0.88);
+  padding: 2px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.1);
+  color:#fff;
+  clear: both;
+}
+.loginbox .innerheading_login h1 {
+  margin: 0;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  font-size: 18px;
+  line-height: 32px;
+  padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
 .loginbox .innerheading {
   background: rgba(255,193,7,0.88);
   padding: 2px;
@@ -105,6 +136,19 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.loginbox .mane-shool-login {
+  text-align: center;
+  padding: 15px;
+  padding-top: 20px;
+}
+.loginbox .mane-shool-login span {
+  color: red;
+    font-size: 24px; 
+   font-weight: bold;
+}
+
+
 .loginbox .mane-shool {
   text-align: center;
   padding: 15px;
