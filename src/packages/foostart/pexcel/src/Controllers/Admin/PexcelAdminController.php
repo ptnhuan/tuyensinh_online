@@ -196,18 +196,24 @@ class PexcelAdminController extends PexcelController {
         $pexcel->pexcel_value = json_encode($students);
         $pexcel->save();
 
-
         /**
          * Import data
          */
-
-
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,
+            'pexcel' => $pexcel,
         ));
 
         return view('pexcel::admin.pexcel_parse', $this->data);
     }
 
+    /**
+     *
+     * @param Request $request
+     * @return type
+     */
+    public function parse_iframe(Request $request){
+
+    }
 }

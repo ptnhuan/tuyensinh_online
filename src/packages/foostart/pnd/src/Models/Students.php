@@ -3,11 +3,9 @@
 namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use DB;
 
-class Students extends Model
-{
+class Students extends Model {
 
     protected $table = 'school_students';
     public $timestamps = false;
@@ -44,7 +42,6 @@ class Students extends Model
         'school_code_option_2',
         'student_email',
         'student_phone',
-
         'student_user',
         'student_pass'
     ];
@@ -55,12 +52,11 @@ class Students extends Model
      * @param type $params
      * @return type
      */
-    public function get_students($params = array())
-    {
+    public function get_students($params = array()) {
         $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //By School
-        if (!empty($params['school_id'])) { 
+        if (!empty($params['school_id'])) {
             $eloquent = $eloquent->where('school_id', $params['school_id']);
             if (intval(@$params['school_option']) == 1) {
                 $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
@@ -73,21 +69,20 @@ class Students extends Model
         //SEARCH BY NAME OR EMAIL
         if (!empty($params['search_student'])) {
 
-            $eloquent = $eloquent->where(function($where) use($params){
+            $eloquent = $eloquent->where(function($where) use($params) {
                 $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
-                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
+                        ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
             });
         }
-      
-        
+
+
         //By Categories
         $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
-            $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
-                ->where('pexcel.user_id', $params['user_id']);
-
-        })->join('pexcel_categories', function ($join) use ($params) {
+                    $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
+                            ->where('pexcel.user_id', $params['user_id']);
+                })->join('pexcel_categories', function ($join) use ($params) {
             $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
-                ->where('pexcel_categories.user_id', $params['user_id']);
+                    ->where('pexcel_categories.user_id', $params['user_id']);
         });
 
         if (!empty(@$params['pexcel_category_id'])) {
@@ -110,8 +105,7 @@ class Students extends Model
      * @param type $pexcel_id
      * @return type
      */
-    public function update_student($input, $student_id = NULL)
-    {
+    public function update_student($input, $student_id = NULL) {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -140,8 +134,7 @@ class Students extends Model
      * @param type $input
      * @return type
      */
-    private function validRow($data)
-    {
+    private function validRow($data) {
         $student = array();
 
         foreach ($this->fillable as $key) {
@@ -151,8 +144,7 @@ class Students extends Model
         return $student;
     }
 
-    public function createAccount($student)
-    {
+    public function createAccount($student) {
 
         $user_name = $this->generateAccount($student->school_id, $student->student_id);
 
@@ -162,8 +154,7 @@ class Students extends Model
         $student->save();
     }
 
-    public function add_student($input)
-    {
+    public function add_student($input) {
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
@@ -174,15 +165,25 @@ class Students extends Model
         return $student;
     }
 
+    public function add_students($students, $pexcel_id) {
 
-    public function delete_student($student_id)
-    {
+        foreach ($students as $student) {
+            $student = (array)$student;
+            $this->add_student($student, $pexcel_id);
+        }
+    }
+
+    public function deleteByPexcel($pexel_id) {
+        $eloquent = self::where('pexcel_id', $pexel_id)->delete();
+        return $eloquent;
+    }
+
+    public function delete_student($student_id) {
         $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 
-    public function generateAccount($school_id, $student_id)
-    {
+    public function generateAccount($school_id, $student_id) {
 
         $school_id .= '';
         $student_id .= '';

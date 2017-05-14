@@ -13,6 +13,8 @@ use Route,
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
+
+use Foostart\Pexcel\Models\Pexcel;
 /**
  * Validators
  */
@@ -25,6 +27,7 @@ class PndAdminController extends PndController
     private $obj_schools = NULL;
     private $obj_categories = NULL;
     private $obj_validator = NULL;
+    private $obj_pexcel = NULL;
 
     public function __construct()
     {
@@ -32,6 +35,7 @@ class PndAdminController extends PndController
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
+        $this->obj_pexcel = new Pexcel();
     }
 
     /**
@@ -41,6 +45,21 @@ class PndAdminController extends PndController
     public function index(Request $request)
     {
         $params = $request->all();
+
+        /**
+         * READ DATA FROM PEXCEL
+         * SAVE TO STUDENT
+         */
+        $pexcel_id = (int)$params['id'];
+        if (!empty($pexcel_id)) {
+            $pexcel = $this->obj_pexcel->find($pexcel_id);
+
+            if (!empty($pexcel)) {
+                $this->obj_students->deleteByPexcel($pexcel_id);
+                $this->obj_students->add_students(json_decode($pexcel->pexcel_value), $pexcel_id);
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
 
         $this->isAuthentication();
 
@@ -204,7 +223,7 @@ class PndAdminController extends PndController
         $params['user_id'] = $this->current_user->id;
 
         $school = $this->obj_schools->get_school_by_user_name($this->current_user->user_name);
-        
+
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
         if (!empty($school)) {
@@ -217,7 +236,7 @@ class PndAdminController extends PndController
             'students' => $students,
             'categories' => $categories,
             'request' => $request,
-            'params' => $params, 
+            'params' => $params,
         ));
 
         return view('pnd::admin.pnd_list', $this->data);
