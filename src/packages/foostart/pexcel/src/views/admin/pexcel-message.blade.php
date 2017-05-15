@@ -2,7 +2,7 @@
     <div class="alert alert-info">
         @if(isset($pexcels) && ($pexcels->total() > 0))
             <p>
-                Bạn đã gửi <b>{{$pexcels->total()}}</b>
+                Bạn đã gửi <b>{{$pexcels->total()}}</b> tin
             </p>
         @else
             <p>
