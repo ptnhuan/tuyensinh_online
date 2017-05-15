@@ -77,7 +77,7 @@ class PexcelAdminController extends PexcelController {
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
             }
 
-            if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+            if ($this->is_admin || $this->is_all || ($pexcel && $pexcel->user_id == $this->current_user->id)) {
                 $this->data = array_merge($this->data, array(
                     'pexcel' => $pexcel,
                     'request' => $request,
@@ -85,7 +85,12 @@ class PexcelAdminController extends PexcelController {
                 ));
                 return view('pexcel::admin.pexcel_edit', $this->data);
             } else {
-                echo 'error_page';
+                $this->data = array_merge($this->data, array(
+                    'pexcel' => NULL,
+                    'request' => $request,
+                    'categories' => array(0 => '...') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
+                ));
+                return view('pexcel::admin.pexcel_edit', $this->data);
             }
         } else {
             //error page
