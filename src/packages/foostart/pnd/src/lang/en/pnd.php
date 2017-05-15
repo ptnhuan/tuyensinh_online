@@ -152,15 +152,16 @@ return [
 
         'student_nominate' => "Tuyển thẳng",
 
-        'school_id_option' => "TBCN L9",
-        'school_class_code' => "TBCN L9",
+        'school_id_option' => "Mã trường chuyên/DTNT",
+        'school_class_code' => "Mã lớp chuyên",
 
         'school_code_option_1' => "Mã nguyện vọng 1",
         'school_code_option_2' => "Mã nguyện vọng 2",
 
         'student_email' =>"Thư điện tử",
         'student_phone' => "Số điện thoại",
-    
+    'student_user' =>"Tên đăng nhập",
+        'student_pass' => "Mật khẩu",
     
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
