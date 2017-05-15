@@ -10,11 +10,13 @@
     <meta name="author" content="">
 
 
-    {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/bootstrap.min.css') !!}
+    {!! HTML::style('css/bootstrap.min.3-3-7.css') !!}
+
     {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/style.css') !!}
     {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/baselayout.css') !!}
     {!! HTML::style('packages/jacopo/laravel-authentication-acl/css/fonts.css') !!}
-    {!! HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css') !!}
+
+    {!! HTML::style('css/font-awesome.min-4-7-0.css') !!}
 
     @yield('head_css')
     @yield('sub_page_css')
@@ -40,8 +42,9 @@
         {{-- Start footer scripts --}}
         @yield('before_footer_scripts')
 
-        {!! HTML::script('packages/jacopo/laravel-authentication-acl/js/vendor/jquery-1.10.2.min.js') !!}
-        {!! HTML::script('packages/jacopo/laravel-authentication-acl/js/vendor/bootstrap.min.js') !!}
+        {!! HTML::script('js/jquery.min.3-2-1.js') !!}
+        {!! HTML::script('js/jquery-ui.min.1-12-1.js') !!}
+        {!! HTML::script('js/bootstrap.min.3-3-7.js') !!}
 
         @yield('footer_scripts')
 

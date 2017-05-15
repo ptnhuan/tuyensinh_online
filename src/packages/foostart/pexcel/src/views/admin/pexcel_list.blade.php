@@ -1,10 +1,12 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
-@section('sub_page_css')
-{!! HTML::style('css/admin_tuyensinh.css') !!}
-@stop
 
 @section('title')
     {{trans('pexcel::pexcel.pexcel_title')}}
+@stop
+
+@section('sub_page_css')
+    {!! HTML::style('css/admin_tuyensinh.css') !!}
+    {!! HTML::style('css/jquery-ui.1-12-1.css') !!}
 @stop
 
 @section('content')
@@ -55,11 +57,11 @@
 
 
 @section('footer_scripts')
-<!-- DELETE CONFIRM -->
-    <script>
-        $(".delete").click(function () {
-            return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
-        });
-    </script>
-<!-- /END DELETE CONFIRM -->
+    <!-- DELETE CONFIRM -->
+        <script>
+            $(".delete").click(function () {
+                return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
+            });
+        </script>
+    <!-- /END DELETE CONFIRM -->
 @stop
