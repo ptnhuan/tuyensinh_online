@@ -175,64 +175,69 @@ class PexcelAdminController extends PexcelController {
      */
     public function delete(Request $request) {
 
-        $pexcel = NULL;
-        $pexcel_id = $request->get('id');
+        $this->isAuthentication();
 
-        if (!empty($pexcel_id)) {
-            $pexcel = $this->obj_pexcel->find($pexcel_id);
+        if ($this->current_user) {
+            $pexcel = NULL;
+            $pexcel_id = $request->get('id');
 
-            if (!empty($pexcel)) {
-                //Message
-                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+            if (!empty($pexcel_id)) {
+                $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-                $pexcel->delete();
+                if (!empty($pexcel)) {
+
+                    if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                        //Message
+                        $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+
+                        $pexcel->delete();
+
+                        $this->data = array_merge($this->data, array(
+                            'pexcel' => $pexcel,
+                        ));
+
+                        return Redirect::route("admin_pexcel");
+                    }
+                }
             }
-        } else {
-
         }
 
-        $this->data = array_merge($this->data, array(
-            'pexcel' => $pexcel,
-        ));
-
-        return Redirect::route("admin_pexcel");
+        //error page
     }
 
     public function parse(Request $request) {
 
-        $obj_parse = new Parse();
-        $obj_students = new Students();
+        $this->isAuthentication();
 
-        $input = $request->all();
+        if ($this->current_user) {
+            $obj_parse = new Parse();
+            $obj_students = new Students();
 
-        $pexcel_id = $request->get('id');
-        $pexcel = $this->obj_pexcel->find($pexcel_id);
+            $input = $request->all();
 
+            $pexcel_id = $request->get('id');
+            $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-        $students = $obj_parse->get_students($pexcel);
+            if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                $students = $obj_parse->get_students($pexcel);
 
-        $pexcel->pexcel_value = json_encode($students);
-        $pexcel->save();
+                $pexcel->pexcel_value = json_encode($students);
+                $pexcel->save();
 
-        /**
-         * Import data
-         */
-        $this->data = array_merge($this->data, array(
-            'students' => $students,
-            'request' => $request,
-            'pexcel' => $pexcel,
-        ));
+                /**
+                 * Import data
+                 */
+                $this->data = array_merge($this->data, array(
+                    'students' => $students,
+                    'request' => $request,
+                    'pexcel' => $pexcel,
+                ));
 
-        return view('pexcel::admin.pexcel_parse', $this->data);
+                return view('pexcel::admin.pexcel_parse', $this->data);
+            }
+        }
     }
 
-    /**
-     *
-     * @param Request $request
-     * @return type
-     */
-    public function parse_iframe(Request $request) {
-
-    }
+    //error page
 
 }
