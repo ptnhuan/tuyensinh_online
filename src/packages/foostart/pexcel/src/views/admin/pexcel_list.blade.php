@@ -37,7 +37,11 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body">
-                    @include('pexcel::admin.pexcel-message')
+                    @if($request->all())
+                        @include('pexcel::admin.pexcel-message-search')
+                    @else
+                        @include('pexcel::admin.pexcel-message')
+                    @endif
                     @include('pexcel::admin.pexcel_item')
                 </div>
             </div>
@@ -52,10 +56,10 @@
 
 @section('footer_scripts')
 <!-- DELETE CONFIRM -->
-<script>
-    $(".delete").click(function () {
-        return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
-    });
-</script>
+    <script>
+        $(".delete").click(function () {
+            return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
+        });
+    </script>
 <!-- /END DELETE CONFIRM -->
 @stop
