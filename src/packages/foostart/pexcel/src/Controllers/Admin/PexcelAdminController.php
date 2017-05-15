@@ -55,7 +55,6 @@ class PexcelAdminController extends PexcelController {
                 'params' => $params
             ));
             return view('pexcel::admin.pexcel_list', $this->data);
-
         } else {
 //            return view('error');
         }
@@ -67,21 +66,30 @@ class PexcelAdminController extends PexcelController {
      */
     public function edit(Request $request) {
 
-        $pexcel = NULL;
-        $pexcel_id = (int) $request->get('id');
+        $this->isAuthentication();
+
+        if ($this->current_user) {
+            $pexcel = NULL;
+            $pexcel_id = (int) $request->get('id');
 
 
-        if (!empty($pexcel_id) && (is_int($pexcel_id))) {
-            $pexcel = $this->obj_pexcel->find($pexcel_id);
+            if (!empty($pexcel_id) && (is_int($pexcel_id))) {
+                $pexcel = $this->obj_pexcel->find($pexcel_id);
+            }
+
+            if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                $this->data = array_merge($this->data, array(
+                    'pexcel' => $pexcel,
+                    'request' => $request,
+                    'categories' => array(0 => '...') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
+                ));
+                return view('pexcel::admin.pexcel_edit', $this->data);
+            } else {
+                echo 'error_page';
+            }
+        } else {
+            //error page
         }
-
-
-        $this->data = array_merge($this->data, array(
-            'pexcel' => $pexcel,
-            'request' => $request,
-            'categories' => array(0 => '...') + $this->obj_pexcel_categories->pluckSelect()->toArray(),
-        ));
-        return view('pexcel::admin.pexcel_edit', $this->data);
     }
 
     /**

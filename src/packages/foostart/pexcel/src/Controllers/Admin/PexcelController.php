@@ -12,7 +12,7 @@ class PexcelController extends Controller {
     public $authentication = NULL;
     public $is_members = FALSE;
     public $current_user = NULL;
-    
+
     public $is_admin = FALSE;
     public $is_all = FALSE;
     public $is_my = FALSE;
@@ -31,7 +31,7 @@ class PexcelController extends Controller {
                 $this->is_admin = TRUE;
             }
 
-            if ($auth_helper->hasPermission(array('_my-pexcel'))) {
+            if ($auth_helper->hasPermission(array('_all-pexcel'))) {
                 $this->is_all = TRUE;
             }
 
