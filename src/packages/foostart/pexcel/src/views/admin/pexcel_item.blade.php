@@ -47,7 +47,7 @@
             <td>
                 <?php
                 $status = config('pexcel.status_str');
-                echo $status[$pexcel->pexcel_status]
+                echo @$status[$pexcel->pexcel_status]
                 ?>
             </td>
 

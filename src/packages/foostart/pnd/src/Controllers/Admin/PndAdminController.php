@@ -54,7 +54,11 @@ class PndAdminController extends PndController
         if (!empty($pexcel_id)) {
             $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-            if (!empty($pexcel)) {
+            $pexcel_status = config('pexcel.status');
+
+            if (!empty($pexcel) && ($pexcel->pexcel_status == $pexcel_status['new'])) {
+                $pexcel->pexcel_status = $pexcel_status['confirmed'];
+                $pexcel->save();
                 $this->obj_students->deleteByPexcel($pexcel_id);
                 $this->obj_students->add_students(json_decode($pexcel->pexcel_value), $pexcel_id);
             }
