@@ -2,26 +2,27 @@
 
 namespace Foostart\Pnd\Controllers\Admin;
 
+use Foostart\Pnd\Controllers\Admin\UserC;
 use Illuminate\Http\Request;
 use Foostart\Pnd\Controllers\Admin\PndController;
 use URL;
 use Route,
     Redirect;
+
+use Illuminate\Support\Facades\Hash;
 /**
  * Models
  */
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
-
 use Foostart\Pexcel\Models\Pexcel;
 /**
  * Validators
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndAdminController extends PndController
-{
+class PndAdminController extends PndController {
 
     private $obj_students = NULL;
     private $obj_schools = NULL;
@@ -29,8 +30,7 @@ class PndAdminController extends PndController
     private $obj_validator = NULL;
     private $obj_pexcel = NULL;
 
-    public function __construct()
-    {
+    public function __construct() {
 
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
@@ -42,15 +42,15 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
+
         $params = $request->all();
 
         /**
          * READ DATA FROM PEXCEL
          * SAVE TO STUDENT
          */
-        $pexcel_id = (int)@$params['id'];
+        $pexcel_id = (int) @$params['id'];
         if (!empty($pexcel_id)) {
             $pexcel = $this->obj_pexcel->find($pexcel_id);
 
@@ -61,6 +61,10 @@ class PndAdminController extends PndController
                 $pexcel->save();
                 $this->obj_students->deleteByPexcel($pexcel_id);
                 $this->obj_students->add_students(json_decode($pexcel->pexcel_value), $pexcel_id);
+
+                //Create user
+//                $students = $this->obj_students->get_students($params);
+//                $this->create_user($students);
             }
         }
         ////////////////////////////////////////////////////////////////////////
@@ -86,17 +90,15 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function edit(Request $request)
-    {
+    public function edit(Request $request) {
 
         $student = NULL;
-        $student_id = (int)$request->get('id');
+        $student_id = (int) $request->get('id');
 
 
         if (!empty($student_id) && (is_int($student_id))) {
 
             $student = $this->obj_students->find($student_id);
-
         }
 
         $this->data = array_merge($this->data, array(
@@ -112,8 +114,7 @@ class PndAdminController extends PndController
      * @param Request $request
      * @return type
      */
-    public function post(Request $request)
-    {
+    public function post(Request $request) {
 
         $this->isAuthentication();
 
@@ -123,7 +124,7 @@ class PndAdminController extends PndController
 
         $input['user_id'] = $this->current_user->id;
 
-        $student_id = (int)$request->get('id');
+        $student_id = (int) $request->get('id');
 
         $student = NULL;
 
@@ -182,7 +183,7 @@ class PndAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
-        ), $data);
+                ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
     }
@@ -191,8 +192,7 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function delete(Request $request)
-    {
+    public function delete(Request $request) {
 
         $student = NULL;
         $student_id = $request->get('id');
@@ -217,9 +217,7 @@ class PndAdminController extends PndController
         return Redirect::route("admin_pnd");
     }
 
-
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         $params = $request->all();
         $students = null;
         $this->isAuthentication();
@@ -247,4 +245,21 @@ class PndAdminController extends PndController
         return view('pnd::admin.pnd_list', $this->data);
     }
 
+    public function create_user($students) {
+        foreach ($students as $student) {
+            $params = array(
+                '_token' => csrf_token(),
+                '__to_hide_password_autocomplete' => null,
+                'email' => $student->student_user.'@gmail.com',
+                'password' => $student->student_pass,
+                'password_confirmation' => $student->student_pass,
+                'actived' => '1',
+                'banned' => 0,
+                'id' => null,
+                'form_name' => 'user'
+            );
+            $user = new UserC();
+            $user->create_user($params);
+        }
+    }
 }
