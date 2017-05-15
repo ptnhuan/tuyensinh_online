@@ -76,22 +76,6 @@ class Students extends Model {
             });
         }
 
-
-        //By Categories
-        $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
-                    $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
-                            ->where('pexcel.user_id', $params['user_id']);
-                })->join('pexcel_categories', function ($join) use ($params) {
-            $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
-                    ->where('pexcel_categories.user_id', $params['user_id']);
-        });
-
-        if (!empty(@$params['pexcel_category_id'])) {
-            $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $params['pexcel_category_id']);
-        } else {
-            $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $eloquent->max('pexcel_categories.pexcel_category_id'));
-        }
-
         //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent = $eloquent->where('pexcel_id', $params['pexcel_id']);
