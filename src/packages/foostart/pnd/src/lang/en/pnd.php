@@ -52,8 +52,8 @@ return [
     'pnd_title' => 'Quản lý thông tin học sinh',
     'slideshow_name' => 'Slideshow',
     'school_title' => 'Quản lý thông tin trường học',
-    'school_code' => 'Mã trường',
-    'school_name' => 'Tên trường',
+    'school_code' => 'Mã trường THCS',
+    'school_name' => 'Tên trường THCS',
     'school_address' => 'Địa chỉ',
     'school_phone' => 'Điện thoại',
     'school_email' => 'Thư điện tử',
@@ -130,19 +130,19 @@ return [
 
         'student_class' => "Lớp",
 
-        'student_capacity_6' => "HL L6",
-        'student_conduct_6' => "HK L6",
+        'student_capacity_6' => "Học lực lớp 6",
+        'student_conduct_6' => "Hạnh kiểm lớp 6",
 
-        'student_capacity_7' => "HL L7",
-        'student_conduct_7' => "HK L7",
+        'student_capacity_7' => "Học lực lớp 7",
+        'student_conduct_7' => "Hạnh kiểm lớp 7",
 
-        'student_capacity_8' =>"HL L8",
-        'student_conduct_8' => "HK L8",
+        'student_capacity_8' =>"Học lực lớp 8",
+        'student_conduct_8' => "Hạnh kiểm lớp 8",
 
-        'student_capacity_9' => "HL L9",
-        'student_conduct_9' => "HK L9",
+        'student_capacity_9' => "Học lực lớp 9",
+        'student_conduct_9' => "Hạnh kiểm lớp 9",
 
-        'student_average' => "TBCN L9",
+        'student_average' => "TBCN Lớp 9",
         'student_average_1' => "TBCN Toán",
         'student_average_2' => "TBCN Văn",
         'student_graduate' => "TN THCS",
