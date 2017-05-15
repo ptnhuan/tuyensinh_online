@@ -197,17 +197,13 @@ class PexcelAdminController extends PexcelController {
 
                         $pexcel->delete();
 
-                        $this->data = array_merge($this->data, array(
-                            'pexcel' => $pexcel,
-                        ));
 
                         return Redirect::route("admin_pexcel");
                     }
                 }
             }
         }
-
-        //error page
+        return Redirect::route("admin_pexcel");
     }
 
     public function parse(Request $request) {
