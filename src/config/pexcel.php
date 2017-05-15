@@ -25,6 +25,11 @@ return [
     ],
 
     /**
+     * SAVE TO TABLE
+     */
+    'save_to_table' => 'school_students',
+
+    /**
      * FIELDS
      */
     'fields' => [
