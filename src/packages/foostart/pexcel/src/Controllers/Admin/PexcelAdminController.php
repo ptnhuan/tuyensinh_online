@@ -37,16 +37,28 @@ class PexcelAdminController extends PexcelController {
      */
     public function index(Request $request) {
 
-        $params = $request->all();
+        $this->isAuthentication();
 
-        $pexcels = $this->obj_pexcel->get_pexcels($params);
+        if ($this->current_user) {
+            $params = $request->all();
 
-        $this->data = array_merge($this->data, array(
-            'pexcels' => $pexcels,
-            'request' => $request,
-            'params' => $params
-        ));
-        return view('pexcel::admin.pexcel_list', $this->data);
+            //get ONE or ALL
+            if ($this->is_my) {
+                $params['user_id'] = $this->current_user->id;
+            }
+
+            $pexcels = $this->obj_pexcel->get_pexcels($params);
+
+            $this->data = array_merge($this->data, array(
+                'pexcels' => $pexcels,
+                'request' => $request,
+                'params' => $params
+            ));
+            return view('pexcel::admin.pexcel_list', $this->data);
+
+        } else {
+//            return view('error');
+        }
     }
 
     /**
@@ -133,7 +145,6 @@ class PexcelAdminController extends PexcelController {
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_successfully'));
 
                     return Redirect::route("admin_pexcel.parse", ["id" => $pexcel->pexcel_id]);
-
                 } else {
 
                     //Message
@@ -212,6 +223,8 @@ class PexcelAdminController extends PexcelController {
      * @param Request $request
      * @return type
      */
-    public function parse_iframe(Request $request){
+    public function parse_iframe(Request $request) {
+
     }
+
 }

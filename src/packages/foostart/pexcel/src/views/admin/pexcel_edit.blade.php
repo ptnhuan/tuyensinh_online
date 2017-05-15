@@ -132,7 +132,7 @@ Trang quản trị bài viết
 </div>
 @stop
 
-@section('sub_page_scripts')
+@section('footer_scripts')
 
 {!! HTML::script('js/tinymce/tinymce.min.js') !!}
 {!! HTML::script('js/tinymce/tinymce-config.js') !!}

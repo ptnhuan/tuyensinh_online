@@ -54,6 +54,11 @@ class Pexcel extends Model {
             $eloquent->where('pexcel_updated_at', '<=', $params['pexcel_date_to']);
         }
 
+        //owner
+        if (!empty($params['user_id'])) {
+            $eloquent->where('user_id', $params['user_id']);
+        }
+
         $pexcels = $eloquent->paginate(config('pexcel.per_page'));
 
         return $pexcels;

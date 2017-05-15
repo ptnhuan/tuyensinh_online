@@ -43,7 +43,6 @@
         @yield('before_footer_scripts')
 
         {!! HTML::script('js/jquery.min.3-2-1.js') !!}
-        {!! HTML::script('js/jquery-ui.min.1-12-1.js') !!}
         {!! HTML::script('js/bootstrap.min.3-3-7.js') !!}
 
         @yield('footer_scripts')
