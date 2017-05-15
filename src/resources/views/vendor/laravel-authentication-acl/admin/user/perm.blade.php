@@ -20,6 +20,7 @@
 {{-- remove permission --}}
 @if( $presenter->permissions )
 @foreach($presenter->permissions_obj as $permission)
+@if($permission)
 {!! Form::open(["route" => "users.edit.permission", "name" => $permission->permission, "role"=>"form"]) !!}
 <div class="form-group">
     <div class="input-group">
@@ -32,6 +33,7 @@
     </div>
 </div>
 {!! Form::close() !!}
+@endif
 @endforeach
 @elseif($user->exists)
 <span class="text-warning"><h5>There is no permission associated to the user.</h5></span>

@@ -20,7 +20,7 @@ class Parse {
         $data = \Excel::selectSheetsByIndex(0)->load($file_path, function($reader) {
                     // Getting all results
                     $reader->noHeading();
-                     
+
                     $reader->formatDates(false);
                 }, 'UTF-8')->get();
         $results = $data->toArray();
@@ -41,13 +41,15 @@ class Parse {
             $value = $filedata[$index];
 
 
-            $data[] = $this->mapData($fields, $value);
+            $data[] = $this->mapData($fields, $value, $pexcel);
         }
         return $data;
     }
 
-    private function mapData($fields, $value) {
-        $data = array();
+    private function mapData($fields, $value, $pexcel) {
+        $data = array(
+            'pexcel_id' => $pexcel->pexcel_id
+        );
 
         foreach ($fields as $key => $index) {
 

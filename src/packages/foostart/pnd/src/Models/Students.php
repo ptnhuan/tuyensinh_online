@@ -43,7 +43,8 @@ class Students extends Model {
         'student_email',
         'student_phone',
         'student_user',
-        'student_pass'
+        'student_pass',
+        'pexcel_id'
     ];
     protected $primaryKey = 'student_id';
 
