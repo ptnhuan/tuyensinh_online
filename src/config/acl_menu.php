@@ -78,7 +78,7 @@ return [
             "name" => "Nhập excel",
             "route" => "admin_pexcel",
             "link" => '/admin/pexcel',
-            "permissions" => ['_superadmin', '_mod_3']
+            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']
         ],
         [
             /*

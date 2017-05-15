@@ -42,6 +42,18 @@ class Pexcel extends Model {
             $eloquent->where('pexcel_name', 'like', '%' . $params['pexcel_name'] . '%');
         }
 
+        //date from
+        if (!empty($params['pexcel_date_from'])) {
+            $params['pexcel_date_from'] = strtotime($params['pexcel_date_from']);
+            $eloquent->where('pexcel_updated_at', '>=', $params['pexcel_date_from']);
+        }
+
+        //date to
+        if (!empty($params['pexcel_date_to'])) {
+            $params['pexcel_date_to'] = strtotime($params['pexcel_date_to']);
+            $eloquent->where('pexcel_updated_at', '<=', $params['pexcel_date_to']);
+        }
+
         $pexcels = $eloquent->paginate(config('pexcel.per_page'));
 
         return $pexcels;
