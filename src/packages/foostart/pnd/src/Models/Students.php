@@ -97,7 +97,7 @@ class Students extends Model {
             $eloquent = $eloquent->where('pexcel_id', $params['pexcel_id']);
         }
 
-        return $eloquent->get();
+        return $eloquent->paginate(config('pexcel.per_page'));
     }
 
     /**
@@ -159,7 +159,6 @@ class Students extends Model {
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
-
         $student = self::create($student);
 
         $student = $this->createAccount($student);
