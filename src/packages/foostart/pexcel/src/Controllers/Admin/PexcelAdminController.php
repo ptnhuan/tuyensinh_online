@@ -139,7 +139,8 @@ class PexcelAdminController extends PexcelController {
                     //Message
                     $this->addFlashMessage('message', trans('pexcel::pexcel_admin.message_update_successfully'));
 
-                    return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
+                    return Redirect::route("admin_pexcel.parse", ["id" => $pexcel->pexcel_id]);
+//                    return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
                 } else {
 
                     //Message
