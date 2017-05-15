@@ -17,13 +17,13 @@ Trang quản trị bài viết
 
                 <!--ERRORS POST-->
                 @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{!! $error !!}</div>
+                <div class="alert alert-danger">{!! $error !!}</div>
                 @endforeach
 
                 {{-- successful message --}}
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
-                    <div class="alert alert-success">{{$message}}</div>
+                <div class="alert alert-success">{{$message}}</div>
                 @endif
 
                 <div class="panel-body">
@@ -69,7 +69,7 @@ Trang quản trị bài viết
                                     @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_name', 'label' => 'Tiêu đề'])
                                     <!--/END INPUT-->
 
-                                     <!--TEXT-->
+                                    <!--TEXT-->
                                     @include('pexcel::elements.text', ['name' => 'pexcel_name'])
                                     <!--/END TEXT-->
                                 </div>
@@ -78,20 +78,26 @@ Trang quản trị bài viết
                                 <!--TAB FILE-->
                                 <div id="file" class="tab-pane fade">
                                     <!--SELECT-->
-                                     @include('pexcel::elements.pexcel_select')
+                                    @include('pexcel::elements.pexcel_select')
                                     <!--/END SELECT-->
 
                                     <!--FILE-->
                                     @include('pexcel::elements.image', ['name' => 'pexcel_file_path'])
                                     <!--/END FILE-->
 
-                                    <!--INPUT-->
-                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_fromrow', 'label' => 'Đọc dữ liệu từ dòng'])
-                                    <!--/END INPUT-->
-                                    <!--INPUT-->
-                                    @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_torow', 'label' => 'Đọc dữ liệu đến dòng'])
-                                    <!--/END INPUT-->
+                                    <div class="form-group" style="margin-top: 15px;">
+                                        <div class="col-md-6" style="padding: 0px; padding-right: 10px;">
+                                            <!--INPUT-->
+                                                @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_fromrow', 'label' => 'Đọc dữ liệu từ dòng'])
+                                            <!--/END INPUT-->
+                                        </div>
 
+                                        <div class="col-md-6" style="padding: 0px; padding-left: 10px;">
+                                            <!--INPUT-->
+                                                @include('pexcel::elements.pexcel_input', ['name' => 'pexcel_torow', 'label' => 'Đọc dữ liệu đến dòng'])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <!--TAB FILE-->

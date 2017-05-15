@@ -16,13 +16,16 @@ class Pexcel extends Model {
         'pexcel_file_path',
         'pexcel_created_at',
         'pexcel_updated_at',
+
+        'pexcel_status',
     ];
 
     protected $primaryKey = 'pexcel_id';
 
     protected  $pexcel_status;
 
-    public function __construct() {
+    public function __construct(array $attributes = array()) {
+        parent::__construct($attributes);
         $this->pexcel_status = config('pexcel.status');
     }
 
@@ -61,9 +64,11 @@ class Pexcel extends Model {
         if (!empty($pexcel)) {
 
             $pexcel->pexcel_name = $input['pexcel_name'];
+
             $pexcel->pexcel_description = $input['pexcel_description'];
 
             $pexcel->pexcel_fromrow = $input['pexcel_fromrow'];
+
             $pexcel->pexcel_torow = $input['pexcel_torow'];
 
             $pexcel->pexcel_status = $this->pexcel_status['new'];
@@ -83,7 +88,7 @@ class Pexcel extends Model {
     }
 
     /**
-     *
+     * Insert new pexcel item
      * @param type $input
      * @return type
      */

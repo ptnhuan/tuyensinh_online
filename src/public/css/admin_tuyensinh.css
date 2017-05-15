@@ -35,3 +35,7 @@
     background-color: #e75f5a !important;
     border-color: #e75f5a !important;
 }
+
+.item_right {
+    float: right;
+}

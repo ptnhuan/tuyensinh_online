@@ -1,10 +1,10 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 @section('sub_page_css')
-    {!! HTML::style('css/admin_tuyensinh.css') !!}
+{!! HTML::style('css/admin_tuyensinh.css') !!}
 @stop
 
 @section('title')
-Trang quản trị bài viết
+    {{trans('pexcel::pexcel.pexcel_title')}}
 @stop
 
 @section('content')
@@ -16,13 +16,16 @@ Trang quản trị bài viết
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pexcel::pexcel.page_search') : trans('pexcel::pexcel.page_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin">
+                        <i class="fa fa-group"></i>
+                        {!! $request->all() ? trans('pexcel::pexcel.page_search') : trans('pexcel::pexcel.page_list') !!}
+                    </h3>
                 </div>
 
                 <!--MESSAGE-->
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
-                <div class="alert alert-success flash-message">{!! $message !!}</div>
+                    <div class="alert alert-success flash-message">{!! $message !!}</div>
                 @endif
                 <!--MESSAGE-->
 
