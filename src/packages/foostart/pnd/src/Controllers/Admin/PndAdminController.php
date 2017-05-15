@@ -50,7 +50,7 @@ class PndAdminController extends PndController
          * READ DATA FROM PEXCEL
          * SAVE TO STUDENT
          */
-        $pexcel_id = (int)$params['id'];
+        $pexcel_id = (int)@$params['id'];
         if (!empty($pexcel_id)) {
             $pexcel = $this->obj_pexcel->find($pexcel_id);
 
