@@ -77,9 +77,9 @@ return [
     'student_phone' => 'Điện thoại',
     'student_email' => 'Thư điện tử',
     'student_date' => 'Sinh ngày',
-    'student_last_name' => 'Tên học sinh',
+  
     'student_name' => 'Họ và tên',
-    'student_first_name' => 'Họ học sinh',
+  
     'page_categories' => 'Tìm kiếm thông tin học sinh',
     'pnd_categories_label' => 'Danh mục',
     'filter' => 'Lọc',
@@ -111,6 +111,57 @@ return [
     'pnd_item_created' => 'Ngày gửi',
     'pnd_item_title' => 'Tiêu đề',
     'pnd' => 'Quản lý file',
+    
+     ////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////STUDENTS///////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    
+     'student_first_name' => "Họ học sinh",
+    'student_last_name' => "Tên học sinh",
+    'student_sex' => "Giới tính",
+    'student_birth' => "Sinh ngày",
+    'student_birth_day' => "Ngày",
+    'student_birth_month' => "Tháng",
+    'student_birth_year' => "Năm ",
+    'student_birth_place' => "Nơi sinh",
+
+        'school_id' => "Mã trường THCS",
+        'school_district_id' => "Mã huyện",
+
+        'student_class' => "Lớp",
+
+        'student_capacity_6' => "HL L6",
+        'student_conduct_6' => "HK L6",
+
+        'student_capacity_7' => "HL L7",
+        'student_conduct_7' => "HK L7",
+
+        'student_capacity_8' =>"HL L8",
+        'student_conduct_8' => "HK L8",
+
+        'student_capacity_9' => "HL L9",
+        'student_conduct_9' => "HK L9",
+
+        'student_average' => "TBCN L9",
+        'student_average_1' => "TBCN Toán",
+        'student_average_2' => "TBCN Văn",
+        'student_graduate' => "TN THCS",
+
+        'student_score_prior' => "Điểm cộng",
+        'student_score_prior_comment' => "Ghi chú",
+
+        'student_nominate' => "Tuyển thẳng",
+
+        'school_id_option' => "TBCN L9",
+        'school_class_code' => "TBCN L9",
+
+        'school_code_option_1' => "Mã nguyện vọng 1",
+        'school_code_option_2' => "Mã nguyện vọng 2",
+
+        'student_email' =>"Thư điện tử",
+        'student_phone' => "Số điện thoại",
+    
+    
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -126,4 +177,9 @@ return [
     'pnd_category_new' => 'Thêm danh mục',
     'pnd_category_update' => 'Cập nhật danh mục',
     'length_category_name' => 'Chiều dài tiêu đề không hợp lệ. Yêu cầu từ <b>:LENGTH_CATEGORY_NAME_MIN</b> tới <b>:LENGTH_CATEGORY_NAME_MAX</b> ký tự',
+    
+    
+    
+    
+    
 ];
