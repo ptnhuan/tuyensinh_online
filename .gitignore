@@ -53,5 +53,3 @@ src/composer.lock
 .idea/workspace.xml
 *.xml
 src/composer.lock
-*.xml
-.idea/workspace.xml
