@@ -65,6 +65,7 @@ return [
     'school_district_title' => 'Quản lý thông tin huyện',
     'school_district_id' => 'Huyện',
     'school_district_code' => 'Mã huyện',
+    
     'school_district_name' => 'Tên huyện',
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
@@ -126,7 +127,7 @@ return [
     'student_birth_place' => "Nơi sinh",
 
         'school_id' => "Mã trường THCS",
-        'school_district_id' => "Mã huyện",
+        'school_district_id' => "Huyện",
 
         'student_class' => "Lớp",
 

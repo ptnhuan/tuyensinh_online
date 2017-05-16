@@ -97,7 +97,7 @@ class Students extends Model {
         }
 
         $student = self::find($student_id);
-
+ 
         if (!empty($student)) {
 
             $student->student_first_name = $input['student_first_name'];

@@ -86,7 +86,7 @@
 
                                     </div>
                                     <div class="row">  
-                                        <div class="col-md-2">
+                                        <div class="col-md-1">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_day','value'=> @$student->student_birth_day])
                                             <!--/END INPUT-->
@@ -96,14 +96,22 @@
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_month','value'=> @$student->student_birth_month])
                                             <!--/END INPUT-->
                                         </div>
+                                          <div class="col-md-1">
+                                            <!--INPUT-->
+                                                  <!--/END INPUT-->
+                                        </div>
                                         <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_year','value'=> @$student->student_birth_year])
                                             <!--/END INPUT-->
                                         </div>
                                         <!--/END INPUT-->
+                                          <div class="col-md-1">
+                                            <!--INPUT-->
+                                                  <!--/END INPUT-->
+                                        </div>
                                         <!--INPUT-->
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_place','value'=> @$student->student_birth_place])
                                             <!--/END INPUT-->
@@ -114,9 +122,12 @@
                                     <div class="row">  
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                          
-                                            
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_district_name','value'=> @$student->school_district_id])
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
+                                            'categories'=> !empty(@$districts) ? $districts  : array(),
+                                            'category_id'=>@$student->school_district_id])
+                                         
+
                                             <!--/END INPUT-->
 
                                         </div>
@@ -124,7 +135,11 @@
                                         <div class="col-md-6">
 
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_name','value'=> @$student->school_id])
+                                               @include('pnd::elements.pnd_select', ['name' => 'school_id',
+                                                    'categories'=> !empty(@$schools) ? $schools  : array(),
+                                                    'category_id'=>@$student->school_id])
+                                                    
+                                           
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-3">
@@ -141,24 +156,39 @@
                                         <!--INPUT-->
                                         <div class="col-md-3"   >
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_capacity_6','value'=> @$student->student_capacity_6])
+                                            
+                                               @include('pnd::elements.pnd_select', ['name' => 'student_capacity_6',
+                                                          'categories'=> ['G'=>'G','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_capacity_6])
+                                          
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-3">
 
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_conduct_6','value'=> @$student->student_conduct_6])
+                                            
+                                                @include('pnd::elements.pnd_select', ['name' => 'student_conduct_6',
+                                                          'categories'=> ['T'=>'T','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_conduct_6])
+                                            
+                                        
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_capacity_7','value'=> @$student->student_capacity_7])
+                                             @include('pnd::elements.pnd_select', ['name' => 'student_capacity_7',
+                                                          'categories'=> ['G'=>'G','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_capacity_7])
+                                           
                                             <!--/END INPUT-->
 
                                         </div>
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_conduct_7','value'=> @$student->student_conduct_7])
+                                              @include('pnd::elements.pnd_select', ['name' => 'student_conduct_7',
+                                                          'categories'=> ['T'=>'T','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_conduct_7])
+                                          
                                             <!--/END INPUT-->
 
                                         </div>
@@ -171,24 +201,36 @@
 
                                       <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_capacity_8','value'=> @$student->student_capacity_8])
+                                             @include('pnd::elements.pnd_select', ['name' => 'student_capacity_8',
+                                                          'categories'=> ['G'=>'G','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_capacity_8])
+                                           
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-3">
 
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_conduct_8','value'=> @$student->student_conduct_8])
+                                              @include('pnd::elements.pnd_select', ['name' => 'student_conduct_8',
+                                                          'categories'=> ['T'=>'T','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_conduct_8])
+                                          
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_capacity_9','value'=> @$student->student_capacity_9])
+                                             @include('pnd::elements.pnd_select', ['name' => 'student_capacity_9',
+                                                          'categories'=> ['G'=>'G','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_capacity_9])
+                                          
                                             <!--/END INPUT-->
 
                                         </div>
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_conduct_9','value'=> @$student->student_conduct_9])
+                                              @include('pnd::elements.pnd_select', ['name' => 'student_conduct_9',
+                                                          'categories'=> ['T'=>'T','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_conduct_9])
+                                         
                                             <!--/END INPUT-->
 
                                         </div>
@@ -217,7 +259,11 @@
                                         <div class="col-md-3">
 
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_graduate','value'=> @$student->student_graduate])
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'student_graduate',
+                                                          'categories'=> ['G'=>'G','K'=>'K','TB'=>'TB','Y'=>'Y'],
+                                                          'category_id'=> @$student->student_graduate])
+                                           
                                             <!--/END INPUT-->
                                         </div>
 
@@ -239,7 +285,11 @@
                                         </div>
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_nominate','value'=> @$student->student_nominate])
+                                            
+                                                  @include('pnd::elements.pnd_select', ['name' => 'student_nominate',
+                                                          'categories'=> ['0'=>'Không','1'=>'Tuyển thẳng'],
+                                                          'category_id'=> @$student->student_nominate])
+                                            
                                             <!--/END INPUT-->
 
                                         </div>
@@ -248,13 +298,22 @@
                                     <div class="row">  
                                         <div class="col-md-6">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_id_option','value'=> @$student->school_id_option])
+                                            
+                                             @include('pnd::elements.pnd_select', ['name' => 'school_id_option',
+                                                    'categories'=> !empty(@$schools) ? $schools  : array(),
+                                                    'category_id'=>@$student->school_id_option])
+                                          
                                             <!--/END INPUT-->
 
                                         </div>
                                         <div class="col-md-6">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_class_code','value'=> @$student->school_class_code])
+                                            
+                                               @include('pnd::elements.pnd_select', ['name' => 'school_class_code',
+                                                    'categories'=> !empty(@$specialists) ? $specialists : array(),
+                                                    'category_id'=>@$student->school_class_code])
+                                            
+                                        
                                             <!--/END INPUT-->
 
                                         </div>
@@ -264,7 +323,7 @@
                                        
 
                                         <!--/END INPUT-->
-                                    </div>
+                                    </div> 
                                        <div class="row">  
                                         
                                         <!--INPUT-->

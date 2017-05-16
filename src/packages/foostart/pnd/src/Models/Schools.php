@@ -143,10 +143,18 @@ class Schools extends Model {
         return implode($user_name);
     }
 
-    public function get_school_by_user_name($user_name = null){
+    public function get_school_by_user_name($user_name = null) {
         $eloquent = self::where('school_user', $user_name)->first();
-        
+
         return $eloquent;
     }
 
+    public function pluck_select() {
+        $eloquent = self::orderBy('school_name', 'ASC');
+        $eloquent->where('school_level_id',2);
+        return $eloquent->pluck('school_name', 'school_code');
+        
+        
+    }
+ 
 }

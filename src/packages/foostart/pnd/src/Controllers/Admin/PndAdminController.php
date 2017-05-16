@@ -13,7 +13,8 @@ use Route,
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
-
+use Foostart\Pnd\Models\Districts;
+use Foostart\Pnd\Models\Specialists;
 use Foostart\Pexcel\Models\Pexcel;
 /**
  * Validators
@@ -28,14 +29,16 @@ class PndAdminController extends PndController
     private $obj_categories = NULL;
     private $obj_validator = NULL;
     private $obj_pexcel = NULL;
-
-    public function __construct()
-    {
+    private $obj_districts = NULL;
+    private $obj_specialists = NULL;
+    public function __construct() {
 
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
         $this->obj_pexcel = new Pexcel();
+        $this->obj_districts = new Districts();
+         $this->obj_specialists = new Specialists();
     }
 
     /**
@@ -87,8 +90,9 @@ class PndAdminController extends PndController
 
         $student = NULL;
         $student_id = (int)$request->get('id');
-
-
+        $districts = $this->obj_districts->pluck_select();
+        $schools = $this->obj_schools->pluck_select();
+            $specialists = $this->obj_specialists->pluck_select();
         if (!empty($student_id) && (is_int($student_id))) {
 
             $student = $this->obj_students->find($student_id);
@@ -98,6 +102,9 @@ class PndAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
+             'districts' => $districts,
+                  'schools' => $schools,
+              'specialists' => $specialists,
         ));
 
         return view('pnd::admin.pnd_edit', $this->data);
@@ -120,7 +127,9 @@ class PndAdminController extends PndController
         $input['user_id'] = $this->current_user->id;
 
         $student_id = (int)$request->get('id');
-
+        $districts = $this->obj_districts->pluck_select();
+         $schools = $this->obj_schools->pluck_select();
+          $specialists = $this->obj_specialists->pluck_select();
         $student = NULL;
 
         $data = array();
@@ -178,6 +187,9 @@ class PndAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
+              'districts' => $districts,
+                'schools' => $schools,
+             'specialists' => $specialists,
         ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
