@@ -146,7 +146,7 @@ class Schools extends Model {
     public function get_school_by_user_id($user_id = null) {
         $eloquent = self::where('user_id', $user_id)->first();
 
-        return $eloquent;
+        return $eloquent;                      
     }
 
     public function pluck_select($params = array()) {
@@ -157,10 +157,7 @@ class Schools extends Model {
         } 
 
         $eloquent = $eloquent->where('school_level_id',2);
-
-        var_dump(count($eloquent->get()->toArray()));
-        var_dump($eloquent->get()->toArray());
-        die();
+ 
         return $eloquent->pluck('school_name', 'school_code');
         
         

@@ -122,7 +122,7 @@
                                     <div class="row">  
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                    
+                                                                      
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
                                             'categories'=> !empty(@$districts) ? $districts  : array(),
                                             'category_id'=>@$student->school_district_code])
