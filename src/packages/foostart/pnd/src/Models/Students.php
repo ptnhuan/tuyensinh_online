@@ -20,7 +20,7 @@ class Students extends Model
         'student_birth_month',
         'student_birth_year',
         'student_birth_place',
-        'school_id',
+        'school_code',
         'school_district_id',
         'student_class',
         'student_capacity_6',
@@ -60,8 +60,8 @@ class Students extends Model
         $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //By School
-        if (!empty($params['school_id'])) {
-            $eloquent = $eloquent->where('school_id', $params['school_id']);
+        if (!empty($params['school_code'])) {
+            $eloquent = $eloquent->where('school_code', $params['school_code']);
             if (intval(@$params['school_option']) == 1) {
                 if (!empty($params['school_code_option']))
                     $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
@@ -79,6 +79,8 @@ class Students extends Model
             }
         }
 
+
+
         //SEARCH BY NAME OR EMAIL
         if (!empty($params['search_student'])) {
 
@@ -93,8 +95,7 @@ class Students extends Model
         $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
             $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
                 ->where('pexcel.user_id', $params['user_id']);
-
-        })->join('pexcel_categories', function ($join) use ($params) {
+        })->leftjoin('pexcel_categories', function ($join) use ($params) {
             $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
                 ->where('pexcel_categories.user_id', $params['user_id']);
         });
@@ -110,7 +111,7 @@ class Students extends Model
             $eloquent = $eloquent->where('pexcel_id', $params['pexcel_id']);
         }
 
-        return $eloquent->get();
+        return $eloquent->paginate(config('buoumau.user_pexcel_per_page'));
     }
 
     /**

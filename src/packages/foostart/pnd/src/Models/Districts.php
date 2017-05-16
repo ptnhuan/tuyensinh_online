@@ -23,8 +23,8 @@ class Districts extends Model {
         $eloquent = self::orderBy('school_district_name', 'ASC');
 
         //pexcel_name
-        if (!empty($params['pexcel_id'])) {
-            $eloquent->where('pexcel_id', $params['pexcel_id']);
+        if (!empty($params['school_district_code'])) {
+            $eloquent->where('school_district_code', $params['school_district_code']);
         }
 
         $pexcels = $eloquent->paginate(config('pexcel.per_page'));

@@ -103,7 +103,7 @@ Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], functi
 /**
  * ADMINISTRATOR
  */
-Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
@@ -113,7 +113,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * list
          */
-        Route::get('z', [
+        Route::get('/pnd', [
             'as' => 'admin_pnd',
             'uses' => 'PndAdminController@index'
         ]);
@@ -121,7 +121,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * edit-add
          */
-        Route::get('admin/pnd/edit', [
+        Route::get('/pnd/edit', [
             'as' => 'admin_pnd.edit',
             'uses' => 'PndAdminController@edit'
         ]);
@@ -129,7 +129,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * pnd
          */
-        Route::post('admin/pnd/edit', [
+        Route::post('/pnd/edit', [
             'as' => 'admin_pnd.post',
             'uses' => 'PndAdminController@post'
         ]);
@@ -137,7 +137,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * delete
          */
-        Route::get('admin/pnd/delete', [
+        Route::get('/pnd/delete', [
             'as' => 'admin_pnd.delete',
             'uses' => 'PndAdminController@delete'
         ]);
@@ -145,9 +145,17 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * search
          */
-        Route::get('admin/pnd/search', [
+        Route::get('/pnd/search', [
             'as' => 'admin_pnd.search',
             'uses' => 'PndAdminController@search'
+        ]);
+
+        /**
+         * get school by district
+         */
+        Route::post('/pnd/school-by-district', [
+            'as' => 'admin_pnd.school.district',
+            'uses' => 'PndAdminController@getSchoolByDistrict'
         ]);
 
 
@@ -157,7 +165,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * list
          */
-        Route::get('admin/pnd_school', [
+        Route::get('/pnd_school', [
             'as' => 'admin_pnd_school',
             'uses' => 'PndSchoolAdminController@index'
         ]);
@@ -165,7 +173,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * edit-add
          */
-        Route::get('admin/pnd_school/edit', [
+        Route::get('/pnd_school/edit', [
             'as' => 'admin_pnd_school.edit',
             'uses' => 'PndSchoolAdminController@edit'
         ]);
@@ -173,7 +181,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * pnd
          */
-        Route::post('admin/pnd_school/edit', [
+        Route::post('/pnd_school/edit', [
             'as' => 'admin_pnd_school.post',
             'uses' => 'PndSchoolAdminController@post'
         ]);
@@ -181,7 +189,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * delete
          */
-        Route::get('admin/pnd_school/delete', [
+        Route::get('/pnd_school/delete', [
             'as' => 'admin_pnd_school.delete',
             'uses' => 'PndSchoolAdminController@delete'
         ]);
@@ -192,7 +200,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * list
          */
-        Route::get('admin/pnd_district', [
+        Route::get('/pnd_district', [
             'as' => 'admin_pnd_district',
             'uses' => 'PndDistrictAdminController@index'
         ]);
@@ -200,7 +208,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * edit-add
          */
-        Route::get('admin/pnd_district/edit', [
+        Route::get('/pnd_district/edit', [
             'as' => 'admin_pnd_district.edit',
             'uses' => 'PndDistrictAdminController@edit'
         ]);
@@ -208,7 +216,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * pnd
          */
-        Route::post('admin/pnd_district/edit', [
+        Route::post('/pnd_district/edit', [
             'as' => 'admin_pnd_district.post',
             'uses' => 'PndDistrictAdminController@post'
         ]);
@@ -216,7 +224,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * delete
          */
-        Route::get('admin/pnd_district/delete', [
+        Route::get('/pnd_district/delete', [
             'as' => 'admin_pnd_district.delete',
             'uses' => 'PndDistrictAdminController@delete'
         ]);
@@ -227,7 +235,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * list
          */
-        Route::get('admin/pnd_specialist', [
+        Route::get('/pnd_specialist', [
             'as' => 'admin_pnd_specialist',
             'uses' => 'PndSpecialistAdminController@index'
         ]);
@@ -235,7 +243,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * edit-add
          */
-        Route::get('admin/pnd_specialist/edit', [
+        Route::get('/pnd_specialist/edit', [
             'as' => 'admin_pnd_specialist.edit',
             'uses' => 'PndSpecialistAdminController@edit'
         ]);
@@ -243,7 +251,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * pnd
          */
-        Route::post('admin/pnd_specialist/edit', [
+        Route::post('/pnd_specialist/edit', [
             'as' => 'admin_pnd_specialist.post',
             'uses' => 'PndSpecialistAdminController@post'
         ]);
@@ -251,7 +259,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * delete
          */
-        Route::get('admin/pnd_specialist/delete', [
+        Route::get('/pnd_specialist/delete', [
             'as' => 'admin_pnd_specialist.delete',
             'uses' => 'PndSpecialistAdminController@delete'
         ]);

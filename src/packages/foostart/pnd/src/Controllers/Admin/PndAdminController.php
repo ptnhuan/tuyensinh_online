@@ -13,6 +13,8 @@ use Route,
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
+use Foostart\Pnd\Models\Districts;
+
 /**
  * Validators
  */
@@ -25,6 +27,7 @@ class PndAdminController extends PndController
     private $obj_schools = NULL;
     private $obj_categories = NULL;
     private $obj_validator = NULL;
+    private $obj_districts = null;
 
     public function __construct()
     {
@@ -32,6 +35,8 @@ class PndAdminController extends PndController
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
+        $this->obj_districts = new Districts();
+
     }
 
     /**
@@ -44,12 +49,10 @@ class PndAdminController extends PndController
 
         $this->isAuthentication();
 
-        $params['user_id'] = $this->current_user->id;
-
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-        $school = $this->obj_schools->get_school_by_user_name($this->current_user->user_name);
+        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
 
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
@@ -57,6 +60,7 @@ class PndAdminController extends PndController
         }
 
         $students = $this->obj_students->get_students($params);
+
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
         $this->data = array_merge($this->data, array(
@@ -78,15 +82,18 @@ class PndAdminController extends PndController
         $student = NULL;
         $student_id = (int)$request->get('id');
 
+        $districts = $this->obj_districts->pluck_select();
 
         if (!empty($student_id) && (is_int($student_id))) {
 
             $student = $this->obj_students->find($student_id);
 
+
         }
 
         $this->data = array_merge($this->data, array(
             'student' => $student,
+            'districts' => $districts,
             'request' => $request,
         ));
 
@@ -203,6 +210,24 @@ class PndAdminController extends PndController
         return Redirect::route("admin_pnd");
     }
 
+
+    /*
+     * Get school by district
+     */
+    public function getSchoolByDistrict(Request $request)
+    {
+
+        $schools = $this->obj_schools->pluck_select($request->get('school_district_code'));
+
  
+        $html = null;
+        if (!empty($schools)) {
+            foreach ($schools as $key => $school) {
+                $html .= '<option value="' . $key . '">' . $school . '</option>';
+            }
+        }
+        
+        return $html;
+    }
 
 }

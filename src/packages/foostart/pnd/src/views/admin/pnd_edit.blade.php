@@ -425,11 +425,26 @@
 
 {!! HTML::script('js/tinymce/tinymce.min.js') !!}
 {!! HTML::script('js/tinymce/tinymce-config.js') !!}
-{!! HTML::script('vendor/laravel-filemanager/js/lfm_pnd.js') !!}
+{!! HTML::script('vendor/laravel-filemanager/js/lfm.js') !!}
 
 <script type='text/javascript'>
     $(document).ready(function () {
+        
         $('#lfm').filemanager('file');
+
+        $('#school_district_id').on('change',function(){
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo URL::route('admin_pnd.school.district') ?>',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    school_district_code: $(this).val(),
+                },
+                success:function(result){
+                    $('#school_id').html(result);
+                }
+            });
+        });
     });
 </script>
 @stop

@@ -143,15 +143,20 @@ class Schools extends Model {
         return implode($user_name);
     }
 
-    public function get_school_by_user_name($user_name = null) {
-        $eloquent = self::where('school_user', $user_name)->first();
+    public function get_school_by_user_id($user_id = null) {
+        $eloquent = self::where('user_id', $user_id)->first();
 
         return $eloquent;
     }
 
-    public function pluck_select() {
+    public function pluck_select($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
         $eloquent->where('school_level_id',2);
+
+        if(!empty($params['school_district_code'])){
+            $eloquent = $eloquent->where('school_district_code',$params['school_district_code']);
+        }
+
         return $eloquent->pluck('school_name', 'school_code');
         
         
