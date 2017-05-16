@@ -15,7 +15,7 @@ class Schools extends Model {
         'school_phone',
         'school_email',
         'school_contact',
-        'school_district_id',
+        'school_district_code',
         'school_level_id',
         'school_user',
         'school_pass'      
@@ -151,12 +151,13 @@ class Schools extends Model {
 
     public function pluck_select($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
-        $eloquent->where('school_level_id',2);
 
         if(!empty($params['school_district_code'])){
             $eloquent = $eloquent->where('school_district_code',$params['school_district_code']);
-        }
+        } 
 
+        $eloquent = $eloquent->where('school_level_id',2);
+ 
         return $eloquent->pluck('school_name', 'school_code');
         
         

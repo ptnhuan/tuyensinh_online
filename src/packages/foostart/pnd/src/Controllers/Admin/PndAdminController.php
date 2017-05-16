@@ -217,7 +217,7 @@ class PndAdminController extends PndController
     public function getSchoolByDistrict(Request $request)
     {
 
-        $schools = $this->obj_schools->pluck_select($request->get('school_district_code'));
+        $schools = $this->obj_schools->pluck_select($request->all());
 
  
         $html = null;

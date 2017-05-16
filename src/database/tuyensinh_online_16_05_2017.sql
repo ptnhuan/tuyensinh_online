@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2017 at 03:49 PM
+-- Generation Time: May 16, 2017 at 04:07 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -220,7 +220,7 @@ CREATE TABLE `schools` (
   `school_phone` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `school_email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `school_contact` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `school_distric_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `school_district_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `school_level_id` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pass_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE `schools` (
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`school_id`, `school_code`, `school_name`, `school_address`, `school_phone`, `school_email`, `school_contact`, `school_distric_code`, `school_level_id`, `user_id`, `pass_id`, `school_user`, `school_pass`) VALUES
+INSERT INTO `schools` (`school_id`, `school_code`, `school_name`, `school_address`, `school_phone`, `school_email`, `school_contact`, `school_district_code`, `school_level_id`, `user_id`, `pass_id`, `school_user`, `school_pass`) VALUES
 (1, '100', 'Trường THCS Đồng Khởi', 'Phú Yên', '0573843348', 'leanpha@phuyen.edu.vn', 'Lê An Pha', '11', '2', '1', '1', '', NULL),
 (2, '101', 'Trường THCS Đinh Tiên Hoàng', 'Phú Yên', '0573843349', 'leanpha@phuyen.edu.vn', 'Lê An Pha', '11', '2', 'user_101', 'user_101', '', NULL),
 (3, '102', 'Trường THCS Huỳnh Thúc Kháng', 'Phú Yên', '0573843350', 'leanpha@phuyen.edu.vn', 'Lê An Pha', '11', '2', 'user_102', 'user_102', '', NULL),
