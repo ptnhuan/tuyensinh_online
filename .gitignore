@@ -48,3 +48,8 @@ Temporary Items
 .idea/blade.xml
 .idea/misc.xml
 src/composer.lock
+*.xml
+.idea/workspace.xml
+.idea/workspace.xml
+*.xml
+src/composer.lock

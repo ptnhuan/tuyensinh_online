@@ -113,7 +113,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         /**
          * list
          */
-        Route::get('admin/pnd', [
+        Route::get('z', [
             'as' => 'admin_pnd',
             'uses' => 'PndAdminController@index'
         ]);
