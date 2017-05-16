@@ -24,11 +24,7 @@
                                                           'categories'=> ['Tất cả','Nguyện vọng 1','Nguyện vọng 2'],
                                                           'category_id'=> !empty(@$request->get('school_option')) ? @$request->get('school_option') : 0])
                  </div>
-                 <div class="col-md-6">
-                     <!--SCHOOL OPTION CODE-->
-                     @include ('pnd::elements.input',['name'=>'school_code_option',
-                                         'value' => !empty(@$request->get('school_code_option')) ? $request->get('school_code_option') : ''])
-                 </div>
+                
              </div>
 
             <!--NAME OR EMAIL STUDENT-->

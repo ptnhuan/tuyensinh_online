@@ -23,6 +23,16 @@ return [
         'deleted' => 22,
         'confirmed' => 33,
     ],
+    'status_str' => [
+        11 => 'Chưa xác nhận',
+        22 => 'Đã xóa',
+        33 => 'Đã xác nhận'
+    ],
+
+    /**
+     * SAVE TO TABLE
+     */
+    'save_to_table' => 'school_students',
 
     /**
      * FIELDS

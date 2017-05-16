@@ -155,7 +155,11 @@
 </style>
 
 @section('sub_page_scripts')
-<script type='text/javascript'>
-    $('.table-data').width(28 * 87);
-</script>
+    <script type='text/javascript'>
+        $('.table-data').width(28 * 87);
+
+        $(".delete").click(function () {
+            return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
+        });
+    </script>
 @stop

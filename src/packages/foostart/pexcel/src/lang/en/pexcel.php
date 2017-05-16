@@ -8,11 +8,12 @@ return [
     "operations" => 'Thao tác',
     'pexcel_category_name_label' => 'Từ khóa:',
     'package_name' => 'Đăng bài',
+    'pexcel_title' => 'Trang quản lý file đã gửi',
     /**
      * Page
      */
 
-    'page_list' => 'Danh sách file',
+    'page_list' => 'Danh sách file đã gửi',
     'page_add' => 'Thêm file mới',
     'page_edit' => 'Cập nhật file',
     'page_search' => 'Tìm kiếm file',
@@ -35,6 +36,7 @@ return [
     'pexcel_name_placeholder' => 'Từ khóa',
     'pexcel_category_name'=> 'Từ khóa',
     'pexcel_image_choose' => 'Chọn Tập tin',
+    'pexcel_item_file' => 'File',
     'slideshow_name' => 'Slideshow',
 
     /**
@@ -68,8 +70,13 @@ return [
     'tab_file' => 'Tập tin ',
 
     'pexcel_item_created' => 'Ngày gửi',
+    'pexcel_item_updated' => 'Cập nhật',
+    'pexcel_item_status' => 'Trạng thái',
     'pexcel_item_title' => 'Tiêu đề',
     'pexcel' => 'Quản lý file',
+
+    'pexcel_date_from' => 'Từ ngày',
+    'pexcel_date_to' => 'Đến ngày',
 
 
     ////////////////////////////////////////////////////////////////////////////

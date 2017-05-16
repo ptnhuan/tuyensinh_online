@@ -17,13 +17,13 @@
 
                 <!--ERRORS POST-->
                 @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{!! $error !!}</div>
+                <div class="alert alert-danger">{!! $error !!}</div>
                 @endforeach
 
                 {{-- successful message --}}
                 <?php $message = Session::get('message'); ?>
                 @if( isset($message) )
-                    <div class="alert alert-success">{{$message}}</div>
+                <div class="alert alert-success">{{$message}}</div>
                 @endif
 
                 <div class="panel-body">
@@ -55,7 +55,7 @@
                                     </a>
                                 </li>
                                 <!--/END TAB ATTRIBUTES-->
- 
+
                             </ul>
                             <!--/END QUICK TABS-->
 
@@ -64,17 +64,17 @@
 
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
-                                                                     
+
                                     <!--INPUT-->
                                     @include('pnd::elements.pnd_input', ['name' => 'school_district_code','value'=> @$district->school_district_code])
                                     <!--/END INPUT-->
-                                    
+
                                     <!--INPUT-->
                                     @include('pnd::elements.pnd_input', ['name' => 'school_district_name','value'=> @$district->school_district_name])
                                     <!--/END INPUT-->
 
-                                      
-                                    
+
+
                                     <!--/END INPUT-->
 
                                 </div>
@@ -86,7 +86,7 @@
                                     <!--/END SELECT-->
                                 </div>
                                 <!--TAB ATTRIBUTES-->
- 
+
 
                             </div>
 

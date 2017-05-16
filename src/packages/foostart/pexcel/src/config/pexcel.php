@@ -16,6 +16,13 @@ return [
     'length_category_name_max' => 150,
 
 
+    /**
+     * STATUS
+     */
+
+    /**
+     * FIELDS
+     */
     'fields' => [
 
         'student_first_name' => 2,

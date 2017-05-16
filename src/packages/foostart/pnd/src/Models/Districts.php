@@ -96,7 +96,7 @@ class Districts extends Model {
     public function pluck_select(){
         $eloquent = self::orderBy('school_district_name', 'ASC');
         
-        return  $eloquent->pluck('school_district_name', 'school_district_id');
+        return  $eloquent->pluck('school_district_name', 'school_district_code');
     }
    
   
