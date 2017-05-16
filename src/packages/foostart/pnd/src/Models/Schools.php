@@ -157,7 +157,10 @@ class Schools extends Model {
         } 
 
         $eloquent = $eloquent->where('school_level_id',2);
- 
+
+        var_dump(count($eloquent->get()->toArray()));
+        var_dump($eloquent->get()->toArray());
+        die();
         return $eloquent->pluck('school_name', 'school_code');
         
         

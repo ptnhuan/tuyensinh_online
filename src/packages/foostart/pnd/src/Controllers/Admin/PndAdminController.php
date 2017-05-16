@@ -216,17 +216,17 @@ class PndAdminController extends PndController
      */
     public function getSchoolByDistrict(Request $request)
     {
-
         $schools = $this->obj_schools->pluck_select($request->all());
 
- 
         $html = null;
         if (!empty($schools)) {
             foreach ($schools as $key => $school) {
-                $html .= '<option value="' . $key . '">' . $school . '</option>';
+                $selected = ($key == $request['school_current']) ? "selected" : "";
+                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>';
+                var_dump($selected);
             }
-        }
-        
+        } 
+      
         return $html;
     }
 
