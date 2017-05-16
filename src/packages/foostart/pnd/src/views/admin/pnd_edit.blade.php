@@ -125,8 +125,7 @@
 
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
                                             'categories'=> !empty(@$districts) ? $districts  : array(),
-                                            'category_id'=>@$student->school_district_id])
-                                         
+                                            'category_id'=>@$student->school_district_code])
 
                                             <!--/END INPUT-->
 
@@ -432,19 +431,25 @@
         
         $('#lfm').filemanager('file');
 
+        get_school($('#school_district_id'));
+        
         $('#school_district_id').on('change',function(){
+            get_school($(this));
+        });
+    });
+    function get_school(This){
+
             $.ajax({
                 type: 'POST',
                 url: '<?php echo URL::route('admin_pnd.school.district') ?>',
                 data:{
                     _token: '{{csrf_token()}}',
-                    school_district_code: $(this).val(),
+                    school_district_code: This.val(),
                 },
                 success:function(result){
                     $('#school_id').html(result);
                 }
             });
-        });
-    });
+    }
 </script>
 @stop
