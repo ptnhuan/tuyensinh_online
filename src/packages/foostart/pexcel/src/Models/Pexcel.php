@@ -17,16 +17,16 @@ class Pexcel extends Model {
         'pexcel_created_at',
         'pexcel_updated_at',
 
-        'pexcel_status',
+        'pexcel_status'
     ];
 
     protected $primaryKey = 'pexcel_id';
 
-    protected  $pexcel_status;
+    protected  $pstatus;
 
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
-        $this->pexcel_status = config('pexcel.status');
+        $this->pstatus = config('pexcel.status');
     }
 
     /**
@@ -88,7 +88,7 @@ class Pexcel extends Model {
 
             $pexcel->pexcel_torow = $input['pexcel_torow'];
 
-            $pexcel->pexcel_status = $this->pexcel_status['new'];
+            $pexcel->pexcel_status = $this->pstatus['new'];
 
             $pexcel->pexcel_category_id = $input['pexcel_category_id'];
 
@@ -97,7 +97,6 @@ class Pexcel extends Model {
             $pexcel->pexcel_updated_at = time();
 
             $pexcel->save();
-
             return $pexcel;
         } else {
             return NULL;
@@ -124,7 +123,7 @@ class Pexcel extends Model {
                     'pexcel_created_at' => time(),
                     'pexcel_updated_at' => time(),
 
-                    'pexcel_status' => $this->pexcel_status['new'],
+                    'pexcel_status' => $this->pstatus['new'],
         ]);
         return $pexcel;
     }
