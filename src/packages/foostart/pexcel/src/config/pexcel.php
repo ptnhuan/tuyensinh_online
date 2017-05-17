@@ -63,7 +63,7 @@ return [
 
         'student_nominate' => 26,
 
-        'school_id_option' => 27,
+        'school_code_option' => 27,
         'school_class_code' => 28,
 
         'school_code_option_1' => 29,

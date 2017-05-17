@@ -110,8 +110,10 @@ class PndAdminController extends PndController
 
         $specialists = $this->obj_specialists->pluck_select();
         
-        $specialists = (object)array_merge(['None'=>''],$specialists->toArray());
+        $specialists = (object)array_merge(['NULL'=>''],$specialists->toArray());
          
+        $school_levels_3 = (object)array_merge(['NULL'=>''],$this->obj_schools->pluck_select(['school_level_id'=>3])->toArray());
+        
         $districts = $this->obj_districts->pluck_select();
 
         if (!empty($student_id) && (is_int($student_id))) {
@@ -124,6 +126,7 @@ class PndAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'specialists' => $specialists,
+            'school_levels_3' => $school_levels_3,
             'districts' => $districts,
             'request' => $request,
         ));
@@ -247,8 +250,10 @@ class PndAdminController extends PndController
      */
     public function getSchoolByDistrict(Request $request)
     {
-     
-        $schools = $this->obj_schools->pluck_select($request->all());
+ 
+        $input = $request->all();
+        $input['school_level_id'] = 2;
+        $schools = $this->obj_schools->pluck_select($input);
  
         $html = null;
         if (!empty($schools)) {

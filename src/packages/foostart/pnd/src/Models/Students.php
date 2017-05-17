@@ -38,7 +38,7 @@ class Students extends Model
         'student_score_prior',
         'student_score_prior_comment',
         'student_nominate',
-        'school_id_option',
+        'school_code_option',
         'school_class_code',
         'school_code_option_1',
         'school_code_option_2',
@@ -161,7 +161,7 @@ class Students extends Model
             $student->student_score_prior = $input['student_score_prior'];
             $student->student_score_prior_comment = $input['student_score_prior_comment'];
             $student->student_nominate = $input['student_nominate'];
-            $student->school_id_option = $input['school_id_option'];
+            $student->school_id_option = $input['school_code_option'];
             $student->school_class_code = $input['school_class_code'];
             $student->school_code_option_1 = $input['school_code_option_1'];
             $student->school_code_option_2 = $input['school_code_option_2'];

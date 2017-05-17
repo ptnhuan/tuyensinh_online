@@ -299,7 +299,7 @@
                                             <!--INPUT-->
                                             
                                              @include('pnd::elements.pnd_select', ['name' => 'school_id_option',
-                                                    'categories'=> !empty(@$schools) ? $schools  : array(),
+                                                    'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
                                                     'category_id'=>@$student->school_id_option])
                                           
                                             <!--/END INPUT-->
@@ -328,13 +328,21 @@
                                         <!--INPUT-->
                                         <div class="col-md-6">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_code_option_1','value'=> @$student->school_code_option_1])
+                                             @include('pnd::elements.pnd_select', ['name' => 'school_code_option_1',
+                                                    'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
+                                                    'category_id'=>@$student->school_id_option_1])
+                                          
+                                            <!--/END INPUT-->
+
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-6">
 
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_code_option_2','value'=> @$student->school_code_option_2])
+                                           @include('pnd::elements.pnd_select', ['name' => 'school_code_option_2',
+                                                    'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
+                                                    'category_id'=>@$student->school_id_option_2])
+                                          
                                             <!--/END INPUT-->
                                         </div>
 
@@ -445,7 +453,7 @@
                 data:{
                     _token: '{{csrf_token()}}',
                     school_district_code: This.val(),
-                    school_current: '<?php echo $student->school_code ?>'
+                    school_current: '<?php echo $student->school_code ?>',
                 },
                 success:function(result){ 
                     $('#school_code').html(result);

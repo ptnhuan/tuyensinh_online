@@ -35,7 +35,7 @@ class Students extends Model {
         'student_score_prior',
         'student_score_prior_comment',
         'student_nominate',
-        'school_id_option',
+        'school_code_option',
         'school_class_code',
         'school_code_option_1',
         'school_code_option_2',
