@@ -62,10 +62,10 @@ class Schools extends Model {
             $school->school_phone = $input['school_phone'];
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];
-            $school->school_district_id = $input['school_district_id'];
+            $school->school_district_code = $input['school_district_id'];
             $school->school_level_id = $input['school_level_id'];
-            $school->school_user = $input['school_user'];
-            $school->school_pass = $input['school_pass'];
+            $school->user_id = $input['school_user'];
+            $school->pass_id = $input['school_pass'];
                           
             
             $school->save();
