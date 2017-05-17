@@ -9,6 +9,7 @@ use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Students;
+use Foostart\Pnd\Validators\PndUserValidator;
 use Illuminate\Http\Request;
 use URL,
     Route,
@@ -31,11 +32,10 @@ class UserController extends PndController
     private $obj_districts = null;
     private $obj_specialists = null;
 
-    private $obj_pexcel = NULL;
+    private $obj_pexcel = NULL; 
 
     public function __construct()
-    {
-
+    { 
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
@@ -59,63 +59,28 @@ class UserController extends PndController
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-
         $student = $this->obj_students->get_student($params);
         
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
+        $specialists = $this->obj_specialists->pluck_select();
+
+        $specialists = (object)array_merge(['NULL'=>'...'],$specialists->toArray());
+
+
+        $school_levels_3 =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
+        $school_levels_3 =array('NULL' => '...') +$school_levels_3->toArray();
+
+
+        $school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
+        $school_levels_specialist =array('NULL' => '...') +$school_levels_specialist->toArray();
+ 
+
+        $districts = $this->obj_districts->pluck_select();
 
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         } 
 
-        $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
-
-        $this->data = array_merge($this->data, array(
-            'student' => $student,
-            'categories' => $categories,
-            'request' => $request,
-            'params' => $params
-        ));
-
-        return view('pnd::user.pnd_detail', $this->data);
-
-    }
-
-    /**
-     *
-     * @return type
-     */
-    public function edit(Request $request)
-    {
-
-        $student = NULL;
-        $student_id = (int)$request->get('id');
-
-        $specialists = $this->obj_specialists->pluck_select();
-
-        $specialists = (object)array_merge(['NULL' => ''], $specialists->toArray());
-
-
-        $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
-        //$school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3);
-
-        //var_dump($school_levels_3);
-        //die();
-        //$school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
-        ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
-
-        $school_levels_specialist = (object)array_merge(['NULL' => ''], $this->obj_schools->pluck_select(['school_level_id' => 3])->toArray());
-
-
-        $districts = $this->obj_districts->pluck_select();
-
-        if (!empty($student_id) && (is_int($student_id))) {
-
-            $student = $this->obj_students->find($student_id);
-
-
-        }
 
         $this->data = array_merge($this->data, array(
             'student' => $student,
@@ -126,9 +91,10 @@ class UserController extends PndController
             'request' => $request,
         ));
 
-        return view('pnd::admin.pnd_edit', $this->data);
-    }
+        return view('pnd::user.pnd_detail', $this->data);
 
+    }
+ 
     /**
      *
      * @param Request $request
@@ -136,15 +102,18 @@ class UserController extends PndController
      */
     public function post(Request $request)
     {
-
+ 
         $this->isAuthentication();
 
-        $this->obj_validator = new PndAdminValidator();
+        $this->obj_validator = new PndUserValidator();
 
-        $input = $request->all();
-
+        $input = $request->only('student_first_name','student_last_name','student_email',
+            'student_sex','student_phone','student_birth_day','student_birth_month',
+            'student_birth_year','student_birth_place','student_birth_place','school_code_option',
+            'school_class_code','school_code_option_1','school_code_option_2');
+       
         $input['user_id'] = $this->current_user->id;
-
+   
         $student_id = (int)$request->get('id');
 
         $student = NULL;
@@ -168,37 +137,19 @@ class UserController extends PndController
 
                     $input['student_id'] = $student_id;
 
-                    $student = $this->obj_students->update_student($input);
+                    $student = $this->obj_students->user_update_student($input);
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
 
-                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                    return Redirect::route("user.student.view", ["id" => $student->student_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
                 }
-            } else {
-
-                $input = array_merge($input, array());
-
-                $student = $this->obj_students->add_student($input);
-
-                if (!empty($student)) {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
-
-                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
-                    //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
-                } else {
-
-                    //Message
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
-                }
-            }
+            }  
         }
 
         $this->data = array_merge($this->data, array(
@@ -206,7 +157,7 @@ class UserController extends PndController
             'request' => $request,
         ), $data);
 
-        return view('pnd::admin.pnd_edit', $this->data);
+        return view('pnd::user.pnd_detail', $this->data);
     }
 
     /**

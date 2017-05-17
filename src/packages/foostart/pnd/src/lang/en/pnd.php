@@ -107,6 +107,8 @@ return [
      *
      */
     'tab_overview' => 'Mô tả',
+    'tab_info_main' => 'Thông tin chính',
+    'tab_info_other' => 'Thông tin khác',
     'tab_attributes' => 'Thuộc tính',
     'tab_image' => 'Hình đại diện',
     'pnd_item_created' => 'Ngày gửi',
