@@ -93,8 +93,7 @@ class Specialists extends Model {
     }
 
    public function pluck_select() {
-        $eloquent = self::orderBy('school_class_name', 'ASC');     
-        
+        $eloquent = self::orderBy('school_class_name', 'ASC');             
         return $eloquent->pluck('school_class_name', 'school_class_code');
     }
    
