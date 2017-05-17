@@ -51,7 +51,7 @@ return [
         'student_birth_place' => 8,
 
         'school_id' => 9,
-        'school_district_id' => 10,
+        'school_district_code' => 10,
 
         'student_class' => 11,
 
