@@ -72,21 +72,14 @@ class Schools extends Model {
 
             $school->save();
 
+
             //Update user account
             $obj_user = new PndUser();
-            $user = $obj_user->search_username($school->school_user);
-
+            $user = $obj_user->search_user(['user_name' => $school->user_id]);
             if ($user) {
-                $user->user_name = $school->school_user;
-                $user->password = Hash::make($school->school_pass);
-                $user->save();
+                $obj_user->update_user($user, $school);
             } else {
-                $user = [
-                    'email' => $school->school_email,
-                    'user_name' => $school->school_user,
-                    'password' => $school->school_pass,
-                ];
-                $obj_user->create_student($user);
+                $obj_user->create_user($school);
             }
             return $school;
         } else {
