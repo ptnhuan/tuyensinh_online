@@ -5,18 +5,22 @@ use Illuminate\Support\Facades\Hash;
 use LaravelAcl\Authentication\Models\User as AclUser;
 use LaravelAcl\Authentication\Models\UserProfile as AclUserProfile;
 
-class User extends AclUser {
+class PndUser extends AclUser {
 
     public function create_student($student) {
 
-        $user = self::create([
+        $user = [
             'email' => $student['student_user'].'@py.edu.vn',
             'user_name' => $student['student_user'],
-            'password'=> Hash::make($student['student_pass']),
+            'password'=> $student['student_user'],
             'activated' => 1,
             'banned' => 0,
 
-        ]);
+        ];
+        $user = self::create($user);
+
+        $obj_profile = new UserProfile();
+        $obj_profile->create_student_profile($user, $student);
         return $user;
     }
 
@@ -29,4 +33,13 @@ class User extends AclUser {
 }
 class UserProfile extends AclUserProfile {
 
+    public function create_student_profile($user, $student) {
+        $student_profile = [
+            'user_id' => $user->id,
+            'first_name' => $student['student_first_name'],
+            'last_name' => $student['student_last_name'],
+        ];
+        $user = self::create($student_profile);
+        return $user;
+    }
 }

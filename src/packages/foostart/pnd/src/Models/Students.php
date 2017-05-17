@@ -3,11 +3,9 @@
 namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use DB;
 
-class Students extends Model
-{
+class Students extends Model {
 
     protected $table = 'school_students';
     public $timestamps = false;
@@ -44,11 +42,9 @@ class Students extends Model
         'school_code_option_2',
         'student_email',
         'student_phone',
-
         'student_user',
         'student_pass',
         'pexcel_id'
-
     ];
     protected $primaryKey = 'student_id';
 
@@ -57,8 +53,7 @@ class Students extends Model
      * @param type $params
      * @return type
      */
-    public function get_students($params = array())
-    {
+    public function get_students($params = array()) {
         $eloquent = self::orderBy('student_last_name', 'DESC');
 
         //By School
@@ -88,18 +83,18 @@ class Students extends Model
 
             $eloquent = $eloquent->where(function ($where) use ($params) {
                 $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
-                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
+                        ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
             });
         }
 
 
         //By Categories
         $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
-            $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
-                ->where('pexcel.user_id', $params['user_id']);
-        })->leftjoin('pexcel_categories', function ($join) use ($params) {
+                    $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
+                            ->where('pexcel.user_id', $params['user_id']);
+                })->leftjoin('pexcel_categories', function ($join) use ($params) {
             $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
-                ->where('pexcel_categories.user_id', $params['user_id']);
+                    ->where('pexcel_categories.user_id', $params['user_id']);
         });
 
         if (!empty(@$params['pexcel_category_id'])) {
@@ -122,8 +117,7 @@ class Students extends Model
      * @param type $pexcel_id
      * @return type
      */
-    public function update_student($input, $student_id = NULL)
-    {
+    public function update_student($input, $student_id = NULL) {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -145,15 +139,15 @@ class Students extends Model
             $student->student_class = $input['student_class'];
             $student->student_capacity_6 = $input['student_capacity_6'];
             $student->student_conduct_6 = $input['student_conduct_6'];
-             $student->student_capacity_7 = $input['student_capacity_7'];
+            $student->student_capacity_7 = $input['student_capacity_7'];
             $student->student_conduct_7 = $input['student_conduct_7'];
-             $student->student_capacity_8 = $input['student_capacity_8'];
+            $student->student_capacity_8 = $input['student_capacity_8'];
             $student->student_conduct_8 = $input['student_conduct_8'];
-             $student->student_capacity_9 = $input['student_capacity_9'];
+            $student->student_capacity_9 = $input['student_capacity_9'];
             $student->student_conduct_9 = $input['student_conduct_9'];
-            
-            
-            
+
+
+
             $student->student_average = $input['student_average'];
             $student->student_average_1 = $input['student_average_1'];
             $student->student_average_2 = $input['student_average_2'];
@@ -169,7 +163,7 @@ class Students extends Model
             $student->student_phone = $input['student_phone'];
             $student->student_user = $input['student_user'];
             $student->student_pass = $input['student_pass'];
-            
+
 
 
             $student->save();
@@ -185,8 +179,7 @@ class Students extends Model
      * @param type $input
      * @return type
      */
-    private function validRow($data)
-    {
+    private function validRow($data) {
         $student = array();
 
         foreach ($this->fillable as $key) {
@@ -196,10 +189,9 @@ class Students extends Model
         return $student;
     }
 
-    public function createAccount($student)
-    {
+    public function createAccount($student) {
 
-        $user_name = $this->generateAccount($student->school_id, $student->student_id);
+        $user_name = $this->generateAccount($student->school_code, $student->student_id);
 
         $student->student_user = $user_name;
         $student->student_pass = $user_name;
@@ -207,8 +199,7 @@ class Students extends Model
         $student->save();
     }
 
-    public function add_student($input)
-    {
+    public function add_student($input) {
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
@@ -222,19 +213,16 @@ class Students extends Model
     public function add_students($students, $pexcel_id) {
 
         foreach ($students as $student) {
-            $this->add_student((array)$student, $pexcel_id);
+            $this->add_student((array) $student, $pexcel_id);
         }
     }
 
-
-    public function delete_student($student_id)
-    {
+    public function delete_student($student_id) {
         $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 
-    public function generateAccount($school_id, $student_id)
-    {
+    public function generateAccount($school_id, $student_id) {
 
         $school_id .= '';
         $student_id .= '';
@@ -243,16 +231,19 @@ class Students extends Model
         $account_max_length = config('pexcel.account_max_length');
 
 
+        //array user
         for ($i = 0; $i < $account_max_length; $i++) {
             $user_name[] = 0;
         }
 
+        //insert first
         for ($i = 0; $i < strlen($school_id); $i++) {
             $user_name[$i] = $school_id[$i];
         }
 
+        //insert last
         for ($i = 0; $i < strlen($student_id); $i++) {
-            $user_name[$account_max_length - $i - 1] = $student_id[$i];
+            $user_name[$account_max_length - strlen($student_id) + $i] = $student_id[$i];
         }
 
         return implode($user_name);
