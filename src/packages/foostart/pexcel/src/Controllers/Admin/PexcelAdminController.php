@@ -181,7 +181,6 @@ class PexcelAdminController extends PexcelController {
     }
 
     public function parse(Request $request) {
-
         $obj_parse = new Parse();
         $obj_students = new Students();
 
@@ -190,21 +189,19 @@ class PexcelAdminController extends PexcelController {
         $pexcel_id = $request->get('id');
         $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-
         $students = $obj_parse->get_students($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
         $pexcel->save();
 
-
         /**
          * Import data
          */
 
-
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,
+            'pexcel' => $pexcel
         ));
 
         return view('pexcel::admin.pexcel_parse', $this->data);
