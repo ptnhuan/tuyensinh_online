@@ -298,9 +298,10 @@
                                         <div class="col-md-6">
                                             <!--INPUT-->
                                             
-                                             @include('pnd::elements.pnd_select', ['name' => 'school_id_option',
-                                                    'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
-                                                    'category_id'=>@$student->school_id_option])
+                                            
+                                             @include('pnd::elements.pnd_select', ['name' => 'school_code_option',
+                                                    'categories'=> !empty(@$school_levels_specialist) ? $school_levels_specialist  : array(),
+                                                    'category_id'=>@$student->school_code_option])
                                           
                                             <!--/END INPUT-->
 
@@ -330,7 +331,7 @@
                                             <!--INPUT-->
                                              @include('pnd::elements.pnd_select', ['name' => 'school_code_option_1',
                                                     'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
-                                                    'category_id'=>@$student->school_id_option_1])
+                                                    'category_id'=>@$student->school_code_option_1])
                                           
                                             <!--/END INPUT-->
 
@@ -341,7 +342,7 @@
                                             <!--INPUT-->
                                            @include('pnd::elements.pnd_select', ['name' => 'school_code_option_2',
                                                     'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
-                                                    'category_id'=>@$student->school_id_option_2])
+                                                    'category_id'=>@$student->school_code_option_2])
                                           
                                             <!--/END INPUT-->
                                         </div>

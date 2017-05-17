@@ -58,7 +58,7 @@ return [
     'school_phone' => 'Điện thoại',
     'school_email' => 'Thư điện tử',
     'school_option' => 'Chọn nguyện vọng',
-    'school_code_option' => 'Mã nguyện vọng',
+    'school_code_option' => 'Trường chuyên/DTNT',
     'search_student' => 'Tìm kiếm ',
     'pexcel_category_id' => 'Khóa học',
     'school_contact' => 'Liên hệ',

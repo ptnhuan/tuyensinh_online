@@ -58,7 +58,7 @@ return [
         'student_score_prior' => 24,
         'student_score_prior_comment' => 25,
         'student_nominate' => 26,
-        'school_id_option' => 27,
+        'school_code_option' => 27,
         'school_class_code' => 28,
         'school_code_option_1' => 29,
         'school_code_option_2' => 30,
