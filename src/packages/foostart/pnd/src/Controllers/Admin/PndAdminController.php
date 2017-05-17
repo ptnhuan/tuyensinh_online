@@ -15,6 +15,7 @@ use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\Specialists;
+use Foostart\Pnd\Models\PndUser;
 
 
 use Foostart\Pexcel\Models\Pexcel;
@@ -55,7 +56,12 @@ class PndAdminController extends PndController
      */
     public function index(Request $request)
     {
+
+        $this->isAuthentication();
+
         $params = $request->all();
+         $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
 
         //PEXCEL
         if(!empty($params['id'])) {
@@ -66,17 +72,16 @@ class PndAdminController extends PndController
 
             if ($pexcel->pexcel_status == $pexcel_status['new']) {
                 $pexcel->pexcel_status = $pexcel_status['confirmed'];
-                $pexcel->save();
+//                $pexcel->save();
 
                 $this->obj_students->add_students($students, $pexcel->pexcel_id);
+
+                $user = new PndUser();
+                $students = $this->obj_students->get_students($params);
+                $user->create_students($students);
             }
         }
         //END PEXCEL
-
-        $this->isAuthentication();
-
-        $params['user_name'] = $this->current_user->user_name;
-        $params['user_id'] = $this->current_user->id;
 
         $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
 
@@ -109,22 +114,22 @@ class PndAdminController extends PndController
         $student_id = (int)$request->get('id');
 
         $specialists = $this->obj_specialists->pluck_select();
-        
+
         $specialists = (object)array_merge(['NULL'=>''],$specialists->toArray());
-         
-     
+
+
         $school_levels_3 =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
         //$school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3);
-      
+
             //var_dump($school_levels_3);
        //die();
         //$school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
       ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
-        
+
        $school_levels_specialist = (object)array_merge(['NULL'=>''],$this->obj_schools->pluck_select(['school_level_id'=>3])->toArray());
-       
-       
-       
+
+
+
         $districts = $this->obj_districts->pluck_select();
 
         if (!empty($student_id) && (is_int($student_id))) {
@@ -138,7 +143,7 @@ class PndAdminController extends PndController
             'student' => $student,
             'specialists' => $specialists,
             'school_levels_3' => $school_levels_3,
-            'school_levels_specialist' => $school_levels_specialist,            
+            'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
             'request' => $request,
         ));
@@ -262,19 +267,19 @@ class PndAdminController extends PndController
      */
     public function getSchoolByDistrict(Request $request)
     {
- 
+
         $input = $request->all();
         $input['school_level_id'] = 2;
         $schools = $this->obj_schools->pluck_select($input);
- 
+
         $html = null;
         if (!empty($schools)) {
             foreach ($schools as $key => $school) {
                 $selected = ($key == $request['school_current']) ? "selected" : "";
-                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>'; 
+                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>';
             }
         }
- 
+
         return $html;
     }
 
