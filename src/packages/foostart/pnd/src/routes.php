@@ -41,7 +41,7 @@ Route::group(['middleware' => ['web'], 'namespace'=>'Foostart\Pnd\Controllers\Us
          */
         Route::post('user/pnd/post', [
             'as' => 'user_pnd.post',
-            'uses' => 'PndUserController@post'
+            'uses' => 'UserController@post'
         ]);
 
         
@@ -228,22 +228,24 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
          /**
          *
          */
-        Route::get('/admin/category/list', [
-                'as'   => 'category.list',
-                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@getList'
+        Route::get('/users/category/list', [
+                'as'   => 'admin_pnd_category.list',
+                'uses' => 'PndCategoryUserController@getList'
         ]);
-        Route::get('/admin/category/edit', [
+        Route::get('/users/category/edit', [
                 'as'   => 'category.edit',
-                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@editPermission'
+                'uses' => 'PndCategoryUserController@edit'
         ]);
-        Route::post('/admin/category/edit', [
+        Route::post('/users/category/edit', [
                 'as'   => 'category.edit',
-                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@postEditPermission'
+                'uses' => 'PndCategoryUserController@post'
         ]);
-        Route::get('/admin/category/delete', [
+        Route::get('/users/category/delete', [
                 'as'   => 'category.delete',
-                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@deletePermission'
+                'uses' => 'PndCategoryUserControllerr@delete'
         ]);
 
+        
+        
     });
 });
