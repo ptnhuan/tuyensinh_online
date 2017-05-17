@@ -4,6 +4,9 @@ namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Foostart\Pnd\Models\PndUser;
+use Illuminate\Support\Facades\Hash;
+
 class Schools extends Model {
 
     protected $table = 'schools';
@@ -18,7 +21,7 @@ class Schools extends Model {
         'school_district_code',
         'school_level_id',
         'school_user',
-        'school_pass'      
+        'school_pass'
     ];
     protected $primaryKey = 'school_id';
 
@@ -51,7 +54,7 @@ class Schools extends Model {
         if (empty($school_id)) {
             $school_id = $input['school_id'];
         }
-        
+
         $school = self::find($school_id);
 
         if (!empty($school)) {
@@ -66,10 +69,25 @@ class Schools extends Model {
             $school->school_level_id = $input['school_level_id'];
             $school->user_id = $input['school_user'];
             $school->pass_id = $input['school_pass'];
-                          
-            
+
             $school->save();
- 
+
+            //Update user account
+            $obj_user = new PndUser();
+            $user = $obj_user->search_username($school->school_user);
+
+            if ($user) {
+                $user->user_name = $school->school_user;
+                $user->password = Hash::make($school->school_pass);
+                $user->save();
+            } else {
+                $user = [
+                    'email' => $school->school_email,
+                    'user_name' => $school->school_user,
+                    'password' => $school->school_pass,
+                ];
+                $obj_user->create_student($user);
+            }
             return $school;
         } else {
             return NULL;
@@ -97,22 +115,22 @@ class Schools extends Model {
 
         $school->school_user = $user_name;
         $school->school_pass = $user_name;
-      
-        
+
+
         $school->save();
     }
 
     public function add_school($input) {
 
         $school = $this->validRow($input);
- 
+
         $school = self::create($school);
 
         $school = $this->createAccount($school);
         return $school;
     }
 
-   
+
 
     public function delete_school($school_id) {
         $eloquent = self::where('school_id', $school_id)->delete();
@@ -146,7 +164,7 @@ class Schools extends Model {
     public function get_school_by_user_id($user_id = null) {
         $eloquent = self::where('user_id', $user_id)->first();
 
-        return $eloquent;                      
+        return $eloquent;
     }
 
     public function pluck_select($params = array()) {
@@ -154,15 +172,21 @@ class Schools extends Model {
 
         if(!empty($params['school_district_code'])){
             $eloquent = $eloquent->where('school_district_code',$params['school_district_code']);
-        } 
+        }
       if(!empty($params['school_choose_specialist'])){
             $eloquent = $eloquent->where('school_choose_specialist',$params['school_choose_specialist']);
-        } 
+        }
         $eloquent = $eloquent->where('school_level_id',$params['school_level_id']);
-    
+
         return $eloquent->pluck('school_name', 'school_code');
-        
-        
+
     }
- 
+
+     public function pluck_select1($params = array()) {
+        $eloquent = self::orderBy('school_name', 'ASC');
+
+        return $eloquent->pluck('school_name', 'school_code');
+
+    }
+
 }

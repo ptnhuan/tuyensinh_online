@@ -5419,3 +5419,17 @@
 127.0.0.1 - - [17/May/2017:20:32:15 +0700] "GET /css/bootstrap.min.css.map HTTP/1.1" 404 11933
 127.0.0.1 - - [17/May/2017:20:32:33 +0700] "GET /admin/groups/list HTTP/1.1" 200 9203
 127.0.0.1 - - [17/May/2017:20:32:35 +0700] "GET /admin/groups/edit?id=4 HTTP/1.1" 200 9746
+127.0.0.1 - - [17/May/2017:20:43:01 +0700] "GET /admin/groups/list HTTP/1.1" 200 9203
+127.0.0.1 - - [17/May/2017:20:43:02 +0700] "GET /admin/permissions/list HTTP/1.1" 200 11241
+127.0.0.1 - - [17/May/2017:20:43:14 +0700] "GET /admin/permissions/list HTTP/1.1" 200 11241
+127.0.0.1 - - [17/May/2017:20:43:18 +0700] "GET /admin/permissions/list HTTP/1.1" 200 11241
+127.0.0.1 - - [17/May/2017:20:43:19 +0700] "GET /admin/pexcel HTTP/1.1" 200 9718
+127.0.0.1 - - [17/May/2017:20:43:19 +0700] "GET /css/admin_tuyensinh.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2017:20:43:19 +0700] "GET /css/jquery-ui.1-12-1.css HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2017:20:43:19 +0700] "GET /js/jquery-ui.min.1-12-1.js HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2017:20:43:19 +0700] "GET /admin/pnd HTTP/1.1" 200 16480
+127.0.0.1 - - [17/May/2017:20:43:21 +0700] "GET /admin/pnd_school HTTP/1.1" 200 16832
+127.0.0.1 - - [17/May/2017:20:43:23 +0700] "GET /admin/pnd_school/edit?id=39 HTTP/1.1" 200 16257
+127.0.0.1 - - [17/May/2017:20:43:23 +0700] "GET /vendor/laravel-filemanager/js/lfm_pnd.js HTTP/1.1" 404 11933
+127.0.0.1 - - [17/May/2017:20:49:54 +0700] "GET /admin/pnd_school/edit?id=39 HTTP/1.1" 200 15471
+127.0.0.1 - - [17/May/2017:20:49:54 +0700] "GET /vendor/laravel-filemanager/js/lfm_pnd.js HTTP/1.1" 404 11933
