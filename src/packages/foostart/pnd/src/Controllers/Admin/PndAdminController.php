@@ -112,12 +112,12 @@ class PndAdminController extends PndController
         
         $specialists = (object)array_merge(['NULL'=>''],$specialists->toArray());
          
-         var_dump($specialists);
-       die();
+     
         $school_levels_3 =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
-        $school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3->toArray());
+        //$school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3);
       
-        
+            //var_dump($school_levels_3);
+       //die();
         //$school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
       ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
         
