@@ -221,5 +221,29 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
             'uses' => 'PndSpecialistAdminController@delete'
         ]);
 
+
+        /**********************************************************************
+         * USER CATEGORY
+         */
+         /**
+         *
+         */
+        Route::get('/admin/category/list', [
+                'as'   => 'category.list',
+                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@getList'
+        ]);
+        Route::get('/admin/category/edit', [
+                'as'   => 'category.edit',
+                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@editPermission'
+        ]);
+        Route::post('/admin/category/edit', [
+                'as'   => 'category.edit',
+                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@postEditPermission'
+        ]);
+        Route::get('/admin/category/delete', [
+                'as'   => 'category.delete',
+                'uses' => 'LaravelAcl\Authentication\Controllers\PermissionController@deletePermission'
+        ]);
+
     });
 });
