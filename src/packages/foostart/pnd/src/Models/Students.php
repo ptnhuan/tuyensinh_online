@@ -46,7 +46,9 @@ class Students extends Model
         'student_phone',
 
         'student_user',
-        'student_pass'
+        'student_pass',
+        'pexcel_id'
+
     ];
     protected $primaryKey = 'student_id';
 
@@ -182,6 +184,13 @@ class Students extends Model
 
         $student = $this->createAccount($student);
         return $student;
+    }
+
+    public function add_students($students, $pexcel_id) {
+
+        foreach ($students as $student) {
+            $this->add_student((array)$student, $pexcel_id);
+        }
     }
 
 

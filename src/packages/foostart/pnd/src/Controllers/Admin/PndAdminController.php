@@ -15,6 +15,8 @@ use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
 
+use Foostart\Pexcel\Models\Pexcel;
+
 /**
  * Validators
  */
@@ -29,6 +31,8 @@ class PndAdminController extends PndController
     private $obj_validator = NULL;
     private $obj_districts = null;
 
+    private $obj_pexcel = NULL;
+
     public function __construct()
     {
 
@@ -36,6 +40,8 @@ class PndAdminController extends PndController
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
+
+        $this->obj_pexcel = new Pexcel();
 
     }
 
@@ -46,6 +52,22 @@ class PndAdminController extends PndController
     public function index(Request $request)
     {
         $params = $request->all();
+
+        //PEXCEL
+        if(!empty($params['id'])) {
+            $pexcel = $this->obj_pexcel->find($params['id']);
+            $pexcel_status = config('pexcel.status');
+
+            $students = (array) json_decode($pexcel->pexcel_value);
+
+            if ($pexcel->pexcel_status == $pexcel_status['new']) {
+                $pexcel->pexcel_status = $pexcel_status['confirmed'];
+                $pexcel->save();
+
+                $this->obj_students->add_students($students, $pexcel->pexcel_id);
+            }
+        }
+        //END PEXCEL
 
         $this->isAuthentication();
 
@@ -225,8 +247,8 @@ class PndAdminController extends PndController
                 $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>';
                 var_dump($selected);
             }
-        } 
-      
+        }
+
         return $html;
     }
 
