@@ -123,7 +123,7 @@
                                         <div class="col-md-3">
                                             <!--INPUT-->
                                                                       
-                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
                                             'categories'=> !empty(@$districts) ? $districts  : array(),
                                             'category_id'=>@$student->school_district_code])
 
@@ -134,9 +134,9 @@
                                         <div class="col-md-6">
 
                                             <!--INPUT-->
-                                               @include('pnd::elements.pnd_select', ['name' => 'school_id',
+                                               @include('pnd::elements.pnd_select', ['name' => 'school_code',
                                                     'categories'=> !empty(@$schools) ? $schools  : array(),
-                                                    'category_id'=>@$student->school_id])
+                                                    'category_id'=>@$student->school_code])
                                                     
                                            
                                             <!--/END INPUT-->
@@ -431,9 +431,9 @@
         
         $('#lfm').filemanager('file');
 
-        get_school($('#school_district_id'));
+        get_school($('#school_district_code'));
         
-        $('#school_district_id').on('change',function(){
+        $('#school_district_code').on('change',function(){
             get_school($(this));
         });
     });
@@ -448,7 +448,7 @@
                     school_current: '<?php echo $student->school_code ?>'
                 },
                 success:function(result){ 
-                    $('#school_id').html(result);
+                    $('#school_code').html(result);
                 }
             });
     }
