@@ -7,7 +7,7 @@ use LaravelAcl\Authentication\Models\UserProfile as AclUserProfile;
 
 class PndUser extends AclUser {
 
-    public function create_student($student) {
+    public function create_user($student) {
 
         $user = [
             'email' => $student['student_user'].'@py.edu.vn',
@@ -28,6 +28,14 @@ class PndUser extends AclUser {
         foreach ($students as $student) {
             $this->create_student($student->toArray());
         }
+    }
+
+    public function search_user($params){
+        $user = NULL;
+        if (!empty($params['user_name'])) {
+            $user = self::where('user_name', $user_name)->first();
+        }
+        return $user;
     }
 
 }

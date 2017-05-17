@@ -56,11 +56,7 @@ class UserController extends PndController
      */
     public function index(Request $request)
     {
-
         $this->isAuthentication();
-
-        var_dump($this->current_user->id);
-        die();
 
         $params = $request->all();
          $params['user_name'] = $this->current_user->user_name;
