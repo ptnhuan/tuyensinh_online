@@ -59,7 +59,7 @@ class Students extends Model
      */
     public function get_students($params = array())
     {
-        $eloquent = self::orderBy('student_last_name', 'DESC');
+        $eloquent = self::orderBy('student_last_name', 'ASC');
 
         //By School
         if (!empty($params['school_code'])) {
@@ -151,9 +151,9 @@ class Students extends Model
             $student->student_conduct_8 = $input['student_conduct_8'];
              $student->student_capacity_9 = $input['student_capacity_9'];
             $student->student_conduct_9 = $input['student_conduct_9'];
-            
-            
-            
+
+
+
             $student->student_average = $input['student_average'];
             $student->student_average_1 = $input['student_average_1'];
             $student->student_average_2 = $input['student_average_2'];
@@ -169,7 +169,7 @@ class Students extends Model
             $student->student_phone = $input['student_phone'];
             $student->student_user = $input['student_user'];
             $student->student_pass = $input['student_pass'];
-            
+
 
 
             $student->save();
