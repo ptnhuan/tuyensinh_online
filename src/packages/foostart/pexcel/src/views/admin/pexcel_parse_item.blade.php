@@ -49,7 +49,7 @@
                     <th>Sinh ngày</th>
                     <th>Nơi sinh</th>                   
                     <th>Mã Trường THCS</th>
-                      <th>Mã huyện</th>
+                    <th>Mã huyện</th>
                     <th>Lớp</th>
                     <th>HL L6</th>
                     <th>HK L6</th>
@@ -94,7 +94,7 @@
                     <td>{!! @$student->student_sex !!}</td>
                     <td>{!! @$student->student_birth_day .' /'. @$student->student_birth_month .'/ '. @$student->student_birth_year!!}</td>
                     <td>{!! @$student->student_birth_place!!}</td>
-                    <td>{!! @$student->school_id!!}</td>
+                    <td>{!! @$student->school_code!!}</td>
                     <td>{!! @$student->school_district_code!!}</td>
                     <td>{!! @$student->student_class!!}</td>
                     <td>{!! @$student->student_capacity_6!!}</td>
@@ -112,7 +112,7 @@
                     <td>{!! @$student->student_score_prior!!}</td>
                     <td>{!! @$student->student_score_prior_comment!!}</td>
                     <td>{!! @$student->student_nominate!!}</td>
-                    <td>{!! @$student->school_id_option!!}</td>
+                    <td>{!! @$student->school_code_option!!}</td>
                     <td>{!! @$student->school_class_code!!}</td>
                     <td>{!! @$student->school_code_option_1!!}</td>
                     <td>{!! @$student->school_code_option_2!!}</td>
