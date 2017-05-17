@@ -249,4 +249,10 @@ class Students extends Model {
         return implode($user_name);
     }
 
+    public function get_student($params = []){
+        $eloquent = self::where('student_user',$params['user_name']);
+
+        return $eloquent->first();
+    }
+
 }

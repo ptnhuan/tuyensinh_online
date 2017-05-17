@@ -1,6 +1,6 @@
 <?php
 
-namespace Foostart\Pexcel\Controllers\User;
+namespace Foostart\Pnd\Controllers\User;
 
 use Illuminate\Http\Request;
 use Foostart\Pexcel\Controllers\User\UserController;
@@ -18,7 +18,7 @@ use Foostart\Slideshow\Models\Slideshows;
  */
 use Foostart\Pexcel\Validators\PexcelAdminValidator;
 
-class PexcelUserController extends UserController {
+class PndUserController extends UserController {
 
     private $obj_post = NULL;
     private $obj_post_categories = NULL;

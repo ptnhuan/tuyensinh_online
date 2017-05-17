@@ -14,7 +14,7 @@ Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], functi
 /**
  * USER
  */
-Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web'], 'namespace'=>'Foostart\Pnd\Controllers\User'], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
         ////////////////////////////////////////////////////////////////////////
@@ -44,58 +44,15 @@ Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], functi
             'uses' => 'PndUserController@post'
         ]);
 
+        
         /**
-         * delete
+         * view info
          */
-        Route::get('user/pnd/delete', [
-            'as' => 'user_pnd.delete',
-            'uses' => 'PndUserController@delete'
+        Route::get('user/student/view', [
+            'as' => 'user.student.view',
+            'uses' => 'UserController@index'
         ]);
-
-        /**
-         * like
-         */
-        Route::post('user/pnd/like', [
-            'as' => 'user_pnd.like',
-            'uses' => 'PndUserController@like'
-        ]);
-
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////POST ROUTE///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        Route::get('user/pnd_category', [
-            'as' => 'user_pnd_category',
-            'uses' => 'PndCategoryUserController@index'
-        ]);
-
-        /**
-         * edit-add
-         */
-        Route::get('user/pnd_category/edit', [
-            'as' => 'user_pnd_category.edit',
-            'uses' => 'PndCategoryUserController@edit'
-        ]);
-
-        /**
-         * pnd
-         */
-        Route::post('user/pnd_category/edit', [
-            'as' => 'user_pnd_category.post',
-            'uses' => 'PndCategoryUserController@post'
-        ]);
-        /**
-         * delete
-         */
-        Route::get('user/pnd_category/delete', [
-            'as' => 'user_pnd_category.delete',
-            'uses' => 'PndCategoryUserController@delete'
-        ]);
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
+ 
     });
 });
 
