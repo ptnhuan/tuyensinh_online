@@ -1,16 +1,16 @@
-@extends('laravel-authentication-acl::admin.layouts.base-1cols')
+@extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
     {!! trans('pnd::pnd.pnd_title') !!}
 @stop
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
              @if(!empty($student))
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title bariol-thin">
-                            {!! !empty($students->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
+                            {{trans('pnd::pnd.student_info')}}
                         </h3>
                     </div>
 
@@ -415,6 +415,7 @@
             @endif
 
         </div>
+        <div class="col-md-3"></div>
     </div>
 @stop
 
