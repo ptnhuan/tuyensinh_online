@@ -11,7 +11,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($students->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
+                        {!! !empty(@$students->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
                     </h3>
                 </div>
 
@@ -454,7 +454,7 @@
                 data:{
                     _token: '{{csrf_token()}}',
                     school_district_code: This.val(),
-                    school_current: '<?php echo $student->school_code ?>',
+                    school_current: '<?php echo @$student->school_code ?>',
                 },
                 success:function(result){ 
                     $('#school_code').html(result);
