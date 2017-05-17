@@ -48,14 +48,6 @@
                                 </li>
                                 <!--/END TAB HOME-->
 
-                                <!--TAB ATTRIBUTES-->
-                                <li>
-                                    <a data-toggle="tab" href="#attributes">
-                                        {!! trans('pnd::pnd.tab_attributes') !!}
-                                    </a>
-                                </li>
-                                <!--/END TAB ATTRIBUTES-->
-
                             </ul>
                             <!--/END QUICK TABS-->
 
@@ -105,7 +97,7 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <!--INPUT-->
-                                         
+
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_id',
                                                     'categories'=> !empty(@$districts) ? $districts  : array(),
                                                     'category_id'=>@$school->school_district_code])
@@ -134,15 +126,6 @@
 
                                 </div>
                                 <!--/END TAB OVERVIEW-->
-
-                                <!--TAB ATTRIBUTES-->
-                                <div id="attributes" class="tab-pane fade">
-                                    <!--SELECT-->
-                                    
-                                    <!--/END SELECT-->
-                                </div>
-                                <!--TAB ATTRIBUTES-->
-
 
                             </div>
 

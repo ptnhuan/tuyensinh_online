@@ -173,6 +173,36 @@ class Students extends Model {
             return NULL;
         }
     }
+    public function user_update_student($input, $student_id = NULL) {
+
+        if (empty($student_id)) {
+            $student_id = $input['student_id'];
+        }
+
+        $student = self::find($student_id);
+
+        if (!empty($student)) {
+
+            $student->student_first_name = $input['student_first_name'];
+            $student->student_last_name = $input['student_last_name'];
+            $student->student_sex = $input['student_sex'];
+            $student->student_birth_day = $input['student_birth_day'];
+            $student->student_birth_month = $input['student_birth_month'];
+            $student->student_birth_year = $input['student_birth_year']; 
+            $student->school_code_option = $input['school_code_option'];
+            $student->school_class_code = $input['school_class_code'];
+            $student->school_code_option_1 = $input['school_code_option_1'];
+            $student->school_code_option_2 = $input['school_code_option_2'];
+            $student->student_email = $input['student_email'];
+            $student->student_phone = $input['student_phone'];
+            
+            $student->save();
+
+            return $student;
+        } else {
+            return NULL;
+        }
+    }
 
     /**
      *

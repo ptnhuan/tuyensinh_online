@@ -30,6 +30,8 @@ return [
     'user_login' => 'ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH',
     'user_delete' => 'Xóa',
     'user_save' => 'Lưu',
+    'user_name' => 'Tên đăng nhập:',
+    'user_category' =>'Phân loại:',
     /***************************************************************************
      ***************************************************************************
      *************************LOGIN PAGE****************************************
@@ -42,11 +44,11 @@ return [
     'login_contact' => 'Phòng Khảo thí và Kiểm định CLGD',
     'login_phone' => 'Điện thoại:057.3842060',
     'login_email' => 'Thư điện tử: ktkdclgd@phuyen.edu.vn',
-    
+
     'login_contact_support' => 'HotLine: 01236907788(An Pha)-0918127300(Thế Vấn)',
-    
-    'login_user' => 'Tên đăng nhập',   
-    
+
+    'login_user' => 'Tên đăng nhập',
+
     'login_pass' => 'Mật khẩu',
     'login_login' => 'Đăng nhập',
 ];

@@ -41,7 +41,7 @@ Route::group(['middleware' => ['web'], 'namespace'=>'Foostart\Pnd\Controllers\Us
          */
         Route::post('user/pnd/post', [
             'as' => 'user_pnd.post',
-            'uses' => 'PndUserController@post'
+            'uses' => 'UserController@post'
         ]);
 
         

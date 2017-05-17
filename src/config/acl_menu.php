@@ -90,5 +90,15 @@ return [
             "permissions" => []
         ],
 
+        [
+            /*
+             * Route to edit the current user profile
+             */
+            "name" => "Thông tin",
+            "route" => "user.student.view",
+            "link" => '/user/student/view',
+            "permissions" => ['_student']
+        ],
+
     ]
 ];
