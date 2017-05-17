@@ -25,7 +25,7 @@ use Foostart\Pexcel\Models\Pexcel;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class UserController extends PndController
+class PndCategoryUserController extends PndController
 {
 
     private $obj_students = NULL;
