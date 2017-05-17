@@ -229,20 +229,20 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
          *
          */
         Route::get('/users/category/list', [
-                'as'   => 'admin_pnd_category.list',
-                'uses' => 'PndCategoryUserController@getList'
+                'as'   => 'admin_pnd_category_user',
+                'uses' => 'PndCategoryUserController@index'
         ]);
         Route::get('/users/category/edit', [
-                'as'   => 'category.edit',
+                'as'   => 'admin_pnd_category_user.edit',
                 'uses' => 'PndCategoryUserController@edit'
         ]);
         Route::post('/users/category/edit', [
-                'as'   => 'category.edit',
+                'as'   => 'admin_pnd_category_user.post',
                 'uses' => 'PndCategoryUserController@post'
         ]);
         Route::get('/users/category/delete', [
-                'as'   => 'category.delete',
-                'uses' => 'PndCategoryUserControllerr@delete'
+                'as'   => 'admin_pnd_category_user.delete',
+                'uses' => 'PndCategoryUserController@delete'
         ]);
 
         

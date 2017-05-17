@@ -16,7 +16,7 @@ Trang quản trị bài viết
                     <h3 class="panel-title bariol-thin">
                         <i class="fa fa-group"></i>
                         {!! $request->all() ?
-                            trans('pexcel::pexcel.pexcel_category_search') : trans('pexcel::pexcel.page_category')
+                            trans('pnd::pnd.pnd_category_search') : trans('pnd::pnd.page_category')
                         !!}
                     </h3>
                 </div>
@@ -35,13 +35,13 @@ Trang quản trị bài viết
                 @endif
                 <!--/END ERRORS-->
                 <div class="panel-body">
-                    @include('pexcel::admin.pexcel_category_item')
+                    @include('pnd::admin.pnd_category_user_item')
                 </div>
             </div>
         </div>
         <!--SAMPLE SEARCH-->
         <div class="col-md-4">
-            @include('pexcel::admin.pexcel_category_search')
+            @include('pnd::admin.pnd_category_user_search')
         </div>
         <!--/END SAMPLE SEARCH-->
     </div>
@@ -52,7 +52,7 @@ Trang quản trị bài viết
 <!-- DELETE CONFIRM -->
 <script>
     $(".delete").click(function () {
-        return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
+        return confirm("{{ trans('pnd::pnd.delete_confirm') }}");
     });
 </script>
 <!-- /END DELETE CONFIRM -->

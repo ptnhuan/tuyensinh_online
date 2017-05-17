@@ -192,7 +192,9 @@ class PndServiceProvider extends ServiceProvider {
         view()->composer([ 'laravel-authentication-acl::admin.user.edit',
                        'laravel-authentication-acl::admin.user.groups',
                        'laravel-authentication-acl::admin.user.list',
-                       'laravel-authentication-acl::admin.user.profile'], function ($view) {
+                       'laravel-authentication-acl::admin.user.profile',
+            'pnd::admin.*'
+            ], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
             $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
@@ -215,7 +217,7 @@ class PndServiceProvider extends ServiceProvider {
                  */
                 //list
                 trans('pnd::pnd.page_user_categories_list') => [
-                    'url' => URL::route('admin_pnd_category.list'),
+                    'url' => URL::route('admin_pnd_category_user'),
                     "icon" => '<i class="fa fa-users" aria-hidden="true"></i>'
                 ],
 

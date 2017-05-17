@@ -164,9 +164,14 @@ return [
     'student_user' =>"Tên đăng nhập",
         'student_pass' => "Mật khẩu",
     
+    
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    'user_categoy_name'=>'Tên',
+    
+    
+    
     'page_category_list' => 'Danh mục',
     'pnd_category_add_button' => 'Thêm danh mục mới',
     'add_specialist' => 'Thêm lớp chuyên',

@@ -1,14 +1,14 @@
 <!--ADD SAMPLE CATEGORY ITEM-->
 <div class="row margin-bottom-12">
     <div class="col-md-12">
-        <a href="{!! URL::route('admin_pnd_category.edit') !!}" class="btn btn-info pull-right">
+        <a href="{!! URL::route('admin_pnd_category_user.edit') !!}" class="btn btn-info pull-right">
             <i class="fa fa-plus"></i>{{trans('pnd::pnd.pnd_category_add_button')}}
         </a>
     </div>
 </div>
 <!--/END ADD SAMPLE CATEGORY ITEM-->
 
-@if( ! $pnds_categories->isEmpty() )
+@if( ! $categoryusers->isEmpty() )
 <table class="table table-hover">
     <thead>
         <tr>
@@ -31,10 +31,10 @@
     </thead>
     <tbody>
         <?php
-            $nav = $pnds_categories->toArray();
+            $nav = $categoryusers->toArray();
             $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
         ?>
-        @foreach($pnds_categories as $pnd_category)
+        @foreach($categoryusers as $pnd_category)
         <tr>
             <!--COUNTER-->
             <td>
@@ -44,7 +44,7 @@
 
             <!--SAMPLE CATEGORY ID-->
             <td>
-                {!! $pnd_category->pnd_category_name !!}
+                {!! $pnd_category->user_categoy_name !!}
             </td>
             <!--/END SAMPLE CATEGORY ID-->
 
@@ -56,10 +56,10 @@
 
             <!--OPERATOR-->
             <td>
-                <a href="{!! URL::route('admin_pnd_category.edit', ['id' => $pnd_category->pnd_category_id]) !!}">
+                <a href="{!! URL::route('admin_pnd_category_user.edit', ['id' => $pnd_category->user_categoy_id]) !!}">
                     <i class="fa fa-edit fa-2x"></i>
                 </a>
-                <a href="{!! URL::route('admin_pnd_category.delete',['id' =>  $pnd_category->pnd_user_category_id, '_token' => csrf_token()]) !!}"
+                <a href="{!! URL::route('admin_pnd_category_user.delete',['id' =>  $pnd_category->user_categoy_id, '_token' => csrf_token()]) !!}"
                    class="margin-left-5 delete">
                     <i class="fa fa-trash-o fa-2x"></i>
                 </a>
@@ -81,6 +81,6 @@
 @endif
 <!--SAMPLE PAGINATOR-->
 <div class="paginator">
-    {!! $pnds_categories->appends($request->except(['page']) )->render() !!}
+    {!! $categoryusers->appends($request->except(['page']) )->render() !!}
 </div>
 <!--/END SAMPLE PAGINATOR-->
