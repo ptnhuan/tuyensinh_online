@@ -25,7 +25,7 @@ use Foostart\Pexcel\Models\Pexcel;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndAdminController extends PndController
+class UserController extends PndController
 {
 
     private $obj_students = NULL;
@@ -58,6 +58,9 @@ class PndAdminController extends PndController
     {
 
         $this->isAuthentication();
+
+        var_dump($this->current_user->id);
+        die();
 
         $params = $request->all();
          $params['user_name'] = $this->current_user->user_name;
@@ -119,16 +122,14 @@ class PndAdminController extends PndController
 
 
         $school_levels_3 =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
-        $school_levels_3 =array('NULL' => '...') +$school_levels_3->toArray();
-        //   $school_levels_3 =array('NULL' => '...') + $this->obj_schools->pluck_select(['school_level_id'=>3]);
+        //$school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3);
 
-
-
+            //var_dump($school_levels_3);
+       //die();
         //$school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
       ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
-          $school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
-        $school_levels_specialist =array('NULL' => '...') +$school_levels_specialist->toArray();
 
+       $school_levels_specialist = (object)array_merge(['NULL'=>''],$this->obj_schools->pluck_select(['school_level_id'=>3])->toArray());
 
 
 
@@ -137,6 +138,7 @@ class PndAdminController extends PndController
         if (!empty($student_id) && (is_int($student_id))) {
 
             $student = $this->obj_students->find($student_id);
+
 
         }
 

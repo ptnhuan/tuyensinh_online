@@ -23,9 +23,9 @@ Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], functi
         /**
          * list
          */
-        Route::get('user/pnd', [
-            'as' => 'user_pnd',
-            'uses' => 'PndUserController@index'
+        Route::get('user/profile', [
+            'as' => 'user_profile',
+            'uses' => 'UserController@index'
         ]);
 
         /**
