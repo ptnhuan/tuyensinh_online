@@ -15,10 +15,9 @@ class PndUser extends AclUser {
             'password'=> $student['student_user'],
             'activated' => 1,
             'banned' => 0,
-            'permissions' => '{"_student":1}',
+            'permissions' => ['_student' => 1],
         ];
         $user = self::create($user);
-
         $obj_profile = new UserProfile();
         $obj_profile->create_student_profile($user, $student);
         return $user;
