@@ -18,7 +18,7 @@ class Students extends Model {
         'student_birth_year',
         'student_birth_place',
         'school_id',
-        'school_district_id',
+        'school_district_code',
         'student_class',
         'student_capacity_6',
         'student_conduct_6',

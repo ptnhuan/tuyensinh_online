@@ -47,8 +47,9 @@
                     <th>Họ và tên</th>
                     <th>Giới tính</th>
                     <th>Sinh ngày</th>
-                    <th>Nơi sinh</th>
+                    <th>Nơi sinh</th>                   
                     <th>Mã Trường THCS</th>
+                      <th>Mã huyện</th>
                     <th>Lớp</th>
                     <th>HL L6</th>
                     <th>HK L6</th>
@@ -94,6 +95,7 @@
                     <td>{!! @$student->student_birth_day .' /'. @$student->student_birth_month .'/ '. @$student->student_birth_year!!}</td>
                     <td>{!! @$student->student_birth_place!!}</td>
                     <td>{!! @$student->school_id!!}</td>
+                    <td>{!! @$student->school_district_code!!}</td>
                     <td>{!! @$student->student_class!!}</td>
                     <td>{!! @$student->student_capacity_6!!}</td>
                     <td>{!! @$student->student_conduct_6!!}</td>
