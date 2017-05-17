@@ -135,8 +135,41 @@ class Students extends Model
 
             $student->student_first_name = $input['student_first_name'];
             $student->student_last_name = $input['student_last_name'];
-
+            $student->student_sex = $input['student_sex'];
+            $student->student_birth_day = $input['student_birth_day'];
+            $student->student_birth_month = $input['student_birth_month'];
+            $student->student_birth_year = $input['student_birth_year'];
+            $student->student_birth_place = $input['student_birth_place'];
+            $student->school_district_code = $input['school_district_code'];
+            $student->school_code = $input['school_code'];
+            $student->student_class = $input['student_class'];
+            $student->student_capacity_6 = $input['student_capacity_6'];
+            $student->student_conduct_6 = $input['student_conduct_6'];
+             $student->student_capacity_7 = $input['student_capacity_7'];
+            $student->student_conduct_7 = $input['student_conduct_7'];
+             $student->student_capacity_8 = $input['student_capacity_8'];
+            $student->student_conduct_8 = $input['student_conduct_8'];
+             $student->student_capacity_9 = $input['student_capacity_9'];
+            $student->student_conduct_9 = $input['student_conduct_9'];
+            
+            
+            
+            $student->student_average = $input['student_average'];
+            $student->student_average_1 = $input['student_average_1'];
+            $student->student_average_2 = $input['student_average_2'];
+            $student->student_graduate = $input['student_graduate'];
+            $student->student_score_prior = $input['student_score_prior'];
+            $student->student_score_prior_comment = $input['student_score_prior_comment'];
+            $student->student_nominate = $input['student_nominate'];
+            $student->school_id_option = $input['school_id_option'];
+            $student->school_class_code = $input['school_class_code'];
+            $student->school_code_option_1 = $input['school_code_option_1'];
+            $student->school_code_option_2 = $input['school_code_option_2'];
             $student->student_email = $input['student_email'];
+            $student->student_phone = $input['student_phone'];
+            $student->student_user = $input['student_user'];
+            $student->student_pass = $input['student_pass'];
+            
 
 
             $student->save();

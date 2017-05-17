@@ -14,6 +14,8 @@ use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
+use Foostart\Pnd\Models\Specialists;
+
 
 use Foostart\Pexcel\Models\Pexcel;
 
@@ -30,6 +32,7 @@ class PndAdminController extends PndController
     private $obj_categories = NULL;
     private $obj_validator = NULL;
     private $obj_districts = null;
+    private $obj_specialists = null;
 
     private $obj_pexcel = NULL;
 
@@ -40,6 +43,7 @@ class PndAdminController extends PndController
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
+        $this->obj_specialists = new Specialists();
 
         $this->obj_pexcel = new Pexcel();
 
@@ -104,6 +108,10 @@ class PndAdminController extends PndController
         $student = NULL;
         $student_id = (int)$request->get('id');
 
+        $specialists = $this->obj_specialists->pluck_select();
+        
+        $specialists = (object)array_merge(['None'=>''],$specialists->toArray());
+         
         $districts = $this->obj_districts->pluck_select();
 
         if (!empty($student_id) && (is_int($student_id))) {
@@ -115,6 +123,7 @@ class PndAdminController extends PndController
 
         $this->data = array_merge($this->data, array(
             'student' => $student,
+            'specialists' => $specialists,
             'districts' => $districts,
             'request' => $request,
         ));
@@ -238,17 +247,17 @@ class PndAdminController extends PndController
      */
     public function getSchoolByDistrict(Request $request)
     {
+     
         $schools = $this->obj_schools->pluck_select($request->all());
-
+ 
         $html = null;
         if (!empty($schools)) {
             foreach ($schools as $key => $school) {
                 $selected = ($key == $request['school_current']) ? "selected" : "";
-                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>';
-                var_dump($selected);
+                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>'; 
             }
         }
-
+ 
         return $html;
     }
 

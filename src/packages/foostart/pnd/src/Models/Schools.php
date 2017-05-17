@@ -155,9 +155,9 @@ class Schools extends Model {
         if(!empty($params['school_district_code'])){
             $eloquent = $eloquent->where('school_district_code',$params['school_district_code']);
         } 
-
+      
         $eloquent = $eloquent->where('school_level_id',2);
- 
+    
         return $eloquent->pluck('school_name', 'school_code');
         
         
