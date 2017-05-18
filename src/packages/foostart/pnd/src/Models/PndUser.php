@@ -10,7 +10,7 @@ class PndUser extends AclUser {
     public function create_student($student) {
 
         $user = [
-            'email' => $student['student_user'].'@py.edu.vn',
+            'email' => $student['student_user'].'@phuyen.edu.vn',
             'user_name' => $student['student_user'],
             'password'=> $student['student_user'],
             'activated' => 1,
