@@ -92,7 +92,7 @@ class PndAdminController extends PndController {
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
         $this->data = array_merge($this->data, array(
-            'students' => $students,
+            'students' => !empty($students)?$students:'',
             'categories' => $categories,
             'request' => $request,
             'params' => $params
