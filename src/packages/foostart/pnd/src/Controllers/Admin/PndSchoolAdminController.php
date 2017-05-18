@@ -95,8 +95,8 @@ class PndSchoolAdminController extends PndController
         $this->obj_validator = new PndSchoolAdminValidator();
 
         $input = $request->all();
-
-        $input['user_id'] = $this->current_user->id;
+     
+        //$input['user_id'] = $this->current_user->id;
 
         $school_id = (int)$request->get('id');
 
@@ -145,7 +145,7 @@ class PndSchoolAdminController extends PndController
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
 
-                    return Redirect::route("admin_pnd.parse", ["id" => $schools->pnd_id]);
+                  //  return Redirect::route("admin_pnd.parse", ["id" => $schools->pnd_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
 

@@ -27,10 +27,10 @@ class PndUser extends AclUser {
     public function update_user($user, $teacher) {
          switch ($teacher->school_level_id) {
             case 2:
-                $user->permissions = ['_mod-2' => 1];
+                $user->permissions = ["_mod-2" => 1,"_my-pexcel"=>1];
                 break;
             case 3:
-                 $user->permissions = ['_mod-3' => 1];
+                 $user->permissions = ["_mod-3" => 1];
         }
         $user->email = $teacher->school_email;
         $user->user_name = $teacher->user_id;
@@ -47,14 +47,14 @@ class PndUser extends AclUser {
             'password'=> $teacher->pass_id,
             'activated' => 1,
             'banned' => 0,
-            'permissions' => '{"_mod-2":1}',
+            'permissions' => ["_mod-2"=>1],
         ];
         switch ($teacher['school_level_id']) {
             case 2:
-                $user['permissions'] = '{"_mod-2":1}';
+                $user['permissions'] = ["_mod-2"=>1,"_my-pexcel"=>1];
                 break;
             case 3:
-                 $user['permissions'] = '{"_mod-3":1}';
+                 $user['permissions'] = ["_mod-3"=>1];
         }
         $user = self::create($user);
 

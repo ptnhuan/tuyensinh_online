@@ -20,8 +20,8 @@ class Schools extends Model {
         'school_contact',
         'school_district_code',
         'school_level_id',
-        'school_user',
-        'school_pass'
+        'user_id',
+        'pass_id'
     ];
     protected $primaryKey = 'school_id';
 
@@ -65,10 +65,10 @@ class Schools extends Model {
             $school->school_phone = $input['school_phone'];
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];
-            $school->school_district_code = $input['school_district_id'];
+            $school->school_district_code = $input['school_district_code'];
             $school->school_level_id = $input['school_level_id'];
-            $school->user_id = $input['school_user'];
-            $school->pass_id = $input['school_pass'];
+            $school->user_id = $input['user_id'];
+            $school->pass_id = $input['pass_id'];
 
             $school->save();
 
@@ -79,6 +79,7 @@ class Schools extends Model {
             if ($user) {
                 $obj_user->update_user($user, $school);
             } else {
+                              
                 $obj_user->create_user($school);
             }
             return $school;
@@ -106,8 +107,8 @@ class Schools extends Model {
 
         $user_name = $this->generateAccount($school->school_id, $school->school_code);
 
-        $school->school_user = $user_name;
-        $school->school_pass = $user_name;
+        $school->user_id = $user_name;
+        $school->pass_id = $user_name;
 
 
         $school->save();
@@ -116,10 +117,22 @@ class Schools extends Model {
     public function add_school($input) {
 
         $school = $this->validRow($input);
-
+ 
         $school = self::create($school);
-
-        $school = $this->createAccount($school);
+              // $school = $this->createAccount($school);
+       
+         //Update user account
+            $obj_user = new PndUser();
+            $user = $obj_user->search_user(['user_name' => $school->user_id]);
+            if ($user) {
+                $obj_user->update_user($user, $school);
+            } else {
+                              
+                $obj_user->create_user($school);
+            }
+            return $school;
+        
+        
         return $school;
     }
 
