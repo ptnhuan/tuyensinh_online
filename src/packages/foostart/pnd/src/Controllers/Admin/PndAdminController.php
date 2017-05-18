@@ -68,13 +68,13 @@ class PndAdminController extends PndController {
                     $students = (array) json_decode($pexcel->pexcel_value);
 
                     $pexcel->pexcel_status = $pexcel_status['confirmed'];
-//                    $pexcel->save();
-                    //$this->obj_students->add_students($students, $pexcel->pexcel_id);
+                    $pexcel->save();
+                    $this->obj_students->add_students($students, $pexcel->pexcel_id);
 
                     $user = new PndUser();
                     $students = $this->obj_students->get_students($params);
 
-                   // $user->create_students($students);
+                    $user->create_students($students);
                 }
             }
         } else {

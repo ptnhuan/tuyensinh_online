@@ -17,12 +17,15 @@ class PndUser extends AclUser {
             'banned' => 0,
             'permissions' => ['_student' => 1],
         ];
+
+        $find = self::where('user_name', $user['user_name'])->first();
+        if ($find) return;
         $user = self::create($user);
         $obj_profile = new UserProfile();
         $obj_profile->create_student_profile($user, $student);
         return $user;
     }
-            
+
     public function update_user($user, $teacher) {
          switch ($teacher->school_level_id) {
             case 2:

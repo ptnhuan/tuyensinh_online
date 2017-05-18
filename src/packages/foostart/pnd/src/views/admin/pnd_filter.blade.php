@@ -13,16 +13,6 @@
             <!--KEYWORD-->
             @include ('pnd::elements.input',['name'=>'keyword', 'value' => $request->get('keyword')])
 
-            <!--CATEGORY NAME-->
-            <?php
-                $categories = !empty(@$categories) ? $categories : array();
-                $category_id = $request->get('category_id') ? $request->get('category_id') : @$student->pexcel_category_id
-            ?>
-
-            @include('pnd::elements.pnd_select', ['name' => 'pexcel_category_id',
-                                                    'categories'=> !empty(@$categories) ? $categories  : array(),
-                                                    'category_id'=>@$category_id])
-
             <div class="row">
                 <div class="col-md-6">
                     <!--SCHOOL OPTION-->
