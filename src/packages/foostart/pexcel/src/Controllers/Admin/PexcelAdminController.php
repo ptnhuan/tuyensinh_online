@@ -42,7 +42,8 @@ class PexcelAdminController extends PexcelController {
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-        
+        $params['permissions'] = $this->current_user->permissions;
+
         $pexcels = $this->obj_pexcel->get_pexcels($params);
 
         $this->data = array_merge($this->data, array(

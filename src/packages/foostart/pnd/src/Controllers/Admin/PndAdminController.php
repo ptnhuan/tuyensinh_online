@@ -22,7 +22,8 @@ use Foostart\Pexcel\Models\Pexcel;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndAdminController extends PndController {
+class PndAdminController extends PndController
+{
 
     private $obj_students = NULL;
     private $obj_schools = NULL;
@@ -32,7 +33,8 @@ class PndAdminController extends PndController {
     private $obj_specialists = null;
     private $obj_pexcel = NULL;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
@@ -47,13 +49,15 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $this->isAuthentication();
 
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
+        $params['permissions'] = $this->current_user->permissions;
 
         //PEXCEL
         if (!empty($params['id'])) {
@@ -65,7 +69,7 @@ class PndAdminController extends PndController {
 
                 if ($pexcel->pexcel_status == $pexcel_status['new']) {
 
-                    $students = (array) json_decode($pexcel->pexcel_value);
+                    $students = (array)json_decode($pexcel->pexcel_value);
 
                     $pexcel->pexcel_status = $pexcel_status['confirmed'];
                     $pexcel->save();
@@ -78,7 +82,7 @@ class PndAdminController extends PndController {
                 }
             }
         } else {
-           $students = $this->obj_students->get_all_students($params);
+            $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
 
@@ -92,7 +96,7 @@ class PndAdminController extends PndController {
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
         $this->data = array_merge($this->data, array(
-            'students' => !empty($students)?$students:'',
+            'students' => !empty($students) ? $students : '',
             'categories' => $categories,
             'request' => $request,
             'params' => $params
@@ -104,14 +108,15 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
 
         $student = NULL;
-        $student_id = (int) $request->get('id');
+        $student_id = (int)$request->get('id');
 
         $specialists = $this->obj_specialists->pluck_select();
 
-        $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
+        $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
 
 
         $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
@@ -120,8 +125,6 @@ class PndAdminController extends PndController {
 
         $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
         $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
-
-
 
 
         $districts = $this->obj_districts->pluck_select();
@@ -148,7 +151,8 @@ class PndAdminController extends PndController {
      * @param Request $request
      * @return type
      */
-    public function post(Request $request) {
+    public function post(Request $request)
+    {
 
         $this->isAuthentication();
 
@@ -158,7 +162,7 @@ class PndAdminController extends PndController {
 
         $input['user_id'] = $this->current_user->id;
 
-        $student_id = (int) $request->get('id');
+        $student_id = (int)$request->get('id');
 
         $student = NULL;
 
@@ -217,7 +221,7 @@ class PndAdminController extends PndController {
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
-                ), $data);
+        ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
     }
@@ -226,7 +230,8 @@ class PndAdminController extends PndController {
      *
      * @return type
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
 
         $student = NULL;
         $student_id = $request->get('id');
@@ -255,7 +260,8 @@ class PndAdminController extends PndController {
      * Get school by district
      */
 
-    public function getSchoolByDistrict(Request $request) {
+    public function getSchoolByDistrict(Request $request)
+    {
 
         $input = $request->all();
         $input['school_level_id'] = 2;

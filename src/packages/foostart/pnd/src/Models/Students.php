@@ -61,40 +61,56 @@ class Students extends Model {
 
         $students = NULL;
 
-        $obj_pexcel = new Pexcel();
-        $obj_pexcel_category = new PexcelCategories();
+        if(!empty($params['permissions'])) {
 
-        $categories = $obj_pexcel_category->get_available_categories();
+            $obj_pexcel = new Pexcel();
+            $obj_pexcel_category = new PexcelCategories();
 
-        if ($categories) {
-            $category_ids = [];
-            foreach ($categories as $category) {
-                $category_ids[] = $category->pexcel_category_id;
-            }
+            $categories = $obj_pexcel_category->get_available_categories();
 
-            //id is pexcel_id
-            $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
-
-            if ($pexcels) {
-                $pexcel_ids = [];
-                foreach ($pexcels as $pexcel) {
-                    $pexcel_ids[] = $pexcel->pexcel_id;
+            if ($categories) {
+                $category_ids = [];
+                foreach ($categories as $category) {
+                    $category_ids[] = $category->pexcel_category_id;
                 }
 
-                if ($pexcel_ids) {
-                    $eloquent = self::orderBy('student_last_name', 'ASC')
-                                ->whereIn('pexcel_id', $pexcel_ids);
 
-                    if (!empty($params['keyword'])) {
-                        $eloquent->where('student_first_name', 'like', '%'.$params['keyword'].'%');
-                        $eloquent->orwhere('student_last_name', 'like', '%'.$params['keyword'].'%');
+                //id is pexcel_id
+                $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
+
+                if ($pexcels) {
+                    $pexcel_ids = [];
+                    foreach ($pexcels as $pexcel) {
+                        $pexcel_ids[] = $pexcel->pexcel_id;
                     }
 
-                    $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                    if ($pexcel_ids) {
+                        $eloquent = self::orderBy('student_last_name', 'ASC')
+                            ->whereIn('pexcel_id', $pexcel_ids);
+
+                        if (!empty($params['keyword'])) {
+                            $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
+                            $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                        }
+
+                        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                        return $students;
+                    }
                 }
             }
         }
+        
+        $eloquent = self::orderBy('student_last_name', 'ASC');
+
+        //SEARCH BY SCHOOL
+        if (!empty($params['school_code'])) {
+
+            $eloquent = $eloquent->where('school_code', $params['school_code']);
+        }
+        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+        
         return $students;
+
 
     }
     public function get_students($params = array()) {

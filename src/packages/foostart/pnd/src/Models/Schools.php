@@ -36,13 +36,16 @@ class Schools extends Model {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         //pexcel_name
-        if (!empty($params['pexcel_id'])) {
-            $eloquent->where('pexcel_id', $params['pexcel_id']);
+
+        if(!empty($params['permissions'])) {
+            if (!empty($params['pexcel_id'])) {
+                $eloquent->where('pexcel_id', $params['pexcel_id']);
+            }
         }
-
-        $pexcels = $eloquent->paginate(config('pexcel.per_page'));
-
-        return $pexcels;
+        
+        $schools = $eloquent->paginate(config('pexcel.per_page'));
+        
+        return $schools;
     }
 
     /**
