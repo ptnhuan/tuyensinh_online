@@ -75,12 +75,15 @@ class PexcelCategories extends Model {
      * @return type
      */
     public function pluckSelect($category_id = NULL) {
+        $status_category = config('pexcel.status_category_lable');
         if ($category_id) {
             $categories = self::where('pexcel_category_id', '!=', $category_id)
-                    ->orderBy('pexcel_category_name', 'ASC')
+                    ->where('pexcel_status', $status_category['available'])
+                    ->orderBy('pexcel_category_name', 'DESC')
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         } else {
-            $categories = self::orderBy('pexcel_category_name', 'ASC')
+            $categories = self::orderBy('pexcel_category_name', 'DESC')
+                    ->where('pexcel_status', $status_category['available'])
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         }
         return $categories;

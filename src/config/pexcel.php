@@ -24,9 +24,17 @@ return [
         22 => 'Đã xóa',
         33 => 'Đã xác nhận'
     ],
+    'status_category_lable' =>[
+        'available' => 99,
+        'blocked' => 77,
+    ],
+    'status_category' => [
+        99  => 'Sẵn sàng',
+        77  => 'Đã khóa'
+    ],
     /**
      * SAVE TO TABLE
-     * STATUS 
+     * STATUS
      */
     'save_to_table' => 'school_students',
     /**
