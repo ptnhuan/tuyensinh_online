@@ -22,7 +22,7 @@ return [
     /**
      * Form
      */
-    'form_heading' => 'Nội dung Tập tin',
+    'form_heading' => 'Tạo khóa học mới',
     'form_add' => 'Tạo Tập tin mới',
     'form_edit' => 'Cập nhật Tập tin',
     'name' => 'Tiêu đề Tập tin',
@@ -34,10 +34,11 @@ return [
     'pexcel_description' => 'Nội dung Tập tin',
     'pexcel_name_label' => 'Từ khóa:',
     'pexcel_name_placeholder' => 'Từ khóa',
-    'pexcel_category_name'=> 'Từ khóa',
+    'pexcel_category_name'=> 'Năm học',
     'pexcel_image_choose' => 'Chọn Tập tin',
     'pexcel_item_file' => 'File',
     'slideshow_name' => 'Slideshow',
+    'pexcel_category_name' => 'Năm học',
 
     /**
      * Message
@@ -91,5 +92,7 @@ return [
     'pexcel_category_new' => 'Thêm danh mục',
     'pexcel_category_update' => 'Cập nhật danh mục',
     'length_category_name' => 'Chiều dài tiêu đề không hợp lệ. Yêu cầu từ <b>:LENGTH_CATEGORY_NAME_MIN</b> tới <b>:LENGTH_CATEGORY_NAME_MAX</b> ký tự',
+
+    'pexcel_category_status' => 'Trạng thái',
 
 ];

@@ -102,9 +102,9 @@
                                          <div class="col-md-4">
                                              <!--INPUT-->
                                            
-                                             @include('pnd::elements.pnd_select', ['name' => 'school_level_id',
-                                             'categories'=> [0=>'',1=>'Cấp 1',2=>'Cấp 2',3=>'Cấp 3'],
-                                             'category_id'=> @$student->school_level_id])
+
+   @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
+
 
                                              <!--/END INPUT-->
                                          </div>
@@ -126,7 +126,7 @@
                                             <!--/END INPUT-->
                                         </div>
                                     </div>
-                                   
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             <!--INPUT-->

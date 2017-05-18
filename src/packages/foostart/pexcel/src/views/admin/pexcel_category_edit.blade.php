@@ -45,7 +45,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
 
                             <!-- POST CATEGORY LIST -->
                             <div class="form-group">
-                                <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : $pexcel_category->pexcel_category_status ?>
+                                <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : @$pexcel_category->pexcel_category_status ?>
 
                                 {!! Form::label('pexcel_category_status', trans('pexcel::pexcel.pexcel_category_status').':') !!}
 
