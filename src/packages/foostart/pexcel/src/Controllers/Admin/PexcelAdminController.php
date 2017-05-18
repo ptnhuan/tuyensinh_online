@@ -36,9 +36,13 @@ class PexcelAdminController extends PexcelController {
      * @return type
      */
     public function index(Request $request) {
+ 
+        $this->isAuthentication();
 
         $params = $request->all();
-
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        
         $pexcels = $this->obj_pexcel->get_pexcels($params);
 
         $this->data = array_merge($this->data, array(
