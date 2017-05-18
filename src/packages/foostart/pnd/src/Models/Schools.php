@@ -71,8 +71,7 @@ class Schools extends Model {
             $school->pass_id = $input['pass_id'];
 
             $school->save();
-
-
+           
             //Update user account
             $obj_user = new PndUser();
             $user = $obj_user->search_user(['user_name' => $school->user_id]);

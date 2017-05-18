@@ -87,7 +87,7 @@ return [
             "name" => "Hiển thị",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => ['_mod-2']
+            "permissions" => []
         ],
 
         [

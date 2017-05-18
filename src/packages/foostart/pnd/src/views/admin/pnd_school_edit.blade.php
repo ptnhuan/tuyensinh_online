@@ -58,7 +58,7 @@
                                 <div id="home" class="tab-pane fade in active">
 
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
                                             <!--/END INPUT-->
@@ -69,7 +69,7 @@
                                             <!--/END INPUT-->
 
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
 
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_address','value'=> @$school->school_address])
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="row">
                                         <!--INPUT-->
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
 
                                             @include('pnd::elements.pnd_input', ['name' => 'school_phone','value'=> @$school->school_phone])
                                             <!--/END INPUT-->
@@ -88,14 +88,27 @@
                                             @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
                                             <!--/END INPUT-->
                                         </div>
-                                        <div class="col-md-5">
+                                      
+                                    </div>
+                                     <div class="row">
+                                           <div class="col-md-4">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
                                             <!--/END INPUT-->
                                         </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_phone','value'=> @$school->school_contact_phone])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_email','value'=> @$school->school_contact_email])
+                                            <!--/END INPUT-->
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <!--INPUT-->
 
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
@@ -105,7 +118,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
+                                                  @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
+                                                
+                                            
                                             <!--/END INPUT-->
                                         </div>
                                     </div>
