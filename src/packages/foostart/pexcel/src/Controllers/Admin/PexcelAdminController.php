@@ -115,7 +115,6 @@ class PexcelAdminController extends PexcelController {
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
 
                     return Redirect::route("admin_pexcel.parse", ["id" => $pexcel->pexcel_id]);
-                    //return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
                 } else {
 
                     //Message
@@ -189,9 +188,14 @@ class PexcelAdminController extends PexcelController {
         $pexcel_id = $request->get('id');
         $pexcel = $this->obj_pexcel->find($pexcel_id);
 
+        $pexcel_category = $this->obj_pexcel_categories->find($pexcel_id);
+
+        $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
+
         $students = $obj_parse->get_students($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
+        unset($pexcel->pexcel_category_name);
         $pexcel->save();
 
         /**

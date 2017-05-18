@@ -48,7 +48,8 @@ class Parse {
 
     private function mapData($fields, $value, $pexcel) {
         $data = array(
-            'pexcel_id' => $pexcel->pexcel_id
+            'pexcel_id' => $pexcel->pexcel_id,
+            'category_name' => $pexcel->pexcel_category_name,
         );
 
         foreach ($fields as $key => $index) {

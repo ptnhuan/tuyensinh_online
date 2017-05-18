@@ -44,7 +44,8 @@ class Students extends Model {
         'student_phone',
         'student_user',
         'student_pass',
-        'pexcel_id'
+        'pexcel_id',
+        'category_name'
     ];
     protected $primaryKey = 'student_id';
 
@@ -188,14 +189,14 @@ class Students extends Model {
             $student->student_sex = $input['student_sex'];
             $student->student_birth_day = $input['student_birth_day'];
             $student->student_birth_month = $input['student_birth_month'];
-            $student->student_birth_year = $input['student_birth_year']; 
+            $student->student_birth_year = $input['student_birth_year'];
             $student->school_code_option = $input['school_code_option'];
             $student->school_class_code = $input['school_class_code'];
             $student->school_code_option_1 = $input['school_code_option_1'];
             $student->school_code_option_2 = $input['school_code_option_2'];
             $student->student_email = $input['student_email'];
             $student->student_phone = $input['student_phone'];
-            
+
             $student->save();
 
             return $student;

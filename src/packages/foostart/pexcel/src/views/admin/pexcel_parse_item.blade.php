@@ -47,7 +47,7 @@
                     <th>Họ và tên</th>
                     <th>Giới tính</th>
                     <th>Sinh ngày</th>
-                    <th>Nơi sinh</th>                   
+                    <th>Nơi sinh</th>
                     <th>Mã Trường THCS</th>
                     <th>Mã huyện</th>
                     <th>Lớp</th>
@@ -158,7 +158,7 @@
 
 @section('sub_page_scripts')
     <script type='text/javascript'>
-        $('.table-data').width(28 * 87);
+        $('.table-data').width(29 * 87);
 
         $(".delete").click(function () {
             return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
