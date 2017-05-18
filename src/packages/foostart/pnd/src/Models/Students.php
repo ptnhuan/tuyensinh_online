@@ -55,11 +55,19 @@ class Students extends Model {
      * @return type
      */
     public function get_students($params = array()) {
-        $eloquent = self::orderBy('student_last_name', 'DESC');
 
-        //By School
+
+        $eloquent = self::orderBy('student_last_name', 'ASC');
+
+        //PEXCEL
+        if (!empty($params['id'])) {
+            $eloquent->where('pexcel_id', $params['id']);
+        }
+
+        //SEARCH BY SCHOOL
         if (!empty($params['school_code'])) {
             $eloquent = $eloquent->where('school_code', $params['school_code']);
+
             if (intval(@$params['school_option']) == 1) {
                 if (!empty($params['school_code_option']))
                     $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
@@ -77,8 +85,6 @@ class Students extends Model {
             }
         }
 
-
-
         //SEARCH BY NAME OR EMAIL
         if (!empty($params['search_student'])) {
 
@@ -88,28 +94,7 @@ class Students extends Model {
             });
         }
 
-
-        //By Categories
-        $eloquent = $eloquent->join('pexcel', function ($join) use ($params) {
-                    $join->on('pexcel.pexcel_id', 'school_students.pexcel_id')
-                            ->where('pexcel.user_id', $params['user_id']);
-                })->leftjoin('pexcel_categories', function ($join) use ($params) {
-            $join->on('pexcel.pexcel_category_id', 'pexcel_categories.pexcel_category_id')
-                    ->where('pexcel_categories.user_id', $params['user_id']);
-        });
-
-        if (!empty(@$params['pexcel_category_id'])) {
-            $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $params['pexcel_category_id']);
-        } else {
-            $eloquent = $eloquent->where('pexcel_categories.pexcel_category_id', $eloquent->max('pexcel_categories.pexcel_category_id'));
-        }
-
-        //pexcel_name
-        if (!empty($params['pexcel_id'])) {
-            $eloquent = $eloquent->where('pexcel_id', $params['pexcel_id']);
-        }
-
-        return $eloquent->paginate(config('buoumau.user_pexcel_per_page'));
+        return $eloquent->paginate(config('pexcel.per_page'));
     }
 
     /**
