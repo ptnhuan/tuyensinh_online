@@ -20,8 +20,9 @@ return [
     'page_search_districts' => 'Tìm kiếm thông tin huyện',
     'page_search_schools' => 'Tìm kiếm thông tin trường học',
     'page_school_search' => 'Tìm kiếm thông tin trường',
-    'page_category' => 'Danh mục file',
+    'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
+    'page_examine_list' => 'Tính điểm xét tuyển',
     'page_district_list' => 'Danh sách huyện',
     'page_district_search' => 'Tìm kiếm thông tin huyện',
     'page_specialist_list' => 'Danh sách lớp chuyên',
@@ -89,6 +90,7 @@ return [
     'tab_info_other'=>'Thông tin',
     'student_info'=>'Thông tin học sinh',
     'filter' => 'Lọc',
+     'filter_examine' => 'Tính điểm xét tuyển',
     /**
      * Message
      */
