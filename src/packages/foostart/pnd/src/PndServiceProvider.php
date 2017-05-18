@@ -193,7 +193,7 @@ class PndServiceProvider extends ServiceProvider {
                        'laravel-authentication-acl::admin.user.groups',
                        'laravel-authentication-acl::admin.user.list',
                        'laravel-authentication-acl::admin.user.profile',
-            'pnd::admin.*'
+            'pnd::admin.users*'
             ], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
