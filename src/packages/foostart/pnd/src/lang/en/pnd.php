@@ -67,7 +67,7 @@ return [
     'school_district_title' => 'Quản lý thông tin huyện',
     'school_district_id' => 'Huyện',
     'school_district_code' => 'Mã huyện',
-    
+
     'school_district_name' => 'Tên huyện',
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
@@ -80,9 +80,9 @@ return [
     'student_phone' => 'Điện thoại',
     'student_email' => 'Thư điện tử',
     'student_date' => 'Sinh ngày',
-  
+
     'student_name' => 'Họ và tên',
-  
+
     'page_categories' => 'Tìm kiếm thông tin học sinh',
     'pnd_categories_label' => 'Danh mục',
     'filter' => 'Lọc',
@@ -114,11 +114,12 @@ return [
     'pnd_item_created' => 'Ngày gửi',
     'pnd_item_title' => 'Tiêu đề',
     'pnd' => 'Quản lý file',
-    
+
      ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////STUDENTS///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
-    
+    'keyword' => 'Từ khóa',
+
      'student_first_name' => "Họ học sinh",
     'student_last_name' => "Tên học sinh",
     'student_sex' => "Giới tính",
@@ -165,15 +166,15 @@ return [
         'student_phone' => "Số điện thoại",
     'student_user' =>"Tên đăng nhập",
         'student_pass' => "Mật khẩu",
-    
-    
+
+
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     'user_categoy_name'=>'Tên',
-    
-    
-    
+
+
+
     'page_category_list' => 'Danh mục',
     'pnd_category_add_button' => 'Thêm danh mục mới',
     'add_specialist' => 'Thêm lớp chuyên',
@@ -186,9 +187,9 @@ return [
     'pnd_category_new' => 'Thêm danh mục',
     'pnd_category_update' => 'Cập nhật danh mục',
     'length_category_name' => 'Chiều dài tiêu đề không hợp lệ. Yêu cầu từ <b>:LENGTH_CATEGORY_NAME_MIN</b> tới <b>:LENGTH_CATEGORY_NAME_MAX</b> ký tự',
-    
-    
-    
-    
-    
+
+
+
+
+
 ];

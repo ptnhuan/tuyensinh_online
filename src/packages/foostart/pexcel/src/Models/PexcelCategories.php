@@ -17,6 +17,15 @@ class PexcelCategories extends Model {
     ];
     protected $primaryKey = 'pexcel_category_id';
 
+    public function get_available_categories() {
+        $status_category = config('pexcel.status_category_lable');
+
+        $categories = self::orderBy('pexcel_category_name', 'ASC')
+                    ->where('pexcel_category_status', $status_category['available'])->get();
+
+        return $categories;
+    }
+
     public function get_pexcels_categories($params = array()) {
         $eloquent = self::orderBy('pexcel_category_id');
 
@@ -104,9 +113,9 @@ class PexcelCategories extends Model {
         return $categories;
     }
 
-     public function get_pexcels_categories_byuserid($params = array(),$user_id) {
+    public function get_pexcels_categories_byuserid($params = array(), $user_id) {
         $eloquent = self::where('user_id', $user_id)
-                        ->orderby('pexcel_category_name');
+                ->orderby('pexcel_category_name');
 
         if (!empty($params['pexcel_category_name'])) {
             $eloquent->where('pexcel_category_name', 'like', '%' . $params['pexcel_category_name'] . '%');

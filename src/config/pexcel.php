@@ -5,6 +5,7 @@ return [
      * NUMBERS
      */
     'per_page' => 10,
+    'per_page_students' => 50,
     'account_max_length' => 7,
     /**
      * VALIDATORS

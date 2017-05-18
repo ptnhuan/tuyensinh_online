@@ -69,14 +69,16 @@ class PndAdminController extends PndController {
 
                     $pexcel->pexcel_status = $pexcel_status['confirmed'];
 //                    $pexcel->save();
-                    $this->obj_students->add_students($students, $pexcel->pexcel_id);
+                    //$this->obj_students->add_students($students, $pexcel->pexcel_id);
 
                     $user = new PndUser();
                     $students = $this->obj_students->get_students($params);
 
-                    $user->create_students($students);
+                   // $user->create_students($students);
                 }
             }
+        } else {
+           $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
 
@@ -86,8 +88,6 @@ class PndAdminController extends PndController {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
-
-        $students = $this->obj_students->get_students($params);
 
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 

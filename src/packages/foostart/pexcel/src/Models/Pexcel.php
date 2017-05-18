@@ -152,8 +152,15 @@ class Pexcel extends Model {
             $eloquent->where('pexcel_name', 'like', '%' . $params['pexcel_name'] . '%');
         }
 
-        $pexcels = $eloquent->paginate(config('buoumau.user_pexcel_per_page'));
+        $pexcels = $eloquent->paginate(config('pexcel.user_pexcel_per_page'));
 
+        return $pexcels;
+    }
+
+    public function get_by_userId_categoryIds($user_id, $category_ids) {
+        $pexcels = self::where('user_id', $user_id)
+                        ->whereIn('pexcel_category_id', $category_ids)
+                        ->get();
         return $pexcels;
     }
 
