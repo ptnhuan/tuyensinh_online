@@ -85,6 +85,9 @@ return [
 
     'page_categories' => 'Tìm kiếm thông tin học sinh',
     'pnd_categories_label' => 'Danh mục',
+    'tab_info_main'=>'Thông tin',
+    'tab_info_other'=>'Thông tin',
+    'student_info'=>'Thông tin học sinh',
     'filter' => 'Lọc',
     /**
      * Message
