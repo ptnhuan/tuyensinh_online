@@ -15,8 +15,9 @@
         <tr>
             <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>
             <th style='width:10%'>{{ trans('pnd::pnd.school_code') }} </th>
-            <th style='width:35%'>{{ trans('pnd::pnd.school_name') }}</th>           
-            <th style='width:15%'>{{ trans('pnd::pnd.school_phone') }}</th>
+            <th style='width:35%'>{{ trans('pnd::pnd.school_name') }}</th>  
+            <th style='width:5%'>{{ trans('pnd::pnd.school_level_id') }}</th>  
+            <th style='width:10%'>{{ trans('pnd::pnd.school_phone') }}</th>
             <th style='width:15%'>{{ trans('pnd::pnd.school_email') }}</th>
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
@@ -35,7 +36,8 @@
                 ?>
             </td>
             <td>{!! @$school-> school_code !!}</td>
-            <td>{!! @$school->school_name !!}</td>                
+            <td>{!! @$school->school_name !!}</td>     
+             <td>{!! @$school->school_level_id !!}</td>     
             <td>{!! @$school->school_phone !!}</td>
             <td>{!! @$school->school_email !!}</td>
 
