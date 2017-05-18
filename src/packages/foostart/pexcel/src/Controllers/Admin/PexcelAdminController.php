@@ -190,9 +190,10 @@ class PexcelAdminController extends PexcelController {
         $input = $request->all();
 
         $pexcel_id = $request->get('id');
+
         $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-        $pexcel_category = $this->obj_pexcel_categories->find($pexcel_id);
+        $pexcel_category = $this->obj_pexcel_categories->find($pexcel->pexcel_category_id);
 
         $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
 
