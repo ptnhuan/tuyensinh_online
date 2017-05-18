@@ -16,9 +16,14 @@
                 {{ trans('pexcel::pexcel.order') }}
             </td>
 
-            <th style='width:50%'>
+            <th style='width:35%'>
                 {{ trans('pexcel::pexcel.pexcel_categoty_name') }}
             </th>
+
+            <th style='width:15%'>
+                Trạng thái
+            </th>
+
 
             <th style='width:25%'>
                 {{ trans('pexcel::pexcel.pexcel_categoty_created') }}
@@ -45,6 +50,18 @@
             <!--SAMPLE CATEGORY ID-->
             <td>
                 {!! $pexcel_category->pexcel_category_name !!}
+            </td>
+            <!--/END SAMPLE CATEGORY ID-->
+
+
+            <!--SAMPLE CATEGORY ID-->
+            <td>
+                <?php
+                    $pexcel_category_status = config('pexcel.status_category');
+                    if ($pexcel_category->pexcel_category_status) {
+                        echo $pexcel_category_status[$pexcel_category->pexcel_category_status];
+                    }
+                ?>
             </td>
             <!--/END SAMPLE CATEGORY ID-->
 

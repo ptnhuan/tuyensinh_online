@@ -20,7 +20,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
 
                 <!--ERRORS CATEGORY-->
                 @foreach($errors->all() as $error)
-                    <div class="alert alert-danger">{!! $error !!}</div>
+                <div class="alert alert-danger">{!! $error !!}</div>
                 @endforeach
 
                 {{-- successful message --}}
@@ -39,9 +39,20 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                             <!--END SAMPLE CATEGORIES ID  -->
 
                             <!-- SAMPLE NAME TEXT-->
-                             <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
+                            <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
                             @include('pexcel::elements.input', ['name' => 'pexcel_category_name', 'value' => $pexcel_category_name])
                             <!-- /END SAMPLE NAME TEXT -->
+
+                            <!-- POST CATEGORY LIST -->
+                            <div class="form-group">
+                                <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : $pexcel_category->pexcel_category_status ?>
+
+                                {!! Form::label('pexcel_category_status', trans('pexcel::pexcel.pexcel_category_status').':') !!}
+
+                                {!! Form::select('pexcel_category_status', [99 => 'Sẵn sàng', 77 => 'Khóa'], $category_status, ['class' => 'form-control']) !!}
+
+                            </div>
+                            <!-- /END POST CATEGORY LIST -->
 
                             {!! Form::hidden('id',@$pexcel_category->pexcel_category_id) !!}
 

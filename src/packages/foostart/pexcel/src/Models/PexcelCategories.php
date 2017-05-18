@@ -11,6 +11,7 @@ class PexcelCategories extends Model {
     protected $fillable = [
         'pexcel_category_name',
         'user_id',
+        'pexcel_category_status',
         'pexcel_category_created_at',
         'pexcel_category_updated_at',
     ];
@@ -43,6 +44,7 @@ class PexcelCategories extends Model {
         if (!empty($pexcel)) {
 
             $pexcel->pexcel_category_name = $input['pexcel_category_name'];
+            $pexcel->pexcel_category_status = $input['pexcel_category_status'];
             $pexcel->pexcel_category_updated_at = time();
 
             $pexcel->save();
@@ -62,6 +64,7 @@ class PexcelCategories extends Model {
 
         $pexcel = self::create([
                     'pexcel_category_name' => $input['pexcel_category_name'],
+                    'pexcel_category_status' => $input['pexcel_category_status'],
                     'pexcel_category_created_at' => time(),
                     'pexcel_category_updated_at' => time(),
                     'user_id' => $input['user_id'],
@@ -78,12 +81,12 @@ class PexcelCategories extends Model {
         $status_category = config('pexcel.status_category_lable');
         if ($category_id) {
             $categories = self::where('pexcel_category_id', '!=', $category_id)
-                    ->where('pexcel_status', $status_category['available'])
+                    ->where('pexcel_category_status', $status_category['available'])
                     ->orderBy('pexcel_category_name', 'DESC')
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         } else {
             $categories = self::orderBy('pexcel_category_name', 'DESC')
-                    ->where('pexcel_status', $status_category['available'])
+                    ->where('pexcel_category_status', $status_category['available'])
                     ->pluck('pexcel_category_name', 'pexcel_category_id');
         }
         return $categories;
