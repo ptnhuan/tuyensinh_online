@@ -27,6 +27,7 @@ return [
     'page_district_search' => 'Tìm kiếm thông tin huyện',
     'page_specialist_list' => 'Danh sách lớp chuyên',
     'page_specialist_search' => 'Tìm kiếm thông tin lớp chuyên',
+    'page_examine_filter' => 'Tính điểm bình quân xét tuyển',
     /**
      * Form
      */
