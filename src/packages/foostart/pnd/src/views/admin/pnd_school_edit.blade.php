@@ -88,10 +88,27 @@
                                             @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
                                             <!--/END INPUT-->
                                         </div>
-                                      
+
                                     </div>
                                      <div class="row">
-                                           <div class="col-md-4">
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
+                                            'categories'=> !empty(@$districts) ? $districts  : array(),
+                                            'category_id'=>@$school->school_district_code])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
+
+
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
                                             <!--/END INPUT-->
@@ -107,25 +124,9 @@
                                             <!--/END INPUT-->
                                         </div>
                                     </div>
+                                   
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <!--INPUT-->
-
-                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
-                                                    'categories'=> !empty(@$districts) ? $districts  : array(),
-                                                    'category_id'=>@$school->school_district_code])
-                                            <!--/END INPUT-->
-                                        </div>
-                                        <div class="col-md-4">
-                                            <!--INPUT-->
-                                                  @include('pnd::elements.pnd_input', ['name' => 'school_level_id','value'=> @$school->school_level_id])
-                                                
-                                            
-                                            <!--/END INPUT-->
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'user_id','value'=> @$school->user_id])
                                             <!--/END INPUT-->

@@ -21,7 +21,9 @@ class Schools extends Model {
         'school_district_code',
         'school_level_id',
         'user_id',
-        'pass_id'
+        'pass_id',
+        'school_contact_phone',
+          'school_contact_email'
     ];
     protected $primaryKey = 'school_id';
 
@@ -69,6 +71,8 @@ class Schools extends Model {
             $school->school_level_id = $input['school_level_id'];
             $school->user_id = $input['user_id'];
             $school->pass_id = $input['pass_id'];
+              $school->school_contact_phone = $input['school_contact_phone'];
+            $school->school_contact_email = $input['school_contact_email'];
 
             $school->save();
            

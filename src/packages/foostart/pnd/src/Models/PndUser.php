@@ -22,8 +22,7 @@ class PndUser extends AclUser {
         $obj_profile->create_student_profile($user, $student);
         return $user;
     }
-
-
+            
     public function update_user($user, $teacher) {
          switch ($teacher->school_level_id) {
             case 2:

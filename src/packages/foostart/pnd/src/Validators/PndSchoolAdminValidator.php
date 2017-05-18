@@ -16,10 +16,11 @@ class PndSchoolAdminValidator extends AbstractValidator
         'school_contact' => 'required',
         'school_district_code' => 'required',
         'school_level_id' => 'required',
-        'user_id' => 'required',
-        'pass_id' => 'required'    
+         'user_id' => 'required',
+        'pass_id' => 'required',  
+        'school_contact_phone' => 'required',
+        'school_contact_email' => 'required'    
                 
-               
     );
 
     protected static $messages = [];
@@ -87,8 +88,9 @@ class PndSchoolAdminValidator extends AbstractValidator
         'school_district_code.required' => 'Nhập huyện',
         'school_level_id.required' => 'Cấp học',
         'user_id.required' => 'Nhập tên đăng nhập',
-        'pass_id.required' => 'Nhập mật khẩu'    
-            
+        'pass_id.required' => 'Nhập mật khẩu',    
+             'school_contact_phone.required' => 'Điệnt thoại',
+        'school_contact_email.required' => 'Thư điện tử'    
             
             
             
