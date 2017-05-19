@@ -155,6 +155,11 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
             'as' => 'admin_pnd_school_about',
             'uses' => 'PndSchoolAdminController@about'
         ]);
+    Route::post('/pnd_school_about', [
+            'as' => 'admin_pnd_school_about.post',
+            'uses' => 'PndSchoolAdminController@post_about'
+        ]);
+
         
         
           ////////////////////////////////////////////////////////////////////////

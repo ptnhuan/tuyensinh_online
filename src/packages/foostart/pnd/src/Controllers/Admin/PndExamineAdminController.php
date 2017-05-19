@@ -13,7 +13,7 @@ use Route,
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
-use Foostart\Pnd\Models\Districts;
+use Foostart\Pnd\Models\Examines;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Examinepoints;
 use Foostart\Pnd\Models\PndUser;
@@ -29,9 +29,9 @@ class PndExamineAdminController extends PndController {
     private $obj_schools = NULL;
     private $obj_categories = NULL;
     private $obj_validator = NULL;
-    private $obj_districts = null;
+    private $obj_examines = null;
     private $obj_specialists = null;
-    private $obj_examinepoints= null;
+    private $obj_examinepoints = null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -39,7 +39,7 @@ class PndExamineAdminController extends PndController {
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
-        $this->obj_districts = new Districts();
+        $this->obj_examines = new Examines();
         $this->obj_specialists = new Specialists();
         $this->obj_examinepoints = new Examinepoints();
 
@@ -54,10 +54,9 @@ class PndExamineAdminController extends PndController {
 
         $this->isAuthentication();
 
-        $ppoints = $request->all();
-        $ppoints['school_point_capacity'] ='G';
-        $ppoints['school_point_conduct'] = 'K';
-        
+
+
+
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
@@ -80,31 +79,50 @@ class PndExamineAdminController extends PndController {
 
                     $user = new PndUser();
                     $students = $this->obj_students->get_students($params);
-                   
+
                     $user->create_students($students);
                 }
             }
         } else {
-           $students= $this->obj_students->get_all_students($params);
-         
+            $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
 
         $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
-   
-       
+
+
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
+        $points = $request->all();
+        $input = $request->all();
 
-      
-       $examines = $this->obj_examinepoints->get_all_students($ppoints);
-       
-               
-   
+        foreach ($students as $value) {
+           
+            $input['student_id'] = $value['student_id'];
+            $points['school_point_capacity'] = $value['student_capacity_6'];
+            $points['school_point_conduct'] = $value['student_conduct_6'];
+            $input['student_point_6'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_7'];
+            $points['school_point_conduct'] = $value['student_conduct_7'];
+            $input['student_point_7'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_8'];
+            $points['school_point_conduct'] = $value['student_conduct_8'];
+            $input['student_point_8'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_9'];
+            $points['school_point_conduct'] = $value['student_conduct_9'];
+            $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'];
+
+            $this->obj_examines->user_update_student($input);
+        }
+
+
+
+
         $this->data = array_merge($this->data, array(
-            'students' => !empty($students)?$students:'',
+            'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
             'request' => $request,
             'params' => $params
@@ -253,7 +271,7 @@ class PndExamineAdminController extends PndController {
                 $student->delete();
             }
         } else {
-
+            
         }
 
         $this->data = array_merge($this->data, array(

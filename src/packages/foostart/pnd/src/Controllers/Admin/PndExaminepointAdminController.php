@@ -190,34 +190,6 @@ class PndExaminepointAdminController extends PndController
         return Redirect::route("admin_pnd_examine_point");
     }
 
-    public function parse(Request $request)
-    {
-
-        $obj_parse = new Parse();
-        $obj_examinepoints = new Districts();
-
-        $input = $request->all();
-
-        $school_point_id = $request->get('id');
-        $examinepoints = $this->obj_examinepoints->find($school_point_id);
-
-
-        $examinepoints = $obj_parse->get_examinepoints($examinepoints);
-
-        /**
-         * Import data
-         */
-        $obj_examinepoints->delete_old_data($examinepoints->pexel_id);
-        $obj_examinepoints->add_examinepoints($examinepoints, $examinepoints->pnd_id);
-
-        $examinepoints = $obj_examinepoints->get_examinepoints();
-
-        $this->data = array_merge($this->data, array(
-            'examinepoints' => $examinepoints,
-            'request' => $request,
-        ));
-
-        return view('pnd::admin.pnd_parse', $this->data);
-    }
+   
 
 }

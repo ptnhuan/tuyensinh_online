@@ -108,6 +108,43 @@ class Schools extends Model {
         }
     }
 
+     public function update_school_about($input, $school_id = NULL) {
+
+        if (empty($school_id)) {
+            $school_id = $input['school_id'];
+        }
+
+        $school = self::find($school_id);
+
+        if (!empty($school)) {
+
+          
+            $school->school_name = $input['school_name'];
+            $school->school_address = $input['school_address'];
+            $school->school_phone = $input['school_phone'];
+            $school->school_email = $input['school_email'];
+            $school->school_contact = $input['school_contact'];       
+        
+            $school->pass_id = $input['pass_id'];
+            $school->school_contact_phone = $input['school_contact_phone'];
+            $school->school_contact_email = $input['school_contact_email'];
+
+            $school->save();
+
+            //Update user account
+            $obj_user = new PndUser();
+            $user = $obj_user->search_user(['user_name' => $school->user_id]);
+            if ($user) {
+                $obj_user->update_user($user, $school);
+            } else {
+
+                $obj_user->create_user($school);
+            }
+            return $school;
+        } else {
+            return NULL;
+        }
+    }
     /**
      *
      * @param type $input

@@ -39,113 +39,35 @@ class Examines extends Model {
         'school_code_option_2',
         'student_email',
         'student_phone',
-
         'student_user',
         'student_pass',
         'pnd_created_at',
         'pnd_updated_at',
     ];
-    protected $primaryKey = 'pnd_id';
+    protected $primaryKey = 'student_id';
 
-    /**
-     *
-     * @param type $params
-     * @return type
-     */
-    public function get_pnds($params = array()) {
-        $eloquent = self::orderBy('school_id', 'DESC');
+    
+    public function user_update_student($input) {
 
-        //pnd_name
-        if (!empty($params['pnd_name'])) {
-            $eloquent->where('pnd_name', 'like', '%' . $params['pnd_name'] . '%');
-        }
+      
+            $student_id = $input['student_id'];
+   
+        $student = self::find($student_id);
 
-        $pnds = $eloquent->paginate(config('pnd.per_page'));
+        if (!empty($student)) {
+            $student->student_point_6 = $input['student_point_6'];
+            $student->student_point_7 = $input['student_point_7'];
+            $student->student_point_8 = $input['student_point_8'];
+            $student->student_point_9 = $input['student_point_9'];
+            $student->student_point_sum = $input['student_point_sum'];
+           
+            $student->save();
 
-        return $pnds;
-    }
-
-    /**
-     *
-     * @param type $input
-     * @param type $pnd_id
-     * @return type
-     */
-    public function update_pnd($input, $school_id = NULL) {
-
-        if (empty($school_id)) {
-            $school_id = $input['school_id'];
-        }
-
-        $pnd = self::find($school_id);
-
-        if (!empty($pnd)) {
-
-            $pnd->pnd_name = $input['pnd_name'];
-            $pnd->pnd_description = $input['pnd_description'];
-
-            $pnd->pnd_category_id = $input['pnd_category_id'];
-
-            $pnd->pnd_file_path = $input['pnd_file_path'];
-
-            $pnd->pnd_updated_at = time();
-
-            $pnd->save();
-
-            return $pnd;
+            return $student;
         } else {
             return NULL;
         }
     }
 
-    /**
-     *
-     * @param type $input
-     * @return type
-     */
-    public function add_pnd($input) {
-
-        $pnd = self::create([
-                    'pnd_name' => @$input['pnd_name'],
-                    'pnd_description' => @$input['pnd_description'],
-                    'pnd_file_path' => @$input['pnd_file_path'],
-
-                    'user_id' => @$input['user_id'],
-                    'pnd_category_id' => @$input['pnd_category_id'],
-
-                    'pnd_created_at' => time(),
-                    'pnd_updated_at' => time(),
-        ]);
-        return $pnd;
-    }
-
-    public function get_pnds_by_user_id($user_id) {
-
-        $eloquent = self::where('user_id', $user_id)
-                ->orderby('pnd_created_at');
-
-        $pnds = $eloquent->paginate(9);
-
-        return $pnds;
-    }
-
-    /**
-     * USER POST
-     * @param type $user_id
-     * @return type
-     */
-    public function get_user_pnds($params, $user_id) {
-        $eloquent = self::where('user_id', $user_id)
-                ->orderby('pnd_id', 'DESC');
-
-        //pnd_name
-        if (!empty($params['pnd_name'])) {
-            $eloquent->where('pnd_name', 'like', '%' . $params['pnd_name'] . '%');
-        }
-
-        $pnds = $eloquent->paginate(config('buoumau.user_pnd_per_page'));
-
-        return $pnds;
-    }
-
+ 
 }

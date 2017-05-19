@@ -37,6 +37,9 @@ class Examinepoints extends Model {
 
         return $pexcels;
     }
+    
+    
+    
 
     /**
      *
@@ -96,55 +99,21 @@ class Examinepoints extends Model {
      * @get Point
      * @return POINT
      */
-    public function get_points($params = array()) {
-        $eloquent = self::orderBy('school_point_point', 'DESC');
-
-        if (!empty($params['school_point_capacity'])) {
-            $eloquent->where('school_point_capacity', $params['school_point_capacity']);
-        }
-        if (!empty($params['school_point_conduct'])) {
-            $eloquent->where('school_point_conduct', $params['school_point_capacity']);
-        }
-
-  
-        //pexcel_name
-        if (!empty($params['pexcel_id'])) {
-            $eloquent->where('pexcel_id', $params['pexcel_id']);
-        }
-
-        $pexcels = $eloquent->paginate(config('pexcel.per_page'));
-
-        return $pexcels;
+      
+     public function get_examinepoint($points = []) {
+        $eloquent = self::where('school_point_capacity', $points['school_point_capacity']);
+        $eloquent = $eloquent->where('school_point_conduct', $points['school_point_conduct']);
+        return $eloquent->first();
     }
+
+     
 
     public function delete_examinepoint($school_point_id) {
         $eloquent = self::where('school_point_id', $school_point_id)->delete();
         return $eloquent;
     }
 
-    public function get_all_students($params){
-
-        $students = NULL;
-                
-        $eloquent = self::orderBy('school_point_id', 'ASC');
-
-        //SEARCH BY SCHOOL
-        if (!empty($params['school_point_capacity'])) {
-            
-           $eloquent = $eloquent->where('school_point_capacity', $params['school_point_capacity']);
-        }
-        
-         if (!empty($params['school_point_conduct'])) {
-            
-           $eloquent = $eloquent->where('school_point_conduct', $params['school_point_conduct']);
-        }
-        $students = $eloquent->paginate(config('pexcel.per_page_students'));
-        
-       
-        return $students;
-
-
-    }
+     
     
     
     
