@@ -68,6 +68,9 @@ return [
      'school_contact_phone' => 'Điện thoại quản trị',
     'school_contact_email' => 'Thư điện tử quản trị',
     'school_district_title' => 'Quản lý thông tin huyện',
+    'page_district' => 'Tìm kiếm thông tin huyện',
+    'district_label' => 'Nhập từ khóa',
+    'school_district_title' => 'Quản lý thông tin huyện',
     'school_district_id' => 'Huyện',
     'school_district_code' => 'Mã huyện',
 

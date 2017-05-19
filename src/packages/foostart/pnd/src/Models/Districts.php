@@ -26,6 +26,13 @@ class Districts extends Model {
         if (!empty($params['school_district_code'])) {
             $eloquent->where('school_district_code', $params['school_district_code']);
         }
+        
+        if (!empty($params['district_label'])) {
+                     
+             $eloquent->where('school_district_code', 'like', '%' . $params['district_label'] . '%');
+                            $eloquent->orwhere('school_district_name', 'like', '%' . $params['district_label'] . '%');
+            
+        }
 
         $pexcels = $eloquent->paginate(config('pexcel.per_page'));
 
