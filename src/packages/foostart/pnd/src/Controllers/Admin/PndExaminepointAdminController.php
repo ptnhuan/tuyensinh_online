@@ -57,9 +57,7 @@ class PndExaminepointAdminController extends PndController
      * @return type
      */
     public function edit(Request $request)
-    {
-
-             
+    {            
         
         
         $examinepoint = NULL;
@@ -99,7 +97,7 @@ class PndExaminepointAdminController extends PndController
 
         $school_point_id = (int)$request->get('id');
 
-        $examinepoints = NULL;
+        $examinepoint = NULL;
 
         $data = array();
 
@@ -125,7 +123,8 @@ class PndExaminepointAdminController extends PndController
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
                    
-                    return Redirect::route("admin_pnd_examine_point.edit", ["id" => $examinepoint->$school_point_id]);
+                   
+                    return Redirect::route("admin_pnd_examine_point.edit", ["id" => $examinepoint->school_point_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
 
@@ -136,9 +135,9 @@ class PndExaminepointAdminController extends PndController
 
                 $input = array_merge($input, array());
 
-                $examinepoints = $this->obj_examinepoints->add_examinepoint($input);
+                $examinepoint = $this->obj_examinepoints->add_examinepoint($input);
 
-                if (!empty($examinepoints)) {
+                if (!empty($examinepoint)) {
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
@@ -154,7 +153,7 @@ class PndExaminepointAdminController extends PndController
         }
 
         $this->data = array_merge($this->data, array(
-            'examinepoints' => $examinepoints,
+            'examinepoints' => $examinepoint,
             'request' => $request,
         ), $data);
 

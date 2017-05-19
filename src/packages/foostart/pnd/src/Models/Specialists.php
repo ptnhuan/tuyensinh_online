@@ -22,6 +22,13 @@ class Specialists extends Model {
     public function get_specialists($params = array()) {
         $eloquent = self::orderBy('school_class_name', 'ASC');
 
+         if (!empty($params['specialist_label'])) {
+                     
+             $eloquent->where('school_class_code', 'like', '%' . $params['specialist_label'] . '%');
+                            $eloquent->orwhere('school_class_name', 'like', '%' . $params['specialist_label'] . '%');
+            
+        }
+        
         //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent->where('pexcel_id', $params['pexcel_id']);

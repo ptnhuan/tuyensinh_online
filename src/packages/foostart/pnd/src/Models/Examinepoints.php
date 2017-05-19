@@ -10,8 +10,8 @@ class Examinepoints extends Model {
     public $timestamps = false;
     protected $fillable = [
         'school_point_capacity',
-        'school_point_conduct',     
-        'school_point_point'     
+        'school_point_conduct',
+        'school_point_point'
     ];
     protected $primaryKey = 'school_point_id';
 
@@ -22,13 +22,13 @@ class Examinepoints extends Model {
      */
     public function get_examinepoints($params = array()) {
         $eloquent = self::orderBy('school_point_point', 'DESC');
-       
-           if (!empty($params['examine_point_label'])) {
-                            $eloquent->where('school_point_point',  $params['examine_point_label']);                           
-                        }
 
-        
-   //pexcel_name
+        if (!empty($params['examine_point_label'])) {
+            $eloquent->where('school_point_point', $params['examine_point_label']);
+        }
+
+
+        //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent->where('pexcel_id', $params['pexcel_id']);
         }
@@ -49,19 +49,19 @@ class Examinepoints extends Model {
         if (empty($school_point_id)) {
             $school_point_id = $input['school_point_id'];
         }
-        
-        $examinepoints = self::find($school_point_id);
 
-        if (!empty($examinepoints)) {
+        $examinepoint = self::find($school_point_id);
 
-            $examinepoints->school_point_capacity = $input['school_point_capacity'];
-            $examinepoints->school_point_conduct = $input['school_point_conduct'];
-            $examinepoints->school_point_point = $input['school_point_point'];
-           
-          
-            $examinepoints->save();
- 
-            return $examinepoints;
+        if (!empty($examinepoint)) {
+
+            $examinepoint->school_point_capacity = $input['school_point_capacity'];
+            $examinepoint->school_point_conduct = $input['school_point_conduct'];
+            $examinepoint->school_point_point = $input['school_point_point'];
+
+
+            $examinepoint->save();
+
+            return $examinepoint;
         } else {
             return NULL;
         }
@@ -82,13 +82,12 @@ class Examinepoints extends Model {
         return $examinepoint;
     }
 
-    
     public function add_examinepoint($input) {
 
         $examinepoints = $this->validRow($input);
- 
+
         $examinepoints = self::create($examinepoints);
-       
+
         return $examinepoints;
     }
 
@@ -107,6 +106,7 @@ class Examinepoints extends Model {
             $eloquent->where('school_point_conduct', $params['school_point_capacity']);
         }
 
+  
         //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent->where('pexcel_id', $params['pexcel_id']);
@@ -122,6 +122,30 @@ class Examinepoints extends Model {
         return $eloquent;
     }
 
-   
-   
+    public function get_all_students($params){
+
+        $students = NULL;
+                
+        $eloquent = self::orderBy('school_point_id', 'ASC');
+
+        //SEARCH BY SCHOOL
+        if (!empty($params['school_point_capacity'])) {
+            
+           $eloquent = $eloquent->where('school_point_capacity', $params['school_point_capacity']);
+        }
+        
+         if (!empty($params['school_point_conduct'])) {
+            
+           $eloquent = $eloquent->where('school_point_conduct', $params['school_point_conduct']);
+        }
+        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+        
+       
+        return $students;
+
+
+    }
+    
+    
+    
 }

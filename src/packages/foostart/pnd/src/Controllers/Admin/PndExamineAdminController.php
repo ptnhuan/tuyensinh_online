@@ -15,7 +15,7 @@ use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\Specialists;
-use Foostart\Pnd\Models\Examines;
+use Foostart\Pnd\Models\Examinepoints;
 use Foostart\Pnd\Models\PndUser;
 use Foostart\Pexcel\Models\Pexcel;
 /**
@@ -31,7 +31,7 @@ class PndExamineAdminController extends PndController {
     private $obj_validator = NULL;
     private $obj_districts = null;
     private $obj_specialists = null;
-    private $obj_examines = null;
+    private $obj_examinepoints= null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -41,7 +41,7 @@ class PndExamineAdminController extends PndController {
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
         $this->obj_specialists = new Specialists();
-        $this->obj_examines = new Examines();
+        $this->obj_examinepoints = new Examinepoints();
 
         $this->obj_pexcel = new Pexcel();
     }
@@ -54,6 +54,10 @@ class PndExamineAdminController extends PndController {
 
         $this->isAuthentication();
 
+        $ppoints = $request->all();
+        $ppoints['school_point_capacity'] ='G';
+        $ppoints['school_point_conduct'] = 'K';
+        
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
@@ -76,24 +80,29 @@ class PndExamineAdminController extends PndController {
 
                     $user = new PndUser();
                     $students = $this->obj_students->get_students($params);
-
+                   
                     $user->create_students($students);
                 }
             }
         } else {
-           $students = $this->obj_students->get_all_students($params);
+           $students= $this->obj_students->get_all_students($params);
+         
         }
         //END PEXCEL
 
         $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
-
+   
+       
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
 
-       // $examines = $this->obj_examines->pluckSelect(@$params['pexcel_category_id']);
-
+      
+       $examines = $this->obj_examinepoints->get_all_students($ppoints);
+       
+               
+   
         $this->data = array_merge($this->data, array(
             'students' => !empty($students)?$students:'',
             //'categories' => $categories,

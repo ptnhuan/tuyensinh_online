@@ -75,6 +75,11 @@ return [
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
     'school_class_name' => 'Tên lớp chuyên',
+    
+    'page_specialist' => 'Tìm kiếm Môn chuyên',
+    'specialist_label' => 'Nhập từ khóa',
+    
+    
     'school_level_id' => 'Cấp học',
     'user_id' => 'Tên đăng nhập',
     'pass_id' => 'Mật khẩu',

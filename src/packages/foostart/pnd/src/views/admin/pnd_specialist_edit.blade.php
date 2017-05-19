@@ -112,7 +112,7 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_search',['name_search'=>'_class_specifics'])
+            @include('pnd::admin.pnd_specialist_search',['name_search'=>'_class_specifics'])
         </div>
 
 <script type='text/javascript'>

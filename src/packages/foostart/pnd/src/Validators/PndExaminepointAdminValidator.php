@@ -64,8 +64,7 @@ class PndExaminepointAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-           
-            
+                     
              'school_point_capacity' => 'Chọn học lực',
         'school_point_conduct' => 'Chọn hạnh kiểm',
         'school_point_point' => 'Nhập điểm',
