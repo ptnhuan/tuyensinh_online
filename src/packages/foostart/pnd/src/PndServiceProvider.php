@@ -183,6 +183,14 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_specialist'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ], 
+                  /**
+                 * Examine point
+                 */
+                //list
+                trans('pnd::pnd.page_examine_point_list') => [
+                    'url' => URL::route('admin_pnd_examine_point'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ], 
                 
             ]);
             //

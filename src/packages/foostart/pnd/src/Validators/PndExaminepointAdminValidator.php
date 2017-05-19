@@ -5,12 +5,12 @@ use \LaravelAcl\Library\Validators\AbstractValidator;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class PndAdminValidator extends AbstractValidator
+class PndExaminepointAdminValidator extends AbstractValidator
 {
     protected static $rules = array(
-        'student_first_name' => 'required',
-        'student_last_name' => 'required',
-        'student_email' => 'required',
+        'school_point_capacity' => 'required',
+        'school_point_conduct' => 'required',
+        'school_point_point' => 'required',
     );
 
     protected static $messages = [];
@@ -64,9 +64,11 @@ class PndAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'student_first_name.required' => 'Yêu cầu nhập họ học viên.',
-            'student_last_name.required' => 'Yêu cầu nhập tên học viên.',
-            'student_email.required' => 'Yêu cầu nhâp email học viên.',
+           
+            
+             'school_point_capacity' => 'Chọn học lực',
+        'school_point_conduct' => 'Chọn hạnh kiểm',
+        'school_point_point' => 'Nhập điểm',
         ];
     }
 

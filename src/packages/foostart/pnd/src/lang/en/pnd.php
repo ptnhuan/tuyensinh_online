@@ -23,6 +23,7 @@ return [
     'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
     'page_examine_list' => 'Tính điểm xét tuyển',
+    'page_examine_point_list' => 'Điểm quy đổi',
     'page_district_list' => 'Danh sách huyện',
     'page_district_search' => 'Tìm kiếm thông tin huyện',
     'page_specialist_list' => 'Danh sách lớp chuyên',
@@ -178,9 +179,6 @@ return [
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     'user_categoy_name'=>'Tên',
-
-
-
     'page_category_list' => 'Danh mục',
     'pnd_category_add_button' => 'Thêm danh mục mới',
     'add_specialist' => 'Thêm lớp chuyên',
@@ -194,7 +192,18 @@ return [
     'pnd_category_update' => 'Cập nhật danh mục',
     'length_category_name' => 'Chiều dài tiêu đề không hợp lệ. Yêu cầu từ <b>:LENGTH_CATEGORY_NAME_MIN</b> tới <b>:LENGTH_CATEGORY_NAME_MAX</b> ký tự',
 
-
+    ////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////POINT//////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    'school_point_title'=>'Điểm quy đổi',
+    'page_category_list' => 'Danh mục',
+    'page_examinepoint_list' => 'Điểm quy đổi',
+    'add_examine_point' => 'Thêm điểm quy đổi',
+    'school_point_capacity' => 'Học lực',
+    'school_point_conduct' => 'Hạnh kiểm',
+    'school_point_point' => 'Điểm quy đổi',
+    'form_point_add' => 'Thêm điểm quy đổi',
+    'form_point_edit' => 'Sửa điểm quy đổi',
 
 
 
