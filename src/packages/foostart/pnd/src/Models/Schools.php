@@ -3,7 +3,6 @@
 namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Foostart\Pnd\Models\PndUser;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,7 +22,7 @@ class Schools extends Model {
         'user_id',
         'pass_id',
         'school_contact_phone',
-          'school_contact_email'
+        'school_contact_email'
     ];
     protected $primaryKey = 'school_id';
 
@@ -36,15 +35,30 @@ class Schools extends Model {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         //pexcel_name
+         if (!empty($params['school_level_id'])) {         
+            $eloquent->where('school_level_id',$params['school_level_id']);          
+        }
+ if (!empty($params['school_district_label'])) {         
+            $eloquent->where('school_district_code',$params['school_district_label']);          
+        }
+        if (!empty($params['school_label'])) {
 
-        if(!empty($params['permissions'])) {
+            $eloquent->where('school_name', 'like', '%' . $params['school_label'] . '%');
+            $eloquent->orwhere('school_address', 'like', '%' . $params['school_label'] . '%');
+            $eloquent->orwhere('school_email', 'like', '%' . $params['school_label'] . '%');
+                     $eloquent->orwhere('school_level_id',$params['school_level_id']);
+            $eloquent->orwhere('school_contact_phone', 'like', '%' . $params['school_label'] . '%');
+        }
+
+
+        if (!empty($params['permissions'])) {
             if (!empty($params['pexcel_id'])) {
                 $eloquent->where('pexcel_id', $params['pexcel_id']);
             }
         }
-        
+
         $schools = $eloquent->paginate(config('pexcel.per_page'));
-        
+
         return $schools;
     }
 
@@ -74,18 +88,18 @@ class Schools extends Model {
             $school->school_level_id = $input['school_level_id'];
             $school->user_id = $input['user_id'];
             $school->pass_id = $input['pass_id'];
-              $school->school_contact_phone = $input['school_contact_phone'];
+            $school->school_contact_phone = $input['school_contact_phone'];
             $school->school_contact_email = $input['school_contact_email'];
 
             $school->save();
-           
+
             //Update user account
             $obj_user = new PndUser();
             $user = $obj_user->search_user(['user_name' => $school->user_id]);
             if ($user) {
                 $obj_user->update_user($user, $school);
             } else {
-                              
+
                 $obj_user->create_user($school);
             }
             return $school;
@@ -123,26 +137,23 @@ class Schools extends Model {
     public function add_school($input) {
 
         $school = $this->validRow($input);
- 
+
         $school = self::create($school);
-              // $school = $this->createAccount($school);
-       
-         //Update user account
-            $obj_user = new PndUser();
-            $user = $obj_user->search_user(['user_name' => $school->user_id]);
-            if ($user) {
-                $obj_user->update_user($user, $school);
-            } else {
-                              
-                $obj_user->create_user($school);
-            }
-            return $school;
-        
-        
+        // $school = $this->createAccount($school);
+        //Update user account
+        $obj_user = new PndUser();
+        $user = $obj_user->search_user(['user_name' => $school->user_id]);
+        if ($user) {
+            $obj_user->update_user($user, $school);
+        } else {
+
+            $obj_user->create_user($school);
+        }
+        return $school;
+
+
         return $school;
     }
-
-
 
     public function delete_school($school_id) {
         $eloquent = self::where('school_id', $school_id)->delete();
@@ -182,23 +193,21 @@ class Schools extends Model {
     public function pluck_select($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
-        if(!empty($params['school_district_code'])){
-            $eloquent = $eloquent->where('school_district_code',$params['school_district_code']);
+        if (!empty($params['school_district_code'])) {
+            $eloquent = $eloquent->where('school_district_code', $params['school_district_code']);
         }
-      if(!empty($params['school_choose_specialist'])){
-            $eloquent = $eloquent->where('school_choose_specialist',$params['school_choose_specialist']);
+        if (!empty($params['school_choose_specialist'])) {
+            $eloquent = $eloquent->where('school_choose_specialist', $params['school_choose_specialist']);
         }
-        $eloquent = $eloquent->where('school_level_id',$params['school_level_id']);
+        $eloquent = $eloquent->where('school_level_id', $params['school_level_id']);
 
         return $eloquent->pluck('school_name', 'school_code');
-
     }
 
-     public function pluck_select1($params = array()) {
+    public function pluck_select1($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         return $eloquent->pluck('school_name', 'school_code');
-
     }
 
 }
