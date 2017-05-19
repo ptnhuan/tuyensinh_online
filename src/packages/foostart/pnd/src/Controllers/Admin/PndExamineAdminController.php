@@ -92,11 +92,11 @@ class PndExamineAdminController extends PndController {
             $params['school_id'] = $school->school_id;
         }
 
-        $examines = $this->obj_examines->pluckSelect(@$params['pexcel_category_id']);
+       // $examines = $this->obj_examines->pluckSelect(@$params['pexcel_category_id']);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students)?$students:'',
-            'categories' => $categories,
+            //'categories' => $categories,
             'request' => $request,
             'params' => $params
         ));

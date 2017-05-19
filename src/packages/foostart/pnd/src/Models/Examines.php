@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pnd extends Model {
+class Examines extends Model {
 
     protected $table = 'school_students';
     public $timestamps = false;
