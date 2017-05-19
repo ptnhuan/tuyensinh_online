@@ -266,7 +266,15 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
             'as' => 'admin_pnd_examine_point.delete',
             'uses' => 'PndExaminepointAdminController@delete'
         ]);
-
+  /**
+         * edit-point
+         */
+      
+         Route::get('/pnd_examine_point/prior', [
+            'as' => 'admin_pnd_examine_point.prior',
+            'uses' => 'PndExaminepointAdminController@prior'
+        ]);
+        
         
           ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND EXAMINE ROUTE///////////////////////////////
@@ -303,7 +311,13 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
             'uses' => 'PndExamineAdminController@delete'
         ]);
 
-
+ /**
+         * set point
+         */
+        Route::get('/pnd_examine/point', [
+            'as' => 'admin_pnd_examine.point',
+            'uses' => 'PndExamineAdminController@point'
+        ]);
         /**********************************************************************
          * USER CATEGORY
          */

@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => 'admin_pnd_examine','method' => 'get']) !!}
+        {!! Form::open(['route' => 'admin_pnd_examine.point','method' => 'get']) !!}
 
         <!--TITLE-->
         <div class="form-group">

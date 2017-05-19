@@ -95,10 +95,45 @@ class PndExamineAdminController extends PndController {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
+       
+
+        $this->data = array_merge($this->data, array(
+            'students' => !empty($students) ? $students : '',
+            //'categories' => $categories,
+            'request' => $request,
+            'params' => $params
+        ));
+        return view('pnd::admin.pnd_examine_list', $this->data);
+    }
+
+    /**
+     * tinh diem
+     * @return type
+     */
+     public function point(Request $request) {
+
+        $this->isAuthentication();
+
+        $params = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+
+            $students_point = $this->obj_students->get_all_students($params);
+             $students = $this->obj_students->get_all_students($params);
+  
+         $this->data = array_merge($this->data, array(
+            'students' => !empty($students) ? $students : '',
+            //'categories' => $categories,
+            'request' => $request,
+            'params' => $params
+        ));
+        //END PEXCEL
+
+      
         $points = $request->all();
         $input = $request->all();
 
-        foreach ($students as $value) {
+        foreach ($students_point as $value) {
            
             $input['student_id'] = $value['student_id'];
             $points['school_point_capacity'] = $value['student_capacity_6'];
@@ -121,12 +156,7 @@ class PndExamineAdminController extends PndController {
 
 
 
-        $this->data = array_merge($this->data, array(
-            'students' => !empty($students) ? $students : '',
-            //'categories' => $categories,
-            'request' => $request,
-            'params' => $params
-        ));
+       
         return view('pnd::admin.pnd_examine_list', $this->data);
     }
 

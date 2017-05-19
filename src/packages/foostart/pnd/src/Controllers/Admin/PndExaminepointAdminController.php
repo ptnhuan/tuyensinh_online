@@ -78,6 +78,29 @@ class PndExaminepointAdminController extends PndController
     
        return view('pnd::admin.pnd_examine_point_edit', $this->data);
     }
+    
+    public function prior(Request $request)
+    {            
+        
+        
+        $examinepoint = NULL;
+        $school_point_id = (int)$request->get('id');
+       
+        
+
+        if (!empty($school_point_id) && (is_int($school_point_id))) {
+
+            $examinepoint = $this->obj_examinepoints->find($school_point_id);
+
+        }
+    
+        $this->data = array_merge($this->data, array(
+            'examinepoints' => $examinepoint,
+            'request' => $request,
+        ));
+    
+       return view('pnd::admin.pnd_examine_point_edit', $this->data);
+    }
 
     /**
      *

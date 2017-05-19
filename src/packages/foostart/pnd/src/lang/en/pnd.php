@@ -104,6 +104,8 @@ return [
     'page_categories' => 'Tìm kiếm thông tin học sinh',
     'pnd_categories_label' => 'Danh mục',
     'tab_info_main'=>'Thông tin',
+    'tab_info_main_point'=>'Điểm quy đổi học lực-hạnh kiểm',
+    'tab_info_other_point'=>'Điểm giới hạn ưu tiên-khuyến khích',
     'tab_info_other'=>'Thông tin',
     'student_info'=>'Thông tin học sinh',
     'filter' => 'Lọc',
@@ -223,6 +225,9 @@ return [
     'examine_point_label' => 'Nhập điểm quy đổi cần tìm',
     'filter_examine_point' => 'Tìm',
     'page_examinepoint_search' => 'Tìm thông tin điểm quy đổi',
+    'student_score_prior_1' => 'Điểm tối đa UT-KK xét tuyển',
+    'student_score_prior_2' => 'Điểm tối đa UT-KK thi tuyển',
+    'student_score_prior_3' => 'Điểm tối đa UT-KK xét tuyển- thi tuyển',
 
 
 
