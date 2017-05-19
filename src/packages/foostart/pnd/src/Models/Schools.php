@@ -35,18 +35,18 @@ class Schools extends Model {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         //pexcel_name
-         if (!empty($params['school_level_id'])) {         
-            $eloquent->where('school_level_id',$params['school_level_id']);          
+        if (!empty($params['school_level_id'])) {
+            $eloquent->where('school_level_id', $params['school_level_id']);
         }
- if (!empty($params['school_district_label'])) {         
-            $eloquent->where('school_district_code',$params['school_district_label']);          
+        if (!empty($params['school_district_label'])) {
+            $eloquent->where('school_district_code', $params['school_district_label']);
         }
         if (!empty($params['school_label'])) {
 
             $eloquent->where('school_name', 'like', '%' . $params['school_label'] . '%');
             $eloquent->orwhere('school_address', 'like', '%' . $params['school_label'] . '%');
             $eloquent->orwhere('school_email', 'like', '%' . $params['school_label'] . '%');
-                     $eloquent->orwhere('school_level_id',$params['school_level_id']);
+            $eloquent->orwhere('school_level_id', $params['school_level_id']);
             $eloquent->orwhere('school_contact_phone', 'like', '%' . $params['school_label'] . '%');
         }
 
@@ -186,10 +186,21 @@ class Schools extends Model {
 
     public function get_school_by_user_id($user_id = null) {
         $eloquent = self::where('user_id', $user_id)->first();
-
+     
         return $eloquent;
+        
+    }
+    
+     public function get_school_id_user_id($user_id = null) {
+        $eloquent = self::where('user_id', $user_id)->first();
+     
+        return $eloquent;
+        
     }
 
+    
+    
+    
     public function pluck_select($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 

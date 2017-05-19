@@ -43,18 +43,52 @@ class PndSchoolAdminController extends PndController {
         $params = $request->all();
 
         $schools = $this->obj_schools->get_schools($params);
-          $districts_search = $this->obj_districts->pluck_select();
-        
-         $districts_search = array('NULL' => '...') + $districts_search->toArray();
-        
+        $districts_search = $this->obj_districts->pluck_select();
+
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
         $this->data = array_merge($this->data, array(
             'schools' => $schools,
             'request' => $request,
             'districts_search' => $districts_search,
-            
             'params' => $params
         ));
         return view('pnd::admin.pnd_school_list', $this->data);
+    }
+
+    /**
+     *
+     * @return type
+     */
+    public function about(Request $request) {
+        
+        
+        $params = $request->all();
+        $this->isAuthentication();
+        $school_users = $this->current_user->user_name;
+        
+           
+        $school = NULL;
+        $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
+         
+        $districts = $this->obj_districts->pluck_select();
+        $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
+
+        if (!empty($school_id) && (is_int($school_id))) {
+
+            $school = $this->obj_schools->find($school_id);
+        }
+
+        $this->data = array_merge($this->data, array(
+            'school' => $school,
+            'districts' => $districts,
+            'districts_search' => $districts_search,
+            'request' => $request,
+        ));
+        
+        return view('pnd::admin.pnd_school_about', $this->data);
     }
 
     /**
@@ -67,9 +101,9 @@ class PndSchoolAdminController extends PndController {
         $school_id = (int) $request->get('id');
 
         $districts = $this->obj_districts->pluck_select();
-            $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
-        
+
 
         if (!empty($school_id) && (is_int($school_id))) {
 
@@ -79,7 +113,7 @@ class PndSchoolAdminController extends PndController {
         $this->data = array_merge($this->data, array(
             'school' => $school,
             'districts' => $districts,
-             'districts_search' => $districts_search,
+            'districts_search' => $districts_search,
             'request' => $request,
         ));
 
@@ -104,9 +138,9 @@ class PndSchoolAdminController extends PndController {
         $school_id = (int) $request->get('id');
 
         $districts = $this->obj_districts->pluck_select();
-            $districts_search = $this->obj_districts->pluck_select();
-         $districts_search = array('NULL' => '...') + $districts_search->toArray();
-        
+        $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
         $schools = NULL;
 
         $data = array();
@@ -164,7 +198,7 @@ class PndSchoolAdminController extends PndController {
         $this->data = array_merge($this->data, array(
             'schools' => $schools,
             'districts' => $districts,
-             'districts_search' => $districts_search,
+            'districts_search' => $districts_search,
             'request' => $request,
                 ), $data);
 

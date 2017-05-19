@@ -150,7 +150,13 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
             'as' => 'admin_pnd_school.delete',
             'uses' => 'PndSchoolAdminController@delete'
         ]);
-
+        
+  Route::get('/pnd_school_about', [
+            'as' => 'admin_pnd_school_about',
+            'uses' => 'PndSchoolAdminController@about'
+        ]);
+        
+        
           ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND DISTRICT ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
