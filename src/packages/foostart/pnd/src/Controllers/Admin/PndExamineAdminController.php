@@ -15,6 +15,7 @@ use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\Specialists;
+use Foostart\Pnd\Models\Examines;
 use Foostart\Pnd\Models\PndUser;
 use Foostart\Pexcel\Models\Pexcel;
 /**
@@ -30,6 +31,7 @@ class PndExamineAdminController extends PndController {
     private $obj_validator = NULL;
     private $obj_districts = null;
     private $obj_specialists = null;
+    private $obj_examines = null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -39,6 +41,7 @@ class PndExamineAdminController extends PndController {
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
         $this->obj_specialists = new Specialists();
+        $this->obj_examines = new Examines();
 
         $this->obj_pexcel = new Pexcel();
     }
@@ -89,7 +92,7 @@ class PndExamineAdminController extends PndController {
             $params['school_id'] = $school->school_id;
         }
 
-        $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
+        $examines = $this->obj_examines->pluckSelect(@$params['pexcel_category_id']);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students)?$students:'',

@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_search',['name_search'=>'_class_specifics'])
+            @include('pnd::admin.pnd_examine_point_search',['name_search'=>'_examine_point'])
         </div>
     </div>
 </div>

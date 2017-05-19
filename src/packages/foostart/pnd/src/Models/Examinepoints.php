@@ -23,6 +23,11 @@ class Examinepoints extends Model {
     public function get_examinepoints($params = array()) {
         $eloquent = self::orderBy('school_point_point', 'DESC');
        
+           if (!empty($params['examine_point_label'])) {
+                            $eloquent->where('school_point_point',  $params['examine_point_label']);                           
+                        }
+
+        
    //pexcel_name
         if (!empty($params['pexcel_id'])) {
             $eloquent->where('pexcel_id', $params['pexcel_id']);

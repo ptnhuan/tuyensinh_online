@@ -204,6 +204,10 @@ return [
     'school_point_point' => 'Điểm quy đổi',
     'form_point_add' => 'Thêm điểm quy đổi',
     'form_point_edit' => 'Sửa điểm quy đổi',
+    'page_examine_point' => 'Tìm kiếm điểm quy đổi',
+    'examine_point_label' => 'Nhập điểm quy đổi cần tìm',
+    'filter_examine_point' => 'Tìm',
+    'page_examinepoint_search' => 'Tìm thông tin điểm quy đổi',
 
 
 
