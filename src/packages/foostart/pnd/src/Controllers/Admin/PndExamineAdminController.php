@@ -14,6 +14,7 @@ use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Examines;
+use Foostart\Pnd\Models\Examinepointpriors;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Examinepoints;
 use Foostart\Pnd\Models\PndUser;
@@ -32,6 +33,7 @@ class PndExamineAdminController extends PndController {
     private $obj_examines = null;
     private $obj_specialists = null;
     private $obj_examinepoints = null;
+     private $obj_examinepointpriors = null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -42,7 +44,7 @@ class PndExamineAdminController extends PndController {
         $this->obj_examines = new Examines();
         $this->obj_specialists = new Specialists();
         $this->obj_examinepoints = new Examinepoints();
-
+$this->obj_examinepointpriors = new Examinepointpriors();
         $this->obj_pexcel = new Pexcel();
     }
 
@@ -96,7 +98,6 @@ class PndExamineAdminController extends PndController {
             $params['school_id'] = $school->school_id;
         }
        
-
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
@@ -148,7 +149,15 @@ class PndExamineAdminController extends PndController {
             $points['school_point_capacity'] = $value['student_capacity_9'];
             $points['school_point_conduct'] = $value['student_conduct_9'];
             $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'];
+
+            if ($value['student_score_prior'] > $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1) {
+
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1;
+            } else {
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $value['student_score_prior'];
+            }
+
+
 
             $this->obj_examines->user_update_student($input);
         }
@@ -156,7 +165,7 @@ class PndExamineAdminController extends PndController {
 
 
 
-       
+
         return view('pnd::admin.pnd_examine_list', $this->data);
     }
 

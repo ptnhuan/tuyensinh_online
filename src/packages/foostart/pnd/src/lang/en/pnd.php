@@ -225,9 +225,9 @@ return [
     'examine_point_label' => 'Nhập điểm quy đổi cần tìm',
     'filter_examine_point' => 'Tìm',
     'page_examinepoint_search' => 'Tìm thông tin điểm quy đổi',
-    'student_score_prior_1' => 'Điểm tối đa UT-KK xét tuyển',
-    'student_score_prior_2' => 'Điểm tối đa UT-KK thi tuyển',
-    'student_score_prior_3' => 'Điểm tối đa UT-KK xét tuyển- thi tuyển',
+    'school_prior_point_1' => 'Điểm tối đa UT-KK xét tuyển',
+    'school_prior_point_2' => 'Điểm tối đa UT-KK thi tuyển',
+    'school_prior_point_3' => 'Điểm tối đa UT-KK xét tuyển- thi tuyển',
 
 
 

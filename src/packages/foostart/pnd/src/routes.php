@@ -270,8 +270,8 @@ Route::group(['middleware' => ['web'],'prefix'=>'admin', 'namespace' => 'Foostar
          * edit-point
          */
       
-         Route::get('/pnd_examine_point/prior', [
-            'as' => 'admin_pnd_examine_point.prior',
+         Route::post('/pnd_examine_point', [
+            'as' => 'admin_pnd_examine_point',
             'uses' => 'PndExaminepointAdminController@prior'
         ]);
         

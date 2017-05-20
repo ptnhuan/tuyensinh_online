@@ -69,6 +69,8 @@ class Examinepoints extends Model {
             return NULL;
         }
     }
+    
+   
 
     /**
      *

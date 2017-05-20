@@ -32,7 +32,7 @@
                         <h4>{!! trans('pnd::pnd.form_heading') !!}</h4>
                         <!--END SAMPLE TITLE FORM EDIT-->
 
-                        {!! Form::open(['route'=>['admin_pnd_examine_point.prior', 'id' => @$student->student_id],  'files'=>true, 'method' => 'post'])  !!}
+                        {!! Form::open(['route'=>['admin_pnd_examine_point', 'id' => @$student->student_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -63,9 +63,22 @@
 
                             <!--TAB OVERVIEW-->
                             <div id="home" class="tab-pane fade in active">
+                                <!--ADD SCHOOL ITEM-->
+
+
+
+                                <!--/END ADD SCHOOL ITEM-->
 
                                 <table class="table table-hover">
                                     <thead>
+                                        <div class="row margin-bottom-12">
+                                          
+    <div class="col-md-12">
+        <a href="{!! URL::route('admin_pnd_examine_point.edit') !!}" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i>{{trans('pnd::pnd.add_examine_point')}}
+        </a>
+    </div>
+</div>
                                         <tr>
                                             <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>
                                             <th style='width:15%'>{{ trans('pnd::pnd.school_point_capacity') }}</th>
@@ -78,6 +91,7 @@
                                         <?php
                                         $nav = $examinepoints->toArray();
                                         $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
+                                        
                                         ?>
                                         @foreach($examinepoints as $examinepoint)
                                         <tr>
@@ -106,32 +120,31 @@
 
                             <!--TAB ATTRIBUTES-->
                             <div id="attributes" class="tab-pane fade">
-                               
-                               
-                                
+
+
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <!--INPUT-->
-                                        @include('pnd::elements.pnd_input', ['name' => 'student_score_prior_1','value'=> @$student->student_score_prior]
-                                        )
+                                        @include('pnd::elements.pnd_input', ['name' => 'school_prior_point_1','value'=> $school_prior_point['school_prior_point_1']]  )
                                         <!--/END INPUT-->
 
                                     </div>
                                     <div class="col-md-4">
                                         <!--INPUT-->
-                                        @include('pnd::elements.pnd_input', ['name' => 'student_score_prior_2','value'=> @$student->student_score_prior_comment
-                          ])
+                                        @include('pnd::elements.pnd_input', ['name' => 'school_prior_point_2','value'=> $school_prior_point['school_prior_point_2'] ])
+                                       
                                         <!--/END INPUT-->
 
                                     </div>
-                                     <div class="col-md-4">
+                                    <div class="col-md-4">
                                         <!--INPUT-->
-                                        @include('pnd::elements.pnd_input', ['name' => 'student_score_prior_3','value'=> @$student->student_score_prior_comment
-                          ])
+                                        @include('pnd::elements.pnd_input', ['name' => 'school_prior_point_3','value'=> $school_prior_point['school_prior_point_3']  ])
+                                      
                                         <!--/END INPUT-->
 
                                     </div>
-                                    
+
                                     <!--/END INPUT-->
                                 </div>
                             </div>
