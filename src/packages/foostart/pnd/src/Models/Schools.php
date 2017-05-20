@@ -13,6 +13,8 @@ class Schools extends Model {
     protected $fillable = [
         'school_code',
         'school_name',
+        'school_code_room',
+        'school_name_title',
         'school_address',
         'school_phone',
         'school_email',
@@ -82,6 +84,11 @@ class Schools extends Model {
             $school->school_name = $input['school_name'];
             $school->school_address = $input['school_address'];
             $school->school_phone = $input['school_phone'];
+            
+              $school->school_code_room = $input['school_code_room'];
+            $school->school_name_title = $input['school_name_title'];
+            
+            
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];
             $school->school_district_code = $input['school_district_code'];
@@ -91,6 +98,8 @@ class Schools extends Model {
             $school->school_contact_phone = $input['school_contact_phone'];
             $school->school_contact_email = $input['school_contact_email'];
 
+            
+          
             $school->save();
 
             //Update user account
@@ -124,7 +133,8 @@ class Schools extends Model {
             $school->school_phone = $input['school_phone'];
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];       
-        
+            $school->school_code_room = $input['school_code_room'];
+            $school->school_name_title = $input['school_name_title'];
             $school->pass_id = $input['pass_id'];
             $school->school_contact_phone = $input['school_contact_phone'];
             $school->school_contact_email = $input['school_contact_email'];

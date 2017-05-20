@@ -57,6 +57,8 @@ return [
     'slideshow_name' => 'Slideshow',
     'school_title' => 'Quản lý thông tin trường học',
     'school_code' => 'Mã trường THCS',
+     'school_code_room' => 'Số báo danh',
+     'school_name_title' => 'Tên trường viết tắt',
     'school_name' => 'Tên trường THCS',
     'school_address' => 'Địa chỉ',
     'school_phone' => 'Điện thoại',
