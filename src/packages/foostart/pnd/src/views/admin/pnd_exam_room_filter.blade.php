@@ -7,7 +7,7 @@
     
     
  <div class="panel-body"> 
-        <button class="btn btn-info pull-right press-indentifi">
+        <button class="btn btn-info pull-right press-room">
             {{trans('pnd::pnd.page_exam_room_list')}}
         </button
     </div>

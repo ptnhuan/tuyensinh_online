@@ -87,10 +87,9 @@ class PndExamWorkAdminController extends PndController {
             }
         } else {
             $students = $this->obj_students->get_all_students($params);
-          
         }
         //END PEXCEL
-      
+
         $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
 
 
@@ -181,18 +180,17 @@ class PndExamWorkAdminController extends PndController {
         $school_users = $this->current_user->user_name;
 
         if ($school_users <> 'admin') {
-            
+
             $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
             $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
-          
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
 
 
         if ($request->ajax()) {
-          
-            $k = 1; 
+
+            $k = 1;
             $identification = "";
 
             foreach ($students_identifi as $value) {
@@ -220,7 +218,7 @@ class PndExamWorkAdminController extends PndController {
             return;
         }
 
-        $students = $this->obj_students->get_all_students_order($params);
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -261,31 +259,31 @@ class PndExamWorkAdminController extends PndController {
 
 
         if ($request->ajax()) {
-            $k = 1;
-             $room = 1;
-             
+            $k = 0;
+            $room = 1;
+            $number=$number;
 
             foreach ($students_identifi as $value) {
 
-                
-                
-                
-                if ($k > $number) {
-                    $room = $room+1;
-                     $k = 0;
+              
+                if ($k >= $number) {
+                    $room = $room + 1;
+                    $k = 1;
                 }
-               
+                else{
+                      $k = $k + 1;
+                }
+
                 $input['student_id'] = $value['student_id'];
                 $input['student_room'] = $room;
-                 $k = $k + 1;
+
 
                 $this->obj_examines->user_update_room_student($input);
-               
             }
             return;
         }
 
-        $students = $this->obj_students->get_all_students_order($params);
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -294,10 +292,6 @@ class PndExamWorkAdminController extends PndController {
             'params' => $params
         ));
         //END PEXCEL
-
-
-        $points = $request->all();
-        $input = $request->all();
 
 
 

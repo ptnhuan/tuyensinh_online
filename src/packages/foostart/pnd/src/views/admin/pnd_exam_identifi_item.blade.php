@@ -33,6 +33,7 @@
             <tbody>
                 <?php
                 $nav = $students->toArray();
+                 
                 $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
                 ?>
                 @foreach($students as $student)
