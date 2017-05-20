@@ -156,6 +156,24 @@ class PndServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 
+                 /**
+                 * Set exam identifi
+                 */
+                //list
+                  trans('pnd::pnd.page_exam_identification') => [
+                    'url' => URL::route('admin_pnd_examine_identifi'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                  /**
+                 * Set exam room
+                 */
+                //list
+                  trans('pnd::pnd.page_exam_identification') => [
+                    'url' => URL::route('admin_pnd_examine_room'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
                 
                 /**
                  * Districts

@@ -24,7 +24,7 @@ use Foostart\Pexcel\Models\Pexcel;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndExamineAdminController extends PndController {
+class PndExamWorkAdminController extends PndController {
 
     private $obj_students = NULL;
     private $obj_schools = NULL;
@@ -111,7 +111,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
      * tinh diem
      * @return type
      */
-     public function point(Request $request) {
+    public function point(Request $request) {
 
         $this->isAuthentication();
 
@@ -119,10 +119,10 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-            $students_point = $this->obj_students->get_all_students($params);
-             $students = $this->obj_students->get_all_students($params);
-  
-         $this->data = array_merge($this->data, array(
+        $students_point = $this->obj_students->get_all_students($params);
+        $students = $this->obj_students->get_all_students($params);
+
+        $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
             'request' => $request,
@@ -130,12 +130,12 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         ));
         //END PEXCEL
 
-      
+
         $points = $request->all();
         $input = $request->all();
 
         foreach ($students_point as $value) {
-           
+
             $input['student_id'] = $value['student_id'];
             $points['school_point_capacity'] = $value['student_capacity_6'];
             $points['school_point_conduct'] = $value['student_conduct_6'];
@@ -163,12 +163,128 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         }
 
 
-  return Redirect::route("admin_pnd_examine");
- 
-
-       
+        return Redirect::route("admin_pnd_examine");
     }
 
+    /**
+     * tinh diem
+     * @return type
+     */
+    public function identifi(Request $request) {
+
+        $this->isAuthentication();
+
+        $params = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+
+        $students_point = $this->obj_students->get_all_students($params);
+        $students = $this->obj_students->get_all_students($params);
+
+        $this->data = array_merge($this->data, array(
+            'students' => !empty($students) ? $students : '',
+            //'categories' => $categories,
+            'request' => $request,
+            'params' => $params
+        ));
+        //END PEXCEL
+
+
+        $points = $request->all();
+        $input = $request->all();
+
+        foreach ($students_point as $value) {
+
+            $input['student_id'] = $value['student_id'];
+            $points['school_point_capacity'] = $value['student_capacity_6'];
+            $points['school_point_conduct'] = $value['student_conduct_6'];
+            $input['student_point_6'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_7'];
+            $points['school_point_conduct'] = $value['student_conduct_7'];
+            $input['student_point_7'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_8'];
+            $points['school_point_conduct'] = $value['student_conduct_8'];
+            $input['student_point_8'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_9'];
+            $points['school_point_conduct'] = $value['student_conduct_9'];
+            $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+
+            if ($value['student_score_prior'] > $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1) {
+
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1;
+            } else {
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $value['student_score_prior'];
+            }
+
+
+
+            $this->obj_examines->user_update_student($input);
+        }
+
+
+        return Redirect::route("admin_pnd_examine");
+    }
+    
+    
+      /**
+     * tinh diem
+     * @return type
+     */
+    public function room(Request $request) {
+
+        $this->isAuthentication();
+
+        $params = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+
+        $students_point = $this->obj_students->get_all_students($params);
+        $students = $this->obj_students->get_all_students($params);
+
+        $this->data = array_merge($this->data, array(
+            'students' => !empty($students) ? $students : '',
+            //'categories' => $categories,
+            'request' => $request,
+            'params' => $params
+        ));
+        //END PEXCEL
+
+
+        $points = $request->all();
+        $input = $request->all();
+
+        foreach ($students_point as $value) {
+
+            $input['student_id'] = $value['student_id'];
+            $points['school_point_capacity'] = $value['student_capacity_6'];
+            $points['school_point_conduct'] = $value['student_conduct_6'];
+            $input['student_point_6'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_7'];
+            $points['school_point_conduct'] = $value['student_conduct_7'];
+            $input['student_point_7'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_8'];
+            $points['school_point_conduct'] = $value['student_conduct_8'];
+            $input['student_point_8'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+            $points['school_point_capacity'] = $value['student_capacity_9'];
+            $points['school_point_conduct'] = $value['student_conduct_9'];
+            $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
+
+            if ($value['student_score_prior'] > $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1) {
+
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1;
+            } else {
+                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $value['student_score_prior'];
+            }
+
+
+
+            $this->obj_examines->user_update_student($input);
+        }
+
+
+        return Redirect::route("admin_pnd_examine");
+    }
+    
     /**
      *
      * @return type
