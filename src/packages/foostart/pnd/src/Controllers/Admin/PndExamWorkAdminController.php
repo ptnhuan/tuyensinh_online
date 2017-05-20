@@ -179,6 +179,9 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params['user_id'] = $this->current_user->id;
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
+        var_dump($students_identifi);
+        die();
+        
         $students = $this->obj_students->get_all_students($params);
 
         $this->data = array_merge($this->data, array(
@@ -222,7 +225,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         }
 
 
-        return Redirect::route("admin_pnd_examine");
+      //  return Redirect::route("admin_pnd_examine");
     }
     
     
@@ -238,7 +241,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-        $students_point = $this->obj_students->get_all_students($params);
+        $students_point = $this->obj_students->get_all_identifi_students($params);
         $students = $this->obj_students->get_all_students($params);
 
         $this->data = array_merge($this->data, array(

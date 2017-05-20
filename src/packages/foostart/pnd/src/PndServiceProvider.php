@@ -169,7 +169,7 @@ class PndServiceProvider extends ServiceProvider {
                  * Set exam room
                  */
                 //list
-                  trans('pnd::pnd.page_exam_identification') => [
+                  trans('pnd::pnd.page_exam_room_list') => [
                     'url' => URL::route('admin_pnd_examine_room'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],

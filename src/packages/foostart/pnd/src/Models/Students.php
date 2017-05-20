@@ -129,9 +129,7 @@ class Students extends Model {
             $obj_pexcel_category = new PexcelCategories();
 
             $categories = $obj_pexcel_category->get_available_categories();
-            var_dump($categories);
-            die();
-            
+          
             if ($categories) {
                 $category_ids = [];
                 foreach ($categories as $category) {
@@ -150,12 +148,7 @@ class Students extends Model {
 
                     if ($pexcel_ids) {
                         $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
-
-                        if (!empty($params['keyword'])) {
-                            $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
-                            $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
-                        }
+                            ->whereIn('pexcel_id', $pexcel_ids);                   
 
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
                         return $students;
