@@ -36,13 +36,27 @@ class PexcelAdminController extends PexcelController {
      * @return type
      */
     public function index(Request $request) {
- 
+
         $this->isAuthentication();
 
         $params = $request->all();
+
+
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['permissions'] = $this->current_user->permissions;
+
+        /**
+         * EXPORT
+         */
+        if (isset($params['export'])) {
+            $pexcels = $this->obj_pexcel->get_pexcels($params);
+            $obj_parse = new Parse();
+            $obj_parse->export_data($pexcels, 'pexcels');
+
+            unset($params['export']);
+        }
+        ////////////////////////////////////////////////////////////////////////
 
         $pexcels = $this->obj_pexcel->get_pexcels($params);
 
@@ -60,21 +74,26 @@ class PexcelAdminController extends PexcelController {
      */
     public function edit(Request $request) {
 
-        $pexcel = NULL;
-        $pexcel_id = (int) $request->get('id');
+        $this->isAuthentication();
+
+        if ($this->current_user) {
+            $pexcel = NULL;
+            $pexcel_id = (int) $request->get('id');
 
 
-        if (!empty($pexcel_id) && (is_int($pexcel_id))) {
-            $pexcel = $this->obj_pexcel->find($pexcel_id);
+            if (!empty($pexcel_id) && (is_int($pexcel_id))) {
+                $pexcel = $this->obj_pexcel->find($pexcel_id);
+            }
+
+            if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                $this->data = array_merge($this->data, array(
+                    'pexcel' => $pexcel,
+                    'request' => $request,
+                    'categories' => $this->obj_pexcel_categories->pluckSelect()->toArray(),
+                ));
+                return view('pexcel::admin.pexcel_edit', $this->data);
+            }
         }
-
-
-        $this->data = array_merge($this->data, array(
-            'pexcel' => $pexcel,
-            'request' => $request,
-            'categories' => $this->obj_pexcel_categories->pluckSelect()->toArray(),
-        ));
-        return view('pexcel::admin.pexcel_edit', $this->data);
     }
 
     /**
@@ -198,7 +217,7 @@ class PexcelAdminController extends PexcelController {
 
         $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
 
-        $students = $obj_parse->get_students($pexcel);
+        $students = $obj_parse->read_data($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
         unset($pexcel->pexcel_category_name);
@@ -207,7 +226,6 @@ class PexcelAdminController extends PexcelController {
         /**
          * Import data
          */
-
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,

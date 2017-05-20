@@ -30,6 +30,7 @@ return [
     'pexcel_required_name' => 'Required name',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
+    'export' => 'Xuất excel',
     'pexcel_overview' => 'Mô tả ngắn',
     'pexcel_description' => 'Nội dung Tập tin',
     'pexcel_name_label' => 'Từ khóa:',

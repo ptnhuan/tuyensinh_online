@@ -7,6 +7,16 @@ return [
     "operations" => 'Thao tác',
     'pnd_category_name_label' => 'Từ khóa:',
     'package_name' => 'Đăng bài',
+
+
+    /* ***********************************************
+     *USERS
+     */
+    'user_name' => 'Tên đăng nhập',
+    'edit_profile' => 'Chỉnh sửa thông tin',
+    'logout' => 'Đăng xuất',    
+
+
     /*     * *************************************************************************
      * **************************************************************************
      * ************************HOC SINH PAGE****************************************
@@ -91,6 +101,7 @@ return [
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
     'school_class_name' => 'Tên lớp chuyên',
+
     'page_specialist' => 'Tìm kiếm Môn chuyên',
     'specialist_label' => 'Nhập từ khóa',
     'school_level_id' => 'Cấp học',
@@ -163,6 +174,24 @@ return [
     'student_conduct_8' => "Hạnh kiểm lớp 8",
     'student_capacity_9' => "Học lực lớp 9",
     'student_conduct_9' => "Hạnh kiểm lớp 9",
+
+    'school_id' => "Mã trường THCS",
+    'school_district_id' => "Huyện",
+
+    'student_class' => "Lớp",
+
+    'student_capacity_6' => "Học lực lớp 6",
+    'student_conduct_6' => "Hạnh kiểm lớp 6",
+
+    'student_capacity_7' => "Học lực lớp 7",
+    'student_conduct_7' => "Hạnh kiểm lớp 7",
+
+    'student_capacity_8' => "Học lực lớp 8",
+    'student_conduct_8' => "Hạnh kiểm lớp 8",
+
+    'student_capacity_9' => "Học lực lớp 9",
+    'student_conduct_9' => "Hạnh kiểm lớp 9",
+
     'student_average' => "TBCN Lớp 9",
     'student_average_1' => "TBCN Toán",
     'student_average_2' => "TBCN Văn",
@@ -174,10 +203,22 @@ return [
     'school_class_code' => "Mã lớp chuyên",
     'school_code_option_1' => "Mã nguyện vọng 1",
     'school_code_option_2' => "Mã nguyện vọng 2",
+    'student_score_prior' => "Điểm cộng",
+    'student_score_prior_comment' => "Ghi chú",
+
+    'student_nominate' => "Tuyển thẳng",
+
+    'school_id_option' => "Mã trường chuyên/DTNT",
+    'school_class_code' => "Mã lớp chuyên",
+
+    'school_code_option_1' => "Mã nguyện vọng 1",
+    'school_code_option_2' => "Mã nguyện vọng 2",
+
     'student_email' => "Thư điện tử",
     'student_phone' => "Số điện thoại",
     'student_user' => "Tên đăng nhập",
     'student_pass' => "Mật khẩu",
+ 
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
