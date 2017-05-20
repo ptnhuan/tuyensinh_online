@@ -15,6 +15,7 @@ class Schools extends Model {
         'school_code',
         'school_name',
         'school_code_room',
+         'school_number_room',
         'school_name_title',
         'school_address',
         'school_phone',
@@ -84,6 +85,7 @@ class Schools extends Model {
             $school->school_code = $input['school_code'];
             $school->school_name = $input['school_name'];
             $school->school_address = $input['school_address'];
+                 $school->school_number_room = $input['school_number_room'];
             $school->school_phone = $input['school_phone'];
             
               $school->school_code_room = $input['school_code_room'];
