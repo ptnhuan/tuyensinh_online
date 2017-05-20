@@ -181,15 +181,18 @@ class PndExamWorkAdminController extends PndController {
         $school_users = $this->current_user->user_name;
 
         if ($school_users <> 'admin') {
+            
             $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
             $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+          
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
 
 
         if ($request->ajax()) {
-            $k = 1;
+          
+            $k = 1; 
             $identification = "";
 
             foreach ($students_identifi as $value) {
@@ -251,37 +254,33 @@ class PndExamWorkAdminController extends PndController {
 
         if ($school_users <> 'admin') {
             $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
-            $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+            $number = $this->obj_schools->get_school_by_user_id($school_users)->school_number_room;
         }
 
-        $students_identifi = $this->obj_students->get_all_identifi_students($params);
+        $students_identifi = $this->obj_students->get_all_students_order($params);
 
 
         if ($request->ajax()) {
             $k = 1;
-            $identification = "";
+             $room = 1;
+             
 
             foreach ($students_identifi as $value) {
 
-                if ($k <= 10) {
-                    $identification = $idoder . "000" . $k;
+                
+                
+                
+                if ($k > $number) {
+                    $room = $room+1;
+                     $k = 0;
                 }
-                if (($k >= 10) && ($k < 100)) {
-                    $identification = $idoder . "00" . $k;
-                }
-                if (($k >= 100) && ($k <= 999)) {
-                    $identification = $idoder . "0" . $k;
-                }
-                if (($k > 999)) {
-                    $identification = $idoder . $k;
-                }
-
+               
                 $input['student_id'] = $value['student_id'];
-                $input['student_identifi'] = $k;
-                $input['student_identifi_name'] = $identification;
+                $input['student_room'] = $room;
+                 $k = $k + 1;
 
-                $this->obj_examines->user_update_identifi_student($input);
-                $k = $k + 1;
+                $this->obj_examines->user_update_room_student($input);
+               
             }
             return;
         }

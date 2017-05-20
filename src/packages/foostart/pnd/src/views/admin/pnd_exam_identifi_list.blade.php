@@ -52,13 +52,13 @@
     $(".press-indentifi").click(function () {
         $.ajax({
             type: "GET",
-            url:'{{URL::route('admin_pnd_examine_identifi')}}',
+            url:'{{URL::route('admin_pnd_exam_identifi')}}',
             success:function(){
                 location.reload();
             }
             
         });
-    });
+    }); 
     
   
      

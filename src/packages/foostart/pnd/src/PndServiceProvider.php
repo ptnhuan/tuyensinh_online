@@ -161,7 +161,7 @@ class PndServiceProvider extends ServiceProvider {
                  */
                 //list
                   trans('pnd::pnd.page_exam_identification') => [
-                    'url' => URL::route('admin_pnd_examine_identifi'),
+                    'url' => URL::route('admin_pnd_exam_identifi'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 
@@ -170,7 +170,7 @@ class PndServiceProvider extends ServiceProvider {
                  */
                 //list
                   trans('pnd::pnd.page_exam_room_list') => [
-                    'url' => URL::route('admin_pnd_examine_room'),
+                    'url' => URL::route('admin_pnd_exam_room'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 

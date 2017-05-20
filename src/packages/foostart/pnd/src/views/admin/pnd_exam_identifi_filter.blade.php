@@ -7,13 +7,12 @@
     
     
  <div class="panel-body"> 
-        <a href="{!! URL::route('admin_pnd_exam_identifi') !!}" class="btn btn-info pull-right">
-            <i class="fa fa-plus press-indentifi"></i>{{trans('pnd::pnd.page_exam_indentifi_filter')}}
-        </a>
+        <button class="btn btn-info pull-right press-indentifi">
+            {{trans('pnd::pnd.page_exam_indentifi_filter')}}
+        </button
     </div>
     
     
- 
          
 </div>
 
