@@ -172,7 +172,8 @@ class Students extends Model
 
     public function get_all_students_order($params)
     {
-        $students = NULL;
+       $students = NULL;
+
 
         $obj_pexcel = new Pexcel();
         $obj_pexcel_category = new PexcelCategories();
@@ -196,11 +197,11 @@ class Students extends Model
                 }
 
                 if ($pexcel_ids) {
-                    $eloquent = self::orderBy('student_last_name', 'ASC')
+                    $eloquent = self::orderBy('student_identifi', 'ASC')
                         ->whereIn('pexcel_id', $pexcel_ids);
 
-
-                    $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                   
+                    $students = $eloquent->get();
                     return $students;
                 }
             }
@@ -243,11 +244,7 @@ class Students extends Model
                     $eloquent = self::orderBy('student_last_name', 'ASC')
                         ->whereIn('pexcel_id', $pexcel_ids);
 
-                    if (!empty($params['keyword'])) {
-                        $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
-                        $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
-                    }
-
+                   
                     $students = $eloquent->get();
                     return $students;
                 }

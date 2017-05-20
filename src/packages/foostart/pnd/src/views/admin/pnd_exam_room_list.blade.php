@@ -49,16 +49,16 @@
 @section('footer_scripts')
 <!-- DELETE CONFIRM -->
 <script>
-    $(".press-indentifi").click(function () {
+    $(".press-room").click(function () {
         $.ajax({
             type: "GET",
-            url:'{{URL::route('admin_pnd_examine_room')}}',
+            url:'{{URL::route('admin_pnd_exam_room')}}',
             success:function(){
                 location.reload();
             }
             
         });
-    });
+    }); 
     
   
      

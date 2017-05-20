@@ -296,14 +296,14 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          * set indentifi
          */
         Route::get('/pnd_examine/identifi', [
-            'as' => 'admin_pnd_examine_identifi',
+            'as' => 'admin_pnd_exam_identifi',
             'uses' => 'PndExamWorkAdminController@identifi'
         ]); 
         /**
          * set point
          */
         Route::get('/pnd_examine/room', [
-            'as' => 'admin_pnd_examine_room',
+            'as' => 'admin_pnd_exam_room',
             'uses' => 'PndExamWorkAdminController@room'
         ]);
         
