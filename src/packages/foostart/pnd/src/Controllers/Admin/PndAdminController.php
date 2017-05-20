@@ -73,6 +73,7 @@ class PndAdminController extends PndController
 
         //PEXCEL
         if (!empty($params['id'])) {
+
             $pexcel = $this->obj_pexcel->find($params['id']);
 
             if ($pexcel && ($this->is_admin || ($pexcel->user_id == $this->current_user->id))) {
@@ -122,14 +123,15 @@ class PndAdminController extends PndController
      */
     public function edit(Request $request)
     {
-
+        $this->isAuthentication();
         $student = NULL;
         $specialists = NULL;
         $school_levels_3 = NULL;
         $school_levels_specialist = NULL;
         $districts = NULL;
 
-        $student_id = (int)$request->get('id');
+        $params = $request->all();
+
 
         $specialists = $this->obj_specialists->pluck_select();
 
@@ -146,21 +148,45 @@ class PndAdminController extends PndController
 
         $districts = $this->obj_districts->pluck_select();
 
-        if (!empty($student_id) && (is_int($student_id))) {
+        //PEXCEL
+        if (!empty($params['id'])) {
 
-            $student = $this->obj_students->find($student_id);
+            $student = $this->obj_students->find($params['id']);
+
+            if ($student) {
+                $pexcel = $this->obj_pexcel->find($student->pexcel_id);
+
+                if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id))) {
+
+                    $this->data = array_merge($this->data, array(
+                        'student' => $student,
+                        'specialists' => $specialists,
+                        'school_levels_3' => $school_levels_3,
+                        'school_levels_specialist' => $school_levels_specialist,
+                        'districts' => $districts,
+                        'request' => $request,
+                    ));  
+                    return view('pnd::admin.pnd_edit', $this->data);
+                }
+            }
+        }else{
+            
+            $this->data = array_merge($this->data, array(
+                'student' => $student,
+                'specialists' => $specialists,
+                'school_levels_3' => $school_levels_3,
+                'school_levels_specialist' => $school_levels_specialist,
+                'districts' => $districts,
+                'request' => $request,
+            ));
+
+            return view('pnd::admin.pnd_edit', $this->data);
+
         }
-        $this->data = array_merge($this->data, array(
-            'student' => $student,
-            'specialists' => $specialists,
-            'school_levels_3' => $school_levels_3,
-            'school_levels_specialist' => $school_levels_specialist,
-            'districts' => $districts,
-            'request' => $request,
-        ));
 
 
-        return view('pnd::admin.pnd_edit', $this->data);
+
+
     }
 
     /**
