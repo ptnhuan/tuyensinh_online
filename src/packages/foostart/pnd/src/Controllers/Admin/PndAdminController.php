@@ -119,7 +119,7 @@ class PndAdminController extends PndController
         
         $student_id = (int)$request->get('id');
 
-        if($this->check_view_user()){
+        if($this->check_view_user($request)){
             $specialists = $this->obj_specialists->pluck_select();
 
             $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
@@ -287,7 +287,7 @@ class PndAdminController extends PndController
     }
 
 
-    /*Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 có quyền
+    /*Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
     xem thông tin học sinh
     */
     public function check_view_user($request){
@@ -303,7 +303,12 @@ class PndAdminController extends PndController
             return true;
         }
 
+        $check_permission_user =1;
+      
+
         return false;
     }
+
+
 
 }
