@@ -220,7 +220,7 @@ class PndExamWorkAdminController extends PndController {
             return;
         }
 
-        $students = $this->obj_students->get_all_students_order($params);
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -266,9 +266,7 @@ class PndExamWorkAdminController extends PndController {
              
 
             foreach ($students_identifi as $value) {
-
-                
-                
+                  
                 
                 if ($k > $number) {
                     $room = $room+1;
@@ -285,7 +283,7 @@ class PndExamWorkAdminController extends PndController {
             return;
         }
 
-        $students = $this->obj_students->get_all_students_order($params);
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -296,11 +294,7 @@ class PndExamWorkAdminController extends PndController {
         //END PEXCEL
 
 
-        $points = $request->all();
-        $input = $request->all();
-
-
-
+        
         return view('pnd::admin.pnd_exam_room_list', $this->data);
     }
 

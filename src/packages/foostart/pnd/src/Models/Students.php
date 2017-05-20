@@ -172,6 +172,75 @@ class Students extends Model
         }
     }
 
+    
+     public function get_all_sort_students($params)
+    {
+
+        $students = NULL;
+
+        $obj_pexcel = new Pexcel();
+        $obj_pexcel_category = new PexcelCategories();
+
+        $categories = $obj_pexcel_category->get_available_categories();
+
+        if ($categories) {
+            $category_ids = [];
+            foreach ($categories as $category) {
+                $category_ids[] = $category->pexcel_category_id;
+            }
+
+            //id is pexcel_id
+            $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
+
+            if ($pexcels) {
+                $pexcel_ids = [];
+                foreach ($pexcels as $pexcel) {
+                    $pexcel_ids[] = $pexcel->pexcel_id;
+                }
+    
+                if ($pexcel_ids) {
+                    $eloquent = self::orderBy('student_identifi', 'ASC')
+                        ->whereIn('pexcel_id', $pexcel_ids);
+
+                    if (!empty($params['keyword'])) {
+                        $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
+                        $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                    }
+   
+                    //school option
+                    if (!empty($params['school_code'])) {
+                        $eloquent = $eloquent->where('school_code', $params['school_code']);
+
+                        if (intval(@$params['school_option']) == 1) {
+                            if (!empty($params['school_code_option']))
+                                $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
+                            else {
+                                $eloquent = $eloquent->whereNotNull('school_code_option_1');
+                                $eloquent = $eloquent->whereNull('school_code_option_2');
+                            }
+                        } elseif (@intval($params['school_option']) == 2) {
+                            if (!empty($params['school_code_option']))
+                                $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
+                            else {
+                                $eloquent = $eloquent->whereNotNull('school_code_option_2');
+                                $eloquent = $eloquent->whereNull('school_code_option_1');
+                            }
+                        }
+                    }
+                    
+
+                    if (!empty($params['export'])) {
+                        $students = $eloquent->get();
+                    } else {
+                        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                    } 
+                    return $students;
+                }
+            }
+        }
+    }
+
+    
     public function get_all_students_order($params)
     {
        $students = NULL;
