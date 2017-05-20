@@ -1,7 +1,7 @@
 <?php
 
 namespace Foostart\Pnd\Controllers\Admin;
- 
+
 use Foostart\Pexcel\Helper\Parse;
 use Illuminate\Http\Request;
 use Foostart\Pnd\Controllers\Admin\PndController;
@@ -70,7 +70,7 @@ class PndAdminController extends PndController
             unset($params['export']);
         }
 
-        
+
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
@@ -128,28 +128,28 @@ class PndAdminController extends PndController
         $school_levels_3 = NULL;
         $school_levels_specialist = NULL;
         $districts = NULL;
-        
+
         $student_id = (int)$request->get('id');
- 
-            $specialists = $this->obj_specialists->pluck_select();
 
-            $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
+        $specialists = $this->obj_specialists->pluck_select();
 
-
-            $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
-            $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
+        $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
 
 
-            $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
-            $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
+        $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
+        $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
 
-            $districts = $this->obj_districts->pluck_select();
+        $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
+        $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
 
-            if (!empty($student_id) && (is_int($student_id))) {
 
-                $student = $this->obj_students->find($student_id);
-            } 
+        $districts = $this->obj_districts->pluck_select();
+
+        if (!empty($student_id) && (is_int($student_id))) {
+
+            $student = $this->obj_students->find($student_id);
+        }
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'specialists' => $specialists,
@@ -299,7 +299,8 @@ class PndAdminController extends PndController
     /*Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
     xem thông tin học sinh
     */
-    public function check_view_user($request){
+    public function check_view_user($request)
+    {
         $this->isAuthentication();
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
@@ -308,16 +309,15 @@ class PndAdminController extends PndController
 
         $check_student = $this->obj_students->get_student($params);
 
-        if(!empty($check_student)){
+        if (!empty($check_student)) {
             return true;
         }
 
-        $check_permission_user =1;
-      
+        $check_permission_user = 1;
+
 
         return false;
     }
-
 
 
 }

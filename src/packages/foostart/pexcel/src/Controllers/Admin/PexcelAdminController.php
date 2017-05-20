@@ -44,7 +44,6 @@ class PexcelAdminController extends PexcelController {
 
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-        $params['permissions'] = $this->current_user->permissions;
 
         /**
          * EXPORT
@@ -85,7 +84,7 @@ class PexcelAdminController extends PexcelController {
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
             }
  
-            if ($this->is_admin || $this->is_all || $this->is_my) {
+            if ($this->is_admin || $this->is_all || $this->is_my || ($pexcel->user_id == $this->current_user->id)) {
                 $this->data = array_merge($this->data, array(
                     'pexcel' => $pexcel,
                     'request' => $request,
@@ -217,7 +216,7 @@ class PexcelAdminController extends PexcelController {
 
         $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
 
-        $students = $obj_parse->get_students($pexcel);
+        $students = $obj_parse->read_data($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
         unset($pexcel->pexcel_category_name);

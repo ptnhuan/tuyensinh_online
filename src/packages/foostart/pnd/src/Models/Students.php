@@ -127,16 +127,19 @@ class Students extends Model
                 foreach ($pexcels as $pexcel) {
                     $pexcel_ids[] = $pexcel->pexcel_id;
                 }
-    
                 if ($pexcel_ids) {
+
                     $eloquent = self::orderBy('student_last_name', 'ASC')
                         ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
-                        $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
-                        $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                        $eloquent = $eloquent->where(function ($where) use ($params) {
+                            $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
+                                ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                        });
                     }
-   
+
+
                     //school option
                     if (!empty($params['school_code'])) {
                         $eloquent = $eloquent->where('school_code', $params['school_code']);
@@ -157,13 +160,12 @@ class Students extends Model
                             }
                         }
                     }
-                    
 
                     if (!empty($params['export'])) {
                         $students = $eloquent->get();
                     } else {
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
-                    } 
+                    }
                     return $students;
                 }
             }
