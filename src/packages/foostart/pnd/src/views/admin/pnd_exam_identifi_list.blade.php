@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.school_exam_examine') !!}
+{!! trans('pnd::pnd.school_exam_identifi') !!}
 @stop
 
 @section('content')
@@ -34,12 +34,12 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
-                    @include('pnd::admin.pnd_examine_point_item')
+                    @include('pnd::admin.pnd_exam_identifi_item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_examine_point_search',['name_search'=>'_examine_point'])
+            @include('pnd::admin.pnd_exam_identifi_filter',['name_search'=>'_examine_point'])
         </div>
     </div>
 </div>
@@ -49,9 +49,17 @@
 @section('footer_scripts')
 <!-- DELETE CONFIRM -->
 <script>
-    $(".delete").click(function () {
-        return confirm("{{ trans('pnd::pnd.delete_confirm') }}");
+    $(".press-indentifi").click(function () {
+        $.ajax({
+            type: "GET",
+            url:'{{URL::route('admin_pnd_examine_identifi')}}',
+            success:function(){
+                location.reload();
+            }
+            
+        });
     });
+     
 </script>
 <!-- /END DELETE CONFIRM -->
 @stop

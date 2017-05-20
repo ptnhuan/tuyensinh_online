@@ -33,7 +33,7 @@ class PndExamWorkAdminController extends PndController {
     private $obj_examines = null;
     private $obj_specialists = null;
     private $obj_examinepoints = null;
-     private $obj_examinepointpriors = null;
+    private $obj_examinepointpriors = null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -44,7 +44,7 @@ class PndExamWorkAdminController extends PndController {
         $this->obj_examines = new Examines();
         $this->obj_specialists = new Specialists();
         $this->obj_examinepoints = new Examinepoints();
-$this->obj_examinepointpriors = new Examinepointpriors();
+        $this->obj_examinepointpriors = new Examinepointpriors();
         $this->obj_pexcel = new Pexcel();
     }
 
@@ -97,7 +97,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
-       
+
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
@@ -177,10 +177,28 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
+        $school_users = $this->current_user->user_name;
+            
+        if ($school_users <> 'admin') {
+            $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
+            $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+         
+        }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
-        var_dump($students_identifi);
-        die();
+
+
+        if ($request->ajax()) {
+
+            foreach ($students_identifi as $value) { 
+                $input['student_id'] = $value['student_id'];
+                $input['student_identifi'] = $idoder.$value['student_id'];
+
+                $this->obj_examines->user_update_identifi_student($input);
+            }
+            return;
+             
+        }
         
         $students = $this->obj_students->get_all_students($params);
 
@@ -196,40 +214,12 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $points = $request->all();
         $input = $request->all();
 
-        foreach ($students_point as $value) {
-
-            $input['student_id'] = $value['student_id'];
-            $points['school_point_capacity'] = $value['student_capacity_6'];
-            $points['school_point_conduct'] = $value['student_conduct_6'];
-            $input['student_point_6'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_7'];
-            $points['school_point_conduct'] = $value['student_conduct_7'];
-            $input['student_point_7'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_8'];
-            $points['school_point_conduct'] = $value['student_conduct_8'];
-            $input['student_point_8'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_9'];
-            $points['school_point_conduct'] = $value['student_conduct_9'];
-            $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-
-            if ($value['student_score_prior'] > $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1) {
-
-                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1;
-            } else {
-                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $value['student_score_prior'];
-            }
 
 
-
-            $this->obj_examines->user_update_student($input);
-        }
-
-
-      //  return Redirect::route("admin_pnd_examine");
+        return view('pnd::admin.pnd_exam_identifi_list', $this->data);
     }
-    
-    
-      /**
+
+    /**
      * tinh diem
      * @return type
      */
@@ -287,7 +277,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
 
         return Redirect::route("admin_pnd_examine");
     }
-    
+
     /**
      *
      * @return type
