@@ -407,7 +407,7 @@ class Students extends Model
 
     public function get_student($params = [])
     {
-
+ 
         $eloquent = null;
         if (!empty($params['user_name'])) {
             $eloquent = self::where('student_user', $params['user_name'])->first();

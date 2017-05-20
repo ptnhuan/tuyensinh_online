@@ -118,8 +118,7 @@ class PndAdminController extends PndController
         $districts = NULL;
         
         $student_id = (int)$request->get('id');
-
-        if($this->check_view_user($request)){
+ 
             $specialists = $this->obj_specialists->pluck_select();
 
             $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
@@ -138,9 +137,7 @@ class PndAdminController extends PndController
             if (!empty($student_id) && (is_int($student_id))) {
 
                 $student = $this->obj_students->find($student_id);
-            }
-        }
-
+            } 
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'specialists' => $specialists,
