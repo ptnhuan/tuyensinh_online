@@ -53,8 +53,8 @@
         $.ajax({
             type: "GET",
             url:'{{URL::route('admin_pnd_examine_identifi')}}',
-            success:{
-                $window.location.reload();
+            success:function(){
+                location.reload();
             }
             
         });

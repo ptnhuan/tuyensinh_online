@@ -71,6 +71,7 @@ class Examines extends Model {
 
         if (!empty($student)) {
             $student->student_identifi = $input['student_identifi'];
+            $student->student_identifi_name = $input['student_identifi_name'];
             
             $student->save();
             return $student;

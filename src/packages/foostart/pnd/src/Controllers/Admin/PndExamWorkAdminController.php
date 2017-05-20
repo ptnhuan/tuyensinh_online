@@ -178,14 +178,28 @@ class PndExamWorkAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $school_users = $this->current_user->user_name;
+            
         if ($school_users <> 'admin') {
             $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
             $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+         
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
 
 
+        if ($request->ajax()) {
+
+            foreach ($students_identifi as $value) { 
+                $input['student_id'] = $value['student_id'];
+                $input['student_identifi'] = $idoder.$value['student_id'];
+
+                $this->obj_examines->user_update_identifi_student($input);
+            }
+            return;
+             
+        }
+        
         $students = $this->obj_students->get_all_students($params);
 
         $this->data = array_merge($this->data, array(
@@ -200,16 +214,6 @@ class PndExamWorkAdminController extends PndController {
         $points = $request->all();
         $input = $request->all();
 
-        if ($request->ajax()) {
-
-            foreach ($students_identifi as $value) { 
-                $input['student_id'] = $value['student_id'];
-                $input['student_identifi'] = $idoder + $value['student_id'];
-
-                $this->obj_examines->user_update_identifi_student($input);
-            }
-             
-        }
 
 
         return view('pnd::admin.pnd_exam_identifi_list', $this->data);
