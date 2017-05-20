@@ -217,7 +217,7 @@ class PexcelAdminController extends PexcelController {
 
         $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
 
-        $students = $obj_parse->read_data($pexcel);
+        $students = $obj_parse->get_students($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
         unset($pexcel->pexcel_category_name);
