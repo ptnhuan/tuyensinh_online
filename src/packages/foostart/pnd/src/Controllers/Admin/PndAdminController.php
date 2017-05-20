@@ -156,7 +156,8 @@ class PndAdminController extends PndController
             if ($student) {
                 $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
-                if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id))) {
+                if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id)
+                        || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))) {
 
                     $this->data = array_merge($this->data, array(
                         'student' => $student,
