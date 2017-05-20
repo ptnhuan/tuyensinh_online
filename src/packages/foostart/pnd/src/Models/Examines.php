@@ -79,5 +79,19 @@ class Examines extends Model {
             return NULL;
         }
     }
+    
+     public function user_update_room_student($input) {
+        $student_id = $input['student_id'];
+        $student = self::find($student_id);
+
+        if (!empty($student)) {
+            $student->student_room = $input['student_room'];
+              
+            $student->save();
+            return $student;
+        } else {
+            return NULL;
+        }
+    }
 
 }
