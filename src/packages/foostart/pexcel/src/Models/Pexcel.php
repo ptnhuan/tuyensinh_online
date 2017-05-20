@@ -59,7 +59,11 @@ class Pexcel extends Model {
             $eloquent->where('user_id', $params['user_id']);
         }
 
-        $pexcels = $eloquent->paginate(config('pexcel.per_page'));
+        if (!empty($params['export'])) {
+            $pexcels = $eloquent->get();
+        } else {
+            $pexcels = $eloquent->paginate(config('pexcel.per_page'));
+        }
 
         return $pexcels;
     }

@@ -10,7 +10,13 @@ class Parse {
         return $flag;
     }
 
-    public function get_students($pexcel) {
+    /**
+     * Read file excel
+     * Read first sheet
+     * @param type $pexcel
+     * @return type
+     */
+    public function read_data($pexcel) {
         $students = array();
 
         $excel = \App::make('excel');
@@ -30,6 +36,12 @@ class Parse {
         return $students;
     }
 
+    /**
+     * Parse data from excel with list of column in configs
+     * @param type $pexcel
+     * @param type $filedata
+     * @return type
+     */
     private function parseExcel($pexcel, $filedata) {
 
         $data = array();
@@ -46,6 +58,13 @@ class Parse {
         return $data;
     }
 
+    /**
+     * Map data excel with configs
+     * @param type $fields
+     * @param type $value
+     * @param type $pexcel
+     * @return type
+     */
     private function mapData($fields, $value, $pexcel) {
         $data = array(
             'pexcel_id' => $pexcel->pexcel_id,
@@ -57,10 +76,32 @@ class Parse {
             $data[$key] = NULL;
             if (isset($value[$index - 1])) {
 
-                $data[$key] = $value[$index-1];
-
+                $data[$key] = $value[$index - 1];
             }
         }
         return $data;
+    }
+
+    public function export_data($data, $file_name) {
+        \Excel::create($file_name .'_' . date('d-m-Y', time()), function($excel) use($data) {
+
+            $excel->sheet('pexels', function($sheet) use($data) {
+
+                $sheet->appendRow(array(
+                        'Pexcel ID',
+                        'Pexcel name',
+                        'Created at',
+                        'File path'
+                ));
+                foreach ($data as $item) {
+                    $sheet->appendRow(array(
+                        $item->pexcel_id,
+                        $item->pexcel_name,
+                        date('d-m-Y', $item->pexcel_created_at),
+                        $item->pexcel_file_path
+                    ));
+                }
+            });
+        })->download('xlsx');
     }
 }

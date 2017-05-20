@@ -43,8 +43,8 @@
 
         </div>
         <!--/END DATE TO-->
-
-        {!! Form::submit(trans('pexcel::pexcel.search').'', ["class" => "btn btn-info pull-right"]) !!}
+        {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-left", 'name' => 'export']) !!}
+        {!! Form::submit(trans('pexcel::pexcel.search').'', ["class" => "btn btn-info pull-right", 'name' => 'search']) !!}
         {!! Form::close() !!}
     </div>
 </div>
