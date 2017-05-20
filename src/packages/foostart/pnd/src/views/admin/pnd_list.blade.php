@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-md-4">
-            @include('pnd::admin.pnd_filter')
+            @include('pnd::admin.pnd_search')
         </div>
     </div>
 </div>
