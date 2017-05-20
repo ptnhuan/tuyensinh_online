@@ -412,3 +412,15 @@
 127.0.0.1 - - [20/May/2017:17:02:07 +0700] "GET /admin/pexcel HTTP/1.1" 200 9927
 127.0.0.1 - - [20/May/2017:17:02:07 +0700] "GET /css/bootstrap.min.css.map HTTP/1.1" 404 11933
 127.0.0.1 - - [20/May/2017:17:02:08 +0700] "GET /admin/pexcel?pexcel_name=&pexcel_date_from=&pexcel_date_to=&export=Xu%E1%BA%A5t+excel HTTP/1.1" 200 6434
+127.0.0.1 - - [20/May/2017:17:43:33 +0700] "GET /admin/pexcel HTTP/1.1" 200 10891
+127.0.0.1 - - [20/May/2017:17:43:34 +0700] "GET /admin/pexcel HTTP/1.1" 200 10891
+127.0.0.1 - - [20/May/2017:17:43:39 +0700] "GET /admin/pexcel HTTP/1.1" 200 7921
+127.0.0.1 - - [20/May/2017:17:43:39 +0700] "GET /admin/pexcel HTTP/1.1" 200 7921
+127.0.0.1 - - [20/May/2017:17:43:41 +0700] "GET /admin/pexcel_category HTTP/1.1" 200 10198
+127.0.0.1 - - [20/May/2017:17:43:44 +0700] "GET /admin/pexcel_category HTTP/1.1" 401 20710
+127.0.0.1 - - [20/May/2017:17:44:01 +0700] "GET /admin/pexcel HTTP/1.1" 200 7921
+127.0.0.1 - - [20/May/2017:17:44:01 +0700] "GET /admin/pexcel HTTP/1.1" 200 7921
+127.0.0.1 - - [20/May/2017:17:45:51 +0700] "GET /admin/pexcel HTTP/1.1" 200 10891
+127.0.0.1 - - [20/May/2017:17:45:58 +0700] "GET /admin/pexcel HTTP/1.1" 200 7921
+127.0.0.1 - - [20/May/2017:17:46:05 +0700] "GET /admin/pexcel/edit?id=5 HTTP/1.1" 200 15366
+127.0.0.1 - - [20/May/2017:17:46:08 +0700] "GET /admin/pexcel/edit?id=5 HTTP/1.1" 200 -
