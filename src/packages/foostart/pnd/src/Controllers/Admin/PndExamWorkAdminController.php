@@ -205,12 +205,13 @@ class PndExamWorkAdminController extends PndController {
                 if (($k > 999)) {
                     $identification = $idoder . $k;
                 }
-                $k = $k + 1;
+              
                 $input['student_id'] = $value['student_id'];
                 $input['student_identifi'] = $k;
                 $input['student_identifi_name'] =$identification;
 
                 $this->obj_examines->user_update_identifi_student($input);
+                  $k = $k + 1;
             }
             return;
         }

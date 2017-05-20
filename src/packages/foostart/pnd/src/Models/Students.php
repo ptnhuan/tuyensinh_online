@@ -14,6 +14,8 @@ class Students extends Model
     protected $table = 'school_students';
     public $timestamps = false;
     protected $fillable = [
+       // 'student_identifi_name',
+        //'student_room',
         'student_first_name',
         'student_last_name',
         'student_sex',
@@ -119,8 +121,7 @@ class Students extends Model
     
      public function get_all_students_order($params)
     {
-
-        $students = NULL;
+  $students = NULL;
 
         if (!empty($params['permissions'])) {
 
@@ -146,9 +147,9 @@ class Students extends Model
                     }
 
                     if ($pexcel_ids) {
-                        $eloquent = self::orderBy('student_identifi', 'ASC')
+                        $eloquent = self::orderBy('student_last_name', 'ASC')
                             ->whereIn('pexcel_id', $pexcel_ids);
- 
+
 
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
                         return $students;
@@ -157,7 +158,7 @@ class Students extends Model
             }
         }
 
-        $eloquent = self::orderBy('student_identifi', 'ASC');
+        $eloquent = self::orderBy('student_last_name', 'ASC');
 
         //SEARCH BY SCHOOL
         if (!empty($params['school_code'])) {
@@ -165,6 +166,7 @@ class Students extends Model
             $eloquent = $eloquent->where('school_code', $params['school_code']);
         }
         $students = $eloquent->paginate(config('pexcel.per_page_students'));
+ 
 
         return $students;
 
