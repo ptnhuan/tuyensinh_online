@@ -35,7 +35,7 @@ return [
     'page_school_about_list' => 'Thông tin đơn vị',
     'page_examine_list' => 'Tính điểm xét tuyển',
     'page_exam_room_list' => 'Xếp phòng thi',
-     'page_exam_identification' => 'Đánh số báo danh/xếp phòng thi',
+    'page_exam_identification' => 'Đánh số báo danh',
     'page_examine_point_list' => 'Điểm quy đổi',
     'page_district_list' => 'Danh sách huyện',
     'page_district_search' => 'Tìm kiếm thông tin huyện',
@@ -43,6 +43,7 @@ return [
     'page_specialist_search' => 'Tìm kiếm thông tin lớp chuyên',
     'page_examine_filter' => 'Tính điểm bình quân xét tuyển',
     'page_exam_indentifi_filter' => 'Đánh số báo danh',
+    'page_exam_room_filter' => 'Xếp phòng thi',
     /**
      * Form
      */
@@ -96,7 +97,6 @@ return [
     'school_district_title' => 'Quản lý thông tin huyện',
     'school_district_id' => 'Huyện',
     'school_district_code' => 'Mã huyện',
-
     'school_district_name' => 'Tên huyện',
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
@@ -104,8 +104,6 @@ return [
 
     'page_specialist' => 'Tìm kiếm Môn chuyên',
     'specialist_label' => 'Nhập từ khóa',
-
-
     'school_level_id' => 'Cấp học',
     'user_id' => 'Tên đăng nhập',
     'pass_id' => 'Mật khẩu',
@@ -114,9 +112,7 @@ return [
     'student_phone' => 'Điện thoại',
     'student_email' => 'Thư điện tử',
     'student_date' => 'Sinh ngày',
-
     'student_name' => 'Họ và tên',
-
     'page_categories' => 'Tìm kiếm thông tin học sinh',
     'pnd_categories_label' => 'Danh mục',
     'tab_info_main' => 'Thông tin',
@@ -155,12 +151,10 @@ return [
     'pnd_item_created' => 'Ngày gửi',
     'pnd_item_title' => 'Tiêu đề',
     'pnd' => 'Quản lý file',
-
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////STUDENTS///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     'keyword' => 'Từ khóa',
-
     'student_first_name' => "Họ học sinh",
     'student_last_name' => "Tên học sinh",
     'student_sex' => "Giới tính",
@@ -169,6 +163,17 @@ return [
     'student_birth_month' => "Tháng",
     'student_birth_year' => "Năm ",
     'student_birth_place' => "Nơi sinh",
+    'school_id' => "Mã trường THCS",
+    'school_district_id' => "Huyện",
+    'student_class' => "Lớp",
+    'student_capacity_6' => "Học lực lớp 6",
+    'student_conduct_6' => "Hạnh kiểm lớp 6",
+    'student_capacity_7' => "Học lực lớp 7",
+    'student_conduct_7' => "Hạnh kiểm lớp 7",
+    'student_capacity_8' => "Học lực lớp 8",
+    'student_conduct_8' => "Hạnh kiểm lớp 8",
+    'student_capacity_9' => "Học lực lớp 9",
+    'student_conduct_9' => "Hạnh kiểm lớp 9",
 
     'school_id' => "Mã trường THCS",
     'school_district_id' => "Huyện",
@@ -191,7 +196,13 @@ return [
     'student_average_1' => "TBCN Toán",
     'student_average_2' => "TBCN Văn",
     'student_graduate' => "TN THCS",
-
+    'student_score_prior' => "Điểm cộng",
+    'student_score_prior_comment' => "Ghi chú",
+    'student_nominate' => "Tuyển thẳng",
+    'school_id_option' => "Mã trường chuyên/DTNT",
+    'school_class_code' => "Mã lớp chuyên",
+    'school_code_option_1' => "Mã nguyện vọng 1",
+    'school_code_option_2' => "Mã nguyện vọng 2",
     'student_score_prior' => "Điểm cộng",
     'student_score_prior_comment' => "Ghi chú",
 
@@ -207,8 +218,7 @@ return [
     'student_phone' => "Số điện thoại",
     'student_user' => "Tên đăng nhập",
     'student_pass' => "Mật khẩu",
-
-
+ 
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -225,7 +235,6 @@ return [
     'pnd_category_new' => 'Thêm danh mục',
     'pnd_category_update' => 'Cập nhật danh mục',
     'length_category_name' => 'Chiều dài tiêu đề không hợp lệ. Yêu cầu từ <b>:LENGTH_CATEGORY_NAME_MIN</b> tới <b>:LENGTH_CATEGORY_NAME_MAX</b> ký tự',
-
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////POINT//////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -247,6 +256,4 @@ return [
     'school_prior_point_1' => 'Điểm tối đa UT-KK xét tuyển',
     'school_prior_point_2' => 'Điểm tối đa UT-KK thi tuyển',
     'school_prior_point_3' => 'Điểm tối đa UT-KK xét tuyển- thi tuyển',
-
-
 ];

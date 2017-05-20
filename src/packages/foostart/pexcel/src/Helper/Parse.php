@@ -11,7 +11,6 @@ class Parse
         $flag = TRUE;
         return $flag;
     }
-
     /**
      * Read file excel
      * Read first sheet
@@ -31,23 +30,14 @@ class Parse
             $reader->noHeading();
 
             $reader->formatDates(false);
-        }, 'UTF-8')->get();
+        }, 'UTF-8')->get();               
         $results = $data->toArray();
 
         $students = $this->parseExcel($pexcel, $results);
 
         return $students;
     }
-
-    /**
-     * Parse data from excel with list of column in configs
-     * @param type $pexcel
-     * @param type $filedata
-     * @return type
-     */
-    private function parseExcel($pexcel, $filedata)
-    {
-
+    private function parseExcel($pexcel, $filedata) {
         $data = array();
 
         $fields = config('pexcel.fields');
@@ -61,7 +51,6 @@ class Parse
         }
         return $data;
     }
-
     /**
      * Map data excel with configs
      * @param type $fields
@@ -81,7 +70,8 @@ class Parse
             $data[$key] = NULL;
             if (isset($value[$index - 1])) {
 
-                $data[$key] = $value[$index - 1];
+                $data[$key] = $value[$index-1];
+
             }
         }
         return $data;

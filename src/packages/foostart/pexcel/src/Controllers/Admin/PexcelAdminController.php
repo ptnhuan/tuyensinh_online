@@ -84,8 +84,8 @@ class PexcelAdminController extends PexcelController {
             if (!empty($pexcel_id) && (is_int($pexcel_id))) {
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
             }
-
-            if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+ 
+            if ($this->is_admin || $this->is_all || $this->is_my) {
                 $this->data = array_merge($this->data, array(
                     'pexcel' => $pexcel,
                     'request' => $request,
@@ -217,7 +217,7 @@ class PexcelAdminController extends PexcelController {
 
         $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
 
-        $students = $obj_parse->read_data($pexcel);
+        $students = $obj_parse->get_students($pexcel);
 
         $pexcel->pexcel_value = json_encode($students);
         unset($pexcel->pexcel_category_name);
