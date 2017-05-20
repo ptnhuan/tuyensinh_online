@@ -178,28 +178,43 @@ class PndExamWorkAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $school_users = $this->current_user->user_name;
-            
+
         if ($school_users <> 'admin') {
             $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
             $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
-         
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
 
 
         if ($request->ajax()) {
+            $k = 1;
+            $identification = "";
 
-            foreach ($students_identifi as $value) { 
+            foreach ($students_identifi as $value) {
+
+                if ($k <= 10) {
+                    $identification = $idoder . "000" . $k;
+                }
+                if (($k >= 10) && ($k < 100)) {
+                    $identification = $idoder . "00" . $k;
+                }
+                if (($k >= 100) && ($k <= 999)) {
+                    $identification = $idoder . "0" . $k;
+                }
+                if (($k > 999)) {
+                    $identification = $idoder . $k;
+                }
+                $k = $k + 1;
                 $input['student_id'] = $value['student_id'];
-                $input['student_identifi'] = $idoder.$value['student_id'];
+                $input['student_identifi'] = $k;
+                $input['student_identifi_name'] =$identification;
 
                 $this->obj_examines->user_update_identifi_student($input);
             }
             return;
-             
         }
-        
+
         $students = $this->obj_students->get_all_students($params);
 
         $this->data = array_merge($this->data, array(

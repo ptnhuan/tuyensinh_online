@@ -43,7 +43,7 @@
                     $counter++
                     ?>
                 </td>
-   <td>{!! @$student->student_identifi!!}</td>
+   <td>{!! @$student->student_identifi_name!!}</td>
                 <td>{!! @$student->student_room!!}</td>
                 <td>{!! @$student->student_first_name .' '. @$student->student_last_name !!}</td>
                 <td>{!! @$student->student_capacity_6!!}</td>
@@ -107,7 +107,7 @@
 
 @section('sub_page_scripts')
     <script type='text/javascript'>
-        $('.table-data').width(17 * 77);
+        $('.table-data').width(19 * 77);
 
         $(".delete").click(function () {
             return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");
