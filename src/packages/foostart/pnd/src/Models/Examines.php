@@ -1,4 +1,6 @@
-<?php namespace Foostart\Pnd\Models;
+<?php
+
+namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,12 +48,8 @@ class Examines extends Model {
     ];
     protected $primaryKey = 'student_id';
 
-    
     public function user_update_student($input) {
-
-      
-            $student_id = $input['student_id'];
-   
+        $student_id = $input['student_id'];
         $student = self::find($student_id);
 
         if (!empty($student)) {
@@ -60,14 +58,25 @@ class Examines extends Model {
             $student->student_point_8 = $input['student_point_8'];
             $student->student_point_9 = $input['student_point_9'];
             $student->student_point_sum = $input['student_point_sum'];
-           
             $student->save();
+            return $student;
+        } else {
+            return NULL;
+        }
+    }
+    
+     public function user_update_identifi_student($input) {
+        $student_id = $input['student_id'];
+        $student = self::find($student_id);
 
+        if (!empty($student)) {
+            $student->student_identifi = $input['student_identifi'];
+            
+            $student->save();
             return $student;
         } else {
             return NULL;
         }
     }
 
- 
 }

@@ -121,7 +121,7 @@ class Students extends Model {
      */
     public function get_all_identifi_students($params){
 
-        $students = NULL;
+         $students = NULL;
 
         if(!empty($params['permissions'])) {
 
@@ -129,7 +129,7 @@ class Students extends Model {
             $obj_pexcel_category = new PexcelCategories();
 
             $categories = $obj_pexcel_category->get_available_categories();
-          
+             
             if ($categories) {
                 $category_ids = [];
                 foreach ($categories as $category) {
@@ -148,7 +148,9 @@ class Students extends Model {
 
                     if ($pexcel_ids) {
                         $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);                   
+                            ->whereIn('pexcel_id', $pexcel_ids);
+
+                     
 
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
                         return $students;
@@ -159,11 +161,14 @@ class Students extends Model {
         
         $eloquent = self::orderBy('student_last_name', 'ASC');
 
-        
+        //SEARCH BY SCHOOL
+        if (!empty($params['school_code'])) {
+
+            $eloquent = $eloquent->where('school_code', $params['school_code']);
+        }
+        $students = $eloquent->paginate(config('pexcel.per_page_students'));
         
         return $students;
-
-
     }
     
     public function get_students($params = array()) {
