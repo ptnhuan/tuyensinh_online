@@ -8,7 +8,8 @@ use DB;
 use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pexcel\Models\PexcelCategories;
 
-class Students extends Model {
+class Students extends Model
+{
 
     protected $table = 'school_students';
     public $timestamps = false;
@@ -57,11 +58,12 @@ class Students extends Model {
      * @param type $params
      * @return type
      */
-    public function get_all_students($params){
+    public function get_all_students($params)
+    {
 
         $students = NULL;
 
-        if(!empty($params['permissions'])) {
+        if (!empty($params['permissions'])) {
 
             $obj_pexcel = new Pexcel();
             $obj_pexcel_category = new PexcelCategories();
@@ -99,7 +101,7 @@ class Students extends Model {
                 }
             }
         }
-        
+
         $eloquent = self::orderBy('student_last_name', 'ASC');
 
         //SEARCH BY SCHOOL
@@ -108,28 +110,29 @@ class Students extends Model {
             $eloquent = $eloquent->where('school_code', $params['school_code']);
         }
         $students = $eloquent->paginate(config('pexcel.per_page_students'));
-        
+
         return $students;
 
 
     }
-    
+
     /**
      *
      * @param type $params
      * @return type
      */
-    public function get_all_identifi_students($params){
+    public function get_all_identifi_students($params)
+    {
 
         $students = NULL;
 
-        if(!empty($params['permissions'])) {
+        if (!empty($params['permissions'])) {
 
             $obj_pexcel = new Pexcel();
             $obj_pexcel_category = new PexcelCategories();
 
             $categories = $obj_pexcel_category->get_available_categories();
-          
+
             if ($categories) {
                 $category_ids = [];
                 foreach ($categories as $category) {
@@ -148,7 +151,7 @@ class Students extends Model {
 
                     if ($pexcel_ids) {
                         $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);                   
+                            ->whereIn('pexcel_id', $pexcel_ids);
 
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
                         return $students;
@@ -156,17 +159,17 @@ class Students extends Model {
                 }
             }
         }
-        
+
         $eloquent = self::orderBy('student_last_name', 'ASC');
 
-        
-        
+
         return $students;
 
 
     }
-    
-    public function get_students($params = array()) {
+
+    public function get_students($params = array())
+    {
 
 
         $eloquent = self::orderBy('student_last_name', 'ASC');
@@ -202,7 +205,7 @@ class Students extends Model {
 
             $eloquent = $eloquent->where(function ($where) use ($params) {
                 $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
-                        ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
+                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
             });
         }
 
@@ -215,7 +218,8 @@ class Students extends Model {
      * @param type $pexcel_id
      * @return type
      */
-    public function update_student($input, $student_id = NULL) {
+    public function update_student($input, $student_id = NULL)
+    {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -245,7 +249,6 @@ class Students extends Model {
             $student->student_conduct_9 = $input['student_conduct_9'];
 
 
-
             $student->student_average = $input['student_average'];
             $student->student_average_1 = $input['student_average_1'];
             $student->student_average_2 = $input['student_average_2'];
@@ -263,7 +266,6 @@ class Students extends Model {
             $student->student_pass = $input['student_pass'];
 
 
-
             $student->save();
 
             return $student;
@@ -271,7 +273,9 @@ class Students extends Model {
             return NULL;
         }
     }
-    public function user_update_student($input, $student_id = NULL) {
+
+    public function user_update_student($input, $student_id = NULL)
+    {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -307,7 +311,8 @@ class Students extends Model {
      * @param type $input
      * @return type
      */
-    private function validRow($data) {
+    private function validRow($data)
+    {
         $student = array();
 
         foreach ($this->fillable as $key) {
@@ -317,7 +322,8 @@ class Students extends Model {
         return $student;
     }
 
-    public function createAccount($student) {
+    public function createAccount($student)
+    {
 
         $user_name = $this->generateAccount($student->school_code, $student->student_id);
 
@@ -327,7 +333,8 @@ class Students extends Model {
         $student->save();
     }
 
-    public function add_student($input) {
+    public function add_student($input)
+    {
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
@@ -338,19 +345,22 @@ class Students extends Model {
         return $student;
     }
 
-    public function add_students($students, $pexcel_id) {
+    public function add_students($students, $pexcel_id)
+    {
 
         foreach ($students as $student) {
-            $this->add_student((array) $student, $pexcel_id);
+            $this->add_student((array)$student, $pexcel_id);
         }
     }
 
-    public function delete_student($student_id) {
+    public function delete_student($student_id)
+    {
         $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 
-    public function generateAccount($school_id, $student_id) {
+    public function generateAccount($school_id, $student_id)
+    {
 
         $school_id .= '';
         $student_id .= '';
@@ -377,10 +387,19 @@ class Students extends Model {
         return implode($user_name);
     }
 
-    public function get_student($params = []){
-        $eloquent = self::where('student_user',$params['user_name']);
+    public function get_student($params = [])
+    {
 
-        return $eloquent->first();
+        $eloquent = null;
+        if (!empty($params['user_name'])) {
+            $eloquent = self::where('student_user', $params['user_name'])->first();
+        }
+        if (!empty($params['school_code']) && !empty($params['id'])) {
+            $eloquent = self::where('student_id', $params['id'])
+                ->where('school_code', $params['school_code'])->first(); 
+        }
+
+        return $eloquent;
     }
 
 }

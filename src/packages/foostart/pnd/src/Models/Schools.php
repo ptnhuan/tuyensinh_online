@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Foostart\Pnd\Models\PndUser;
 use Illuminate\Support\Facades\Hash;
 
+
 class Schools extends Model {
 
     protected $table = 'schools';
@@ -261,5 +262,7 @@ class Schools extends Model {
 
         return $eloquent->pluck('school_name', 'school_code');
     }
+
+
 
 }
