@@ -2,13 +2,13 @@
 
 return [
     /*
-    |--------------------------------------------------------------------------
-    | Admin panel menu items
-    |--------------------------------------------------------------------------
-    |
-    | Here you can edit the items to show in the admin menu(on top of the page)
-    |
-    */
+      |--------------------------------------------------------------------------
+      | Admin panel menu items
+      |--------------------------------------------------------------------------
+      |
+      | Here you can edit the items to show in the admin menu(on top of the page)
+      |
+     */
     "list" => [
         [
             "name" => "Trang chủ",
@@ -70,7 +70,6 @@ return [
             "link" => '/admin/users/profile/self',
             "permissions" => []
         ],
-
         [
             /*
              * Route to edit the current user profile
@@ -84,12 +83,20 @@ return [
             /*
              * Route to edit the current user profile
              */
+            "name" => "",
+            "route" => "admin_pexcel_category",
+            "link" => '/admin/pexcel_category',
+            "permissions" => ['_superadmin', '_all-mypexcel']
+        ],
+        [
+            /*
+             * Route to edit the current user profile
+             */
             "name" => "Hiển thị",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
             "permissions" => []
         ],
-
         [
             /*
              * Route to edit the current user profile
@@ -108,6 +115,5 @@ return [
             "link" => '/user/student/view',
             "permissions" => ['_student']
         ],
-
     ]
 ];
