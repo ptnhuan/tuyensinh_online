@@ -84,7 +84,7 @@ class Students extends Model
                 foreach ($pexcels as $pexcel) {
                     $pexcel_ids[] = $pexcel->pexcel_id;
                 }
-
+    
                 if ($pexcel_ids) {
                     $eloquent = self::orderBy('student_last_name', 'ASC')
                         ->whereIn('pexcel_id', $pexcel_ids);

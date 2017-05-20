@@ -87,9 +87,10 @@ class PndExamWorkAdminController extends PndController {
             }
         } else {
             $students = $this->obj_students->get_all_students($params);
+          
         }
         //END PEXCEL
-
+      
         $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
 
 
