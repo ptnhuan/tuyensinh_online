@@ -1,7 +1,8 @@
 <?php
 
 namespace Foostart\Pnd\Controllers\Admin;
-
+ 
+use Foostart\Pexcel\Helper\Parse;
 use Illuminate\Http\Request;
 use Foostart\Pnd\Controllers\Admin\PndController;
 use URL;
@@ -57,8 +58,19 @@ class PndAdminController extends PndController
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-        $params['permissions'] = $this->current_user->permissions;
 
+        /**
+         * EXPORT
+         */
+        if (isset($params['export'])) {
+            $students = $this->obj_students->get_all_students($params);
+            $obj_parse = new Parse();
+            $obj_parse->export_data_students($students, 'students');
+
+            unset($params['export']);
+        }
+
+        
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);

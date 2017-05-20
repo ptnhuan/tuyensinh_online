@@ -2,9 +2,11 @@
 
 namespace Foostart\Pexcel\Helper;
 
-class Parse {
+class Parse
+{
 
-    public function isValidFile($file_path) {
+    public function isValidFile($file_path)
+    {
 
         $flag = TRUE;
         return $flag;
@@ -16,19 +18,20 @@ class Parse {
      * @param type $pexcel
      * @return type
      */
-    public function read_data($pexcel) {
+    public function read_data($pexcel)
+    {
         $students = array();
 
         $excel = \App::make('excel');
 
         $file_path = realpath(base_path('public/' . $pexcel->pexcel_file_path));
 
-        $data = \Excel::selectSheetsByIndex(0)->load($file_path, function($reader) {
-                    // Getting all results
-                    $reader->noHeading();
+        $data = \Excel::selectSheetsByIndex(0)->load($file_path, function ($reader) {
+            // Getting all results
+            $reader->noHeading();
 
-                    $reader->formatDates(false);
-                }, 'UTF-8')->get();
+            $reader->formatDates(false);
+        }, 'UTF-8')->get();
         $results = $data->toArray();
 
         $students = $this->parseExcel($pexcel, $results);
@@ -42,7 +45,8 @@ class Parse {
      * @param type $filedata
      * @return type
      */
-    private function parseExcel($pexcel, $filedata) {
+    private function parseExcel($pexcel, $filedata)
+    {
 
         $data = array();
 
@@ -65,7 +69,8 @@ class Parse {
      * @param type $pexcel
      * @return type
      */
-    private function mapData($fields, $value, $pexcel) {
+    private function mapData($fields, $value, $pexcel)
+    {
         $data = array(
             'pexcel_id' => $pexcel->pexcel_id,
             'category_name' => $pexcel->pexcel_category_name,
@@ -82,16 +87,17 @@ class Parse {
         return $data;
     }
 
-    public function export_data($data, $file_name) {
-        \Excel::create($file_name .'_' . date('d-m-Y', time()), function($excel) use($data) {
+    public function export_data($data, $file_name)
+    {
+        \Excel::create($file_name . '_' . date('d-m-Y', time()), function ($excel) use ($data) {
 
-            $excel->sheet('pexels', function($sheet) use($data) {
+            $excel->sheet('pexels', function ($sheet) use ($data) {
 
                 $sheet->appendRow(array(
-                        'Pexcel ID',
-                        'Pexcel name',
-                        'Created at',
-                        'File path'
+                    'Pexcel ID',
+                    'Pexcel name',
+                    'Created at',
+                    'File path'
                 ));
                 foreach ($data as $item) {
                     $sheet->appendRow(array(
@@ -99,6 +105,32 @@ class Parse {
                         $item->pexcel_name,
                         date('d-m-Y', $item->pexcel_created_at),
                         $item->pexcel_file_path
+                    ));
+                }
+            });
+        })->download('xlsx');
+    }
+
+    public function export_data_students($data, $file_name)
+    {
+        \Excel::create($file_name . '_' . date('d-m-Y', time()), function ($excel) use ($data) {
+
+            $excel->sheet('students', function ($sheet) use ($data) {
+
+                $sheet->appendRow(array(
+                    'Student ID',
+                    'Student name',
+                    'Birth',
+                    'Phone Number',
+                    'Email'
+                ));
+                foreach ($data as $item) {
+                    $sheet->appendRow(array(
+                        $item->student_id,
+                        $item->student_first_name.$item->student_last_name,
+                        date('d-m-Y', $item->student_birth),
+                        $item->student_phone,
+                        $item->student_email
                     ));
                 }
             });

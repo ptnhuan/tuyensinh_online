@@ -59,6 +59,50 @@ class Students extends Model
      * @param type $params
      * @return type
      */
+
+    public function get_students($params = array())
+    {
+
+
+        $eloquent = self::orderBy('student_last_name', 'ASC');
+
+        //PEXCEL
+        if (!empty($params['id'])) {
+            $eloquent->where('pexcel_id', $params['id']);
+        }
+
+        //SEARCH BY SCHOOL
+        if (!empty($params['school_code'])) {
+            $eloquent = $eloquent->where('school_code', $params['school_code']);
+
+            if (intval(@$params['school_option']) == 1) {
+                if (!empty($params['school_code_option']))
+                    $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
+                else {
+                    $eloquent = $eloquent->whereNotNull('school_code_option_1');
+                    $eloquent = $eloquent->whereNull('school_code_option_2');
+                }
+            } elseif (@intval($params['school_option']) == 2) {
+                if (!empty($params['school_code_option']))
+                    $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
+                else {
+                    $eloquent = $eloquent->whereNotNull('school_code_option_2');
+                    $eloquent = $eloquent->whereNull('school_code_option_1');
+                }
+            }
+        }
+
+        //SEARCH BY NAME OR EMAIL
+        if (!empty($params['search_student'])) {
+
+            $eloquent = $eloquent->where(function ($where) use ($params) {
+                $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
+                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
+            });
+        }
+
+        return $eloquent->paginate(config('pexcel.per_page'));
+    }
     public function get_all_students($params)
     {
 
@@ -74,7 +118,6 @@ class Students extends Model
             foreach ($categories as $category) {
                 $category_ids[] = $category->pexcel_category_id;
             }
-
 
             //id is pexcel_id
             $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
@@ -93,8 +136,34 @@ class Students extends Model
                         $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
                         $eloquent->orwhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                     }
+   
+                    //school option
+                    if (!empty($params['school_code'])) {
+                        $eloquent = $eloquent->where('school_code', $params['school_code']);
 
-                    $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                        if (intval(@$params['school_option']) == 1) {
+                            if (!empty($params['school_code_option']))
+                                $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
+                            else {
+                                $eloquent = $eloquent->whereNotNull('school_code_option_1');
+                                $eloquent = $eloquent->whereNull('school_code_option_2');
+                            }
+                        } elseif (@intval($params['school_option']) == 2) {
+                            if (!empty($params['school_code_option']))
+                                $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
+                            else {
+                                $eloquent = $eloquent->whereNotNull('school_code_option_2');
+                                $eloquent = $eloquent->whereNull('school_code_option_1');
+                            }
+                        }
+                    }
+                    
+
+                    if (!empty($params['export'])) {
+                        $students = $eloquent->get();
+                    } else {
+                        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                    } 
                     return $students;
                 }
             }
@@ -186,49 +255,6 @@ class Students extends Model
         }
     }
 
-    public function get_students($params = array())
-    {
-
-
-        $eloquent = self::orderBy('student_last_name', 'ASC');
-
-        //PEXCEL
-        if (!empty($params['id'])) {
-            $eloquent->where('pexcel_id', $params['id']);
-        }
-
-        //SEARCH BY SCHOOL
-        if (!empty($params['school_code'])) {
-            $eloquent = $eloquent->where('school_code', $params['school_code']);
-
-            if (intval(@$params['school_option']) == 1) {
-                if (!empty($params['school_code_option']))
-                    $eloquent = $eloquent->where('school_code_option_1', $params['school_code_option']);
-                else {
-                    $eloquent = $eloquent->whereNotNull('school_code_option_1');
-                    $eloquent = $eloquent->whereNull('school_code_option_2');
-                }
-            } elseif (@intval($params['school_option']) == 2) {
-                if (!empty($params['school_code_option']))
-                    $eloquent = $eloquent->where('school_code_option_2', $params['school_code_option']);
-                else {
-                    $eloquent = $eloquent->whereNotNull('school_code_option_2');
-                    $eloquent = $eloquent->whereNull('school_code_option_1');
-                }
-            }
-        }
-
-        //SEARCH BY NAME OR EMAIL
-        if (!empty($params['search_student'])) {
-
-            $eloquent = $eloquent->where(function ($where) use ($params) {
-                $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
-                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
-            });
-        }
-
-        return $eloquent->paginate(config('pexcel.per_page'));
-    }
 
     /**
      *
