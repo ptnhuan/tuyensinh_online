@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_examine_point_search',['name_search'=>'_examine_point'])
+            @include('pnd::admin.pnd_exam_identifi_filter',['name_search'=>'_examine_point'])
         </div>
     </div>
 </div>
@@ -49,9 +49,17 @@
 @section('footer_scripts')
 <!-- DELETE CONFIRM -->
 <script>
-    $(".delete").click(function () {
-        return confirm("{{ trans('pnd::pnd.delete_confirm') }}");
+    $(".press-indentifi").click(function () {
+        $.ajax({
+            type: "GET",
+            url:'{{URL::route('admin_pnd_examine_identifi')}}',
+            success:{
+                $window.location.reload();
+            }
+            
+        });
     });
+     
 </script>
 <!-- /END DELETE CONFIRM -->
 @stop

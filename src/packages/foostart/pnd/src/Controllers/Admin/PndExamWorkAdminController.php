@@ -33,7 +33,7 @@ class PndExamWorkAdminController extends PndController {
     private $obj_examines = null;
     private $obj_specialists = null;
     private $obj_examinepoints = null;
-     private $obj_examinepointpriors = null;
+    private $obj_examinepointpriors = null;
     private $obj_pexcel = NULL;
 
     public function __construct() {
@@ -44,7 +44,7 @@ class PndExamWorkAdminController extends PndController {
         $this->obj_examines = new Examines();
         $this->obj_specialists = new Specialists();
         $this->obj_examinepoints = new Examinepoints();
-$this->obj_examinepointpriors = new Examinepointpriors();
+        $this->obj_examinepointpriors = new Examinepointpriors();
         $this->obj_pexcel = new Pexcel();
     }
 
@@ -97,7 +97,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         }
-       
+
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
@@ -200,24 +200,22 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $points = $request->all();
         $input = $request->all();
 
-       
-        
-        foreach ($students_identifi as $value) {
+        if ($request->ajax()) {
 
-                                   
-            $input['student_id'] = $value['student_id'];           
-            $input['student_identifi'] = $idoder+$value['student_id'];
+            foreach ($students_identifi as $value) { 
+                $input['student_id'] = $value['student_id'];
+                $input['student_identifi'] = $idoder + $value['student_id'];
 
-
-            $this->obj_examines->user_update_identifi_student($input);
+                $this->obj_examines->user_update_identifi_student($input);
+            }
+             
         }
 
-   return view('pnd::admin.pnd_exam_identifi_list', $this->data);
-       
+
+        return view('pnd::admin.pnd_exam_identifi_list', $this->data);
     }
-    
-    
-      /**
+
+    /**
      * tinh diem
      * @return type
      */
@@ -275,7 +273,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
 
         return Redirect::route("admin_pnd_examine");
     }
-    
+
     /**
      *
      * @return type

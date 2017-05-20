@@ -32,6 +32,7 @@ return [
     'page_specialist_list' => 'Danh sách lớp chuyên',
     'page_specialist_search' => 'Tìm kiếm thông tin lớp chuyên',
     'page_examine_filter' => 'Tính điểm bình quân xét tuyển',
+    'page_exam_indentifi_filter' => 'Đánh số báo danh',
     /**
      * Form
      */
@@ -114,6 +115,7 @@ return [
     'student_info'=>'Thông tin học sinh',
     'filter' => 'Lọc',
      'filter_examine' => 'Tính điểm xét tuyển',
+      'filter_exam_identifi' => 'Đánh số báo danh',
     /**
      * Message
      */

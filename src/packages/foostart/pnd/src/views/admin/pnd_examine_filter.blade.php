@@ -1,7 +1,7 @@
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('pnd::pnd.page_examine_filter') ?></h3>
+        <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i><?php echo trans('pnd::pnd.page_exam_indentifi_filter') ?></h3>
     </div>
     <div class="panel-body">
 
