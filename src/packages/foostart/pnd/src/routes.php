@@ -10,7 +10,6 @@ Route::group(['middleware' => ['web'], 'Foostart\Pnd\Controllers\Admin'], functi
 });
 
 
-
 /**
  * USER
  */
@@ -51,7 +50,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         Route::get('user/student/view', [
             'as' => 'user.student.view',
             'uses' => 'UserController@index'
-        ]);
+        ]); 
     });
 });
 
@@ -159,8 +158,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndSchoolAdminController@post_about'
         ]);
 
-
-
+ 
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND DISTRICT ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -267,7 +265,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ]);
         /**
          * edit-point
-         */
+         */ 
         Route::post('/pnd_examine_point', [
             'as' => 'admin_pnd_examine_point',
             'uses' => 'PndExaminepointAdminController@prior'
@@ -275,7 +273,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
 
 
         ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////PND EXAM WORK ROUTE///////////////////////////////
+        ////////////////////////////PND EXAMINE ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         /**
          * list
@@ -300,9 +298,8 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         Route::get('/pnd_examine/identifi', [
             'as' => 'admin_pnd_examine_identifi',
             'uses' => 'PndExamWorkAdminController@identifi'
-        ]);
-        
-          /**
+        ]); 
+        /**
          * set point
          */
         Route::get('/pnd_examine/room', [
@@ -331,6 +328,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         Route::get('/users/category/delete', [
             'as' => 'admin_pnd_category_user.delete',
             'uses' => 'PndCategoryUserController@delete'
-        ]);
+        ]); 
     });
 });

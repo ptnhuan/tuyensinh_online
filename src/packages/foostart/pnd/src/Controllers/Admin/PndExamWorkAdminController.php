@@ -178,7 +178,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
-        $students_point = $this->obj_students->get_all_students($params);
+        $students_identifi = $this->obj_students->get_all_identifi_students($params);
         $students = $this->obj_students->get_all_students($params);
 
         $this->data = array_merge($this->data, array(
