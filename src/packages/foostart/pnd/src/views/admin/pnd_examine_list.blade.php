@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.pnd_title') !!}
+{!! trans('pnd::pnd.school_exam_examine') !!}
 @stop
 
 @section('content')

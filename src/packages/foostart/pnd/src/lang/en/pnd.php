@@ -218,7 +218,7 @@ return [
     ////////////////////////////////////////////////////////////////////////////
     'school_point_title'=>'Điểm quy đổi',
     'school_exam_identifi'=>'Đánh số báo danh',
-      'school_exam_examine'=>'Xét tuyển',
+      'school_exam_examine'=>'Tính điểm Xét tuyển',
     'page_category_list' => 'Danh mục',
     'page_examinepoint_list' => 'Điểm quy đổi',
     'add_examine_point' => 'Thêm điểm quy đổi',

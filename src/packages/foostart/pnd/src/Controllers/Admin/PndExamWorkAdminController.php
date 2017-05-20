@@ -104,7 +104,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
             'request' => $request,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_exam_identifi_list', $this->data);
+        return view('pnd::admin.pnd_examine_list', $this->data);
     }
 
     /**
@@ -212,8 +212,8 @@ $this->obj_examinepointpriors = new Examinepointpriors();
             $this->obj_examines->user_update_identifi_student($input);
         }
 
-
-        return Redirect::route("admin_pnd_examine");
+   return view('pnd::admin.pnd_exam_identifi_list', $this->data);
+       
     }
     
     
