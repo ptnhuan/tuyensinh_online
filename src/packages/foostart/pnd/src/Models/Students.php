@@ -127,7 +127,7 @@ class Students extends Model
                 foreach ($pexcels as $pexcel) {
                     $pexcel_ids[] = $pexcel->pexcel_id;
                 }
-
+    
                 if ($pexcel_ids) {
                     $eloquent = self::orderBy('student_last_name', 'ASC')
                         ->whereIn('pexcel_id', $pexcel_ids);
@@ -433,7 +433,7 @@ class Students extends Model
 
     public function get_student($params = [])
     {
-
+ 
         $eloquent = null;
         if (!empty($params['user_name'])) {
             $eloquent = self::where('student_user', $params['user_name'])->first();
