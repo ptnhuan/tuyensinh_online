@@ -215,7 +215,7 @@ class PndExamWorkAdminController extends PndController {
             return;
         }
 
-        $students = $this->obj_students->get_all_students($params);
+        $students = $this->obj_students->get_all_students_order($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',

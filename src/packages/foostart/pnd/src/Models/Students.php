@@ -116,6 +116,61 @@ class Students extends Model
 
     }
 
+    
+     public function get_all_students_order($params)
+    {
+
+        $students = NULL;
+
+        if (!empty($params['permissions'])) {
+
+            $obj_pexcel = new Pexcel();
+            $obj_pexcel_category = new PexcelCategories();
+
+            $categories = $obj_pexcel_category->get_available_categories();
+
+            if ($categories) {
+                $category_ids = [];
+                foreach ($categories as $category) {
+                    $category_ids[] = $category->pexcel_category_id;
+                }
+
+
+                //id is pexcel_id
+                $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
+
+                if ($pexcels) {
+                    $pexcel_ids = [];
+                    foreach ($pexcels as $pexcel) {
+                        $pexcel_ids[] = $pexcel->pexcel_id;
+                    }
+
+                    if ($pexcel_ids) {
+                        $eloquent = self::orderBy('student_identifi', 'ASC')
+                            ->whereIn('pexcel_id', $pexcel_ids);
+ 
+
+                        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                        return $students;
+                    }
+                }
+            }
+        }
+
+        $eloquent = self::orderBy('student_identifi', 'ASC');
+
+        //SEARCH BY SCHOOL
+        if (!empty($params['school_code'])) {
+
+            $eloquent = $eloquent->where('school_code', $params['school_code']);
+        }
+        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+
+        return $students;
+
+
+    }
+
     /**
      *
      * @param type $params
