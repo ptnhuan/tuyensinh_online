@@ -12,6 +12,7 @@ use Route,
  */
 use Foostart\Pnd\Models\Pnd;
 use Foostart\Pnd\Models\Schools;
+use Foostart\Pnd\Models\SchoolTests;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Helper\Parse;
@@ -21,14 +22,14 @@ use Foostart\Pnd\Helper\Parse;
 use Foostart\Pnd\Validators\PndSchoolAdminValidator;
 
 class PndSchoolTestAdminController extends PndController {
-
+ private $obj_school_tests = NULL;
     private $obj_schools = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
     private $obj_districts = NULL;
 
     public function __construct() {
-
+  $this->obj_school_tests = new SchoolTests();
         $this->obj_schools = new Schools();
         $this->obj_districts = new Districts();
         $this->obj_pexcel_categories = new PexcelCategories();
@@ -41,19 +42,18 @@ class PndSchoolTestAdminController extends PndController {
     public function index(Request $request) {
 
         $params = $request->all();
-
+$school_tests = $this->obj_school_tests->get_schools($params);
         $schools = $this->obj_schools->get_schools($params);
         $districts_search = $this->obj_districts->pluck_select();
-
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
-
         $this->data = array_merge($this->data, array(
             'schools' => $schools,
+             'schooltests' => $school_tests,
             'request' => $request,
             'districts_search' => $districts_search,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_school_list', $this->data);
+        return view('pnd::admin.pnd_school_test_list', $this->data);
     }
 
     /**

@@ -30,8 +30,10 @@ return [
     'page_search_districts' => 'Tìm kiếm thông tin huyện',
     'page_search_schools' => 'Tìm kiếm thông tin trường học',
     'page_school_search' => 'Tìm kiếm thông tin trường',
+    'page_school_test_search' => 'Tìm kiếm hội đồng coi thi',
     'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
+    'page_school_test_list' => 'Hội đồng coi thi',
     'page_school_about_list' => 'Thông tin đơn vị',
     'page_school_test_list' => 'Hội đồng coi thi',
     'page_school_about_list' => 'Thông tin đơn vị',
@@ -125,6 +127,25 @@ return [
     'filter' => 'Lọc',
     'filter_examine' => 'Tính điểm xét tuyển',
     'filter_exam_identifi' => 'Đánh số báo danh',
+    
+       /**
+     * Message
+     */
+    
+    
+    
+    'school_test_title' => 'Quản lý thông tin trường học',
+    'school_test_code' => 'Mã trường THCS',
+    'school_test_code_room' => 'Số báo danh',
+    'school_test_name_title' => 'Tên trường viết tắt',
+    'school_test_name' => 'Tên Hội đồng coi thi',
+    'school_test_address' => 'Địa chỉ',
+    'school_test_phone' => 'Điện thoại',
+    'school_test_email' => 'Thư điện tử',
+    'school_test_number_room' => 'Số Thí sinh/phòng thi',
+    
+    
+    
     /**
      * Message
      */
@@ -229,6 +250,7 @@ return [
     'pnd_category_add_button' => 'Thêm danh mục mới',
     'add_specialist' => 'Thêm lớp chuyên',
     'add_school' => 'Thêm trường',
+     'add_school_test' => 'Thêm hội đồng coi thi',
     'add_district' => 'Thêm huyện',
     'pnd_categoty_id' => 'Category ID',
     'pnd_categoty_name' => 'Tên danh mục',

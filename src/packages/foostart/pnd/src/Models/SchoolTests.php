@@ -13,20 +13,16 @@ class SchoolTests extends Model {
     public $timestamps = false;
     protected $fillable = [
         'school_code',
-        'school_name',
-        'school_code_room',
-         'school_number_room',
-        'school_name_title',
-        'school_address',
-        'school_phone',
-        'school_email',
-        'school_contact',
-        'school_district_code',
-        'school_level_id',
-        'user_id',
-        'pass_id',
-        'school_contact_phone',
-        'school_contact_email'
+        'school_test_code',
+        'school_test_name',
+           'school_test_name_title',
+        'school_test_address',
+        'school_test_phone',
+        'school_test_email',
+        'school_test_contact',
+        'school_test_district_code',
+             'school_test_contact_phone',
+        'school_test_contact_email'
     ];
     protected $primaryKey = 'school_id';
 
@@ -38,10 +34,7 @@ class SchoolTests extends Model {
     public function get_schools($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
-        //pexcel_name
-        if (!empty($params['school_level_id'])) {
-            $eloquent->where('school_level_id', $params['school_level_id']);
-        }
+        
         if (!empty($params['school_district_label'])) {
             $eloquent->where('school_district_code', $params['school_district_label']);
         }
@@ -120,44 +113,7 @@ class SchoolTests extends Model {
         }
     }
 
-     public function update_school_about($input, $school_id = NULL) {
-
-        if (empty($school_id)) {
-            $school_id = $input['school_id'];
-        }
-
-        $school = self::find($school_id);
-
-        if (!empty($school)) {
-
-          
-            $school->school_name = $input['school_name'];
-            $school->school_address = $input['school_address'];
-            $school->school_phone = $input['school_phone'];
-            $school->school_email = $input['school_email'];
-            $school->school_contact = $input['school_contact'];       
-            $school->school_code_room = $input['school_code_room'];
-            $school->school_name_title = $input['school_name_title'];
-            $school->pass_id = $input['pass_id'];
-            $school->school_contact_phone = $input['school_contact_phone'];
-            $school->school_contact_email = $input['school_contact_email'];
-
-            $school->save();
-
-            //Update user account
-            $obj_user = new PndUser();
-            $user = $obj_user->search_user(['user_name' => $school->user_id]);
-            if ($user) {
-                $obj_user->update_user($user, $school);
-            } else {
-
-                $obj_user->create_user($school);
-            }
-            return $school;
-        } else {
-            return NULL;
-        }
-    }
+    
     /**
      *
      * @param type $input
@@ -173,34 +129,13 @@ class SchoolTests extends Model {
         return $school;
     }
 
-    public function createAccount($school) {
-
-        $user_name = $this->generateAccount($school->school_id, $school->school_code);
-
-        $school->user_id = $user_name;
-        $school->pass_id = $user_name;
-
-
-        $school->save();
-    }
-
+    
     public function add_school($input) {
 
         $school = $this->validRow($input);
 
         $school = self::create($school);
-        // $school = $this->createAccount($school);
-        //Update user account
-        $obj_user = new PndUser();
-        $user = $obj_user->search_user(['user_name' => $school->user_id]);
-        if ($user) {
-            $obj_user->update_user($user, $school);
-        } else {
-
-            $obj_user->create_user($school);
-        }
-        return $school;
-
+        
 
         return $school;
     }
@@ -210,30 +145,7 @@ class SchoolTests extends Model {
         return $eloquent;
     }
 
-    public function generateAccount($school_id, $school_code) {
-
-        $school_id .= '';
-        $school_code .= '';
-
-        $user_name = array();
-        $account_max_length = config('pexcel.account_max_length');
-
-
-        for ($i = 0; $i < $account_max_length; $i++) {
-            $user_name[] = 0;
-        }
-
-        for ($i = 0; $i < strlen($school_id); $i++) {
-            $user_name[$i] = $school_id[$i];
-        }
-
-        for ($i = 0; $i < strlen($school_code); $i++) {
-            $user_name[$account_max_length - $i - 1] = $school_code[$i];
-        }
-
-        return implode($user_name);
-    }
-
+   
     public function get_school_by_user_id($user_id = null) {
         $eloquent = self::where('user_id', $user_id)->first();
      
