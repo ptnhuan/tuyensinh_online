@@ -58,19 +58,21 @@ class PndAdminController extends PndController
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-        $params['this'] = $this;
+
         /**
-         * EXPORT
+         * EXPORT TO FILE EXCEL
          */
         if (isset($params['export'])) {
+
             $students = $this->obj_students->get_all_students($params);
             $obj_parse = new Parse();
             $obj_parse->export_data_students($students, 'students');
 
             unset($params['export']);
         }
-
-        //PEXCEL
+        /**
+         * IMPORT FROM PEXCEL TO STUDENTS
+         */
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
 
@@ -103,7 +105,7 @@ class PndAdminController extends PndController
             $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
-
+        $pexcels = $this->obj_students->sendPexcels();
 
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
@@ -111,7 +113,8 @@ class PndAdminController extends PndController
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
             'request' => $request,
-            'params' => $params
+            'params' => $params,
+            'pexcels' => array('0' => '...') + $pexcels->toArray(),
         ));
         return view('pnd::admin.pnd_list', $this->data);
     }

@@ -161,10 +161,14 @@ class Pexcel extends Model {
         return $pexcels;
     }
 
-    public function get_by_userId_categoryIds($user_id, $category_ids) {
-        $pexcels = self::where('user_id', $user_id)
-                        ->whereIn('pexcel_category_id', $category_ids)
-                        ->get();
+    public function get_by_userId_categoryIds($params, $category_ids) {
+        $pexcels = self::where('user_id', $params['user_id'])
+                        ->whereIn('pexcel_category_id', $category_ids);
+
+        if (!empty($params['pexcel_id'])) {
+            $pexcels->where('pexcel_id', $params['pexcel_id']);
+        }
+        $pexcels = $pexcels->get();
         return $pexcels;
     }
 
@@ -173,4 +177,8 @@ class Pexcel extends Model {
         return $pexcels;
     }
 
+     public function pluck_by_categories($category_ids){
+        $pexcels = self::whereIn('pexcel_category_id', $category_ids)->pluck('pexcel_name', 'pexcel_id');
+        return $pexcels;
+    }
 }

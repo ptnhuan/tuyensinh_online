@@ -22,10 +22,20 @@
                 </div>
             </div>
 
+            <!-- POST CATEGORY LIST -->
+            <div class="form-group">
+                <?php $pexcel_id = $request->get('pexcel_id') ? $request->get('pexcel_id') : 0 ?>
+
+                {!! Form::label('pexcel_id', 'Đợt cập nhật:') !!}
+
+                {!! Form::select('pexcel_id', @$pexcels, $pexcel_id, ['class' => 'form-control']) !!}
+            </div>
+            <!-- /END POST CATEGORY LIST -->
+
         </div>
         <!--/END TITLE-->
 
-        {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-left", 'name' => 'export']) !!}
+        {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-left", 'name' => 'search']) !!}
         {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
         {!! Form::close() !!}
     </div>
