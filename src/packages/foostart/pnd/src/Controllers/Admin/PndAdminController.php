@@ -96,7 +96,6 @@ class PndAdminController extends PndController
             }
         } else {
             $school = $this->obj_schools->get_school_by_user($params);
-
             if (!empty($school)) {
                 $params['school_code'] = $school->school_code;
                 $params['school_id'] = $school->school_id;

@@ -148,7 +148,7 @@ class Students extends Model
             {
                 $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
             } else if ($params['this']->is_my) {
-                $pexcels = $obj_pexcel->get_by_userId_categoryIds($params['user_id'], $category_ids);
+                $pexcels = $obj_pexcel->get_by_userId_categoryIds($params, $category_ids);
             }else{
                 return;
             }
