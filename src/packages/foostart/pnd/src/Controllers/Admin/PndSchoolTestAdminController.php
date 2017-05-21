@@ -22,14 +22,15 @@ use Foostart\Pnd\Helper\Parse;
 use Foostart\Pnd\Validators\PndSchoolAdminValidator;
 
 class PndSchoolTestAdminController extends PndController {
- private $obj_school_tests = NULL;
+
+    private $obj_school_tests = NULL;
     private $obj_schools = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
     private $obj_districts = NULL;
 
     public function __construct() {
-  $this->obj_school_tests = new SchoolTests();
+        $this->obj_school_tests = new SchoolTests();
         $this->obj_schools = new Schools();
         $this->obj_districts = new Districts();
         $this->obj_pexcel_categories = new PexcelCategories();
@@ -42,13 +43,13 @@ class PndSchoolTestAdminController extends PndController {
     public function index(Request $request) {
 
         $params = $request->all();
-$school_tests = $this->obj_school_tests->get_schools($params);
+        $school_tests = $this->obj_school_tests->get_schools($params);
         $schools = $this->obj_schools->get_schools($params);
         $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
         $this->data = array_merge($this->data, array(
             'schools' => $schools,
-             'schooltests' => $school_tests,
+            'schooltests' => $school_tests,
             'request' => $request,
             'districts_search' => $districts_search,
             'params' => $params
@@ -61,21 +62,20 @@ $school_tests = $this->obj_school_tests->get_schools($params);
      * @return type
      */
     public function about(Request $request) {
-        
-        
+
+
         $params = $request->all();
         $this->isAuthentication();
         $school_users = $this->current_user->user_name;
 
 
         $school = NULL;
-        
-       
-        if  ( $school_users <> 'admin')  
-                {              
-     $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
+
+
+        if ($school_users <> 'admin') {
+            $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
         }
-        
+
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
@@ -92,7 +92,7 @@ $school_tests = $this->obj_school_tests->get_schools($params);
             'districts_search' => $districts_search,
             'request' => $request,
         ));
-        
+
         return view('pnd::admin.pnd_school_about', $this->data);
     }
 
@@ -209,7 +209,8 @@ $school_tests = $this->obj_school_tests->get_schools($params);
 
         return view('pnd::admin.pnd_school_edit', $this->data);
     }
- /**
+
+    /**
      *
      * @param Request $request
      * @return type
@@ -219,13 +220,10 @@ $school_tests = $this->obj_school_tests->get_schools($params);
         $this->isAuthentication();
 
         $this->obj_validator = new PndSchoolAdminValidator();
-
         $input = $request->all();
-
         //$input['user_id'] = $this->current_user->id;
 
         $school_id = (int) $request->get('id');
-     
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
@@ -298,6 +296,7 @@ $school_tests = $this->obj_school_tests->get_schools($params);
      *
      * @return type
      */
+
     /**
      *
      * @return type
