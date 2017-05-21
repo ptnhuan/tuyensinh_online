@@ -62,7 +62,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-
+        $params['this'] = $this;
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
@@ -90,7 +90,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
+        $school = $this->obj_schools->get_school_by_user($params);
 
 
         if (!empty($school)) {
@@ -104,7 +104,7 @@ $this->obj_examinepointpriors = new Examinepointpriors();
             'request' => $request,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_examine_list', $this->data);
+        return view('pnd::admin.management.pnd_examine_list', $this->data);
     }
 
     /**

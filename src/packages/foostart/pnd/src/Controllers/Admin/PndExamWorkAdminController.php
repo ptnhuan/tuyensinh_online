@@ -62,7 +62,7 @@ class PndExamWorkAdminController extends PndController {
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-
+        $params['this'] = $this;
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
@@ -90,7 +90,7 @@ class PndExamWorkAdminController extends PndController {
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
+        $school = $this->obj_schools->get_school_by_user($params);
 
 
         if (!empty($school)) {
@@ -104,7 +104,7 @@ class PndExamWorkAdminController extends PndController {
             'request' => $request,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_examine_list', $this->data);
+        return view('pnd::admin.management.pnd_examine_list', $this->data);
     }
 
     /**
@@ -181,8 +181,8 @@ class PndExamWorkAdminController extends PndController {
 
         if ($school_users <> 'admin') {
 
-            $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
-            $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
+            $idoder = $this->obj_schools->get_school_by_user($params)->school_code_room;
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
@@ -234,7 +234,7 @@ class PndExamWorkAdminController extends PndController {
 
 
 
-        return view('pnd::admin.pnd_exam_identifi_list', $this->data);
+        return view('pnd::admin.management.pnd_exam_identifi_list', $this->data);
     }
 
     /**
@@ -251,8 +251,8 @@ class PndExamWorkAdminController extends PndController {
         $school_users = $this->current_user->user_name;
 
         if ($school_users <> 'admin') {
-            $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
-            $number = $this->obj_schools->get_school_by_user_id($school_users)->school_number_room;
+            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
+            $number = $this->obj_schools->get_school_by_user($params)->school_number_room;
         }
 
         $students_identifi = $this->obj_students->get_all_students_order($params);
@@ -295,7 +295,7 @@ class PndExamWorkAdminController extends PndController {
 
 
 
-        return view('pnd::admin.pnd_exam_room_list', $this->data);
+        return view('pnd::admin.management.pnd_exam_room_list', $this->data);
     }
 
     /**

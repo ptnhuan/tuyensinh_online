@@ -179,27 +179,34 @@ class PexcelAdminController extends PexcelController {
      */
     public function delete(Request $request) {
 
-        $pexcel = NULL;
-        $pexcel_id = $request->get('id');
+        $this->isAuthentication();
 
-        if (!empty($pexcel_id)) {
-            $pexcel = $this->obj_pexcel->find($pexcel_id);
+        if ($this->isAuthentication()) {
 
-            if (!empty($pexcel)) {
-                //Message
-                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+            $pexcel = NULL;
+            $pexcel_id = $request->get('id');
 
-                $pexcel->delete();
+            if (!empty($pexcel_id)) {
+                $pexcel = $this->obj_pexcel->find($pexcel_id);
+
+                if (!empty($pexcel)) {
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+
+                    if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                        $pexcel->delete();
+                    }
+                }
+            } else {
+
             }
-        } else {
 
+            $this->data = array_merge($this->data, array(
+                'pexcel' => $pexcel,
+            ));
+
+            return Redirect::route("admin_pexcel");
         }
-
-        $this->data = array_merge($this->data, array(
-            'pexcel' => $pexcel,
-        ));
-
-        return Redirect::route("admin_pexcel");
     }
 
     public function parse(Request $request) {
