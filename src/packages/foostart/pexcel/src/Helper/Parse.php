@@ -107,28 +107,33 @@ class Parse
         })->download('xlsx');
     }
 
-    public function export_data_students($data) {
+    public function export_data_students($data,$schoolname) {
 
+        
         $temp = realpath(base_path('public/templates/MAUNHAPHOCSINH.xls'));
 
         $columns = config('pexcel.columns');
 
         $fromrow = config('pexcel.write_from');
 
-        \Excel::load($temp, function ($excel) use ($data, $columns, $fromrow) {
+        \Excel::load($temp, function ($excel) use ($data,$schoolname, $columns, $fromrow) {
 
             $fields = array_keys($columns);
 
             $sheet = $excel->setActiveSheetIndex(0);
-
+          
+           $sheet->setCellValue("A2", mb_strtoupper($schoolname) );
+            
             foreach ($data as $item) {
-
+ 
                 foreach ($item->toArray() as $key => $value) {
 
+                    $sheet->setCellValue("A".$fromrow, $fromrow-9);
+                    
                     if (in_array($key, $fields)) {
 
                         $cell = $columns[$key].$fromrow;
-
+                      
                         $sheet->setCellValue($cell, $value);
 
                     }
@@ -136,7 +141,7 @@ class Parse
                 }
                 $fromrow++;
             }
-
+  
         })->download('xlsx');
     }
 

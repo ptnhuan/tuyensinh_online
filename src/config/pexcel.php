@@ -76,6 +76,7 @@ return [
     ],
 
     'columns' => [
+        'stt_id' => 'A',
         'student_first_name' => 'B',
         'student_last_name' => 'C',
         'student_sex' => 'D',

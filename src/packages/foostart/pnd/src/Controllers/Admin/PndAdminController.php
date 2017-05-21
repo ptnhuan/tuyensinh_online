@@ -66,7 +66,7 @@ class PndAdminController extends PndController
 
             $students = $this->obj_students->get_all_students($params);
             $obj_parse = new Parse();
-            $obj_parse->export_data_students($students, 'students');
+            $obj_parse->export_data_students($students, $this->obj_schools->get_school_by_user($params)->school_name);
 
             unset($params['export']);
         }

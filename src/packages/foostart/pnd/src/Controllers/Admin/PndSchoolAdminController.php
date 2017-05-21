@@ -96,7 +96,7 @@ class PndSchoolAdminController extends PndController
             'request' => $request,
         ));
 
-        return view('pnd::admin.management.pnd_school_about', $this->data);
+        return view('pnd::admin.pnd_school_about', $this->data);
     }
 
     /**
