@@ -97,7 +97,10 @@ class UserController extends PndController {
 
         $this->obj_validator = new PndUserValidator();
 
-        $input = $request->only('student_first_name', 'student_last_name', 'student_email', 'student_sex', 'student_phone', 'student_birth_day', 'student_birth_month', 'student_birth_year', 'student_birth_place', 'school_code', 'school_district_code', 'student_class', 'student_capacity_6', 'student_conduct_6', 'student_capacity_7', 'student_conduct_7', 'student_capacity_8', 'student_conduct_8', 'student_capacity_9', 'student_conduct_9', 'student_average', 'student_average_1', 'student_average_2', 'student_graduate', 'student_score_prior', 'student_score_prior_comment', 'school_code_option', 'school_class_code', 'school_code_option_1', 'school_code_option_2', 'student_pass');
+        $input = $request->only('student_first_name', 'student_last_name', 'student_email', 'student_sex', 'student_phone', 'student_birth_day', 'student_birth_month', 'student_birth_year', 'student_birth_place',
+                'school_code', 'school_district_code', 'student_class', 'student_capacity_6', 'student_conduct_6', 'student_capacity_7', 'student_conduct_7', 'student_capacity_8', 'student_conduct_8', 'student_capacity_9', 'student_conduct_9',
+                'student_average', 'student_average_1', 'student_average_2', 'student_graduate', 'student_score_prior', 'student_score_prior_comment', 'school_code_option', 'school_class_code',
+                'student_nominate', 'school_code_option_1', 'school_code_option_2', 'student_pass');
 
 
 

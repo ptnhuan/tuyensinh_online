@@ -32,10 +32,8 @@ class PndUserValidator extends AbstractValidator {
         'student_average_2' => 'required',
         'student_graduate' => 'required',
         'student_score_prior' => 'required',
-        'student_score_prior_comment' => 'required',
-  
-        'school_code_option_1' => 'required',
-       
+        'student_score_prior_comment' => 'required',  
+        'school_code_option_1' => 'required',       
         'student_pass' => 'required',
     );
     protected static $messages = [];
