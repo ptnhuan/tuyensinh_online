@@ -9,37 +9,32 @@ use Illuminate\Support\MessageBag as MessageBag;
 class PndUserValidator extends AbstractValidator {
 
     protected static $rules = array(
-        'student_first_name',
-        'student_last_name',
-        'student_sex',
-        'student_birth',
-        'student_birth_day',
-        'student_birth_month',
-        'student_birth_year',
-        'student_birth_place',
-        'school_code',
-        'school_district_code',
-        'student_class',
-        'student_capacity_6',
-        'student_conduct_6',
-        'student_capacity_7',
-        'student_conduct_7',
-        'student_capacity_8',
-        'student_conduct_8',
-        'student_capacity_9',
-        'student_conduct_9',
-        'student_average',
-        'student_average_1',
-        'student_average_2',
-        'student_graduate',
-        'student_score_prior',
-        'student_score_prior_comment',
-        'student_nominate',
-        'school_code_option',
-        'school_class_code',
-        'school_code_option_1',
-        'school_code_option_2',
-        'student_pass'
+        'student_first_name' => 'required',
+        'student_last_name' => 'required',
+        'student_sex' => 'required',
+        'student_birth_day' => 'required',
+        'student_birth_month' => 'required',
+        'student_birth_year' => 'required',
+        'student_birth_place' => 'required',
+        'school_code' => 'required',
+        'school_district_code' => 'required',
+        'student_class' => 'required',
+        'student_capacity_6' => 'required',
+        'student_conduct_6' => 'required',
+        'student_capacity_7' => 'required',
+        'student_conduct_7' => 'required',
+        'student_capacity_8' => 'required',
+        'student_conduct_8' => 'required',
+        'student_capacity_9' => 'required',
+        'student_conduct_9' => 'required',
+        'student_average' => 'required',
+        'student_average_1' => 'required',
+        'student_average_2' => 'required',
+        'student_graduate' => 'required',
+        'student_score_prior' => 'required',
+        'student_score_prior_comment' => 'required',  
+        'school_code_option_1' => 'required',       
+        'student_pass' => 'required',
     );
     protected static $messages = [];
 
@@ -81,7 +76,7 @@ class PndUserValidator extends AbstractValidator {
         $this->errors = $this->errors ? $this->errors : new MessageBag();
 
         if (empty($input['user_id'])) {
-            $this->errors->add('user_id', 'Yêu cầu nhập mã thành viên');
+            $this->errors->add('user_id', 'Yêu cầu nhập mã học sinh');
             $flag = FALSE;
         }
 
@@ -91,11 +86,11 @@ class PndUserValidator extends AbstractValidator {
     public function messages() {
         self::$messages = [
             'student_first_name.required' => 'Yêu cầu nhập họ học sinh.',
-            'student_last_name.required' => ' .',
+            'student_last_name.required' => 'Nhập tên học sinh .',
             'student_sex.required' => 'Nhập giới tính .',
-            'student_birth.required' => 'Nhập ngày sinh .',
-            'student_birth_day.required' => 'Nhập tháng sinh .',
-            'student_birth_month.required' => 'Nhập năm sinh .',
+            'student_birth_day.required' => 'Nhập ngày sinh .',
+            'student_birth_month.required' => 'Nhập tháng sinh .',
+            'student_birth_year.required' => 'Nhập năm sinh .',
             'student_birth_place.required' => 'Nhập nơi sinh .',
             'school_code.required' => 'Chọn trường học THCS .',
             'school_district_code.required' => 'Chọn huyện .',
@@ -113,8 +108,7 @@ class PndUserValidator extends AbstractValidator {
             'student_average_2.required' => ' Nhập điểm TB Môn Văn.',
             'student_graduate.required' => ' Chọn loại Tốt nghiệp .',
             'student_score_prior.required' => ' Nhập điểm Ưu tiên-khuyến khích .',
-            'student_score_prior_comment.required' => 'Nhập ghi chú Ưu tiên-khuyến khích.',
-            'school_code_option.required' => 'Chọn trường chuyên biệt  .',
+            'student_score_prior_comment.required' => 'Nhập ghi chú Ưu tiên-khuyến khích.',           
             'school_code_option_1.required' => ' Chọn trường THPT Nguyện vọng 1 .',
             'student_pass.required' => 'Nhập mật khẩu đăng nhập .',
         ];
