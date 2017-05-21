@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'student_class','value'=> @$student->student_class,'disabled' => 'disabled'])
+                                            @include('pnd::elements.pnd_input', ['name' => 'student_class','value'=> @$student->student_class])
                                             <!--/END INPUT-->
 
                                             </div>
@@ -365,9 +365,15 @@
                                                     'category_id'=> @$student->student_nominate ])
 
                                             <!--/END INPUT-->
+                                            
 
                                             </div>
                                             <!--/END INPUT-->
+                                               <div class="col-md-3">
+                                                <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'student_pass','value'=> @$student->student_pass ])
+                                            <!--/END INPUT-->
+                                            </div>
                                         </div>
                                     </div>
                                     <!--TAB ATTRIBUTES-->

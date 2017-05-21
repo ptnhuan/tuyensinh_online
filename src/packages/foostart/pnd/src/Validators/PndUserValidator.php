@@ -33,12 +33,10 @@ class PndUserValidator extends AbstractValidator {
         'student_graduate' => 'required',
         'student_score_prior' => 'required',
         'student_score_prior_comment' => 'required',
-        'student_nominate' => 'required',
-        'school_code_option' => 'required',
-        'school_class_code' => 'required',
+  
         'school_code_option_1' => 'required',
-        'school_code_option_2' => 'required',
-        'student_pass=' => 'required',
+       
+        'student_pass' => 'required',
     );
     protected static $messages = [];
 
@@ -80,7 +78,7 @@ class PndUserValidator extends AbstractValidator {
         $this->errors = $this->errors ? $this->errors : new MessageBag();
 
         if (empty($input['user_id'])) {
-            $this->errors->add('user_id', 'Yêu cầu nhập mã thành viên');
+            $this->errors->add('user_id', 'Yêu cầu nhập mã học sinh');
             $flag = FALSE;
         }
 
@@ -112,8 +110,7 @@ class PndUserValidator extends AbstractValidator {
             'student_average_2.required' => ' Nhập điểm TB Môn Văn.',
             'student_graduate.required' => ' Chọn loại Tốt nghiệp .',
             'student_score_prior.required' => ' Nhập điểm Ưu tiên-khuyến khích .',
-            'student_score_prior_comment.required' => 'Nhập ghi chú Ưu tiên-khuyến khích.',
-            'school_code_option.required' => 'Chọn trường chuyên biệt  .',
+            'student_score_prior_comment.required' => 'Nhập ghi chú Ưu tiên-khuyến khích.',           
             'school_code_option_1.required' => ' Chọn trường THPT Nguyện vọng 1 .',
             'student_pass.required' => 'Nhập mật khẩu đăng nhập .',
         ];
