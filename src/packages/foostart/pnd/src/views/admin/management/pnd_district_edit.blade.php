@@ -111,7 +111,7 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_district_search',['name_search'=>'_districts'])
+            @include('pnd::admin.management.pnd_district_search',['name_search'=>'_districts'])
         </div>
 
     </div>

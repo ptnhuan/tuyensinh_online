@@ -25,14 +25,14 @@ class PndExaminepointAdminController extends PndController
 {
 
     private $obj_examinepoints = NULL;
-     private $obj_examinepointpriors = NULL;
+    private $obj_examinepointpriors = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
-     private $obj_validatorprior = NULL;
+    private $obj_validatorprior = NULL;
 
     public function __construct()
     {
- $this->obj_examinepointpriors = new Examinepointpriors();
+        $this->obj_examinepointpriors = new Examinepointpriors();
         $this->obj_examinepoints = new Examinepoints();
         $this->obj_pexcel_categories = new PexcelCategories();
     }
@@ -47,16 +47,16 @@ class PndExaminepointAdminController extends PndController
         $params = $request->all();
 
         $examinepoints = $this->obj_examinepoints->get_examinepoints($params);
-$school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
-   $this->data = array_merge($this->data, array(
+        $school_prior_point = $this->obj_examinepointpriors->get_examinepointpriors();
+        $this->data = array_merge($this->data, array(
             'examinepoints' => $examinepoints,
             'school_prior_point' => $school_prior_point,
             'request' => $request,
             'params' => $params
         ));
-   
-   
-        return view('pnd::admin.pnd_examine_point_list', $this->data);
+
+
+        return view('pnd::admin.management.pnd_examine_point_list', $this->data);
     }
 
     /**
@@ -64,59 +64,57 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
      * @return type
      */
     public function edit(Request $request)
-    {            
-        
-        
+    {
+
+
         $examinepoint = NULL;
         $school_point_id = (int)$request->get('id');
-       
-        
+
 
         if (!empty($school_point_id) && (is_int($school_point_id))) {
 
             $examinepoint = $this->obj_examinepoints->find($school_point_id);
 
         }
-    
+
         $this->data = array_merge($this->data, array(
             'examinepoints' => $examinepoint,
             'request' => $request,
         ));
-    
-       return view('pnd::admin.pnd_examine_point_edit', $this->data);
+
+        return view('pnd::admin.management.pnd_examine_point_edit', $this->data);
     }
-    
+
     public function prior(Request $request)
-    {            
+    {
         $this->isAuthentication();
 
         $this->obj_validatorprior = new PndExaminepointpriorAdminValidator();
 
         $input = $request->all();
-   
 
-        $school_prior_id=1;
+
+        $school_prior_id = 1;
 
         $examinepointprior = NULL;
 
         $data = array();
-        
-        
-      
-          $examinepointprior = $this->obj_examinepointpriors->find($school_prior_id);
 
-                if (!empty($examinepointprior)) {
 
-                    $input['school_prior_id'] = $school_prior_id;
+        $examinepointprior = $this->obj_examinepointpriors->find($school_prior_id);
 
-                    $examinepointprior= $this->obj_examinepointpriors->update_examinepointpriors($input);
+        if (!empty($examinepointprior)) {
 
-                    //Message
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
-                }
-        
-         
-          return Redirect::route("admin_pnd_examine_point");
+            $input['school_prior_id'] = $school_prior_id;
+
+            $examinepointprior = $this->obj_examinepointpriors->update_examinepointpriors($input);
+
+            //Message
+            $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
+        }
+
+
+        return Redirect::route("admin_pnd_examine_point");
     }
 
     /**
@@ -158,12 +156,12 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
 
                     $input['school_point_id'] = $school_point_id;
 
-                    $examinepoint= $this->obj_examinepoints->update_examinepoint($input);
+                    $examinepoint = $this->obj_examinepoints->update_examinepoint($input);
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
-                   
-                   
+
+
                     return Redirect::route("admin_pnd_examine_point.edit", ["id" => $examinepoint->school_point_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
@@ -182,7 +180,7 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
 
-                  //  return Redirect::route("admin_pnd.parse", ["id" => $examinepoints->pnd_id]);
+                    //  return Redirect::route("admin_pnd.parse", ["id" => $examinepoints->pnd_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
 
@@ -197,7 +195,7 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
             'request' => $request,
         ), $data);
 
-        return view('pnd::admin.pnd_examine_point_edit', $this->data);
+        return view('pnd::admin.management.pnd_examine_point_edit', $this->data);
     }
 
     /**
@@ -211,7 +209,7 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
         $school_point_id = $request->get('id');
 
         if (!empty($school_point_id)) {
-            $examinepoint= $this->obj_examinepoints->find($school_point_id);
+            $examinepoint = $this->obj_examinepoints->find($school_point_id);
 
             if (!empty($examinepoint)) {
                 //Message
@@ -230,6 +228,5 @@ $school_prior_point= $this->obj_examinepointpriors->get_examinepointpriors();
         return Redirect::route("admin_pnd_examine_point");
     }
 
-   
 
 }

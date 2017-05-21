@@ -11,9 +11,9 @@
 
             <th style='width:15%'>{{ trans('pnd::pnd.student_date') }}</th>
 
-            <th style='width:20%'>  {{ trans('pnd::pnd.student_phone') }}</th>
+            <th style='width:20%'>  {{ trans('pnd::pnd.student_class') }}</th>
 
-            <th style='width:15%'> {{ trans('pnd::pnd.student_email') }}</th>
+            <th style='width:15%'> {{ trans('pnd::pnd.school_code') }}</th>
 
             <th style='width:15%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
@@ -37,9 +37,9 @@
 
              <td>{!! date('d-m-Y', $student->student_birth) !!}</td>
 
-            <td>{!! @$student->student_phone !!}</td>
+            <td>{!! @$student->student_class !!}</td>
 
-            <td>{!! @$student->student_email !!}</td>
+            <td>{!! @$student->school_code !!}</td>
 
             <td>
                 <a href="{!! URL::route('admin_pnd.edit', ['id' => $student->student_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>

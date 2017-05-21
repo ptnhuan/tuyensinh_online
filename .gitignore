@@ -56,3 +56,6 @@ src/composer.lock
 .idea/workspace.xml
 *.xml
 src/composer.lock
+*.log
+logs/tuyensinh-access.log
+src/public/files/84/59202904dd452.xls

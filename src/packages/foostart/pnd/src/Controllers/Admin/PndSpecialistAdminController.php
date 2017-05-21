@@ -49,7 +49,7 @@ class PndSpecialistAdminController extends PndController
             'request' => $request,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_specialist_list', $this->data);
+        return view('pnd::admin.management.pnd_specialist_list', $this->data);
     }
 
     /**
@@ -74,7 +74,7 @@ class PndSpecialistAdminController extends PndController
             'request' => $request,
         ));
 
-        return view('pnd::admin.pnd_specialist_edit', $this->data);
+        return view('pnd::admin.management.pnd_specialist_edit', $this->data);
     }
 
     /**
@@ -154,7 +154,7 @@ class PndSpecialistAdminController extends PndController
             'request' => $request,
         ), $data);
 
-        return view('pnd::admin.pnd_specialist_edit', $this->data);
+        return view('pnd::admin.management.pnd_specialist_edit', $this->data);
     }
 
     /**

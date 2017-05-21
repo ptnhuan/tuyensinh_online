@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.pnd_title') !!}
+{!! trans('pnd::pnd.school_exam_examine') !!}
 @stop
 
 @section('content')
@@ -36,14 +36,14 @@
                 <!--ERRORS-->
                 <div class="panel-body">
 
-                    @include('pnd::admin.pnd_item')
+                    @include('pnd::admin.management.pnd_examine_item')
 
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            @include('pnd::admin.pnd_search')
+            @include('pnd::admin.management.pnd_examine_filter')
         </div>
     </div>
 </div>

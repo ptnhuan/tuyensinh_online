@@ -62,7 +62,7 @@ class PndExamWorkAdminController extends PndController {
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-
+        $params['this'] = $this;
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
@@ -90,7 +90,7 @@ class PndExamWorkAdminController extends PndController {
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
+        $school = $this->obj_schools->get_school_by_user($params);
 
 
         if (!empty($school)) {
@@ -104,7 +104,7 @@ class PndExamWorkAdminController extends PndController {
             'request' => $request,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_examine_list', $this->data);
+        return view('pnd::admin.management.pnd_examine_list', $this->data);
     }
 
     /**
@@ -180,14 +180,16 @@ class PndExamWorkAdminController extends PndController {
         $school_users = $this->current_user->user_name;
 
         if ($school_users <> 'admin') {
-            $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
-            $idoder = $this->obj_schools->get_school_by_user_id($school_users)->school_code_room;
+
+            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
+            $idoder = $this->obj_schools->get_school_by_user($params)->school_code_room;
         }
 
         $students_identifi = $this->obj_students->get_all_identifi_students($params);
 
 
         if ($request->ajax()) {
+
             $k = 1;
             $identification = "";
 
@@ -205,18 +207,18 @@ class PndExamWorkAdminController extends PndController {
                 if (($k > 999)) {
                     $identification = $idoder . $k;
                 }
-              
+
                 $input['student_id'] = $value['student_id'];
                 $input['student_identifi'] = $k;
-                $input['student_identifi_name'] =$identification;
+                $input['student_identifi_name'] = $identification;
 
                 $this->obj_examines->user_update_identifi_student($input);
-                  $k = $k + 1;
+                $k = $k + 1;
             }
             return;
         }
 
-        $students = $this->obj_students->get_all_students_order($params);
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -232,7 +234,7 @@ class PndExamWorkAdminController extends PndController {
 
 
 
-        return view('pnd::admin.pnd_exam_identifi_list', $this->data);
+        return view('pnd::admin.management.pnd_exam_identifi_list', $this->data);
     }
 
     /**
@@ -246,9 +248,42 @@ class PndExamWorkAdminController extends PndController {
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
+        $school_users = $this->current_user->user_name;
 
-        $students_point = $this->obj_students->get_all_identifi_students($params);
-        $students = $this->obj_students->get_all_students($params);
+        if ($school_users <> 'admin') {
+            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
+            $number = $this->obj_schools->get_school_by_user($params)->school_number_room;
+        }
+
+        $students_identifi = $this->obj_students->get_all_students_order($params);
+
+
+        if ($request->ajax()) {
+            $k = 0;
+            $room = 1;
+            $number=$number;
+
+            foreach ($students_identifi as $value) {
+
+              
+                if ($k >= $number) {
+                    $room = $room + 1;
+                    $k = 1;
+                }
+                else{
+                      $k = $k + 1;
+                }
+
+                $input['student_id'] = $value['student_id'];
+                $input['student_room'] = $room;
+
+
+                $this->obj_examines->user_update_room_student($input);
+            }
+            return;
+        }
+
+        $students = $this->obj_students->get_all_sort_students($params);
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -259,39 +294,8 @@ class PndExamWorkAdminController extends PndController {
         //END PEXCEL
 
 
-        $points = $request->all();
-        $input = $request->all();
 
-        foreach ($students_point as $value) {
-
-            $input['student_id'] = $value['student_id'];
-            $points['school_point_capacity'] = $value['student_capacity_6'];
-            $points['school_point_conduct'] = $value['student_conduct_6'];
-            $input['student_point_6'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_7'];
-            $points['school_point_conduct'] = $value['student_conduct_7'];
-            $input['student_point_7'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_8'];
-            $points['school_point_conduct'] = $value['student_conduct_8'];
-            $input['student_point_8'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-            $points['school_point_capacity'] = $value['student_capacity_9'];
-            $points['school_point_conduct'] = $value['student_conduct_9'];
-            $input['student_point_9'] = $this->obj_examinepoints->get_examinepoint($points)->school_point_point;
-
-            if ($value['student_score_prior'] > $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1) {
-
-                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $this->obj_examinepointpriors->get_examinepointpriors()->school_prior_point_1;
-            } else {
-                $input['student_point_sum'] = $input['student_point_6'] + $input['student_point_7'] + $input['student_point_8'] + $input['student_point_9'] + $value['student_score_prior'];
-            }
-
-
-
-            $this->obj_examines->user_update_student($input);
-        }
-
-
-        return Redirect::route("admin_pnd_examine");
+        return view('pnd::admin.management.pnd_exam_room_list', $this->data);
     }
 
     /**

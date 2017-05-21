@@ -168,4 +168,9 @@ class Pexcel extends Model {
         return $pexcels;
     }
 
+    public function get_all_by_categoryIds($category_ids){
+        $pexcels = self::whereIn('pexcel_category_id', $category_ids)->get();
+        return $pexcels;
+    }
+
 }

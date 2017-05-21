@@ -34,12 +34,12 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
-                    @include('pnd::admin.pnd_exam_identifi_item')
+                    @include('pnd::admin.management.pnd_exam_identifi_item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_exam_identifi_filter',['name_search'=>'_examine_point'])
+            @include('pnd::admin.management.pnd_exam_identifi_filter',['name_search'=>'_examine_point'])
         </div>
     </div>
 </div>
@@ -52,13 +52,15 @@
     $(".press-indentifi").click(function () {
         $.ajax({
             type: "GET",
-            url:'{{URL::route('admin_pnd_examine_identifi')}}',
+            url:'{{URL::route('admin_pnd_exam_identifi')}}',
             success:function(){
                 location.reload();
             }
             
         });
-    });
+    }); 
+    
+  
      
 </script>
 <!-- /END DELETE CONFIRM -->

@@ -2,6 +2,7 @@
 
 namespace Foostart\Pnd\Controllers\Admin;
 
+use Foostart\Pexcel\Helper\Parse;
 use Illuminate\Http\Request;
 use Foostart\Pnd\Controllers\Admin\PndController;
 use URL;
@@ -57,7 +58,18 @@ class PndAdminController extends PndController
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-        $params['permissions'] = $this->current_user->permissions;
+        $params['this'] = $this;
+
+        /**
+         * EXPORT
+         */
+        if (isset($params['export'])) {
+            $students = $this->obj_students->get_all_students($params);
+            $obj_parse = new Parse();
+            $obj_parse->export_data_students($students, 'students');
+
+            unset($params['export']);
+        }
 
         //PEXCEL
         if (!empty($params['id'])) {
@@ -82,16 +94,17 @@ class PndAdminController extends PndController
                 }
             }
         } else {
+            $school = $this->obj_schools->get_school_by_user($params);
+
+            if (!empty($school)) {
+                $params['school_code'] = $school->school_code;
+                $params['school_id'] = $school->school_id;
+            }
+
             $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
-
-        if (!empty($school)) {
-            $params['school_code'] = $school->school_code;
-            $params['school_id'] = $school->school_id;
-        }
 
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
 
@@ -110,34 +123,59 @@ class PndAdminController extends PndController
      */
     public function edit(Request $request)
     {
-
+        $this->isAuthentication();
         $student = NULL;
         $specialists = NULL;
         $school_levels_3 = NULL;
         $school_levels_specialist = NULL;
         $districts = NULL;
+
+        $params = $request->all();
         
-        $student_id = (int)$request->get('id');
-
-        if($this->check_view_user($request)){
-            $specialists = $this->obj_specialists->pluck_select();
-
-            $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
 
 
-            $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
-            $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
 
-            $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
-            $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
+        $specialists = $this->obj_specialists->pluck_select();
+
+        $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
 
 
-            $districts = $this->obj_districts->pluck_select();
+        $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
+        $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
-            if (!empty($student_id) && (is_int($student_id))) {
 
-                $student = $this->obj_students->find($student_id);
+        $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
+        $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
+
+
+        $districts = $this->obj_districts->pluck_select();
+
+        //PEXCEL
+        if (!empty($params['id'])) {
+
+            $student = $this->obj_students->find($params['id']);
+
+            if ($student) {
+                $pexcel = $this->obj_pexcel->find($student->pexcel_id);
+
+
+                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id) 
+                        || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
+                ) {
+
+                }elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
+                    $school = $this->obj_schools->get_school_by_user($params);
+                    
+                    if(empty($school) || $student->school_code_option_1 != $school->school_code){
+                        return;
+                    }
+                }else{
+                    return;
+                }
             }
         }
 
@@ -150,8 +188,9 @@ class PndAdminController extends PndController
             'request' => $request,
         ));
 
-
         return view('pnd::admin.pnd_edit', $this->data);
+
+
     }
 
     /**
@@ -168,7 +207,9 @@ class PndAdminController extends PndController
 
         $input = $request->all();
 
-        $input['user_id'] = $this->current_user->id;
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
 
         $student_id = (int)$request->get('id');
 
@@ -191,14 +232,25 @@ class PndAdminController extends PndController
 
                 if (!empty($student)) {
 
-                    $input['student_id'] = $student_id;
+                    $input['student_id'] = $student_id; 
 
-                    $student = $this->obj_students->update_student($input);
+                    $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
-                    //Message
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
+                    if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id)
+                            || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
+                    ) {
+                        $student = $this->obj_students->update_student($input);
+                        //Message
+                        $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
 
-                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                        return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                    }
+                    else{
+                        
+                        $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
+
+                        return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                    }
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
 
@@ -238,7 +290,8 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function delete(Request $request)
+    public
+    function delete(Request $request)
     {
 
         $student = NULL;
@@ -268,7 +321,8 @@ class PndAdminController extends PndController
      * Get school by district
      */
 
-    public function getSchoolByDistrict(Request $request)
+    public
+    function getSchoolByDistrict(Request $request)
     {
 
         $input = $request->all();
@@ -290,7 +344,9 @@ class PndAdminController extends PndController
     /*Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
     xem thông tin học sinh
     */
-    public function check_view_user($request){
+    public
+    function check_view_user($request)
+    {
         $this->isAuthentication();
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
@@ -299,16 +355,15 @@ class PndAdminController extends PndController
 
         $check_student = $this->obj_students->get_student($params);
 
-        if(!empty($check_student)){
+        if (!empty($check_student)) {
             return true;
         }
 
-        $check_permission_user =1;
-      
+        $check_permission_user = 1;
+
 
         return false;
     }
-
 
 
 }

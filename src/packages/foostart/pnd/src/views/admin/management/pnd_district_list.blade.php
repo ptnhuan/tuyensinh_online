@@ -4,20 +4,19 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.school_exam_examine') !!}
+{!! trans('pnd::pnd.school_district_title') !!}
 @stop
 
 @section('content')
 
 <div class="row">
     <div class="col-md-12">
-
         <div class="col-md-8">
 
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_district_search') : trans('pnd::pnd.page_district_list') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,16 +33,13 @@
                 @endforeach
                 @endif
                 <!--ERRORS-->
-                <div class="panel-body">
-
-                    @include('pnd::admin.pnd_examine_item')
-
+                <div class="panel-body"> 
+                    @include('pnd::admin.management.pnd_district_item')
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
-            @include('pnd::admin.pnd_examine_filter')
+            @include('pnd::admin.management.pnd_district_search',['name_search'=>'_districts'])
         </div>
     </div>
 </div>

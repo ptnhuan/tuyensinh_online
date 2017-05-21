@@ -50,7 +50,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
         Route::get('user/student/view', [
             'as' => 'user.student.view',
             'uses' => 'UserController@index'
-        ]); 
+        ]);
     });
 });
 
@@ -117,6 +117,12 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
+
+        Route::get('/manager', [
+            'as' => 'admin_manager',
+            'uses' => 'PndSchoolAdminController@index'
+        ]);
+
         /**
          * list
          */
@@ -158,7 +164,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndSchoolAdminController@post_about'
         ]);
 
- 
+
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND DISTRICT ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -265,7 +271,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ]);
         /**
          * edit-point
-         */ 
+         */
         Route::post('/pnd_examine_point', [
             'as' => 'admin_pnd_examine_point',
             'uses' => 'PndExaminepointAdminController@prior'
@@ -291,22 +297,22 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_examine.point',
             'uses' => 'PndExamWorkAdminController@point'
         ]);
-        
-          /**
+
+        /**
          * set indentifi
          */
         Route::get('/pnd_examine/identifi', [
-            'as' => 'admin_pnd_examine_identifi',
+            'as' => 'admin_pnd_exam_identifi',
             'uses' => 'PndExamWorkAdminController@identifi'
-        ]); 
+        ]);
         /**
          * set point
          */
         Route::get('/pnd_examine/room', [
-            'as' => 'admin_pnd_examine_room',
+            'as' => 'admin_pnd_exam_room',
             'uses' => 'PndExamWorkAdminController@room'
         ]);
-        
+
         /*         * ********************************************************************
          * USER CATEGORY
          */
@@ -328,6 +334,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         Route::get('/users/category/delete', [
             'as' => 'admin_pnd_category_user.delete',
             'uses' => 'PndCategoryUserController@delete'
-        ]); 
+        ]);
     });
 });

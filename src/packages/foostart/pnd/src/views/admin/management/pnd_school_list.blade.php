@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.school_class_title') !!}
+{!! trans('pnd::pnd.school_title') !!}
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_specialist_search') : trans('pnd::pnd.page_specialist_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_school_search') : trans('pnd::pnd.page_school_list') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,12 +34,12 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
-                    @include('pnd::admin.pnd_specialist_item')
+                    @include('pnd::admin.management.pnd_school_item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_specialist_search',['name_search'=>'_class_specifics'])
+            @include('pnd::admin.management.pnd_school_search',['name_search'=>'_schools'])
         </div>
     </div>
 </div>

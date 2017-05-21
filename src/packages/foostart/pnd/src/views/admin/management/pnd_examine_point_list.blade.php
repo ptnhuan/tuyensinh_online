@@ -34,12 +34,12 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
-                    @include('pnd::admin.pnd_examine_point_item')
+                    @include('pnd::admin.management.pnd_examine_point_item')
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            @include('pnd::admin.pnd_examine_point_search',['name_search'=>'_examine_point'])
+            @include('pnd::admin.management.pnd_examine_point_search',['name_search'=>'_examine_point'])
         </div>
     </div>
 </div>
