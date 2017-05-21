@@ -7,6 +7,8 @@ use DB;
 use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pexcel\Models\PexcelCategories;
 
+use Foostart\Pnd\Models\PndUser;
+
 class Students extends Model {
 
     protected $table = 'school_students';
@@ -159,11 +161,9 @@ class Students extends Model {
                     if (!empty($params['export'])) {
 
                         $students = $eloquent->get();
-
                     } else {
 
                         $students = $eloquent->paginate(config('pexcel.per_page_students'));
-
                     }
 
                     return $students;
@@ -453,16 +453,14 @@ class Students extends Model {
         return $student;
     }
 
-    public
-            function add_students($students, $pexcel_id) {
+    public function add_students($students, $pexcel_id) {
 
         foreach ($students as $student) {
             $this->add_student((array) $student, $pexcel_id);
         }
     }
 
-    public
-            function delete_student($student_id) {
+    public function delete_student($student_id) {
         $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
@@ -510,4 +508,18 @@ class Students extends Model {
         return $eloquent;
     }
 
+    public function deleteStudentsByPexcelId($pexcel_id) {
+
+        $obj_user = new PndUser();
+        //Delete in user table
+
+        $students = self::where('pexcel_id', $pexcel_id)->get();
+
+        if (!empty($students)) {
+            foreach ($students as $student) {
+                $user = $obj_user->delete_user(array('user_name' => $student['student_user']));
+            }
+        }
+
+    }
 }

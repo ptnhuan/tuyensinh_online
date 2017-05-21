@@ -78,6 +78,19 @@ class PndUser extends AclUser {
         return $user;
     }
 
+    public function delete_user($params) {
+
+        $user = self::where('user_name', $params['user_name'])->first();
+
+        if ($user) {
+            $obj_profile = new UserProfile();
+            $obj_profile->delete_profile($user->id);
+            $user = self::where('user_name', $params['user_name'])->delete();
+        }
+
+
+    }
+
 }
 class UserProfile extends AclUserProfile {
 
@@ -99,4 +112,9 @@ class UserProfile extends AclUserProfile {
         $user = self::create($user_profile);
         return $user;
     }
+
+    public function delete_profile($user_id) {
+        self::where('user_id', $user_id)->delete();
+    }
+
 }

@@ -11,7 +11,7 @@ use Route,
  * Models
  */
 use Foostart\Pexcel\Models\Pexcel;
-use Foostart\Pexcel\Models\Students;
+use Foostart\Pnd\Models\Students;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pexcel\Helper\Parse;
 /**
@@ -83,7 +83,7 @@ class PexcelAdminController extends PexcelController {
             if (!empty($pexcel_id) && (is_int($pexcel_id))) {
                 $pexcel = $this->obj_pexcel->find($pexcel_id);
             }
- 
+
             if ($this->is_admin || $this->is_all || $this->is_my || ($pexcel->user_id == $this->current_user->id)) {
                 $this->data = array_merge($this->data, array(
                     'pexcel' => $pexcel,
@@ -181,32 +181,37 @@ class PexcelAdminController extends PexcelController {
 
         $this->isAuthentication();
 
-        if ($this->isAuthentication()) {
 
-            $pexcel = NULL;
-            $pexcel_id = $request->get('id');
+        $pexcel = NULL;
+        $pexcel_id = $request->get('id');
 
-            if (!empty($pexcel_id)) {
-                $pexcel = $this->obj_pexcel->find($pexcel_id);
 
-                if (!empty($pexcel)) {
-                    //Message
-                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+        if (!empty($pexcel_id)) {
 
-                    if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
-                        $pexcel->delete();
-                    }
+            $pexcel = $this->obj_pexcel->find($pexcel_id);
+
+            if (!empty($pexcel)) {
+                //Message
+                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+
+                if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+
+                    $obj_student = new Students();
+
+                    $obj_student->deleteStudentsByPexcelId($pexcel->pexcel_id);
+
+                    $pexcel->delete();
                 }
-            } else {
-
             }
+        } else {
 
-            $this->data = array_merge($this->data, array(
-                'pexcel' => $pexcel,
-            ));
-
-            return Redirect::route("admin_pexcel");
         }
+
+        $this->data = array_merge($this->data, array(
+            'pexcel' => $pexcel,
+        ));
+
+        return Redirect::route("admin_pexcel");
     }
 
     public function parse(Request $request) {
