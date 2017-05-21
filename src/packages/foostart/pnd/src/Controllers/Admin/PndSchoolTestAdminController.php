@@ -96,9 +96,11 @@ class PndSchoolTestAdminController extends PndController {
       if (!empty($school_id) && (is_int($school_id))) {
 
             $school = $this->obj_school_tests->find($school_id);
-       
+           
+            
        }
-
+ var_dump($school);
+            die();
         $this->data = array_merge($this->data, array(
             'school' => $school,
              'school_all' => $school_all,

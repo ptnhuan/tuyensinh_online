@@ -89,11 +89,7 @@
                                         <div class="col-md-6">
 
                                             <!--INPUT-->
-                                            <?php
-                                            var_dump(@$school_all);
-                                           die();
-                                            
-                                            ?>
+                                           
                                                @include('pnd::elements.pnd_select', ['name' => 'school_code',
                                                     'categories'=> !empty(@$school_all) ? $school_all  : array(),
                                                     'category_id'=>@$student->school_code])

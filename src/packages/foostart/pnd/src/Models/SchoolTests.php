@@ -24,7 +24,7 @@ class SchoolTests extends Model {
              'school_test_contact_phone',
         'school_test_contact_email'
     ];
-    protected $primaryKey = 'school_id';
+    protected $primaryKey = 'school_test_id';
 
     /**
      *
@@ -68,7 +68,7 @@ class SchoolTests extends Model {
     public function update_school($input, $school_id = NULL) {
 
         if (empty($school_id)) {
-            $school_id = $input['school_id'];
+            $school_test_id = $input['school_id'];
         }
 
         $school = self::find($school_id);
@@ -141,7 +141,7 @@ class SchoolTests extends Model {
     }
 
     public function delete_school($school_id) {
-        $eloquent = self::where('school_id', $school_id)->delete();
+        $eloquent = self::where('school_test_id', $school_id)->delete();
         return $eloquent;
     }
 
