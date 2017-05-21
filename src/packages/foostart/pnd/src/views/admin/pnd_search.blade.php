@@ -25,8 +25,8 @@
         </div>
         <!--/END TITLE-->
 
-        {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-left", 'name' => 'export']) !!}
-        {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-right"]) !!}
+        {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-left", 'name' => 'export']) !!}
+        {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
         {!! Form::close() !!}
     </div>
 </div>

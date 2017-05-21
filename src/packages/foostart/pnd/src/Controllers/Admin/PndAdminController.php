@@ -59,7 +59,6 @@ class PndAdminController extends PndController
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-
         /**
          * EXPORT
          */
@@ -131,7 +130,7 @@ class PndAdminController extends PndController
         $districts = NULL;
 
         $params = $request->all();
-        
+
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
@@ -163,13 +162,13 @@ class PndAdminController extends PndController
                 $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
 
-                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id) 
+                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id)
                         || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
                 ) {
 
                 }elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
                     $school = $this->obj_schools->get_school_by_user($params);
-                    
+
                     if(empty($school) || $student->school_code_option_1 != $school->school_code){
                         return;
                     }
@@ -232,7 +231,7 @@ class PndAdminController extends PndController
 
                 if (!empty($student)) {
 
-                    $input['student_id'] = $student_id; 
+                    $input['student_id'] = $student_id;
 
                     $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
@@ -246,7 +245,7 @@ class PndAdminController extends PndController
                         return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
                     }
                     else{
-                        
+
                         $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
 
                         return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);

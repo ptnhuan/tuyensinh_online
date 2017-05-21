@@ -30,7 +30,7 @@ class Parse
             $reader->noHeading();
 
             $reader->formatDates(false);
-        }, 'UTF-8')->get();               
+        }, 'UTF-8')->get();
         $results = $data->toArray();
 
         $students = $this->parseExcel($pexcel, $results);
@@ -85,12 +85,18 @@ class Parse
 
                 $sheet->appendRow(array(
                     'Pexcel ID',
+                    'Pexcel ID',
+                    'Pexcel ID',
+                    'Pexcel ID',
                     'Pexcel name',
                     'Created at',
                     'File path'
                 ));
                 foreach ($data as $item) {
                     $sheet->appendRow(array(
+                        $item->pexcel_id,
+                        $item->pexcel_id,
+                        $item->pexcel_id,
                         $item->pexcel_id,
                         $item->pexcel_name,
                         date('d-m-Y', $item->pexcel_created_at),
@@ -101,29 +107,37 @@ class Parse
         })->download('xlsx');
     }
 
-    public function export_data_students($data, $file_name)
-    {
-        \Excel::create($file_name . '_' . date('d-m-Y', time()), function ($excel) use ($data) {
+    public function export_data_students($data) {
 
-            $excel->sheet('students', function ($sheet) use ($data) {
+        $temp = realpath(base_path('public/templates/MAUNHAPHOCSINH.xls'));
 
-                $sheet->appendRow(array(
-                    'Student ID',
-                    'Student name',
-                    'Birth',
-                    'Phone Number',
-                    'Email'
-                ));
-                foreach ($data as $item) {
-                    $sheet->appendRow(array(
-                        $item->student_id,
-                        $item->student_first_name.$item->student_last_name,
-                        date('d-m-Y', $item->student_birth),
-                        $item->student_phone,
-                        $item->student_email
-                    ));
+        $columns = config('pexcel.columns');
+
+        $fromrow = config('pexcel.write_from');
+
+        \Excel::load($temp, function ($excel) use ($data, $columns, $fromrow) {
+
+            $fields = array_keys($columns);
+
+            $sheet = $excel->setActiveSheetIndex(0);
+
+            foreach ($data as $item) {
+
+                foreach ($item->toArray() as $key => $value) {
+
+                    if (in_array($key, $fields)) {
+
+                        $cell = $columns[$key].$fromrow;
+
+                        $sheet->setCellValue($cell, $value);
+
+                    }
+
                 }
-            });
+                $fromrow++;
+            }
+
         })->download('xlsx');
     }
+
 }
