@@ -95,7 +95,7 @@ return [
             "name" => "Hiển thị",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => []
+            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']
         ],
         [
             /*
@@ -113,7 +113,7 @@ return [
             "name" => "Quản trị",
             "route" => "admin_manager",
             "link" => '/admin/manager',
-            "permissions" => []
+            "permissions" => ["_superadmin", "_permission-editor"]
         ],
     ]
 ];

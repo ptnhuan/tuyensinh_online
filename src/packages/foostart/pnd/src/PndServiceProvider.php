@@ -142,7 +142,14 @@ class PndServiceProvider extends ServiceProvider
                     "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
                 ],
 
-
+ /**
+                 * About School
+                 */
+                //list
+                trans('pnd::pnd.page_school_about_list') => [
+                    'url' => URL::route('admin_pnd_school_about'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
             ]);
             //
 
@@ -228,14 +235,7 @@ class PndServiceProvider extends ServiceProvider
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
 
-                /**
-                 * About School
-                 */
-                //list
-                trans('pnd::pnd.page_school_about_list') => [
-                    'url' => URL::route('admin_pnd_school_about'),
-                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ],
+               
 
                 /**
                  * Schools test
