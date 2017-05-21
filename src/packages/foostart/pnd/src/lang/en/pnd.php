@@ -145,7 +145,7 @@ return [
     'school_test_phone' => 'Điện thoại',
     'school_test_email' => 'Thư điện tử',
     'school_test_number_room' => 'Số Thí sinh/phòng thi',
-    
+    'form_school_test_add' => 'Tạo mới hội đồng coi thi',
     
     
     /**

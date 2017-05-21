@@ -11,7 +11,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($schools->school_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_school__edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_school_add') !!}
+                        {!! !empty($schools->school_test_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_school__edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_school_test_add') !!}
                     </h3>
                 </div>
 
@@ -33,7 +33,7 @@
                             <h4>{!! trans('pnd::pnd.form_heading') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
-                            {!! Form::open(['route'=>['admin_pnd_school.post', 'id' => @$school->school_id],  'files'=>true, 'method' => 'post'])  !!}
+                            {!! Form::open(['route'=>['admin_pnd_school_test.post', 'id' => @$school->school_test_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
 
@@ -90,8 +90,8 @@
 
                                             <!--INPUT-->
                                             <?php
-                                            
-                                           
+                                            var_dump(@$school_all);
+                                           die();
                                             
                                             ?>
                                                @include('pnd::elements.pnd_select', ['name' => 'school_code',
@@ -200,17 +200,17 @@
 
                                 </div>
 
-                                {!! Form::hidden('id',@$schools->school_id) !!}
+                                {!! Form::hidden('id',@$schools->school_test_id) !!}
 
                                 <!-- DELETE BUTTON -->
-                                <a href="{!! URL::route('admin_pnd_school.delete',['id' => @$schools->school_id, '_token' => csrf_token()]) !!}"
+                                <a href="{!! URL::route('admin_pnd_school_test.delete',['id' => @$schools->school_test_id, '_token' => csrf_token()]) !!}"
                                    class="btn btn-danger pull-right margin-left-5 delete">
                                     Xóa
                                 </a>
                                 <!-- DELETE BUTTON -->
 
                                 <!-- SAVE BUTTON -->
-                                {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
+                               {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
                                 <!-- /SAVE BUTTON -->
 
                                 {!! Form::close() !!}
@@ -235,8 +235,30 @@
     {!! HTML::script('vendor/laravel-filemanager/js/lfm_pnd.js') !!}
 
     <script type='text/javascript'>
-        $(document).ready(function () {
-            $('#lfm').filemanager('file');
+    $(document).ready(function () {
+        
+        $('#lfm').filemanager('file');
+
+        get_school($('#school_district_code'));
+        
+        $('#school_district_code').on('change',function(){
+            get_school($(this));
         });
-    </script>
-    @stop
+    });
+    function get_school(This){
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo URL::route('admin_pnd.school.district') ?>',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    school_district_code: This.val(),
+                    school_current: '<?php echo @$school_all->school_code ?>',
+                },
+                success:function(result){ 
+                    $('#school_code').html(result);
+                }
+            });
+    }
+</script>
+@stop

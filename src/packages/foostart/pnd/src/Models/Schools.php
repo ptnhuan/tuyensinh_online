@@ -270,6 +270,10 @@ class Schools extends Model {
         return $eloquent->pluck('school_name', 'school_code');
     }
 
+ public function pluck_select_test($params = array()) {
+        $eloquent = self::orderBy('school_name', 'ASC');
 
+        return $eloquent->pluck('school_name', 'school_code');
+    }
 
 }
