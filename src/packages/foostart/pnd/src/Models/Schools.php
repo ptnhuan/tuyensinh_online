@@ -241,6 +241,11 @@ class Schools extends Model {
         
     }
     
+     public function get_school_all() {
+        $eloquent = self::orderBy('school_name', 'ASC');
+        return $eloquent;
+        
+    }
      
     
     

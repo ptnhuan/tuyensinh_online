@@ -70,7 +70,7 @@ class PndSchoolAdminController extends PndController
         $param_users = $request->all();
         $this->isAuthentication();
         $school_users = $this->current_user->user_name;
-$param_users['user_name']=$school_users;
+        $param_users['user_name'] = $school_users;
 
         $school = NULL;
 

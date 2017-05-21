@@ -74,11 +74,11 @@ class PndSchoolTestAdminController extends PndController {
         $param_users['user_name'] = $school_users;
        
         
-        $school = NULL;
-        $school_id = (int) $request->get('id');
+         $school = NULL;
+        $school_id = (int)$request->get('id');
 
         if ($school_users <> 'admin') {
-             $school_id_test = $this->obj_schools->get_school_by_user($param_users)->school_id;
+             $school_id_test = $this->obj_schools->get_school_by_user($param_users)->school_code;
             
           
         }
@@ -91,13 +91,17 @@ class PndSchoolTestAdminController extends PndController {
         $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
         $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
-        if (!empty($school_id) && (is_int($school_id))) {
+          $school_all =  $school = $this->obj_schools->find($school_id);
+         
+      if (!empty($school_id) && (is_int($school_id))) {
 
             $school = $this->obj_schools->find($school_id);
-        }
+       
+       }
 
         $this->data = array_merge($this->data, array(
             'school' => $school,
+             'school_all' => $school_all,
             'school_id_test' => $school_id_test,
             'school_levels_3' => $school_levels_3,
             'districts' => $districts,
