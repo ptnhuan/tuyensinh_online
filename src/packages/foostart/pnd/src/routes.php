@@ -158,6 +158,43 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndSchoolAdminController@post_about'
         ]);
 
+        
+          ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////PND SCHOOL TEST ROUTE///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        /**
+         * list
+         */
+        Route::get('/pnd_school_test', [
+            'as' => 'admin_pnd_school_test',
+            'uses' => 'PndSchoolTestAdminController@index'
+        ]);
+
+        /**
+         * edit-add
+         */
+        Route::get('/pnd_school_test/edit', [
+            'as' => 'admin_pnd_school_test.edit',
+            'uses' => 'PndSchoolTestAdminController@edit'
+        ]);
+
+        /**
+         * pnd
+         */
+        Route::post('/pnd_school_test/edit', [
+            'as' => 'admin_pnd_school_test.post',
+            'uses' => 'PndSchoolTestAdminController@post'
+        ]);
+
+        /**
+         * delete
+         */
+        Route::get('/pnd_school_test/delete', [
+            'as' => 'admin_pnd_school_test.delete',
+            'uses' => 'PndSchoolTestAdminController@delete'
+        ]);
+
+        
  
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND DISTRICT ROUTE///////////////////////////////

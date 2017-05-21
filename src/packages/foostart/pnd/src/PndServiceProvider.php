@@ -147,6 +147,8 @@ class PndServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
                 
+                 
+              
                  /**
                  * Examine
                  */
@@ -218,6 +220,17 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_school_about'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ], 
+                
+                  /**
+                 * Schools test
+                 */
+                //list
+                trans('pnd::pnd.page_school_test_list') => [
+                    'url' => URL::route('admin_pnd_school_test'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                
                 
             ]);
             //

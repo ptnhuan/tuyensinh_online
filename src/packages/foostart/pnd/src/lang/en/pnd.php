@@ -33,6 +33,8 @@ return [
     'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
     'page_school_about_list' => 'Thông tin đơn vị',
+    'page_school_test_list' => 'Hội đồng coi thi',
+    'page_school_about_list' => 'Thông tin đơn vị',
     'page_examine_list' => 'Tính điểm xét tuyển',
     'page_exam_room_list' => 'Xếp phòng thi',
     'page_exam_identification' => 'Đánh số báo danh',
