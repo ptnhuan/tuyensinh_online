@@ -75,6 +75,7 @@ class PndSchoolTestAdminController extends PndController {
        
         $school_id_test=NULL;
          $school = NULL;
+         
         $school_id = (int)$request->get('id');
 
         if ($school_users <> 'admin') {
@@ -90,17 +91,15 @@ class PndSchoolTestAdminController extends PndController {
         $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
         $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
-          $school_all =  $school = $this->obj_schools->pluck_select_test();
-        
+          $school_all = $this->obj_schools->pluck_select_test();
+ 
          
-      if (!empty($school_id) && (is_int($school_id))) {
+     if (!empty($school_id) && (is_int($school_id))) {
 
             $school = $this->obj_school_tests->find($school_id);
-           
-            
+                  
        }
- var_dump($school);
-            die();
+ 
         $this->data = array_merge($this->data, array(
             'school' => $school,
              'school_all' => $school_all,
@@ -110,7 +109,7 @@ class PndSchoolTestAdminController extends PndController {
             'districts_search' => $districts_search,
             'request' => $request,
         ));
-
+ 
         return view('pnd::admin.pnd_school_test_edit', $this->data);
     }
 

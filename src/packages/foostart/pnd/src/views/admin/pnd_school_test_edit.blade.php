@@ -249,7 +249,7 @@
                 data:{
                     _token: '{{csrf_token()}}',
                     school_district_code: This.val(),
-                    school_current: '<?php echo @$school_all->school_code ?>',
+                    school_current: '<?php echo @$school->school_code ?>',
                 },
                 success:function(result){ 
                     $('#school_code').html(result);
