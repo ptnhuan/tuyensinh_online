@@ -10,7 +10,11 @@ class PndAdminValidator extends AbstractValidator
     protected static $rules = array(
         'student_first_name' => 'required',
         'student_last_name' => 'required',
-        'student_email' => 'required',
+        'student_sex' => 'student_sex',
+        'student_birth' => 'student_birth',
+        
+        
+        
     );
 
     protected static $messages = [];
@@ -64,9 +68,11 @@ class PndAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'student_first_name.required' => 'Yêu cầu nhập họ học viên.',
-            'student_last_name.required' => 'Yêu cầu nhập tên học viên.',
-            'student_email.required' => 'Yêu cầu nhâp email học viên.',
+            'student_first_name.required' => 'Nhập thông tin họ học sinh.',
+            'student_last_name.required' => 'Nhập tên học sinh.',
+             'student_sex' => 'student_sex',
+        'student_birth' => 'student_birth',
+            
         ];
     }
 
