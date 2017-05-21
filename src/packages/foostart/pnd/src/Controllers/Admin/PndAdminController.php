@@ -306,6 +306,8 @@ class PndAdminController extends PndController
                 //Message
                 $this->addFlashMessage('message', trans('pnd::pnd.message_delete_successfully'));
 
+                $obj_student = new PndUser();
+                $obj_student->delete_user(array('user_name' => $student->student_user));
                 $student->delete();
             }
         } else {

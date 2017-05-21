@@ -10,7 +10,7 @@
         <hr class="message-inner-separator">
         <p>Yêu cầu đọc từ dòng <b><?php echo $pexcel->pexcel_fromrow ?></b> đến dòng <b><?php echo $pexcel->pexcel_torow ?></b> </p>
         <p>Đã đọc được: <b><?php echo count($students) ?></b> dòng</p>
-        <p>Trạng thái</p>
+        <p>Trạng thái <b><?php echo $config[$pexcel->pexcel_status] ?></b></p>
     </div>
 </div>
 

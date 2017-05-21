@@ -234,13 +234,16 @@ class PexcelAdminController extends PexcelController {
         unset($pexcel->pexcel_category_name);
         $pexcel->save();
 
+        $config = config('pexcel.status_str');
+
         /**
          * Import data
          */
         $this->data = array_merge($this->data, array(
             'students' => $students,
             'request' => $request,
-            'pexcel' => $pexcel
+            'pexcel' => $pexcel,
+            'config' => $config,
         ));
 
         return view('pexcel::admin.pexcel_parse', $this->data);
