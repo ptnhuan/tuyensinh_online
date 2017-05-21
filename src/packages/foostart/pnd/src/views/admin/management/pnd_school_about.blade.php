@@ -183,7 +183,7 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_school_search',['name_search'=>'_schools'])
+            @include('pnd::admin.management.pnd_school_search',['name_search'=>'_schools'])
         </div>
 
     </div>

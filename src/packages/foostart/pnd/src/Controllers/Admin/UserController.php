@@ -59,15 +59,15 @@ class UserController extends PndController
         $this->isAuthentication();
 
         $params = $request->all();
-         $params['user_name'] = $this->current_user->user_name;
+        $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
 
         //PEXCEL
-        if(!empty($params['id'])) {
+        if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
             $pexcel_status = config('pexcel.status');
 
-            $students = (array) json_decode($pexcel->pexcel_value);
+            $students = (array)json_decode($pexcel->pexcel_value);
 
             if ($pexcel->pexcel_status == $pexcel_status['new']) {
                 $pexcel->pexcel_status = $pexcel_status['confirmed'];
@@ -82,7 +82,7 @@ class UserController extends PndController
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user_id($params['user_id']);
+        $school = $this->obj_schools->get_school_by_user($params);
 
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
@@ -114,19 +114,18 @@ class UserController extends PndController
 
         $specialists = $this->obj_specialists->pluck_select();
 
-        $specialists = (object)array_merge(['NULL'=>''],$specialists->toArray());
+        $specialists = (object)array_merge(['NULL' => ''], $specialists->toArray());
 
 
-        $school_levels_3 =  $this->obj_schools->pluck_select(['school_level_id'=>3]);
+        $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
         //$school_levels_3 =  (object)array_merge(['NULL'=>''],$school_levels_3);
 
-            //var_dump($school_levels_3);
-       //die();
+        //var_dump($school_levels_3);
+        //die();
         //$school_levels_specialist =  $this->obj_schools->pluck_select(['school_level_id'=>3,'school_choose_specialist'=>1]);
-      ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
+        ///  $school_levels_specialist =  (object)array_merge(['NULL'=>''],$school_levels_specialist->toArray());
 
-       $school_levels_specialist = (object)array_merge(['NULL'=>''],$this->obj_schools->pluck_select(['school_level_id'=>3])->toArray());
-
+        $school_levels_specialist = (object)array_merge(['NULL' => ''], $this->obj_schools->pluck_select(['school_level_id' => 3])->toArray());
 
 
         $districts = $this->obj_districts->pluck_select();
@@ -275,7 +274,7 @@ class UserController extends PndController
         if (!empty($schools)) {
             foreach ($schools as $key => $school) {
                 $selected = ($key == $request['school_current']) ? "selected" : "";
-                $html .= '<option '. $selected .' value="' . $key . '">' . $school . '</option>';
+                $html .= '<option ' . $selected . ' value="' . $key . '">' . $school . '</option>';
             }
         }
 

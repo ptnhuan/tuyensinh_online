@@ -20,14 +20,16 @@ use Foostart\Pnd\Helper\Parse;
  */
 use Foostart\Pnd\Validators\PndSchoolAdminValidator;
 
-class PndSchoolAdminController extends PndController {
+class PndSchoolAdminController extends PndController
+{
 
     private $obj_schools = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
     private $obj_districts = NULL;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->obj_schools = new Schools();
         $this->obj_districts = new Districts();
@@ -38,7 +40,8 @@ class PndSchoolAdminController extends PndController {
      *
      * @return type
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $params = $request->all();
 
@@ -53,29 +56,29 @@ class PndSchoolAdminController extends PndController {
             'districts_search' => $districts_search,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_school_list', $this->data);
+        return view('pnd::admin.management.pnd_school_list', $this->data);
     }
 
     /**
      *
      * @return type
      */
-    public function about(Request $request) {
-        
-        
+    public function about(Request $request)
+    {
+
+
         $params = $request->all();
         $this->isAuthentication();
         $school_users = $this->current_user->user_name;
 
 
         $school = NULL;
-        
-       
-        if  ( $school_users <> 'admin')  
-                {              
-     $school_id = $this->obj_schools->get_school_by_user_id($school_users)->school_id;
+
+
+        if ($school_users <> 'admin') {
+            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
         }
-        
+
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
@@ -92,18 +95,19 @@ class PndSchoolAdminController extends PndController {
             'districts_search' => $districts_search,
             'request' => $request,
         ));
-        
-        return view('pnd::admin.pnd_school_about', $this->data);
+
+        return view('pnd::admin.management.pnd_school_about', $this->data);
     }
 
     /**
      *
      * @return type
      */
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
 
         $school = NULL;
-        $school_id = (int) $request->get('id');
+        $school_id = (int)$request->get('id');
 
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
@@ -122,7 +126,7 @@ class PndSchoolAdminController extends PndController {
             'request' => $request,
         ));
 
-        return view('pnd::admin.pnd_school_edit', $this->data);
+        return view('pnd::admin.management.pnd_school_edit', $this->data);
     }
 
     /**
@@ -130,7 +134,8 @@ class PndSchoolAdminController extends PndController {
      * @param Request $request
      * @return type
      */
-    public function post(Request $request) {
+    public function post(Request $request)
+    {
 
         $this->isAuthentication();
 
@@ -140,7 +145,7 @@ class PndSchoolAdminController extends PndController {
 
         //$input['user_id'] = $this->current_user->id;
 
-        $school_id = (int) $request->get('id');
+        $school_id = (int)$request->get('id');
 
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
@@ -205,16 +210,18 @@ class PndSchoolAdminController extends PndController {
             'districts' => $districts,
             'districts_search' => $districts_search,
             'request' => $request,
-                ), $data);
+        ), $data);
 
-        return view('pnd::admin.pnd_school_edit', $this->data);
+        return view('pnd::admin.management.pnd_school_edit', $this->data);
     }
- /**
+
+    /**
      *
      * @param Request $request
      * @return type
      */
-    public function post_about(Request $request) {
+    public function post_about(Request $request)
+    {
 
         $this->isAuthentication();
 
@@ -224,8 +231,8 @@ class PndSchoolAdminController extends PndController {
 
         //$input['user_id'] = $this->current_user->id;
 
-        $school_id = (int) $request->get('id');
-     
+        $school_id = (int)$request->get('id');
+
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
@@ -289,9 +296,9 @@ class PndSchoolAdminController extends PndController {
             'districts' => $districts,
             'districts_search' => $districts_search,
             'request' => $request,
-                ), $data);
+        ), $data);
 
-        return view('pnd::admin.pnd_school_about', $this->data);
+        return view('pnd::admin.management.pnd_school_about', $this->data);
     }
 
     /**
@@ -302,7 +309,8 @@ class PndSchoolAdminController extends PndController {
      *
      * @return type
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
 
         $school = NULL;
         $school_id = $request->get('id');
@@ -317,7 +325,7 @@ class PndSchoolAdminController extends PndController {
                 $school->delete();
             }
         } else {
-            
+
         }
 
         $this->data = array_merge($this->data, array(
@@ -327,7 +335,8 @@ class PndSchoolAdminController extends PndController {
         return Redirect::route("admin_pnd_school");
     }
 
-    public function parse(Request $request) {
+    public function parse(Request $request)
+    {
 
         $obj_parse = new Parse();
         $obj_schools = new Schools();

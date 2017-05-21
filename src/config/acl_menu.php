@@ -111,9 +111,9 @@ return [
              * Route to edit the current user profile
              */
             "name" => "Quản trị",
-            "route" => "user.schoo.view",
-            "link" => '/user/student/view',
-            "permissions" => ['_student']
+            "route" => "admin_manager",
+            "link" => '/admin/manager',
+            "permissions" => []
         ],
     ]
 ];
