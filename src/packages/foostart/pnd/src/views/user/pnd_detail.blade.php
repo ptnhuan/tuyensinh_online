@@ -200,8 +200,7 @@
 
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
                                             'categories'=> !empty(@$districts) ? $districts  : array(),
-                                            'category_id'=>@$student->school_district_code,
-                                            'disabled' => 'disabled'])
+                                            'category_id'=>@$student->school_district_code ])
 
                                             <!--/END INPUT-->
 
@@ -212,8 +211,7 @@
                                                 <!--INPUT-->
                                             @include('pnd::elements.pnd_select', ['name' => 'school_code',
                                                  'categories'=> !empty(@$schools) ? $schools  : array(),
-                                                 'category_id'=>@$student->school_code,
-                                             'disabled' => 'disabled'])
+                                                 'category_id'=>@$student->school_code ])
 
 
                                             <!--/END INPUT-->
