@@ -10,8 +10,8 @@ class PndAdminValidator extends AbstractValidator
     protected static $rules = array(
         'student_first_name' => 'required',
         'student_last_name' => 'required',
-        'student_sex' => 'student_sex',
-        'student_birth' => 'student_birth',
+        'student_sex' => 'required',
+       
         
         
         
@@ -70,8 +70,8 @@ class PndAdminValidator extends AbstractValidator
         self::$messages = [
             'student_first_name.required' => 'Nhập thông tin họ học sinh.',
             'student_last_name.required' => 'Nhập tên học sinh.',
-             'student_sex' => 'student_sex',
-        'student_birth' => 'student_birth',
+             'student_sex.required' => 'Nhập giới tính',
+      
             
         ];
     }

@@ -180,7 +180,7 @@ class PndAdminController extends PndController
                 }
             }
         }
-
+ $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'specialists' => $specialists,
@@ -188,6 +188,7 @@ class PndAdminController extends PndController
             'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
             'request' => $request,
+             'pexcels' => $pexcels,
         ));
 
         return view('pnd::admin.pnd_edit', $this->data);
@@ -279,10 +280,11 @@ class PndAdminController extends PndController
                 }
             }
         }
-
+ $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
+               'pexcels' => $pexcels,
         ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
