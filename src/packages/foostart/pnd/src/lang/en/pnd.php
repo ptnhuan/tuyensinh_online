@@ -33,6 +33,7 @@ return [
     'page_school_test_search' => 'Tìm kiếm hội đồng coi thi',
     'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
+   
     'page_school_test_list' => 'Hội đồng coi thi',
     'page_school_about_list' => 'Thông tin đơn vị',
     'page_school_test_list' => 'Hội đồng coi thi',
@@ -138,7 +139,8 @@ return [
     'school_test_code' => 'Mã trường THCS',
     'school_test_code_room' => 'Số báo danh',
     'school_test_name_title' => 'Tên trường viết tắt',
-    'school_test_name' => 'Tên Hội đồng coi thi',
+    'school_id_test' => 'Tên Hội đồng coi thi',
+     'school_test' => 'Tên Hội đồng tuyển sinh',
     'school_test_address' => 'Địa chỉ',
     'school_test_phone' => 'Điện thoại',
     'school_test_email' => 'Thư điện tử',
@@ -225,6 +227,9 @@ return [
     'school_id_option' => "Mã trường chuyên/DTNT",
     'school_class_code' => "Mã lớp chuyên",
     'school_code_option_1' => "Mã nguyện vọng 1",
+    
+    
+    
     'school_code_option_2' => "Mã nguyện vọng 2",
     'student_score_prior' => "Điểm cộng",
     'student_score_prior_comment' => "Ghi chú",

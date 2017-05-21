@@ -67,16 +67,16 @@ class PndSchoolAdminController extends PndController
     {
 
 
-        $params = $request->all();
+        $param_users = $request->all();
         $this->isAuthentication();
         $school_users = $this->current_user->user_name;
-
+$param_users['user_name']=$school_users;
 
         $school = NULL;
 
 
         if ($school_users <> 'admin') {
-            $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
+            $school_id = $this->obj_schools->get_school_by_user($param_users)->school_id;
         }
 
         $districts = $this->obj_districts->pluck_select();
