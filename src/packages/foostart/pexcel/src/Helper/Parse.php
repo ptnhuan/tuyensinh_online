@@ -42,7 +42,7 @@ class Parse
 
         $fields = config('pexcel.fields');
 
-        for ($index = $pexcel->pexcel_fromrow; $index < $pexcel->pexcel_torow; $index++) {
+        for ($index = $pexcel->pexcel_fromrow-1; $index < $pexcel->pexcel_torow; $index++) {
 
             $value = $filedata[$index];
 
