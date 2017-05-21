@@ -117,6 +117,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
+
+        Route::get('/manager', [
+            'as' => 'admin_manager',
+            'uses' => 'PndSchoolAdminController@index'
+        ]);
         /**
          * list
          */

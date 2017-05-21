@@ -8,14 +8,16 @@ use URL,
     Route;
 use Illuminate\Http\Request;
 
-class PndServiceProvider extends ServiceProvider {
+class PndServiceProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap the application services.
      *
      * @return void
      */
-    public function boot(Request $request) {
+    public function boot(Request $request)
+    {
 
         /**
          * views
@@ -39,16 +41,16 @@ class PndServiceProvider extends ServiceProvider {
          */
         $this->publishes([
             __DIR__ . '/config/pnd.php' => config_path('pnd.php'),
-                ], 'pnd_config');
+        ], 'pnd_config');
 
         $this->publishes([
-            __DIR__.'/views'  => base_path('resources/views/vendor/pnd'),
+            __DIR__ . '/views' => base_path('resources/views/vendor/pnd'),
         ], 'pnd_views');
         $this->publishes([
             __DIR__ . '/../database/migrations/' => database_path('migrations')
-                ], 'pnd_migrations');
+        ], 'pnd_migrations');
         $this->publishes([
-            __DIR__.'/public' => public_path('vendor/pnd'),
+            __DIR__ . '/public' => public_path('vendor/pnd'),
         ], 'pnd_public');
     }
 
@@ -57,14 +59,16 @@ class PndServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
+    public function register()
+    {
         include __DIR__ . '/routes.php';
     }
 
     /**
      *
      */
-    public function postViewComposer(Request $request) {
+    public function postViewComposer(Request $request)
+    {
 
         /**
          * USER sidebar menu
@@ -111,7 +115,7 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('user_pnd_category'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                            ], $admin_pnds));
+            ], $admin_pnds));
             //
         });
 
@@ -137,7 +141,20 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd.edit'),
                     "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
                 ],
-                
+
+
+            ]);
+            //
+
+        });
+
+        view()->composer(['pnd::admin.management.*'], function ($view) {
+            global $request;
+            $pnd_id = $request->get('id');
+            $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
+
+            $view->with('sidebar_items', [
+
                 /**
                  * Schools
                  */
@@ -146,10 +163,9 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_school'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-                 
-              
-                 /**
+
+
+                /**
                  * Examine
                  */
                 //list
@@ -157,26 +173,26 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_examine'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-                 /**
+
+                /**
                  * Set exam identifi
                  */
                 //list
-                  trans('pnd::pnd.page_exam_identification') => [
+                trans('pnd::pnd.page_exam_identification') => [
                     'url' => URL::route('admin_pnd_exam_identifi'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-                  /**
+
+                /**
                  * Set exam room
                  */
                 //list
-                  trans('pnd::pnd.page_exam_room_list') => [
+                trans('pnd::pnd.page_exam_room_list') => [
                     'url' => URL::route('admin_pnd_exam_room'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-                
+
+
                 /**
                  * Districts
                  */
@@ -185,16 +201,7 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_district'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-               /**
-                 * Class=specialist
-                 */
-                //list
-                trans('pnd::pnd.page_specialist_list') => [
-                    'url' => URL::route('admin_pnd_specialist'),
-                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ],
- 
+
                 /**
                  * Class=specialist
                  */
@@ -202,26 +209,35 @@ class PndServiceProvider extends ServiceProvider {
                 trans('pnd::pnd.page_specialist_list') => [
                     'url' => URL::route('admin_pnd_specialist'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ], 
-                  /**
+                ],
+
+                /**
+                 * Class=specialist
+                 */
+                //list
+                trans('pnd::pnd.page_specialist_list') => [
+                    'url' => URL::route('admin_pnd_specialist'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                /**
                  * Examine point
                  */
                 //list
                 trans('pnd::pnd.page_examine_point_list') => [
                     'url' => URL::route('admin_pnd_examine_point'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ], 
-                
-                  /**
+                ],
+
+                /**
                  * About School
                  */
                 //list
                 trans('pnd::pnd.page_school_about_list') => [
                     'url' => URL::route('admin_pnd_school_about'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ], 
-                
-                  /**
+                ],
+
+                /**
                  * Schools test
                  */
                 //list
@@ -229,36 +245,31 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_school_test'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
-                
-                
             ]);
-            //
-            
         });
-        
-        view()->composer([ 'laravel-authentication-acl::admin.user.edit',
-                       'laravel-authentication-acl::admin.user.groups',
-                       'laravel-authentication-acl::admin.user.list',
-                       'laravel-authentication-acl::admin.user.profile',
+
+        view()->composer(['laravel-authentication-acl::admin.user.edit',
+            'laravel-authentication-acl::admin.user.groups',
+            'laravel-authentication-acl::admin.user.list',
+            'laravel-authentication-acl::admin.user.profile',
             'pnd::admin.users*'
-            ], function ($view) {
+        ], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
             $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
 
             $view->with('sidebar_items', [
-                
+
                 /*
                  * default acl
                  */
                 "Users list" => [
-                    "url"  => URL::route('users.list'),
+                    "url" => URL::route('users.list'),
                     "icon" => '<i class="fa fa-user"></i>'
                 ],
-                "Add user"   => [
-                        'url'  => URL::route('users.edit'),
-                        "icon" => '<i class="fa fa-plus-circle"></i>'
+                "Add user" => [
+                    'url' => URL::route('users.edit'),
+                    "icon" => '<i class="fa fa-plus-circle"></i>'
                 ],
                 /**
                  * Categories users
@@ -269,8 +280,8 @@ class PndServiceProvider extends ServiceProvider {
                     "icon" => '<i class="fa fa-users" aria-hidden="true"></i>'
                 ],
 
-        ]);
-      });
+            ]);
+        });
     }
 
 }

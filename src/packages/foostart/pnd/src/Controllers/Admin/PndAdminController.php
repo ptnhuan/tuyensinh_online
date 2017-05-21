@@ -58,7 +58,7 @@ class PndAdminController extends PndController
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
-
+        $params['this'] = $this;
         /**
          * EXPORT TO FILE EXCEL
          */
@@ -139,8 +139,6 @@ class PndAdminController extends PndController
         $params['this'] = $this;
 
 
-
-
         $specialists = $this->obj_specialists->pluck_select();
 
         $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
@@ -169,18 +167,18 @@ class PndAdminController extends PndController
                         || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
                 ) {
 
-                }elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
+                } elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
                     $school = $this->obj_schools->get_school_by_user($params);
 
-                    if(empty($school) || $student->school_code_option_1 != $school->school_code){
+                    if (empty($school) || $student->school_code_option_1 != $school->school_code) {
                         return;
                     }
-                }else{
+                } else {
                     return;
                 }
             }
         }
- $pexcels = $this->obj_students->sendPexcels();
+        $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'specialists' => $specialists,
@@ -188,7 +186,7 @@ class PndAdminController extends PndController
             'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
             'request' => $request,
-             'pexcels' => $pexcels,
+            'pexcels' => $pexcels,
         ));
 
         return view('pnd::admin.pnd_edit', $this->data);
@@ -247,8 +245,7 @@ class PndAdminController extends PndController
                         $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
 
                         return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
-                    }
-                    else{
+                    } else {
 
                         $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
 
@@ -280,11 +277,11 @@ class PndAdminController extends PndController
                 }
             }
         }
- $pexcels = $this->obj_students->sendPexcels();
+        $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
             'request' => $request,
-               'pexcels' => $pexcels,
+            'pexcels' => $pexcels,
         ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
