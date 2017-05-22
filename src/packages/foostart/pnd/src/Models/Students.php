@@ -163,7 +163,8 @@ class Students extends Model {
                                     ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                         });
                     }
-             
+                if (!empty($params['school_option123'])) {
+                    
                     if (($params['school_option123'] == "9900" || $params['school_option123'] == "9901")) {
 
                         $eloquent = $eloquent->where('school_code_option', $params['school_option123']);
@@ -173,7 +174,7 @@ class Students extends Model {
                             $eloquent = $eloquent->where('school_code_option_1', $params['school_option123']);
                         }
                     }
-
+                }
  
 
                     if ($params['this']->is_level_3) {

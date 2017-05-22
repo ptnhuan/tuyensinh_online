@@ -93,8 +93,9 @@ class PndSchoolAdminController extends PndController
 
         $school = NULL;
 
-
-        if ($school_users <> 'admin') {
+   
+        if (!empty($this->current_user->permissions)) {
+            
             $school_id = $this->obj_schools->get_school_by_user($param_users)->school_id;
         }
 

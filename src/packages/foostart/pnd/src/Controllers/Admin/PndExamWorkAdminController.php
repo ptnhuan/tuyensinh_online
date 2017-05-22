@@ -178,8 +178,8 @@ class PndExamWorkAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $school_users = $this->current_user->user_name;
-
-        if ($school_users <> 'admin') {
+ if (!empty($this->current_user->permissions)) {
+    
 
             $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
             $idoder = $this->obj_schools->get_school_by_user($params)->school_code_room;
@@ -250,7 +250,7 @@ class PndExamWorkAdminController extends PndController {
         $params['user_id'] = $this->current_user->id;
         $school_users = $this->current_user->user_name;
 
-        if ($school_users <> 'admin') {
+        if (!empty($this->current_user->permissions)) {
             $school_id = $this->obj_schools->get_school_by_user($params)->school_id;
             $number = $this->obj_schools->get_school_by_user($params)->school_number_room;
         }

@@ -65,9 +65,9 @@ class PndAdminController extends PndController {
         $addeditde = 0;
  
  
-        if ($params['user_name'] <> 'admin') {
-            $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
-        }
+       if (!empty($this->current_user->permissions)) {
+          $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
+        }//
 
    
 
@@ -154,7 +154,7 @@ class PndAdminController extends PndController {
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
 
-
+   $params['school_option123']="";
         $specialists = $this->obj_specialists->pluck_select();
 
         $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
@@ -198,6 +198,7 @@ class PndAdminController extends PndController {
             'student' => $student,
             'specialists' => $specialists,
             'school_levels_3' => $school_levels_3,
+             'school_option123_choose' => $params['school_option123'],
             'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
             'request' => $request,
