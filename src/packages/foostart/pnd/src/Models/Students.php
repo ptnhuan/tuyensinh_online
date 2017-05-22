@@ -502,9 +502,9 @@ class Students extends Model {
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
         $student['category_name'] = $categories->pexcel_category_name;
 
-        $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);
+    //    $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);
 
-        $student['pexcel_id'] = $pexcels->pexcel_id;
+   //     $student['pexcel_id'] = $pexcels->pexcel_id;
 
         $student = self::create($student);
 

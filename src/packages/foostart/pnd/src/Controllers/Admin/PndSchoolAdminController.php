@@ -244,7 +244,7 @@ class PndSchoolAdminController extends PndController
                       $usermail['body'] ="THÔNG TIN ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH TRỰC TUYẾN ".'<br>' ."Đơn vị ".$input['school_name'].'<br>' ."Tên đăng nhập: ".$input['user_id'].'<br>' ."Mật khẩu: ".$input['pass_id'].'<br>' ."Địa chỉ truy cập: http://tuyensinh.phuyen.edu.vn";
                     //  $usermail['body'] ="THÔNG TIN ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH TRỰC TUYẾN ".'<br>' ."Đơn vị: Trần Thế Vấn ".'<br>' ."Tên đăng nhập: tranthevan".'<br>' ."Mật khẩu: ttv300".'<br>' ."Địa chỉ truy cập: http://tuyensinh.phuyen.edu.vn";
                   //    $usermail['body'] ="THÔNG TIN ĐĂNG NHẬP HỆ THỐNG TUYỂN SINH TRỰC TUYẾN ".'<br>' ."Đơn vị: Phạm Ngọc Thơ ".'<br>' ."Tên đăng nhập: phamngoctho".'<br>' ."Mật khẩu: pnt578".'<br>' ."Địa chỉ truy cập: http://tuyensinh.phuyen.edu.vn";
-                 
+                 /*
                     Mail::send(['view' => 'mail'], ['usermail' => $usermail], function ($m) use ($usermail) {
                         $m->from('tuyensinh@phuyen.edu.vn', 'Hệ thống Tuyển sinh Trực Tuyến-Sở Giáo dục và Đào tạo Phú Yên');
                         $m->to($usermail['email'], $usermail['name'])->subject('Thông tin mật khẩu đăng nhập!')
@@ -252,7 +252,7 @@ class PndSchoolAdminController extends PndController
                         
                     });
 
- 
+ */
                     
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));

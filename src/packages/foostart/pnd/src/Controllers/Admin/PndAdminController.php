@@ -53,28 +53,27 @@ class PndAdminController extends PndController {
         $this->isAuthentication();
 
         $params = $request->all();
-          $params_option = $request->all();
+        $params_option = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-       
+$school_option123="";
         /**
          * EXPORT TO FILE EXCEL
          */
         // kiem tra them xoa sua 
         $addeditde = 0;
- 
- 
-       if (!empty($this->current_user->permissions)) {
-          $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
+        if (!empty($this->current_user->permissions)) {
+            $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
         }//
 
-     if (isset($params['school_option123'])) {
-     } else{
-         $params['school_option123']=""; 
-     }
+        if (isset($params['school_option123'])) {
+            
+        } else {
+            $params['school_option123'] = "";
+        }
 
-     
+
         if (isset($params['export'])) {
 
             $students = $this->obj_students->get_all_students($params);
@@ -113,19 +112,18 @@ class PndAdminController extends PndController {
                 $params['school_code'] = $school->school_code;
                 $params['school_id'] = $school->school_id;
             }
-            
+
             $students = $this->obj_students->get_all_students($params);
-            
+
             $params_option = $this->obj_students->get_student_option($params);
-            
-         $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
-            
+
+            $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
         }
         //END PEXCEL
         $pexcels = $this->obj_students->sendPexcels();
 
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
- 
+
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
@@ -157,7 +155,7 @@ class PndAdminController extends PndController {
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
 
-   $params['school_option123']="";
+        $params['school_option123'] = "";
         $specialists = $this->obj_specialists->pluck_select();
 
         $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
@@ -201,7 +199,7 @@ class PndAdminController extends PndController {
             'student' => $student,
             'specialists' => $specialists,
             'school_levels_3' => $school_levels_3,
-             'school_option123_choose' => $params['school_option123'],
+            'school_option123_choose' => $params['school_option123'],
             'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
             'request' => $request,
@@ -275,7 +273,7 @@ class PndAdminController extends PndController {
             } else {
 
                 $input = array_merge($input, array());
-            
+
                 $student = $this->obj_students->add_student($input);
 
                 if (!empty($student)) {
