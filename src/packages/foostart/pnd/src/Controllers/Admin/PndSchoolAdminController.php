@@ -4,6 +4,7 @@ namespace Foostart\Pnd\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Foostart\Pnd\Controllers\Admin\PndController;
+use Illuminate\Support\Facades\Mail;
 use URL;
 use Route,
     Redirect;
@@ -215,7 +216,14 @@ class PndSchoolAdminController extends PndController
                 if (!empty($school)) {
 
                     $input['school_id'] = $school_id;
-
+                    Mail::send(['view' => 'mail'], $input, function($message) use ($input){
+                        $message->to($input['school_email'])->cc($input['school_email'])
+                            ->subject('Mail sent from 1 23')
+                            ->setBody('123123123123123');
+                        $message->from('tuyensinh@phuyen.edu.vn');
+                    });
+                    var_dump(123);
+                    die();
                     $school = $this->obj_schools->update_school($input);
 
                     //Message
@@ -231,7 +239,14 @@ class PndSchoolAdminController extends PndController
             } else {
 
                 $input = array_merge($input, array());
-
+                Mail::send(['view' => 'mail'], $input, function($message) use ($input){
+                    $message->to($input['school_email'])->cc($input['school_email'])
+                        ->subject('Mail sent from 1 23')
+                        ->setBody('123123123123123');
+                    $message->from('tuyensinh@phuyen.edu.vn');
+                });
+                var_dump(123);
+                die();
                 $schools = $this->obj_schools->add_school($input);
 
                 if (!empty($schools)) {
