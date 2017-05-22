@@ -84,6 +84,7 @@ return [
     'school_email' => 'Thư điện tử',
     'school_number_room' => 'Số Thí sinh/phòng thi',
     'school_option' => 'Chọn nguyện vọng',
+     'school_option123' => 'Chọn trường đăng ký',
     'school_title_about' => 'Thông tin đơn vị',
     'form_school_about_edit' => 'THÔNG TIN ĐƠN VỊ',
     'school_code_option' => 'Trường chuyên/DTNT',

@@ -493,10 +493,17 @@ class Students extends Model
     public
     function add_student($input)
     {
+        
+       
+        $obj_pexcel_category = new PexcelCategories();
+
+        $categories = $obj_pexcel_category->get_pexcels_categories_action();
 
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
-
+	 $student['category_name']=$categories->pexcel_category_name;
+	 $student['pexcel_id']=$categories->pexcel_category_id;
+      
         $student = self::create($student);
 
         $student = $this->createAccount($student);
@@ -552,6 +559,20 @@ class Students extends Model
 
         $eloquent = null;
         if (!empty($params['user_name'])) {
+            $eloquent = self::where('student_user', $params['user_name'])->first();
+        }
+        if (!empty($params['school_code']) && !empty($params['id'])) {
+            $eloquent = self::where('student_id', $params['id'])
+                ->where('school_code', $params['school_code'])->first();
+        }
+
+        return $eloquent;
+    }
+    
+     function get_student_option($params = [])
+    {  $eloquent = null;
+        $eloquent = self::groupBy('school_code_option_1');
+         if (!empty($params['user_name'])) {
             $eloquent = self::where('student_user', $params['user_name'])->first();
         }
         if (!empty($params['school_code']) && !empty($params['id'])) {

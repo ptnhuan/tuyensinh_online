@@ -30,8 +30,7 @@ class PndAdminValidator extends AbstractValidator
         'student_average_1' => 'required',
         'student_average_2' => 'required',
         'student_graduate' => 'required',
-        'student_score_prior' => 'required',
-        'student_score_prior_comment' => 'required',  
+       
         'school_code_option_1' => 'required',   
           'student_user' => 'required',
         'student_pass' => 'required',
@@ -112,8 +111,7 @@ class PndAdminValidator extends AbstractValidator
             'student_average_1.required' => ' Nhập điểm TB Môn Toán .',
             'student_average_2.required' => ' Nhập điểm TB Môn Văn.',
             'student_graduate.required' => ' Chọn loại Tốt nghiệp .',
-            'student_score_prior.required' => ' Nhập điểm Ưu tiên-khuyến khích .',
-            'student_score_prior_comment.required' => 'Nhập ghi chú Ưu tiên-khuyến khích.',           
+                 
             'school_code_option_1.required' => ' Chọn trường THPT Nguyện vọng 1 .',
                 'student_user.required' => 'Tên đăng nhập.',
             'student_pass.required' => 'Nhập mật khẩu đăng nhập .',

@@ -36,6 +36,16 @@ class PexcelCategories extends Model {
         return $pexcels_category;
     }
 
+     public function get_pexcels_categories_action($params = array()) {       
+
+        $eloquent = self::where('pexcel_category_status', 99)->first();
+     
+        return $eloquent;
+        
+        
+    }
+    
+    
     /**
      *
      * @param type $input

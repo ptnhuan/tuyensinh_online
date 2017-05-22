@@ -16,9 +16,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <!--SCHOOL OPTION-->
-                    @include('pnd::elements.pnd_select', ['name' => 'school_option',
-                    'categories'=> ['Tất cả','Nguyện vọng 1','Nguyện vọng 2'],
-                    'category_id'=> !empty(@$request->get('school_option')) ? @$request->get('school_option') : 0])
+                                      
+                          @include('pnd::elements.pnd_select', ['name' => 'school_option123',
+                                            'categories'=> !empty(@$school_option123) ? $school_option123  : array()
+                                             ])
+                    
+                    
                 </div>
             </div>
 
