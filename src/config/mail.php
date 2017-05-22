@@ -17,7 +17,7 @@ return [
     */
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -29,7 +29,8 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+  
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +57,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'tuyensinh@phuyen.edu.vn'),
+        'name' => env('MAIL_FROM_NAME', 'Le An Pha- Phu Yen Edu'),
     ],
 
     /*
@@ -84,9 +85,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME','tuyensinh@phuyen.edu.vn'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD','phavantho7788'),
 
     /*
     |--------------------------------------------------------------------------
