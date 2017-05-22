@@ -154,14 +154,21 @@
                                             <!--/END INPUT-->
                                         </div>
                                     </div>
-                                    
-                                      <div class="row">
+
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_number_room','value'=> @$school->school_number_room])
                                             <!--/END INPUT-->
                                         </div>
-                                         
+
+                                        <div class="col-md-4">
+                                            <!--SCHOOL OPTION-->
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_online',
+                                            'categories'=> ['0'=>'Không','1'=>'Cấp lại mật khẩu']])
+                                        </div>
+
+
                                     </div>
 
                                     <div class="row">

@@ -269,7 +269,10 @@ class Schools extends Model {
     public function pluck_select_option($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
-        $eloquent = $eloquent->whereIn('school_code', $params);
+        if (!empty($params)) {
+             $eloquent = $eloquent->whereIn('school_code', $params);
+        }
+              
         $eloquent = $eloquent->orWhere('school_choose_specialist', 1);
 
         return $eloquent->pluck('school_name', 'school_code');

@@ -16,17 +16,17 @@
             <div class="row">
                 <div class="col-md-10">
                     <!--SCHOOL OPTION-->
-                                      
-                          @include('pnd::elements.pnd_select', ['name' => 'school_option123',
-                                            'categories'=> !empty(@$school_option123) ? $school_option123  : array(),
-                                           'category_id'=> $school_option123_choose ])
-                    
-                    
+
+                    @include('pnd::elements.pnd_select', ['name' => 'school_option123',
+                    'categories'=> !empty(@$school_option123) ? $school_option123  : array(),
+                    'category_id'=> $school_option123_choose ])
+
+
                 </div>
             </div>
 
             <!-- POST CATEGORY LIST -->
-           
+
             <div class="form-group">
                 <?php $pexcel_id = $request->get('pexcel_id') ? $request->get('pexcel_id') : 0 ?>
 
@@ -43,6 +43,13 @@
         {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
         {!! Form::close() !!}
     </div>
+
+    <div class="panel-body">
+
+
+
+    </div>    
+
 </div>
 
 

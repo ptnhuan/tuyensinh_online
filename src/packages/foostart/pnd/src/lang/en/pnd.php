@@ -82,6 +82,7 @@ return [
     'school_address' => 'Địa chỉ',
     'school_phone' => 'Điện thoại',
     'school_email' => 'Thư điện tử',
+    'school_online' => 'Cấp lại mật khẩu',
     'school_number_room' => 'Số Thí sinh/phòng thi',
     'school_option' => 'Chọn nguyện vọng',
      'school_option123' => 'Chọn trường đăng ký',

@@ -57,7 +57,7 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-$school_option123="";
+        $school_option123 = "";
         /**
          * EXPORT TO FILE EXCEL
          */
@@ -77,8 +77,14 @@ $school_option123="";
         if (isset($params['export'])) {
 
             $students = $this->obj_students->get_all_students($params);
-            $obj_parse = new Parse();
+
+            if (!empty($students)) {
+              $obj_parse = new Parse();
             $obj_parse->export_data_students($students, $this->obj_schools->get_school_by_user($params)->school_name);
+            }
+
+
+           
 
             unset($params['export']);
         }
@@ -107,18 +113,23 @@ $school_option123="";
                 }
             }
         } else {
+           
+            
             $school = $this->obj_schools->get_school_by_user($params);
             if (!empty($school)) {
                 $params['school_code'] = $school->school_code;
                 $params['school_id'] = $school->school_id;
             }
-
+ 
             $students = $this->obj_students->get_all_students($params);
 
             $params_option = $this->obj_students->get_student_option($params);
-
+                     
             $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
-        }
+
+            
+            
+            }
         //END PEXCEL
         $pexcels = $this->obj_students->sendPexcels();
 
@@ -304,8 +315,7 @@ $school_option123="";
      *
      * @return type
      */
-    public
-            function delete(Request $request) {
+    public function delete(Request $request) {
 
         $student = NULL;
         $student_id = $request->get('id');
