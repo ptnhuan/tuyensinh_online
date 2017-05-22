@@ -74,7 +74,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Nhập excel",
+            "name" => "Nhập danh sách học sinh",
             "route" => "admin_pexcel",
             "link" => '/admin/pexcel',
             "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']
@@ -92,7 +92,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Hiển thị",
+            "name" => "Dữ liệu tuyển sinh",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
             "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']

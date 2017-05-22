@@ -23,8 +23,7 @@ use Foostart\Pexcel\Models\Pexcel;
  */
 use Foostart\Pnd\Validators\PndAdminValidator;
 
-class PndAdminController extends PndController
-{
+class PndAdminController extends PndController {
 
     private $obj_students = NULL;
     private $obj_schools = NULL;
@@ -34,8 +33,7 @@ class PndAdminController extends PndController
     private $obj_specialists = null;
     private $obj_pexcel = NULL;
 
-    public function __construct()
-    {
+    public function __construct() {
 
         $this->obj_students = new Students();
         $this->obj_schools = new Schools();
@@ -50,8 +48,7 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
 
         $this->isAuthentication();
 
@@ -62,6 +59,14 @@ class PndAdminController extends PndController
         /**
          * EXPORT TO FILE EXCEL
          */
+        // kiem tra them xoa sua 
+        $addeditde = 0;
+
+        if ( $params['user_name'] <> 'admin') {
+            $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
+        }
+        
+        
         if (isset($params['export'])) {
 
             $students = $this->obj_students->get_all_students($params);
@@ -82,7 +87,7 @@ class PndAdminController extends PndController
 
                 if ($pexcel->pexcel_status == $pexcel_status['new']) {
 
-                    $students = (array)json_decode($pexcel->pexcel_value);
+                    $students = (array) json_decode($pexcel->pexcel_value);
 
                     $pexcel->pexcel_status = $pexcel_status['confirmed'];
                     $pexcel->save();
@@ -111,6 +116,7 @@ class PndAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
+            'addeditde' => $addeditde,
             'request' => $request,
             'params' => $params,
             'pexcels' => array('0' => '...') + $pexcels->toArray(),
@@ -122,8 +128,7 @@ class PndAdminController extends PndController
      *
      * @return type
      */
-    public function edit(Request $request)
-    {
+    public function edit(Request $request) {
         $this->isAuthentication();
         $student = NULL;
         $specialists = NULL;
@@ -140,7 +145,7 @@ class PndAdminController extends PndController
 
         $specialists = $this->obj_specialists->pluck_select();
 
-        $specialists = (object)array_merge(['NULL' => '...'], $specialists->toArray());
+        $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
 
 
         $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
@@ -162,10 +167,9 @@ class PndAdminController extends PndController
                 $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
 
-                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id)
-                        || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
+                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
                 ) {
-
+                    
                 } elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
                     $school = $this->obj_schools->get_school_by_user($params);
 
@@ -189,8 +193,6 @@ class PndAdminController extends PndController
         ));
 
         return view('pnd::admin.pnd_edit', $this->data);
-
-
     }
 
     /**
@@ -198,8 +200,7 @@ class PndAdminController extends PndController
      * @param Request $request
      * @return type
      */
-    public function post(Request $request)
-    {
+    public function post(Request $request) {
 
         $this->isAuthentication();
 
@@ -211,7 +212,7 @@ class PndAdminController extends PndController
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
 
-        $student_id = (int)$request->get('id');
+        $student_id = (int) $request->get('id');
 
         $student = NULL;
 
@@ -236,8 +237,7 @@ class PndAdminController extends PndController
 
                     $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
-                    if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id)
-                            || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
+                    if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
                     ) {
                         $student = $this->obj_students->update_student($input);
                         //Message
@@ -281,7 +281,7 @@ class PndAdminController extends PndController
             'student' => $student,
             'request' => $request,
             'pexcels' => $pexcels,
-        ), $data);
+                ), $data);
 
         return view('pnd::admin.pnd_edit', $this->data);
     }
@@ -291,8 +291,7 @@ class PndAdminController extends PndController
      * @return type
      */
     public
-    function delete(Request $request)
-    {
+            function delete(Request $request) {
 
         $student = NULL;
         $student_id = $request->get('id');
@@ -309,7 +308,7 @@ class PndAdminController extends PndController
                 $student->delete();
             }
         } else {
-
+            
         }
 
         $this->data = array_merge($this->data, array(
@@ -324,8 +323,7 @@ class PndAdminController extends PndController
      */
 
     public
-    function getSchoolByDistrict(Request $request)
-    {
+            function getSchoolByDistrict(Request $request) {
 
         $input = $request->all();
         $input['school_level_id'] = 2;
@@ -342,13 +340,12 @@ class PndAdminController extends PndController
         return $html;
     }
 
+    /* Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
+      xem thông tin học sinh
+     */
 
-    /*Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
-    xem thông tin học sinh
-    */
     public
-    function check_view_user($request)
-    {
+            function check_view_user($request) {
         $this->isAuthentication();
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
@@ -366,6 +363,5 @@ class PndAdminController extends PndController
 
         return false;
     }
-
 
 }
