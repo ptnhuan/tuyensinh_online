@@ -172,6 +172,16 @@ class Pexcel extends Model {
         return $pexcels;
     }
 
+    public function get_by_userId_categoryIds_first($params, $category_ids) {
+        $pexcels = self::where('user_id', $params['user_id'])->first() ;
+                  //  ->where('pexcel_category_id', $category_ids);
+        
+          //$pexcels = $pexcels->get();
+        return $pexcels;
+        
+               
+    }
+
     public function get_all_by_categoryIds($category_ids){
         $pexcels = self::whereIn('pexcel_category_id', $category_ids)->get();
         return $pexcels;

@@ -218,7 +218,7 @@ $params_option= array('0'=>'1101','1'=>'1102');
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-
+        $input['user_id'] = $this->current_user->id;
         $student_id = (int) $request->get('id');
 
         $student = NULL;
@@ -266,7 +266,7 @@ $params_option= array('0'=>'1101','1'=>'1102');
             } else {
 
                 $input = array_merge($input, array());
-
+            
                 $student = $this->obj_students->add_student($input);
 
                 if (!empty($student)) {

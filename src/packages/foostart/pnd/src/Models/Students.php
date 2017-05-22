@@ -494,7 +494,7 @@ class Students extends Model
     function add_student($input)
     {
         
-       
+        $obj_pexcel = new Pexcel();
         $obj_pexcel_category = new PexcelCategories();
 
         $categories = $obj_pexcel_category->get_pexcels_categories_action();
@@ -502,8 +502,11 @@ class Students extends Model
         $student = $this->validRow($input);
         $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
 	 $student['category_name']=$categories->pexcel_category_name;
-	 $student['pexcel_id']=$categories->pexcel_category_id;
-      
+         
+         $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);
+          
+	 $student['pexcel_id']=$pexcels->pexcel_id;
+        
         $student = self::create($student);
 
         $student = $this->createAccount($student);
