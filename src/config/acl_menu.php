@@ -92,7 +92,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Dữ liệu tuyển sinh",
+            "name" => "Hồ sơ học sinh",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
             "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']

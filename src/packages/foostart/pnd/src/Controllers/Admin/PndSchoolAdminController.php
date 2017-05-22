@@ -19,6 +19,7 @@ use Foostart\Pnd\Helper\Parse;
  * Validators
  */
 use Foostart\Pnd\Validators\PndSchoolAdminValidator;
+use Foostart\Pnd\Validators\PndSchoolAboutAdminValidator;
 
 class PndSchoolAdminController extends PndController
 {
@@ -59,6 +60,24 @@ class PndSchoolAdminController extends PndController
         return view('pnd::admin.management.pnd_school_list', $this->data);
     }
 
+     public function index_about(Request $request)
+    {
+
+        $params = $request->all();
+
+        $schools = $this->obj_schools->get_schools($params);
+        $districts_search = $this->obj_districts->pluck_select();
+
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
+        $this->data = array_merge($this->data, array(
+            'schools' => $schools,
+            'request' => $request,
+            'districts_search' => $districts_search,
+            'params' => $params
+        ));
+        return view('pnd::admin.pnd_school_list', $this->data);
+    }
     /**
      *
      * @return type
@@ -127,6 +146,31 @@ class PndSchoolAdminController extends PndController
         ));
 
         return view('pnd::admin.management.pnd_school_edit', $this->data);
+    }
+  public function edit_about(Request $request)
+    {
+
+        $school = NULL;
+        $school_id = (int)$request->get('id');
+
+        $districts = $this->obj_districts->pluck_select();
+        $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
+
+        if (!empty($school_id) && (is_int($school_id))) {
+
+            $school = $this->obj_schools->find($school_id);
+        }
+
+        $this->data = array_merge($this->data, array(
+            'school' => $school,
+            'districts' => $districts,
+            'districts_search' => $districts_search,
+            'request' => $request,
+        ));
+
+        return view('pnd::admin.pnd_school_edit', $this->data);
     }
 
     /**
@@ -225,7 +269,7 @@ class PndSchoolAdminController extends PndController
 
         $this->isAuthentication();
 
-        $this->obj_validator = new PndSchoolAdminValidator();
+        $this->obj_validator = new PndSchoolAboutAdminValidator();
 
         $input = $request->all();
 
@@ -252,12 +296,14 @@ class PndSchoolAdminController extends PndController
         } else {
             if (!empty($school_id) && is_int($school_id)) {
 
+                
+                
                 $school = $this->obj_schools->find($school_id);
 
                 if (!empty($school)) {
 
                     $input['school_id'] = $school_id;
-
+                   
                     $school = $this->obj_schools->update_school_about($input);
 
                     //Message
@@ -297,8 +343,8 @@ class PndSchoolAdminController extends PndController
             'districts_search' => $districts_search,
             'request' => $request,
         ), $data);
-
-        return view('pnd::admin.management.pnd_school_about', $this->data);
+ 
+        return view('pnd::admin.pnd_school_about', $this->data);
     }
 
     /**

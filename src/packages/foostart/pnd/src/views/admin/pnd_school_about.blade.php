@@ -62,14 +62,14 @@
 
                                             @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
                                             'categories'=> !empty(@$districts) ? $districts  : array(),
-                                            'category_id'=>@$school->school_district_code])
+                                            'category_id'=>@$school->school_district_code,'disabled' => 'disabled'])
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_select', ['name' => 'school_level_id',
                                             'categories'=> ['2'=>'Cấp 2','3'=>'Cấp 3'],
-                                            'category_id'=> @$school->school_level_id])
+                                            'category_id'=> @$school->school_level_id,'disabled' => 'disabled'])
 
 
 
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'user_id','value'=> @$school->user_id])
+                                            @include('pnd::elements.pnd_input', ['name' => 'user_id','value'=> @$school->user_id,'disabled' => 'disabled'])
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-4">
@@ -90,12 +90,12 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code,'disabled' => 'disabled'])
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-2">
                                             <!--INPUT-->
-                                            @include('pnd::elements.pnd_input', ['name' => 'school_code_room','value'=> @$school->school_code_room])
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_code_room','value'=> @$school->school_code_room,'disabled' => 'disabled'])
                                             <!--/END INPUT-->
                                         </div>
                                         <div class="col-md-4">
