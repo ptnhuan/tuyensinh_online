@@ -44,8 +44,20 @@ class PndSchoolAdminController extends PndController
     public function index(Request $request)
     {
 
-        $params = $request->all();
-       // $params['districts_search']="";
+       $params = $request->all();
+     
+       
+        if (isset($params['districts_search'])) {
+     } else{
+         $params['districts_search']=""; 
+     }
+     
+        if (isset($params['school_level_id'])) {
+     } else{
+         $params['school_level_id']=""; 
+     }
+
+ 
         $schools = $this->obj_schools->get_schools($params);
         
         $districts_search = $this->obj_districts->pluck_select();
@@ -55,6 +67,7 @@ class PndSchoolAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'schools' => $schools,              
             'request' => $request,
+            'school_level_choose'=>$params['school_level_id'],
              'districts_code_choose' => $params['districts_search'],
             'districts_search' => $districts_search,
             'params' => $params
@@ -144,6 +157,8 @@ class PndSchoolAdminController extends PndController
         $this->data = array_merge($this->data, array(
             'school' => $school,
             'districts' => $districts,
+              'school_level_choose'=>$school->school_level_id,
+             'districts_code_choose' => $school->school_district_code,
             'districts_search' => $districts_search,
             'request' => $request,
         ));

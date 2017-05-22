@@ -57,7 +57,7 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-       // $params['school_option123']="";
+       
         /**
          * EXPORT TO FILE EXCEL
          */
@@ -69,7 +69,10 @@ class PndAdminController extends PndController {
           $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
         }//
 
-   
+     if (isset($params['school_option123'])) {
+     } else{
+         $params['school_option123']=""; 
+     }
 
      
         if (isset($params['export'])) {

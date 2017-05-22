@@ -20,7 +20,7 @@
                 <!--SCHOOL OPTION-->
                 @include('pnd::elements.pnd_select', ['name' => 'school_level_id',
                 'categories'=> [''=>'','2'=>'Cấp 2','3'=>'Cấp 3'],
-                'category_id'=>''])
+                'category_id'=>$school_level_choose])
             </div>
         </div>
         

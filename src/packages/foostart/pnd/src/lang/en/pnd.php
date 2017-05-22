@@ -100,6 +100,7 @@ return [
     'school_district_title' => 'Quản lý thông tin huyện',
     'page_district' => 'Tìm kiếm thông tin huyện',
     'district_label' => 'Nhập từ khóa',
+    'districts_search' => 'Chọn huyện',
     'school_district_title' => 'Quản lý thông tin huyện',
     'school_district_id' => 'Huyện',
     'school_district_code' => 'Mã huyện',
