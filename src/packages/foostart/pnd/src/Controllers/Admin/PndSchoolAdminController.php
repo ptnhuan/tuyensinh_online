@@ -20,7 +20,7 @@ use Foostart\Pnd\Helper\Parse;
  */
 use Foostart\Pnd\Validators\PndSchoolAdminValidator;
 use Foostart\Pnd\Validators\PndSchoolAboutAdminValidator;
-
+use Illuminate\Support\Facades\Mail;
 class PndSchoolAdminController extends PndController
 {
 
@@ -216,6 +216,16 @@ class PndSchoolAdminController extends PndController
 
                     $input['school_id'] = $school_id;
 
+                     Mail::send(['view' => 'mail'], $input, function($message) use ($input){
+                        $message->to($input['school_email'])->cc($input['school_email'])
+                            ->subject('Mail sent from 1 23')
+                            ->setBody('123123123123123');
+                        $message->from('tuyensinh@phuyen.edu.vn');
+                    });
+                    var_dump(123);
+                    die();
+                    
+                    
                     $school = $this->obj_schools->update_school($input);
 
                     //Message
@@ -234,6 +244,15 @@ class PndSchoolAdminController extends PndController
 
                 $schools = $this->obj_schools->add_school($input);
 
+                  Mail::send(['view' => 'mail'], $input, function($message) use ($input){
+                    $message->to($input['school_email'])->cc($input['school_email'])
+                        ->subject('Mail sent from 1 23')
+                        ->setBody('123123123123123');
+                    $message->from('tuyensinh@phuyen.edu.vn');
+                });
+                var_dump(123);
+                die();
+                
                 if (!empty($schools)) {
 
                     //Message
