@@ -14,12 +14,12 @@
             @include ('pnd::elements.input',['name'=>'keyword', 'value' => $request->get('keyword')])
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-10">
                     <!--SCHOOL OPTION-->
                                       
                           @include('pnd::elements.pnd_select', ['name' => 'school_option123',
-                                            'categories'=> !empty(@$school_option123) ? $school_option123  : array()
-                                             ])
+                                            'categories'=> !empty(@$school_option123) ? $school_option123  : array(),
+                                           'category_id'=> $school_option123_choose ])
                     
                     
                 </div>

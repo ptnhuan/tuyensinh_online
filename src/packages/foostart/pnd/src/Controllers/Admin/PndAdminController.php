@@ -57,20 +57,19 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
+        $params['school_option123']="";
         /**
          * EXPORT TO FILE EXCEL
          */
         // kiem tra them xoa sua 
         $addeditde = 0;
-
+ 
+ 
         if ($params['user_name'] <> 'admin') {
             $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
         }
-$params_option= array('0'=>'1101','1'=>'1102');
- 
 
-
-        $school_option123 = $this->obj_schools->pluck_select_option($params_option);
+   
 
      
         if (isset($params['export'])) {
@@ -111,18 +110,24 @@ $params_option= array('0'=>'1101','1'=>'1102');
                 $params['school_code'] = $school->school_code;
                 $params['school_id'] = $school->school_id;
             }
-
+            
             $students = $this->obj_students->get_all_students($params);
+            
+            $params_option = $this->obj_students->get_student_option($params);
+            
+         $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
+            
         }
         //END PEXCEL
         $pexcels = $this->obj_students->sendPexcels();
 
         $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
-
+ 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
             'school_option123' => $school_option123,
+            'school_option123_choose' => $params['school_option123'],
             'addeditde' => $addeditde,
             'request' => $request,
             'params' => $params,
