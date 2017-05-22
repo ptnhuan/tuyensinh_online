@@ -57,7 +57,7 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-        $params['school_option123']="";
+       // $params['school_option123']="";
         /**
          * EXPORT TO FILE EXCEL
          */

@@ -45,15 +45,17 @@ class PndSchoolAdminController extends PndController
     {
 
         $params = $request->all();
-
+       // $params['districts_search']="";
         $schools = $this->obj_schools->get_schools($params);
+        
         $districts_search = $this->obj_districts->pluck_select();
          
         $districts_search = array('NULL' => '...') + $districts_search->toArray();
-
+  
         $this->data = array_merge($this->data, array(
             'schools' => $schools,              
             'request' => $request,
+             'districts_code_choose' => $params['districts_search'],
             'districts_search' => $districts_search,
             'params' => $params
         ));

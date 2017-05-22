@@ -27,9 +27,9 @@
         <div class="row">
             <div class="col-md-6">
                 <!--SCHOOL OPTION-->
-                @include('pnd::elements.pnd_select', ['name' => 'school_district_label',
+                @include('pnd::elements.pnd_select', ['name' => 'districts_search',
                                             'categories'=> !empty(@$districts_search) ? $districts_search  : array(),
-                                            'category_id'=>@$school->school_district_code])
+                                            'category_id'=>$districts_code_choose])
             </div>
         </div>
         <!--/END TITLE-->
