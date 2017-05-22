@@ -44,6 +44,7 @@ return [
     */
 
     'port' => env('MAIL_PORT', 587),
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -58,8 +59,10 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'tuyensinh@phuyen.edu.vn'),
-        'name' => env('MAIL_FROM_NAME', 'Le An Pha- Phu Yen Edu'),
+        'name' => env('MAIL_FROM_NAME', 'tuyensinh@phuyen.edu.vn'),
     ],
+    
+     'from' => ['address' => 'tuyensinh@phuyen.edu.vn', 'name' => 'tuyensinh@phuyen.edu.vn'],
 
     /*
     |--------------------------------------------------------------------------
@@ -73,6 +76,7 @@ return [
     */
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +90,7 @@ return [
     */
 
     'username' => env('MAIL_USERNAME','tuyensinh@phuyen.edu.vn'),
-
+    
     'password' => env('MAIL_PASSWORD','phavantho7788'),
 
     /*
@@ -101,6 +105,7 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -113,6 +118,8 @@ return [
     |
     */
 
+        'pretend' => false,
+    
     'markdown' => [
         'theme' => 'default',
 
