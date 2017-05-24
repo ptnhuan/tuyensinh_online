@@ -122,6 +122,7 @@ return [
     'student_date' => 'Sinh ngày',
     'student_name' => 'Họ và tên',
     'page_categories' => 'Tìm kiếm thông tin học sinh',
+    'page_statistics' => 'Thống kê',
     'pnd_categories_label' => 'Danh mục',
     'tab_info_main' => 'Thông tin',
     'tab_info_main_point' => 'Điểm quy đổi học lực-hạnh kiểm',

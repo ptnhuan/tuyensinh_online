@@ -343,6 +343,94 @@ class Students extends Model {
         }
     }
 
+        /**
+     *
+     * @param type $params
+     * @return type
+     */
+    public function statistics_all_students($params,$choose) {
+       $students = NULL;
+        $obj_pexcel = new Pexcel();
+        $obj_pexcel_category = new PexcelCategories();
+        $categories = $obj_pexcel_category->get_available_categories();
+        if ($categories) {
+
+            $category_ids = [];
+
+            foreach ($categories as $category) {
+                $category_ids[] = $category->pexcel_category_id;
+            }
+
+            if ($params['this']->is_admin || $params['this']->is_all || $params['this']->is_level_3) {//user is admin
+                $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
+            } else if ($params['this']->is_my) {
+                $pexcels = $obj_pexcel->get_by_userId_categoryIds($params, $category_ids);
+            } else {
+                return;
+            }
+
+            if ($pexcels) {
+                $pexcel_ids = [];
+                foreach ($pexcels as $pexcel) {
+                    $pexcel_ids[] = $pexcel->pexcel_id;
+                }
+                if ($pexcel_ids) {
+                    $eloquent = self::whereIn('pexcel_id', $pexcel_ids);
+//1 Luong Van Chanh
+                   
+                      if ($choose == "1") {
+                        
+                        $eloquent = $eloquent->where('school_code_option', "9900");
+                    }
+//1 Luong Van Chanh
+                    if ($choose == "2") {
+                   
+                         $eloquent = $eloquent->where('school_code_option', "9901");
+                    }
+
+                    $students = $eloquent->get();
+
+
+                    return $students;
+                }
+            }
+        }
+    }
+
+/*
+     * @param type $params
+     * @return type
+     */
+     public function statistics_all_student_schools($params) {
+      
+     //   $eloquent= DB::table('schools')
+      //         ->join('school_students', 'schools.school_code', '=', 'school_students.school_code')
+       //     ->select('schools.school_code','schools.school_name', \DB::raw("count(school_students.school_code) as count"))
+  // ->get();
+    
+       //  where `bins`.`location_id` = ?
+        //    group by `bins`.`commodity_id`) `bins`
+        
+        
+      //  $eloquent = self::select(\DB::raw('schools.school_code,COUNT(school_students.school_code) as sum'))
+      //  ->leftJoin('school_students','school_students.school_code','=','schools.school_code')
+      //->groupBy('schools.school_code')       
+    //->get();
+        
+      //  );
+        $eloquent=DB::table('schools')
+                 ->select('schools.school_code','schools.school_name', DB::raw('count(school_students.student_id) as items'))
+                ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')  
+                ->where('schools.school_level_id',2)
+                  ->where('schools.school_code', $params['school_code'])                
+                ->groupBy('schools.school_code','schools.school_name')
+         ->get( );
+
+         return $eloquent;
+         
+ 
+    }
+    
     /**
      *
      * @param type $input
@@ -499,7 +587,7 @@ class Students extends Model {
         $categories = $obj_pexcel_category->get_pexcels_categories_action();
 
         $student = $this->validRow($input);
-        $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
+      //  $student['student_birth'] = strtotime($student['student_birth_month'] . '/' . $student['student_birth_day'] . '/' . $student['student_birth_year']);
         $student['category_name'] = $categories->pexcel_category_name;
 
     //    $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);

@@ -87,7 +87,7 @@ if ($addeditde == 0) {
                     <td>{!! @$student->school_code!!}</td>
                     <td>{!! @$student->school_district_code!!}</td>
                     <td>{!! @$student->student_class!!}</td>
-                    <td>{!! @$student->student_conduct_6!!}</td>
+                    <td>{!! @$student->student_capacity_6!!}</td>
                     <td>{!! @$student->student_conduct_6!!}</td>                
                     <td>{!! @$student->student_capacity_7!!}</td>
                     <td>{!! @$student->student_conduct_7!!}</td>

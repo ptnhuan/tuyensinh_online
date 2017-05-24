@@ -277,5 +277,20 @@ class Schools extends Model {
 
         return $eloquent->pluck('school_name', 'school_code');
     }
+    
+        public function pluck_select_option_all($params = array()) {
+        $eloquent = self::orderBy('school_name', 'ASC');
+
+        if (!empty($params)) {
+             $eloquent = $eloquent->whereIn('school_code', $params);
+        }
+              
+        return $eloquent->pluck('school_name', 'school_code', 'school_code');
+    }
+    
+    
+    
+   
+
 
 }

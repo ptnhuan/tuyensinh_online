@@ -27,13 +27,7 @@
 
             <!-- POST CATEGORY LIST -->
 
-            <div class="form-group">
-                <?php $pexcel_id = $request->get('pexcel_id') ? $request->get('pexcel_id') : 0 ?>
-
-                {!! Form::label('pexcel_id', 'Đợt cập nhật:') !!}
-
-                {!! Form::select('pexcel_id', @$pexcels, $pexcel_id, ['class' => 'form-control']) !!}
-            </div>
+             <!-- @include('pnd::admin.pnd_statistics')  
             <!-- /END POST CATEGORY LIST -->
 
         </div>

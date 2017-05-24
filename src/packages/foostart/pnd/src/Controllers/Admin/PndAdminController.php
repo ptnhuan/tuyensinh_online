@@ -57,7 +57,10 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-        $school_option123 = "";
+        $school_option123 = NULL;
+        $school_option12 = NULL;
+        $statistics=NULL;
+        
         /**
          * EXPORT TO FILE EXCEL
          */
@@ -122,13 +125,23 @@ class PndAdminController extends PndController {
             }
  
             $students = $this->obj_students->get_all_students($params);
-
+      
+            if (!empty($students)) {
+            $statistics['sum'] = $this->obj_students->statistics_all_students($params,0)->count();
+            $statistics['lvc'] = $this->obj_students->statistics_all_students($params,1)->count();
+            $statistics['dtnt'] = $this->obj_students->statistics_all_students($params,2)->count();
+            }else{
+                 $statistics['sum'] =0;
+                $statistics['lvc']=0;
+                 $statistics['dtnt']=0;
+            }
             $params_option = $this->obj_students->get_student_option($params);
-                     
+          
             $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
 
-            
-            
+           // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
+           $school_option12=$this->obj_students->statistics_all_student_schools($params);
+           //var_dump($school_option12);die();
             }
         //END PEXCEL
         $pexcels = $this->obj_students->sendPexcels();
@@ -139,8 +152,10 @@ class PndAdminController extends PndController {
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
             'school_option123' => $school_option123,
+            'school_option12' =>$school_option12,
             'school_option123_choose' => $params['school_option123'],
             'addeditde' => $addeditde,
+            'statistics' => $statistics,
             'request' => $request,
             'params' => $params,
             'pexcels' => array('0' => '...') + $pexcels->toArray(),

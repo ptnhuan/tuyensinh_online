@@ -100,7 +100,8 @@ class PndSchoolAdminController extends PndController
     public function about(Request $request)
     {
 
-
+     
+        
         $param_users = $request->all();
         $this->isAuthentication();
         $school_users = $this->current_user->user_name;
@@ -311,7 +312,7 @@ class PndSchoolAdminController extends PndController
      */
     public function post_about(Request $request)
     {
-
+      
         $this->isAuthentication();
 
         $this->obj_validator = new PndSchoolAboutAdminValidator();
