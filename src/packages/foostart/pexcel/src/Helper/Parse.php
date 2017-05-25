@@ -144,5 +144,40 @@ class Parse
   
         })->download('xlsx');
     }
+public function export_data_school_students($data) {
 
+        
+        $temp = realpath(base_path('public/templates/MAUTHONGKE_CAP2.xls'));
+
+        $columns = config('pexcel.column_schools');
+
+        $fromrow = config('pexcel.write_from_school');
+
+        \Excel::load($temp, function ($excel) use ($data,$columns, $fromrow) {
+
+            $fields = array_keys($columns);
+
+            $sheet = $excel->setActiveSheetIndex(0);
+          
+             
+            foreach ($data as $item) {
+ 
+                foreach ($item as $key => $value) {
+
+                    $sheet->setCellValue("A".$fromrow, $fromrow-4);
+                    
+                    if (in_array($key, $fields)) {
+
+                        $cell = $columns[$key].$fromrow;
+                      
+                        $sheet->setCellValue($cell, $value);
+
+                    }
+
+                }
+                $fromrow++;
+            }
+  
+        })->download('xlsx');
+    }
 }

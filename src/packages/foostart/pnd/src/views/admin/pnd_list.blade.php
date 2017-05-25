@@ -44,11 +44,15 @@
    
         <div class="col-md-4">
             @include('pnd::admin.pnd_search')
-             
-          
-  
+
+
         </div>
-        
+        <div class="col-md-4">
+
+            @include('pnd::admin.pnd_statistics')
+
+        </div>    
+
        
     </div>
 </div>

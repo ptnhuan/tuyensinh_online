@@ -245,6 +245,26 @@ class PndServiceProvider extends ServiceProvider
                     'url' => URL::route('admin_pnd_school_test'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
+                
+                /**
+                 * THong ke
+                 */
+                //list
+                
+                 trans('pnd::pnd.page_school_student_level_2_list') => [
+                    'url' => URL::route('admin_pnd_school_student_level_2'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                trans('pnd::pnd.page_school_statistics_level_2_list') => [
+                    'url' => URL::route('admin_pnd_statistics_level_2'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                trans('pnd::pnd.page_school_statistics_level_3_list') => [
+                    'url' => URL::route('admin_pnd_statistics_level_3'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
             ]);
         });
 

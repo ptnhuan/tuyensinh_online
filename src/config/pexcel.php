@@ -5,7 +5,7 @@ return [
      * NUMBERS
      */
     'per_page' => 20,
-    'per_page_students' => 50,
+    'per_page_students' => 500,
     'account_max_length' => 7,
     /**
      * VALIDATORS
@@ -110,4 +110,29 @@ return [
         'student_phone' => 'AF',
     ],
     'write_from' => 10,
+    
+    
+    /**
+     * SAVE TO THONG KE
+     * STATUS
+     */
+    'save_to_table_school' => 'school_students',
+    /**
+     * FIELDS
+     */
+    'field_schools' => [
+        'school_code' => 2,
+        'school_name' => 3,
+        'countstudent' => 4,
+        
+    ],
+
+    'column_schools' => [
+        'stt_id' => 'A',
+        'school_code' => 'B',
+        'school_name' => 'C',
+        'countstudent' => 'D',
+       
+    ],
+    'write_from_school' => 5,
 ];

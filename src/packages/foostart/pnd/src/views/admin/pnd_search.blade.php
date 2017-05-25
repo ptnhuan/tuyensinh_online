@@ -13,6 +13,18 @@
             <!--KEYWORD-->
             @include ('pnd::elements.input',['name'=>'keyword', 'value' => $request->get('keyword')])
 
+             <div class="row">
+                <div class="col-md-10">
+                    <!--SCHOOL OPTION-->
+
+                    @include('pnd::elements.pnd_select', ['name' => 'school_class123',
+                    'categories'=> !empty(@$school_class123) ? $school_class123  : array(),
+                    'category_id'=> $school_class123_choose ])
+
+
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-md-10">
                     <!--SCHOOL OPTION-->
@@ -26,8 +38,7 @@
             </div>
 
             <!-- POST CATEGORY LIST -->
-
-             <!-- @include('pnd::admin.pnd_statistics')  
+ 
             <!-- /END POST CATEGORY LIST -->
 
         </div>
@@ -38,12 +49,7 @@
         {!! Form::close() !!}
     </div>
 
-    <div class="panel-body">
-
-
-
-    </div>    
-
+   
 </div>
 
 

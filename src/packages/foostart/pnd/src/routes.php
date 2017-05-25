@@ -349,6 +349,27 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndExamWorkAdminController@room'
         ]);
         
+         /**
+         * set tatistics_level_2
+         */
+       
+         Route::get('/pnd_school_student/level_2', [
+            'as' => 'admin_pnd_school_student_level_2',
+            'uses' => 'PndAdminController@school_student_index'
+        ]);
+         
+        Route::get('/pnd_statistics/level_2', [
+            'as' => 'admin_pnd_statistics_level_2',
+            'uses' => 'PndStatisticsAdminController@index'
+        ]);
+        
+          Route::get('/pnd_statistics/level_3', [
+            'as' => 'admin_pnd_statistics_level_3',
+            'uses' => 'PndStatisticsAdminController@index_3'
+        ]);
+        
+        
+        
         /*         * ********************************************************************
          * USER CATEGORY
          */
