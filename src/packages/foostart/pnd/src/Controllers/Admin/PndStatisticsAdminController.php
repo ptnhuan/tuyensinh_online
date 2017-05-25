@@ -63,12 +63,12 @@ class PndStatisticsAdminController extends PndController {
         if (isset($params1['districts_search'])) {
             $params['districts_search']=$params1['districts_search'];
      } else{
-         $params['districts_search']=NULL; 
+         $params['districts_search']='NULL'; 
      }
      
                 $districts_search = $this->obj_districts->pluck_select();
 
-        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+        $districts_search = array('NULL' => '') + $districts_search->toArray();
 
   
         if (isset($params1['export'])) {
@@ -133,12 +133,12 @@ class PndStatisticsAdminController extends PndController {
         if (isset($params1['districts_search'])) {
             $params['districts_search']=$params1['districts_search'];
      } else{
-         $params['districts_search']=NULL; 
+         $params['districts_search']='NULL'; 
      }
      
                 $districts_search = $this->obj_districts->pluck_select();
 
-        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+        $districts_search = array('NULL' => '') + $districts_search->toArray();
 
   
         if (isset($params1['export'])) {
@@ -149,7 +149,7 @@ class PndStatisticsAdminController extends PndController {
           
             if (!empty($students)) {
                 $obj_parse = new Parse();
-                $obj_parse->export_data_school_students($students);
+                $obj_parse->export_data_school_option_students($students);
             }
             unset($params1['export']);
         }

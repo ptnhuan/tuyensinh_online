@@ -135,4 +135,28 @@ return [
        
     ],
     'write_from_school' => 5,
+    
+    
+    /**
+     * FIELDS
+     */
+    'field_option_schools' => [
+        'school_code' => 2,
+        'school_name' => 3,
+        'school_index' => 4,
+        'countstudent' => 5,
+        'countstudent1' => 6,
+        
+    ],
+
+    'column_option_schools' => [
+        'stt_id' => 'A',
+        'school_code' => 'B',
+        'school_name' => 'C',
+        'school_index' => 'D',
+        'countstudent' => 'E',
+        'countstudent1' => 'F',
+       
+    ],
+    'write_from__option_school' => 5,
 ];

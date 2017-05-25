@@ -13,8 +13,8 @@
             
             <th style='width:10%'>{{ trans('pnd::pnd.school_code') }} </th>
             <th style='width:35%'>{{ trans('pnd::pnd.school_name') }}</th>  
-             <th style='width:15%'>{{ trans('pnd::pnd.school_index') }}</th>  
-               <th style='width:15%'>{{ trans('pnd::pnd.school_index') }}</th>  
+             <th style='width:25%'>{{ trans('pnd::pnd.school_index') }}</th>  
+               
             <th style='width:35%'>{{ trans('pnd::pnd.school_student_count') }}</th> 
            
         </tr>
@@ -35,11 +35,11 @@
                 ?>
             </td>
          
-            <td>{!! @$school-> school_code !!}</td>
+            <td>{!! @$school->school_code !!}</td>
             <td>{!! @$school->school_name !!}</td>    
              <td>{!! @$school->school_index !!}</td>     
              <td>{!! @$school->countstudent !!}</td>     
-                     <td>{!! @$school->countstudent1 !!}</td>     
+                    
                      
         </tr>
         @endforeach

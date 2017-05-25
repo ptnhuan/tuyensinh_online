@@ -518,29 +518,23 @@ class Students extends Model {
                          
                       
         $eloquent = DB::table('schools')
-                ->select('schools.school_code as school_code', 'schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
-                ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')
-                ->where('schools.school_level_id', 2)
-                ->whereIn('school_students.pexcel_id', $pexcel_ids);
-        if (!empty($params['districts_search'])) {
-            $eloquent->where('schools.school_district_code', $params['districts_search']);
-        }
-        
-        $eloquent->groupBy('schools.school_code', 'schools.school_name');
+                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
+                            ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')
+                            ->where('schools.school_level_id', 2)
+                            ->whereIn('school_students.pexcel_id', $pexcel_ids);
+       // if ($params['school_option123'] <> 'NULL') {
+                    if ($params['districts_search']<>'NULL') {
+                        $eloquent->where('schools.school_district_code', $params['districts_search']);
+                    }
 
-        
+                    $eloquent->groupBy('schools.school_code', 'schools.school_name');
 
-        return $eloquent->get();
-                    
-                    
-              
+
+
+                    return $eloquent->get();
                 }
             }
         }
-         
-         
-      
-       
     }
     
     /*
@@ -701,31 +695,24 @@ class Students extends Model {
                  
                 if ($pexcel_ids) {
                    
-                         
+                    
+                    
                       
         $eloquent = DB::table('schools')
-                ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', DB::raw('count(school_students.school_code_option_1) as countstudent'), DB::raw('count(school_students.school_code_option_2) as countstudent1'))
-                ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code_option_1')
+                ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', DB::raw('count(s1.student_id) as countstudent'))
+                ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option_1')
+              
                 ->where('schools.school_level_id', 3)
-                ->whereIn('school_students.pexcel_id', $pexcel_ids);
-        if (!empty($params['districts_search'])) {
+                ->whereIn('s1.pexcel_id', $pexcel_ids);
+        if ($params['districts_search']<>'NULL') {
             $eloquent->where('schools.school_district_code', $params['districts_search']);
         }
-        
-        $eloquent->groupBy('schools.school_code', 'schools.school_name','schools.school_index' );
-
-        
-
-        return $eloquent->get();
-                    
-                    
-                    
-                    
-                    
+         $eloquent->groupBy('schools.school_code', 'schools.school_name','schools.school_index');
+                      
                  //   var_dump($eloquent->count());die();
-                   // $students = $eloquent->get();
+                   $students = $eloquent->get();
 
-                  //  return $students;
+                     return $students;
                 }
             }
         }
