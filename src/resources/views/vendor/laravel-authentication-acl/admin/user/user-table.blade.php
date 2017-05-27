@@ -57,7 +57,8 @@
                       @endforeach
               </table>
               <div class="paginator">
-                  {!! $users->appends($request->except(['page']) )->render() !!}
+                   
+                  {{ $users->links('pnd::simple-default') }}
               </div>
               @else
                   <span class="text-warning"><h5>No results found.</h5></span>

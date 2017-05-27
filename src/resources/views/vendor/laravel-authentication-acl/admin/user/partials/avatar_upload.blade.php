@@ -11,7 +11,7 @@
         <div class="form-group">
             {!! Form::file('avatar', ['class' => 'form-control']) !!}
             <span class="text-danger">{!! $errors->first('avatar') !!}</span>
-        </div>
+        </div>                                                                                    
         {!! Form::hidden('user_id', $user_profile->user_id) !!}
         {!! Form::hidden('user_profile_id', $user_profile->id) !!}
         <div class="form-group">
