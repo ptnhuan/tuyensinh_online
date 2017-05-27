@@ -60,6 +60,13 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
  */
 Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
+    Route::get('/pnd_statistics/level_2', [
+        'as' => 'admin_pnd_statistics_level_2',
+        'uses' => 'PndStatisticsAdminController@index'
+    ]);
+
+    
+    
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
         ////////////////////////////////////////////////////////////////////////

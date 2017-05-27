@@ -15,6 +15,7 @@ class PndController extends Controller {
     public $is_admin = FALSE;
     public $is_my = FALSE;
     public $is_all = FALSE;
+    public $is_level_2 = FALSE;
     public $is_level_3 = FALSE;
 
     public function isAuthentication() {
@@ -40,6 +41,10 @@ class PndController extends Controller {
 
             if ($auth_helper->hasPermission(array('_mod-3'))) {
                 $this->is_level_3 = TRUE;
+            }
+
+            if ($auth_helper->hasPermission(array('_mod-2'))) {
+                $this->is_level_2 = TRUE;
             }
          
         }

@@ -95,7 +95,7 @@ return [
             "name" => "Hồ sơ học sinh",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']
+            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel','_mod-2']
         ],
         
         [
@@ -105,7 +105,7 @@ return [
             "name" => "Hồ sơ nguyện vọng 1",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => ["_mod3"]
+            "permissions" => ["_mod-3"]
         ],
         [
             /*

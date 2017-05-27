@@ -8,7 +8,8 @@ use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pnd\Models\PndUser;
 
-class Students extends Model {
+class Students extends Model
+{
 
     protected $table = 'school_students';
     public $timestamps = false;
@@ -59,9 +60,8 @@ class Students extends Model {
      * @param type $params
      * @return type
      */
-    public function get_students($params = array()) {
-
-
+    public function get_students($params = array())
+    {
         $eloquent = self::orderBy('student_last_name', 'ASC');
 
         //PEXCEL
@@ -95,14 +95,15 @@ class Students extends Model {
 
             $eloquent = $eloquent->where(function ($where) use ($params) {
                 $where->where('student_email', 'like', '%' . $params['search_student'] . '%')
-                        ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
+                    ->orWhere('student_last_name', 'like', '%' . $params['search_student'] . '%');
             });
         }
 
         return $eloquent->paginate(config('pexcel.per_page'));
     }
 
-    public function sendPexcels() {
+    public function sendPexcels()
+    {
 
         $pexcels = [];
         $obj_pexcel = new Pexcel();
@@ -122,7 +123,8 @@ class Students extends Model {
         return $pexcels;
     }
 
-    public function get_all_students($params) {
+    public function get_all_students($params)
+    {
 
         $students = NULL;
 
@@ -139,9 +141,9 @@ class Students extends Model {
                 $category_ids[] = $category->pexcel_category_id;
             }
 
-            if ($params['this']->is_admin || $params['this']->is_all || $params['this']->is_level_3) {//user is admin
+            if ($params['this']->is_admin || $params['this']->is_all) {//user is admin
                 $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
-            } else if ($params['this']->is_my) {
+            } else if ($params['this']->is_my || $params['this']->is_level_2) {
                 $pexcels = $obj_pexcel->get_by_userId_categoryIds($params, $category_ids);
             } else {
                 return;
@@ -155,12 +157,12 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
                     $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
                         $eloquent = $eloquent->where(function ($where) use ($params) {
                             $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
-                                    ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                                ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                         });
                     }
 
@@ -183,15 +185,15 @@ class Students extends Model {
                         }
                     }
 
- // if (!empty($params['school_option1234'])) {
+                    // if (!empty($params['school_option1234'])) {
                     if ($params['school_option1234'] <> 'NULL') {
-         
-                     
-                            if (!empty($params['school_option1234'])) {
-                           
-                                $eloquent = $eloquent->where('school_code_option_2', $params['school_option1234']);
-                            } 
-                          
+
+
+                        if (!empty($params['school_option1234'])) {
+
+                            $eloquent = $eloquent->where('school_code_option_2', $params['school_option1234']);
+                        }
+
                     }
 
 
@@ -213,7 +215,8 @@ class Students extends Model {
         }
     }
 
-    public function get_all_school_students($params) {
+    public function get_all_school_students($params)
+    {
 
         $students = NULL;
 
@@ -246,17 +249,17 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
                     $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
                         $eloquent = $eloquent->where(function ($where) use ($params) {
                             $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
-                                    ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                                ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                         });
                     }
-                  if ($params['school_code_level'] <> 'NULL') {
-              //      if (!empty($params['school_code_level'])) {
-   
+                    if ($params['school_code_level'] <> 'NULL') {
+                        //      if (!empty($params['school_code_level'])) {
+
                         $eloquent = $eloquent->where('school_code', $params['school_code_level']);
                     }
 
@@ -273,17 +276,16 @@ class Students extends Model {
                         }
                     }
 
- // if (!empty($params['school_option1234'])) {
+                    // if (!empty($params['school_option1234'])) {
                     if ($params['school_option1234'] <> 'NULL') {
 
-                            if (!empty($params['school_option1234'])) {
-                                
-                                $eloquent = $eloquent->where('school_code_option_2', $params['school_option1234']);
-                            } 
-                          
+                        if (!empty($params['school_option1234'])) {
+
+                            $eloquent = $eloquent->where('school_code_option_2', $params['school_option1234']);
+                        }
+
                     }
 
-                    
 
                     if (!empty($params['export'])) {
 
@@ -299,7 +301,8 @@ class Students extends Model {
         }
     }
 
-    public function get_all_sort_students($params) {
+    public function get_all_sort_students($params)
+    {
 
         $students = NULL;
 
@@ -325,7 +328,7 @@ class Students extends Model {
 
                 if ($pexcel_ids) {
                     $eloquent = self::orderBy('student_identifi', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
                         $eloquent->where('student_first_name', 'like', '%' . $params['keyword'] . '%');
@@ -366,7 +369,8 @@ class Students extends Model {
     }
 
     public
-            function get_all_students_order($params) {
+    function get_all_students_order($params)
+    {
         $students = NULL;
 
 
@@ -393,7 +397,7 @@ class Students extends Model {
 
                 if ($pexcel_ids) {
                     $eloquent = self::orderBy('student_identifi', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
 
                     $students = $eloquent->get();
@@ -408,7 +412,8 @@ class Students extends Model {
      * @param type $params
      * @return type
      */
-    public function get_all_identifi_students($params) {
+    public function get_all_identifi_students($params)
+    {
 
         $students = NULL;
 
@@ -436,7 +441,7 @@ class Students extends Model {
 
                 if ($pexcel_ids) {
                     $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
 
                     $students = $eloquent->get();
@@ -451,7 +456,8 @@ class Students extends Model {
      * @param type $params
      * @return type
      */
-    public function statistics_all_students($params, $choose) {
+    public function statistics_all_students($params, $choose)
+    {
         $students = NULL;
         $obj_pexcel = new Pexcel();
         $obj_pexcel_category = new PexcelCategories();
@@ -505,8 +511,9 @@ class Students extends Model {
         }
     }
 
-    
-     public function statistics_all_all_students($params, $choose) {
+
+    public function statistics_all_all_students($params, $choose)
+    {
         $students = NULL;
         $obj_pexcel = new Pexcel();
         $obj_pexcel_category = new PexcelCategories();
@@ -562,7 +569,8 @@ class Students extends Model {
      * @return type
      */
 
-    public function statistics_all_student_school_level_2($params) {
+    public function statistics_all_student_school_level_2($params)
+    {
 
 
         $students = NULL;
@@ -596,12 +604,11 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
 
-
                     $eloquent = DB::table('schools')
-                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
-                            ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')
-                            ->where('schools.school_level_id', 2)
-                            ->whereIn('school_students.pexcel_id', $pexcel_ids);
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
+                        ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')
+                        ->where('schools.school_level_id', 2)
+                        ->whereIn('school_students.pexcel_id', $pexcel_ids);
                     // if ($params['school_option123'] <> 'NULL') {
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
@@ -610,7 +617,6 @@ class Students extends Model {
                     $eloquent->groupBy('schools.school_code', 'schools.school_name');
 
 
-
                     return $eloquent->get();
                 }
             }
@@ -622,7 +628,8 @@ class Students extends Model {
      * @return type
      */
 
-    public function statistics_all_student_school_option_1($params) {
+    public function statistics_all_student_school_option_1($params)
+    {
 
 
         $students = NULL;
@@ -638,14 +645,14 @@ class Students extends Model {
                 $category_ids[] = $category->pexcel_category_id;
             }
 
-            if ($params['this']->is_admin || $params['this']->is_all || $params['this']->is_level_3) {//user is admin
+            if ($params['this']->is_admin || $params['this']->is_all) {//user is admin
                 $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
-            } else if ($params['this']->is_my) {
+            } else if ($params['this']->is_my || $params['this']->is_level_2) {
                 $pexcels = $obj_pexcel->get_by_userId_categoryIds($params, $category_ids);
             } else {
                 return;
             }
-
+ 
             if ($pexcels) {
                 $pexcel_ids = [];
 
@@ -656,18 +663,16 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
 
-
                     $eloquent = DB::table('schools')
-                            ->select('schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
-                            ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code_option_1')
-                            ->where('schools.school_level_id', 3)
-                            ->whereIn('school_students.pexcel_id', $pexcel_ids);
+                        ->select('schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
+                        ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code_option_1')
+                        ->where('schools.school_level_id', 3)
+                        ->whereIn('school_students.pexcel_id', $pexcel_ids);
                     if (!empty($params['districts_search'])) {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
 
                     $eloquent->groupBy('schools.school_code', 'schools.school_name', 'schools.school_index');
-
 
 
                     return $eloquent->get();
@@ -681,7 +686,8 @@ class Students extends Model {
      * @return type
      */
 
-    public function statistics_all_student_school_option($params) {
+    public function statistics_all_student_school_option($params)
+    {
 
 
         $students = NULL;
@@ -709,19 +715,17 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
 
-
                     $eloquent = DB::table('schools')
-                            ->select('schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
-                            ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code_option_1')
-                            ->where('schools.school_level_id', 3)
-                            ->where('school_students.school_code', $params['school_code_level'])
-                            ->whereIn('school_students.pexcel_id', $pexcel_ids);
+                        ->select('schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
+                        ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code_option_1')
+                        ->where('schools.school_level_id', 3)
+                        ->where('school_students.school_code', $params['school_code_level'])
+                        ->whereIn('school_students.pexcel_id', $pexcel_ids);
                     if (!empty($params['districts_search'])) {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
 
                     $eloquent->groupBy('schools.school_code', 'schools.school_name', 'schools.school_index');
-
 
 
                     return $eloquent->get();
@@ -730,7 +734,8 @@ class Students extends Model {
         }
     }
 
-    public function statistics_all_student_school_level_3($params) {
+    public function statistics_all_student_school_level_3($params)
+    {
 
 
         $students = NULL;
@@ -764,13 +769,13 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
                     DB::table('school_student_option')->delete();
-                    
-                     $eloquent = DB::table('schools')
-                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index','schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
-                            ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option')
-                            ->where('schools.school_level_id', 3)    
-                              ->where('schools.school_code', '=', 9900)
-                            ->whereIn('s1.pexcel_id', $pexcel_ids);
+
+                    $eloquent = DB::table('schools')
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', 'schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
+                        ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option')
+                        ->where('schools.school_level_id', 3)
+                        ->where('schools.school_code', '=', 9900)
+                        ->whereIn('s1.pexcel_id', $pexcel_ids);
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
@@ -778,21 +783,20 @@ class Students extends Model {
 
                     //   var_dump($eloquent->count());die();
                     $students = $eloquent->get();
-                                     
-                    
-                    foreach ($students as $s)
-                    {
-                                                
-                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name,'school_index_1' =>  $s->school_index,'school_index_2' =>  $s->school_index2,'school_option_1' =>  $s->countstudent]);
+
+
+                    foreach ($students as $s) {
+
+                        DB::table('school_student_option')->insert([
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
                     }
 
-                     $eloquent = DB::table('schools')
-                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index','schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
-                            ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option')
-                            ->where('schools.school_level_id', 3)    
-                              ->where('schools.school_code', '=', 9901)
-                            ->whereIn('s1.pexcel_id', $pexcel_ids);
+                    $eloquent = DB::table('schools')
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', 'schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
+                        ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option')
+                        ->where('schools.school_level_id', 3)
+                        ->where('schools.school_code', '=', 9901)
+                        ->whereIn('s1.pexcel_id', $pexcel_ids);
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
@@ -800,23 +804,22 @@ class Students extends Model {
 
                     //   var_dump($eloquent->count());die();
                     $students = $eloquent->get();
-                                     
-                    
-                    foreach ($students as $s)
-                    {
-                                                
-                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name,'school_index_1' =>  $s->school_index,'school_index_2' =>  $s->school_index2,'school_option_1' =>  $s->countstudent]);
+
+
+                    foreach ($students as $s) {
+
+                        DB::table('school_student_option')->insert([
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
                     }
 
 
                     $eloquent = DB::table('schools')
-                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index','schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
-                            ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option_1')
-                            ->where('schools.school_level_id', 3)
-                                   ->where('schools.school_code', '<>', 9900)
-                             ->where('schools.school_code', '<>', 9901)
-                            ->whereIn('s1.pexcel_id', $pexcel_ids);
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', 'schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
+                        ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option_1')
+                        ->where('schools.school_level_id', 3)
+                        ->where('schools.school_code', '<>', 9900)
+                        ->where('schools.school_code', '<>', 9901)
+                        ->whereIn('s1.pexcel_id', $pexcel_ids);
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
@@ -824,25 +827,22 @@ class Students extends Model {
 
                     //   var_dump($eloquent->count());die();
                     $students = $eloquent->get();
-                    
-                    
-                    
-                    foreach ($students as $s)
-                    {
-                                                
-                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name,'school_index_1' =>  $s->school_index,'school_index_2' =>  $s->school_index2,'school_option_1' =>  $s->countstudent]);
+
+
+                    foreach ($students as $s) {
+
+                        DB::table('school_student_option')->insert([
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
                     }
-                    
-                    
-                    
+
+
                     $eloquent = DB::table('schools')
-                            ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', DB::raw('count(s1.student_id) as countstudent'))
-                            ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option_2')
-                            ->where('schools.school_level_id', 3)
-                               ->where('schools.school_code', '<>', 9900)
-                             ->where('schools.school_code', '<>', 9901)
-                            ->whereIn('s1.pexcel_id', $pexcel_ids);
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', DB::raw('count(s1.student_id) as countstudent'))
+                        ->leftjoin('school_students as s1', 'schools.school_code', '=', 's1.school_code_option_2')
+                        ->where('schools.school_level_id', 3)
+                        ->where('schools.school_code', '<>', 9900)
+                        ->where('schools.school_code', '<>', 9901)
+                        ->whereIn('s1.pexcel_id', $pexcel_ids);
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
@@ -850,25 +850,22 @@ class Students extends Model {
 
                     //   var_dump($eloquent->count());die();
                     $students = $eloquent->get();
-                    
-                       foreach ($students as $s)
-                    {
-                                                
-                         DB::table('school_student_option')->where('school_code', $s->school_code)
-                           -> update(['school_option_2' =>  $s->countstudent]);
-                                            
+
+                    foreach ($students as $s) {
+
+                        DB::table('school_student_option')->where('school_code', $s->school_code)
+                            ->update(['school_option_2' => $s->countstudent]);
+
                     }
-                    
-                    $students=DB::table('school_student_option')->get();
-                    
+
+                    $students = DB::table('school_student_option')->get();
+
                     return $students;
                 }
             }
         }
 
 
-
- 
     }
 
     /**
@@ -878,7 +875,8 @@ class Students extends Model {
      * @return type
      */
     public
-            function update_student($input, $student_id = NULL) {
+    function update_student($input, $student_id = NULL)
+    {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -933,7 +931,8 @@ class Students extends Model {
         }
     }
 
-    public function user_update_student($input, $student_id = NULL) {
+    public function user_update_student($input, $student_id = NULL)
+    {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -991,7 +990,8 @@ class Students extends Model {
     }
 
     // luu sinh vien cap nhat mat khau
-    public function user_update_student_k($input, $student_id = NULL) {
+    public function user_update_student_k($input, $student_id = NULL)
+    {
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -1001,11 +1001,10 @@ class Students extends Model {
 
         if (!empty($student)) {
 
-            
+
             $student->student_email = $input['student_email'];
             $student->student_phone = $input['student_phone'];
 
- 
 
             $student->student_pass = $input['student_pass'];
 
@@ -1017,13 +1016,15 @@ class Students extends Model {
             return NULL;
         }
     }
+
     /**
      *
      * @param type $input
      * @return type
      */
     private
-            function validRow($data) {
+    function validRow($data)
+    {
         $student = array();
 
         foreach ($this->fillable as $key) {
@@ -1034,7 +1035,8 @@ class Students extends Model {
     }
 
     public
-            function createAccount($student) {
+    function createAccount($student)
+    {
 
         $user_name = $this->generateAccount($student->school_code, $student->student_id);
 
@@ -1045,7 +1047,8 @@ class Students extends Model {
     }
 
     public
-        function add_student($input) {
+    function add_student($input)
+    {
 
         $obj_pexcel = new Pexcel();
         $obj_pexcel_category = new PexcelCategories();
@@ -1058,27 +1061,30 @@ class Students extends Model {
 
         //    $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);
         //     $student['pexcel_id'] = $pexcels->pexcel_id;
- 
+
         $student = self::create($student);
 
         $student = $this->createAccount($student);
         return $student;
     }
 
-    public function add_students($students, $pexcel_id) {
+    public function add_students($students, $pexcel_id)
+    {
 
         foreach ($students as $student) {
-            $this->add_student((array) $student, $pexcel_id);
+            $this->add_student((array)$student, $pexcel_id);
         }
     }
 
-    public function delete_student($student_id) {
+    public function delete_student($student_id)
+    {
         $eloquent = self::where('student_id', $student_id)->delete();
         return $eloquent;
     }
 
     public
-            function generateAccount($school_id, $student_id) {
+    function generateAccount($school_id, $student_id)
+    {
 
         $school_id .= '';
         $student_id .= '';
@@ -1106,7 +1112,8 @@ class Students extends Model {
     }
 
     public
-            function get_student($params = []) {
+    function get_student($params = [])
+    {
 
         $eloquent = null;
         if (!empty($params['user_name'])) {
@@ -1114,13 +1121,14 @@ class Students extends Model {
         }
         if (!empty($params['school_code']) && !empty($params['id'])) {
             $eloquent = self::where('student_id', $params['id'])
-                            ->where('school_code', $params['school_code'])->first();
+                ->where('school_code', $params['school_code'])->first();
         }
 
         return $eloquent;
     }
 
-    function get_student_option($params) {
+    function get_student_option($params)
+    {
         // $eloquent = self::groupBy('school_code_option_1') ;
 
         $students = NULL;
@@ -1154,12 +1162,12 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
                     $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
                         $eloquent = $eloquent->where(function ($where) use ($params) {
                             $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
-                                    ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                                ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                         });
                     }
 
@@ -1172,7 +1180,9 @@ class Students extends Model {
             }
         }
     }
-    function get_student_option_2($params) {
+
+    function get_student_option_2($params)
+    {
         // $eloquent = self::groupBy('school_code_option_1') ;
 
         $students = NULL;
@@ -1206,12 +1216,12 @@ class Students extends Model {
                 if ($pexcel_ids) {
 
                     $eloquent = self::orderBy('student_last_name', 'ASC')
-                            ->whereIn('pexcel_id', $pexcel_ids);
+                        ->whereIn('pexcel_id', $pexcel_ids);
 
                     if (!empty($params['keyword'])) {
                         $eloquent = $eloquent->where(function ($where) use ($params) {
                             $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
-                                    ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                                ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
                         });
                     }
 
@@ -1225,7 +1235,8 @@ class Students extends Model {
         }
     }
 
-    public function deleteStudentsByPexcelId($pexcel_id) {
+    public function deleteStudentsByPexcelId($pexcel_id)
+    {
 
         $obj_user = new PndUser();
         //Delete in user table
@@ -1239,7 +1250,8 @@ class Students extends Model {
         }
     }
 
-    public function pluck_select_class($params = array()) {
+    public function pluck_select_class($params = array())
+    {
 
         $eloquent = self::orderBy('student_class', 'ASC');
 
@@ -1252,9 +1264,9 @@ class Students extends Model {
         return $eloquent->pluck('student_class', 'student_class');
     }
 
-    
-    
-     public function delete_pexcel_id_recybin($params) {
+
+    public function delete_pexcel_id_recybin($params)
+    {
 
 
         $students = NULL;
@@ -1277,7 +1289,7 @@ class Students extends Model {
             } else {
                 return;
             }
- 
+
             if ($pexcels) {
                 $pexcel_ids = [];
 
@@ -1287,29 +1299,16 @@ class Students extends Model {
 
                 if ($pexcel_ids) {
 
-                   $eloquent = DB::table('school_students')
-                                   ->whereNotIn('pexcel_id', $pexcel_ids)->delete();
-                    
-                     $eloquent = DB::table('school_students')
-                                    ->whereNull('pexcel_id')->delete();
+                    $eloquent = DB::table('school_students')
+                        ->whereNotIn('pexcel_id', $pexcel_ids)->delete();
+
+                    $eloquent = DB::table('school_students')
+                        ->whereNull('pexcel_id')->delete();
                 }
-             
+
             }
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
