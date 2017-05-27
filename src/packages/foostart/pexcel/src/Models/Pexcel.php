@@ -141,6 +141,16 @@ class Pexcel extends Model {
 
         return $pexcels;
     }
+    
+     public function get_pexcels_by_user_id_first($user_id) {
+
+        $eloquent = self::where('user_id', $user_id)
+                ->orderby('pexcel_created_at');
+
+        $pexcels = $eloquent->paginate(9)->first();
+
+        return $pexcels;
+    }
 
     /**
      * USER POST

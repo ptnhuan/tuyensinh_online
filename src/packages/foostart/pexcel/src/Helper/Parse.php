@@ -144,6 +144,44 @@ class Parse
   
         })->download('xlsx');
     }
+    
+     public function export_data_student_user_pass($data,$schoolname) {
+
+        
+        $temp = realpath(base_path('public/templates/MAUMATKHAU.xls'));
+
+        $columns = config('pexcel.column_student_users');
+
+        $fromrow = config('pexcel.write_from_student_users');
+
+        \Excel::load($temp, function ($excel) use ($data,$schoolname, $columns, $fromrow) {
+
+            $fields = array_keys($columns);
+
+            $sheet = $excel->setActiveSheetIndex(0);
+          
+           $sheet->setCellValue("A2", mb_strtoupper($schoolname) );
+            
+            foreach ($data as $item) {
+ 
+                foreach ($item->toArray() as $key => $value) {
+
+                    $sheet->setCellValue("A".$fromrow, $fromrow-8);
+                    
+                    if (in_array($key, $fields)) {
+
+                        $cell = $columns[$key].$fromrow;
+                      
+                        $sheet->setCellValue($cell, $value);
+
+                    }
+
+                }
+                $fromrow++;
+            }
+  
+        })->download('xlsx');
+    }
 public function export_data_school_students($data) {
 
         
@@ -201,7 +239,7 @@ public function export_data_school_students($data) {
  
                 foreach ($item as $key => $value) {
 
-                    $sheet->setCellValue("A".$fromrow, $fromrow-4);
+                    $sheet->setCellValue("A".$fromrow, $fromrow-5);
                     
                     if (in_array($key, $fields)) {
 

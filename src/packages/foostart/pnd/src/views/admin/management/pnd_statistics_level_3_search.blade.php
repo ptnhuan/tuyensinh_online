@@ -21,6 +21,8 @@
             <!--/END TITLE-->
         </div>
         <div class="row">
+            
+            
 
             {!! Form::submit(trans('pnd::pnd.filter_examine_point').'', ["class" => "btn btn-info pull-right"]) !!}
             {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}

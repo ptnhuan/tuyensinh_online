@@ -143,9 +143,9 @@ return [
     'field_option_schools' => [
         'school_code' => 2,
         'school_name' => 3,
-        'school_index' => 4,
-        'countstudent' => 5,
-        'countstudent1' => 6,
+        'school_index_1' => 4,        
+        'school_option_1' => 5,
+        'school_option_2' => 6,
         
     ],
 
@@ -153,10 +153,43 @@ return [
         'stt_id' => 'A',
         'school_code' => 'B',
         'school_name' => 'C',
-        'school_index' => 'D',
-        'countstudent' => 'E',
-        'countstudent1' => 'F',
+        'school_index_1' => 'D',       
+        'school_option_1' => 'E',
+        'school_option_2' => 'F',
        
     ],
-    'write_from__option_school' => 5,
+    'write_from__option_school' => 6,
+    
+    
+    
+    /**
+     * FIELDS
+     */
+    'field_student_users' => [
+        'student_first_name' => 2,
+        'student_last_name' => 3,
+        'student_sex' => 4,
+        'student_birth_day' => 4,
+        'student_birth_month' => 5,
+        'student_birth_year' => 6,    
+        'student_class' => 7,
+        'student_user' => 8,
+        'student_pass' => 9
+        
+    ],
+
+    'column_student_users' => [
+       'stt_id' => 'A',
+        'student_first_name' => 'B',
+        'student_last_name' => 'C',
+        'student_sex' => 'D',
+        'student_birth_day' => 'E',
+        'student_birth_month' => 'F',
+        'student_birth_year' => 'G',
+        'student_class' => 'H',
+        'student_user' => 'I',
+        'student_pass' => 'J',
+       
+    ],
+    'write_from_student_users' => 8,
 ];

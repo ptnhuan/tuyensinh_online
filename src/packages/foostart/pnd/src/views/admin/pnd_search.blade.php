@@ -14,7 +14,7 @@
             @include ('pnd::elements.input',['name'=>'keyword', 'value' => $request->get('keyword')])
 
              <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <!--SCHOOL OPTION-->
 
                     @include('pnd::elements.pnd_select', ['name' => 'school_class123',
@@ -26,7 +26,7 @@
             </div>
             
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <!--SCHOOL OPTION-->
 
                     @include('pnd::elements.pnd_select', ['name' => 'school_option123',
@@ -36,20 +36,55 @@
 
                 </div>
             </div>
+            
+            
+             <div class="row">
+                <div class="col-md-12">
+                    <!--SCHOOL OPTION-->
 
-            <!-- POST CATEGORY LIST -->
- 
-            <!-- /END POST CATEGORY LIST -->
+                    @include('pnd::elements.pnd_select', ['name' => 'school_option1234',
+                    'categories'=> !empty(@$school_option1234) ? $school_option1234  : array(),
+                    'category_id'=> $school_option1234_choose ])
+
+
+                </div>
+            </div>
+
+          <div class="row">
+                <div class="col-md-3">
+                    <!--SCHOOL OPTION-->
+
+                 {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-left", 'name' => 'search']) !!}
+     
+
+                </div>
+               <div class="col-md-4">
+                    <!--SCHOOL OPTION-->
+
+                  {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
+    
+
+                </div>
+               <div class="col-md-5">
+                    <!--SCHOOL OPTION-->
+     {!! Form::submit(trans('pexcel::pexcel.export_id').'', ["class" => "btn btn-info pull-right", 'name' => 'exportpass']) !!}
+      
+                </div>
+                {!! Form::close() !!}
+            </div>
 
         </div>
         <!--/END TITLE-->
 
-        {!! Form::submit(trans('pnd::pnd.search').'', ["class" => "btn btn-info pull-left", 'name' => 'search']) !!}
-        {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
-        {!! Form::close() !!}
+        
+    </div>
+   
+
     </div>
 
-   
+
+ 
+
+                    @include('pnd::admin.pnd_statistics')
+  
 </div>
-
-

@@ -23,6 +23,7 @@ class Schools extends Model {
         'school_district_code',
         'school_level_id',
         'school_index',
+         'school_index2',
         'user_id',
         'pass_id',
         'school_contact_phone',
@@ -92,6 +93,7 @@ class Schools extends Model {
             $school->school_code_room = $input['school_code_room'];
             $school->school_name_title = $input['school_name_title'];
             $school->school_index = $input['school_index'];
+            $school->school_index2 = $input['school_index2'];
 
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];
@@ -275,6 +277,18 @@ class Schools extends Model {
         }
 
         $eloquent = $eloquent->orWhere('school_choose_specialist', 1);
+
+        return $eloquent->pluck('school_name', 'school_code');
+    }
+    
+     public function pluck_select_option2($params = array()) {
+        $eloquent = self::orderBy('school_name', 'ASC');
+
+        if (!empty($params)) {
+            $eloquent = $eloquent->whereIn('school_code', $params);
+        }
+
+        
 
         return $eloquent->pluck('school_name', 'school_code');
     }

@@ -15,16 +15,16 @@
 
             <thead>
                 <tr>
-                    <td>Tổng số học sinh: <?php echo $statistics['sum']; ?> hồ sơ</td>
+                    <td>Tổng số học sinh: <?php echo $statisticss['sum']; ?> hồ sơ</td>
                           
                 </tr>
          
                 
                    <tr>
-                    <td>-Đăng ký trường chuyên:<?php echo $statistics['lvc']; ?> hồ sơ</td>
+                    <td>-Đăng ký trường chuyên:<?php echo $statisticss['lvc']; ?> hồ sơ</td>
                 </tr>
                 <tr>
-                    <td>-Đăng ký DTNT:<?php echo $statistics['dtnt']; ?> hồ sơ</td>
+                    <td>-Đăng ký DTNT:<?php echo $statisticss['dtnt']; ?> hồ sơ</td>
                 </tr>
                 <div class="paginator">
     

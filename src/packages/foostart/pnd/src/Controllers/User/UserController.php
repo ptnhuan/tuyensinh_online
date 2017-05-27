@@ -10,6 +10,7 @@ use Foostart\Pnd\Models\Schools;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Validators\PndUserValidator;
+use Foostart\Pnd\Validators\PndUserkValidator;
 use Illuminate\Http\Request;
 use URL,
     Route,
@@ -52,12 +53,11 @@ class UserController extends PndController {
         $params['user_id'] = $this->current_user->id;
 
         $student = $this->obj_students->get_student($params);
-
+         $school_aed=$student->school_aed;
         $specialists = $this->obj_specialists->pluck_select();
-
         $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
 
-
+       
         $school_levels_3 = $this->obj_schools->pluck_select(['school_level_id' => 3]);
         $school_levels_3 = array('NULL' => '...') + $school_levels_3->toArray();
 
@@ -65,8 +65,9 @@ class UserController extends PndController {
         $school_levels_specialist = $this->obj_schools->pluck_select(['school_level_id' => 3, 'school_choose_specialist' => 1]);
         $school_levels_specialist = array('NULL' => '...') + $school_levels_specialist->toArray();
 
-
         $districts = $this->obj_districts->pluck_select();
+      
+        $schools = $this->obj_schools->pluck_select(['school_level_id' => 2]);
 
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
@@ -80,6 +81,9 @@ class UserController extends PndController {
             'school_levels_3' => $school_levels_3,
             'school_levels_specialist' => $school_levels_specialist,
             'districts' => $districts,
+            'schools' =>$schools ,
+             'school_aed' =>$school_aed,
+            'params' => $params,
             'request' => $request,
         ));
 
@@ -95,13 +99,22 @@ class UserController extends PndController {
 
         $this->isAuthentication();
 
-        $this->obj_validator = new PndUserValidator();
+     
 
+         $school_aed = (int) $request->get('school_aed');
+         
+       if ($school_aed==1 ){
+              $this->obj_validator = new PndUserValidator();
         $input = $request->only('student_first_name', 'student_last_name', 'student_email', 'student_sex', 'student_phone', 'student_birth_day', 'student_birth_month', 'student_birth_year', 'student_birth_place',
                 'school_code', 'school_district_code', 'student_class', 'student_capacity_6', 'student_conduct_6', 'student_capacity_7', 'student_conduct_7', 'student_capacity_8', 'student_conduct_8', 'student_capacity_9', 'student_conduct_9',
                 'student_average', 'student_average_1', 'student_average_2', 'student_graduate', 'student_score_prior', 'student_score_prior_comment', 'school_code_option', 'school_class_code',
-                'student_nominate', 'school_code_option_1', 'school_code_option_2', 'student_pass');
-
+                'student_nominate', 'school_code_option_1', 'school_code_option_2',  'student_pass');
+        }
+        
+        if ($school_aed==0){
+                $this->obj_validator = new PndUserkValidator();
+        $input = $request->only('student_email',  'student_phone', 'student_pass');
+        }
 
 
         $input['user_id'] = $this->current_user->id;
@@ -129,7 +142,7 @@ class UserController extends PndController {
 
                     $input['student_id'] = $student_id;
 
-                    $student = $this->obj_students->user_update_student($input);
+                    $student = $this->obj_students->user_update_student_k($input);
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
@@ -185,13 +198,14 @@ class UserController extends PndController {
      * Get school by district
      */
 
-    public function getSchoolByDistrict(Request $request) {
-
+     public
+            function getSchoolByDistrict(Request $request) {
+      $html = null;
         $input = $request->all();
         $input['school_level_id'] = 2;
         $schools = $this->obj_schools->pluck_select($input);
 
-        $html = null;
+       
         if (!empty($schools)) {
             foreach ($schools as $key => $school) {
                 $selected = ($key == $request['school_current']) ? "selected" : "";
@@ -201,5 +215,28 @@ class UserController extends PndController {
 
         return $html;
     }
+    
+    /* Kiểm tra user là học sinh hiện tại hay là trường cấp 2/ cấp 3 / user có quyền
+      xem thông tin học sinh
+     */
 
+    public
+            function check_view_user($request) {
+        $this->isAuthentication();
+        $params = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['permissions'] = $this->current_user->permissions;
+
+        $check_student = $this->obj_students->get_student($params);
+
+        if (!empty($check_student)) {
+            return true;
+        }
+
+        $check_permission_user = 1;
+
+
+        return false;
+    }
 }

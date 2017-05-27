@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-8">
+        <div class="col-md-9">
 
             <div class="panel panel-info">
 
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>   
-        <div class="col-md-4">
+        <div class="col-md-3">
             @include('pnd::admin.management.pnd_statistics_level_3_search',['name_search'=>'_schools'])
         </div>
     </div>

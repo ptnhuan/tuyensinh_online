@@ -57,26 +57,26 @@ class PndStatisticsAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-        
-        $statistics=NULL;
-        
+
+        $statistics = NULL;
+
         if (isset($params1['districts_search'])) {
-            $params['districts_search']=$params1['districts_search'];
-     } else{
-         $params['districts_search']='NULL'; 
-     }
-     
-                $districts_search = $this->obj_districts->pluck_select();
+            $params['districts_search'] = $params1['districts_search'];
+        } else {
+            $params['districts_search'] = 'NULL';
+        }
+
+        $districts_search = $this->obj_districts->pluck_select();
 
         $districts_search = array('NULL' => '') + $districts_search->toArray();
 
-  
+
         if (isset($params1['export'])) {
 
-          
+
             $students = $this->obj_students->statistics_all_student_school_level_2($params);
-                
-          
+
+
             if (!empty($students)) {
                 $obj_parse = new Parse();
                 $obj_parse->export_data_school_students($students);
@@ -86,39 +86,34 @@ class PndStatisticsAdminController extends PndController {
         /**
          * IMPORT FROM PEXCEL TO STUDENTS
          */
-       
-        
+        // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
+        $school_student_school_level_2 = $this->obj_students->statistics_all_student_school_level_2($params);
 
-           // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
-           $school_student_school_level_2=$this->obj_students->statistics_all_student_school_level_2($params);
-     
         //END PEXCEL
-        
- 
+
+
 
         $this->data = array_merge($this->data, array(
-           // 'students' => !empty($students) ? $students : '',
+            // 'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
             //'school_option123' => $school_option123,
             //'school_option12' =>$school_option12,
             //'school_option123_choose' => $params['school_option123'],
             //'addeditde' => $addeditde,
-           // 'statistics' => $statistics,
-               
-              'districts_code_choose' => $params['districts_search'],
-                'districts_search' => $districts_search,
+            // 'statistics' => $statistics,
+
+            'districts_code_choose' => $params['districts_search'],
+            'districts_search' => $districts_search,
             'school_student_school_level_2' => !empty($school_student_school_level_2) ? $school_student_school_level_2 : '',
             'request' => $request,
             'params' => $params,
-            
         ));
-        
-        
-        return view('pnd::admin.management.pnd_statistics_level_2_list', $this->data);
-       
-    } 
 
-      public function index_3(Request $request) {
+
+        return view('pnd::admin.management.pnd_statistics_level_2_list', $this->data);
+    }
+
+    public function index_3(Request $request) {
 
         $this->isAuthentication();
 
@@ -127,26 +122,26 @@ class PndStatisticsAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-        
-        $statistics=NULL;
-        
+
+        $statistics = NULL;
+
         if (isset($params1['districts_search'])) {
-            $params['districts_search']=$params1['districts_search'];
-     } else{
-         $params['districts_search']='NULL'; 
-     }
-     
-                $districts_search = $this->obj_districts->pluck_select();
+            $params['districts_search'] = $params1['districts_search'];
+        } else {
+            $params['districts_search'] = 'NULL';
+        }
+
+        $districts_search = $this->obj_districts->pluck_select();
 
         $districts_search = array('NULL' => '') + $districts_search->toArray();
 
-  
+
         if (isset($params1['export'])) {
 
-          
+
             $students = $this->obj_students->statistics_all_student_school_level_3($params);
-                
-          
+
+
             if (!empty($students)) {
                 $obj_parse = new Parse();
                 $obj_parse->export_data_school_option_students($students);
@@ -156,35 +151,33 @@ class PndStatisticsAdminController extends PndController {
         /**
          * IMPORT FROM PEXCEL TO STUDENTS
          */
-       
-        
+        // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
+        $school_student_school_level_3 = $this->obj_students->statistics_all_student_school_level_3($params);
 
-           // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
-           $school_student_school_level_3=$this->obj_students->statistics_all_student_school_level_3($params);
-     
+
+
         //END PEXCEL
-        
- 
+
+
 
         $this->data = array_merge($this->data, array(
-           // 'students' => !empty($students) ? $students : '',
+            // 'students' => !empty($students) ? $students : '',
             //'categories' => $categories,
             //'school_option123' => $school_option123,
             //'school_option12' =>$school_option12,
             //'school_option123_choose' => $params['school_option123'],
             //'addeditde' => $addeditde,
-           // 'statistics' => $statistics,
-               
-              'districts_code_choose' => $params['districts_search'],
-                'districts_search' => $districts_search,
+            // 'statistics' => $statistics,
+
+            'districts_code_choose' => $params['districts_search'],
+            'districts_search' => $districts_search,
             'school_student_school_level_3' => !empty($school_student_school_level_3) ? $school_student_school_level_3 : '',
             'request' => $request,
             'params' => $params,
-            
         ));
-        
-        
+
+
         return view('pnd::admin.management.pnd_statistics_level_3_list', $this->data);
-       
-    } 
+    }
+
 }
