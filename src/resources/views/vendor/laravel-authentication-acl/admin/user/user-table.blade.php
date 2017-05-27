@@ -58,7 +58,7 @@
               </table>
               <div class="paginator">
                    
-                  {{ $users->links('pnd::simple-default') }}
+                  {{ $users->links('pnd::pagination') }}
               </div>
               @else
                   <span class="text-warning"><h5>No results found.</h5></span>
