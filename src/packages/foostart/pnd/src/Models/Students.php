@@ -7,10 +7,11 @@ use DB;
 use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pnd\Models\PndUser;
-
+use Foostart\Pnd\Models\Districts;
 class Students extends Model
 {
-
+ 
+  
     protected $table = 'school_students';
     public $timestamps = false;
     protected $fillable = [
@@ -566,8 +567,9 @@ class Students extends Model
 
     /*
      * @param type $params
-     * @return type
+     * @return type FRONT
      */
+
 
     public function statistics_all_student_school_level_2($params)
     {
@@ -605,7 +607,7 @@ class Students extends Model
 
 
                     $eloquent = DB::table('schools')
-                        ->select('schools.school_code as school_code', 'schools.school_name as school_name', DB::raw('count(school_students.student_id) as countstudent'))
+                        ->select('schools.school_code as school_code', 'schools.school_name as school_name','schools.school_district_code as school_district_code', DB::raw('count(school_students.student_id) as countstudent'))
                         ->leftjoin('school_students', 'schools.school_code', '=', 'school_students.school_code')
                         ->where('schools.school_level_id', 2)
                         ->whereIn('school_students.pexcel_id', $pexcel_ids);
@@ -613,21 +615,34 @@ class Students extends Model
                     if ($params['districts_search'] <> 'NULL') {
                         $eloquent->where('schools.school_district_code', $params['districts_search']);
                     }
+                    $eloquent->groupBy('schools.school_code', 'schools.school_name', 'schools.school_district_code');
 
-                    $eloquent->groupBy('schools.school_code', 'schools.school_name');
+$eloquent=$eloquent->get();
+                    DB::table('school_student_level_2')->delete();
+                     $obj_districts = new Districts();
+                    
+                    foreach ($eloquent as $s) {
 
+                         $add= $obj_districts->get_name_district($s->school_district_code);
+                        
+                        DB::table('school_student_level_2')->insert([
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_name_district' => $add, 'school_index' => $s->countstudent]);
+                    }
 
-                    return $eloquent->get();
+                    
+                
+
+                    return $eloquent;
                 }
             }
         }
     }
-
     /*
      * @param type $params
      * @return type
      */
 
+    
     public function statistics_all_student_school_option_1($params)
     {
 
@@ -673,8 +688,8 @@ class Students extends Model
                     }
 
                     $eloquent->groupBy('schools.school_code', 'schools.school_name', 'schools.school_index');
-
-
+                    
+              
                     return $eloquent->get();
                 }
             }
@@ -734,7 +749,40 @@ class Students extends Model
         }
     }
 
-    public function statistics_all_student_school_level_3($params)
+    public function statistics_all_student_school_level_front_3()
+    {
+
+
+        $students = NULL;
+     
+                    $students = DB::table('school_student_option')->get();
+
+                    return $students;
+     
+
+    }
+
+    
+     public function statistics_all_student_school_level_front_2()
+    {
+
+
+        $students = NULL;
+     
+                    $students = DB::table('school_student_level_2')->get();
+
+                    return $students;
+     
+
+    }
+    /**
+     *
+     * @param type $input
+     * @param type $pexcel_id
+     * @return type
+     */
+    
+     public function statistics_all_student_school_level_3($params)
     {
 
 

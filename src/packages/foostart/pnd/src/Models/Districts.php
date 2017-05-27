@@ -39,6 +39,12 @@ class Districts extends Model {
         return $pexcels;
     }
 
+    
+     public function get_name_district($district_code) {
+         
+        $eloquent = self::where('school_district_code', $district_code)->first();
+        return $eloquent->school_district_name;
+    }
     /**
      *
      * @param type $input

@@ -54,17 +54,28 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Foostart\Pnd\Controllers\
     });
 });
 
+/**
+ * ADMINISTRATOR
+ */
+Route::group(['middleware' => ['web'], 'prefix' => '', 'namespace' => 'Foostart\Pnd\Controllers\Front'], function () {
+
+    Route::get('/front_statistics/level_2', [
+        'as' => 'front_pnd_statistics_level_2',
+        'uses' => 'PndStatisticsAdminController@index'
+    ]);
+    
+     Route::get('/front_statistics/level_3', [
+            'as' => 'front_pnd_statistics_level_3',
+            'uses' => 'PndStatisticsAdminController@index_3'
+        ]);
+});
 
 /**
  * ADMINISTRATOR
  */
 Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
-    Route::get('/pnd_statistics/level_2', [
-        'as' => 'admin_pnd_statistics_level_2',
-        'uses' => 'PndStatisticsAdminController@index'
-    ]);
-
+   
     
     
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
