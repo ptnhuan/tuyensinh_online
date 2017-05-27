@@ -105,7 +105,7 @@ return [
             "name" => "Hồ sơ nguyện vọng 1",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => ["_mod-3"]
+            "permissions" => ['_superadmin','_mod-3']
         ],
         [
             /*
