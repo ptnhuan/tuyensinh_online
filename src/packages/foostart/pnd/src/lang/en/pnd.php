@@ -33,6 +33,7 @@ return [
     'page_school_test_search' => 'Tìm kiếm hội đồng coi thi',
     'page_catego ry' => 'Danh mục file',
     'page_school_list' => 'Danh sách trường',
+    'page_config_category' => 'Thông số kỳ thi',
    
     'page_school_test_list' => 'Hội đồng coi thi',
     'page_school_about_list' => 'Thông tin đơn vị',

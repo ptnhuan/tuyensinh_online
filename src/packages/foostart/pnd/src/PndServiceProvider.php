@@ -163,6 +163,14 @@ class PndServiceProvider extends ServiceProvider
             $view->with('sidebar_items', [
 
                 /**
+                 * config 
+                 */
+                //list
+                trans('pnd::pnd.page_config_category') => [
+                    'url' => URL::route('admin_pexcel_category'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                /**
                  * Schools
                  */
                 //list
