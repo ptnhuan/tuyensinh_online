@@ -142,7 +142,7 @@ class PndServiceProvider extends ServiceProvider
                     "icon" => '<i class="fa fa-plus" aria-hidden="true"></i>'
                 ],
 
- /**
+                /**
                  * About School
                  */
                 //list
@@ -155,30 +155,15 @@ class PndServiceProvider extends ServiceProvider
 
         });
 
-        view()->composer(['pnd::admin.management.*'], function ($view) {
+        /*
+         * HỒ SƠ NGUYỆN VỌNG 1
+         */
+        view()->composer(['pnd::admin.management.pnd_exam*'], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
             $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
 
             $view->with('sidebar_items', [
-
-                /**
-                 * config 
-                 */
-                //list
-                trans('pnd::pnd.page_config_category') => [
-                    'url' => URL::route('admin_pexcel_category'),
-                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ],
-                /**
-                 * Schools
-                 */
-                //list
-                trans('pnd::pnd.page_school_list') => [
-                    'url' => URL::route('admin_pnd_school'),
-                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ],
-
 
                 /**
                  * Examine
@@ -204,6 +189,40 @@ class PndServiceProvider extends ServiceProvider
                 //list
                 trans('pnd::pnd.page_exam_room_list') => [
                     'url' => URL::route('admin_pnd_exam_room'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+
+                //list
+                trans('pnd::pnd.page_examine_point_list') => [
+                    'url' => URL::route('admin_pnd_examine_point'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+
+            ]);
+        });
+
+        view()->composer(['pnd::admin.management.pnd_district*','pnd::admin.management.pnd_school*'
+            ,'pnd::admin.management.pnd_statistic*','pnd::admin.management.pnd_specialist*'], function ($view) {
+            global $request;
+            $pnd_id = $request->get('id');
+            $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
+
+            $view->with('sidebar_items', [
+
+                /**
+                 * config
+                 */
+                //list
+                trans('pnd::pnd.page_config_category') => [
+                    'url' => URL::route('admin_pexcel_category'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                /**
+                 * Schools
+                 */
+                //list
+                trans('pnd::pnd.page_school_list') => [
+                    'url' => URL::route('admin_pnd_school'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
 
@@ -236,15 +255,7 @@ class PndServiceProvider extends ServiceProvider
                 ],
                 /**
                  * Examine point
-                 */
-                //list
-                trans('pnd::pnd.page_examine_point_list') => [
-                    'url' => URL::route('admin_pnd_examine_point'),
-                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
-                ],
-
-               
-
+                 */ 
                 /**
                  * Schools test
                  */
@@ -253,22 +264,22 @@ class PndServiceProvider extends ServiceProvider
                     'url' => URL::route('admin_pnd_school_test'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
+
                 /**
                  * THong ke
                  */
                 //list
-                
-                 trans('pnd::pnd.page_school_student_level_2_list') => [
+
+                trans('pnd::pnd.page_school_student_level_2_list') => [
                     'url' => URL::route('admin_pnd_school_student_level_2'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
+
                 trans('pnd::pnd.page_school_statistics_level_2_list') => [
                     'url' => URL::route('admin_pnd_statistics_level_2'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                
+
                 trans('pnd::pnd.page_school_statistics_level_3_list') => [
                     'url' => URL::route('admin_pnd_statistics_level_3'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'

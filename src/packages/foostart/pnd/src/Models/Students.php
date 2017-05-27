@@ -168,12 +168,12 @@ class Students extends Model
                     }
 
                     //  if (!empty($params['school_class123'])) {
-                    if ($params['school_class123'] <> 'NULL') {
+                    if (@$params['school_class123'] <> null) {
                         $eloquent = $eloquent->where('student_class', $params['school_class123']);
                     }
 
                     // if (!empty($params['school_option123'])) {
-                    if ($params['school_option123'] <> 'NULL') {
+                    if (@$params['school_option123'] <> null) {
 
                         if (($params['school_option123'] == "9900" || $params['school_option123'] == "9901")) {
 
@@ -187,7 +187,7 @@ class Students extends Model
                     }
 
                     // if (!empty($params['school_option1234'])) {
-                    if ($params['school_option1234'] <> 'NULL') {
+                    if (@$params['school_option1234'] <> null) {
 
 
                         if (!empty($params['school_option1234'])) {
