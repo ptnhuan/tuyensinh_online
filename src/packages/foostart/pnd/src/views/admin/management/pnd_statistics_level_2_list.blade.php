@@ -18,6 +18,15 @@
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_school_search') : trans('pnd::pnd.page_school_list') !!}</h3>
                 </div>
+                <div>
+                    
+                    
+                </div>
+                
+                <div style=" align-self: center">
+                    <h5   >DỮ LIỆU CẤP NHẬT ĐẾN THỜI ĐIỂM <?php echo $data_update;?></h3>
+                </div>
+                
 
                 <!--MESSAGE-->
                 <?php $message = Session::get('message'); ?>

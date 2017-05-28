@@ -53,7 +53,7 @@ class PndStatisticsAdminController extends PndController {
        
         $school_student_school_level_2 = $this->obj_students->statistics_all_student_school_level_front_2();
        
-
+$data_update = $this->obj_students->get_first_statistics_all_student_school_level_2()->first()->updatetime;
 
         //END PEXCEL
 
@@ -63,6 +63,7 @@ class PndStatisticsAdminController extends PndController {
  
             'school_student_school_level_2' => !empty($school_student_school_level_2) ? $school_student_school_level_2: '',
             'request' => $request,
+              'data_update' => $data_update,
            
         ));
 
@@ -81,13 +82,14 @@ class PndStatisticsAdminController extends PndController {
 
         //END PEXCEL
 
-
+$data_update = $this->obj_students->get_first_statistics_all_student_school_level_3()->first()->updatetime;
 
         $this->data = array_merge($this->data, array(
             
  
             'school_student_school_level_3' => !empty($school_student_school_level_3) ? $school_student_school_level_3 : '',
             'request' => $request,
+              'data_update' => $data_update,
            
         ));
 

@@ -88,7 +88,8 @@ class PndStatisticsAdminController extends PndController {
          */
         // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
         $school_student_school_level_2 = $this->obj_students->statistics_all_student_school_level_2($params);
-
+        $data_update = $this->obj_students->get_first_statistics_all_student_school_level_2()->first()->updatetime;
+        
         //END PEXCEL
 
 
@@ -106,6 +107,8 @@ class PndStatisticsAdminController extends PndController {
             'districts_search' => $districts_search,
             'school_student_school_level_2' => !empty($school_student_school_level_2) ? $school_student_school_level_2 : '',
             'request' => $request,
+            'data_update' => $data_update,
+            
             'params' => $params,
         ));
 
@@ -154,7 +157,8 @@ class PndStatisticsAdminController extends PndController {
         // $school_option12 =$this->obj_schools->pluck_select_option_all($params);
         $school_student_school_level_3 = $this->obj_students->statistics_all_student_school_level_3($params);
 
-
+  $data_update = $this->obj_students->get_first_statistics_all_student_school_level_2()->first()->updatetime;
+     
 
         //END PEXCEL
 
@@ -173,6 +177,7 @@ class PndStatisticsAdminController extends PndController {
             'districts_search' => $districts_search,
             'school_student_school_level_3' => !empty($school_student_school_level_3) ? $school_student_school_level_3 : '',
             'request' => $request,
+                'data_update' => $data_update,
             'params' => $params,
         ));
 

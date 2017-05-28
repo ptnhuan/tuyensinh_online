@@ -8,6 +8,7 @@ use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pnd\Models\PndUser;
 use Foostart\Pnd\Models\Districts;
+use \DateTime;
 class Students extends Model
 {
  
@@ -622,7 +623,7 @@ $eloquent=$eloquent->get();
                      $obj_districts = new Districts();
                     
                      $dt = new DateTime();
-  
+  //,'updatetime'=>$dt->format('H:i:s d-m-Y')
                     foreach ($eloquent as $s) {
 
                          $add= $obj_districts->get_name_district($s->school_district_code);
@@ -630,7 +631,7 @@ $eloquent=$eloquent->get();
                          
                          
                         DB::table('school_student_level_2')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_name_district' => $add, 'school_index' => $s->countstudent,'updatetime'=> $s->$dt->format('Y-m-d H:i:s')]);
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_name_district' => $add, 'school_index' => $s->countstudent,'updatetime'=>$dt->format('H:i:s d-m-Y')]);
                     }
 
                     
@@ -641,12 +642,23 @@ $eloquent=$eloquent->get();
             }
         }
     }
+    
+     public function get_first_statistics_all_student_school_level_2() {
+        $eloquent = NULL;
+        $eloquent = DB::table('school_student_level_2')->get();          
+        return $eloquent;
+    }
+ public function get_first_statistics_all_student_school_level_3() {
+        $eloquent = NULL;
+        $eloquent = DB::table('school_student_option')->get();          
+        return $eloquent;
+    }
+
     /*
      * @param type $params
      * @return type
      */
 
-    
     public function statistics_all_student_school_option_1($params)
     {
 
@@ -821,6 +833,10 @@ $eloquent=$eloquent->get();
                 if ($pexcel_ids) {
 
                     DB::table('school_student_option')->delete();
+                    
+                        
+                     $dt = new DateTime();
+  
 
                     $eloquent = DB::table('schools')
                         ->select('schools.school_code as school_code', 'schools.school_name as school_name', 'schools.school_index as school_index', 'schools.school_index2 as school_index2', DB::raw('count(s1.student_id) as countstudent'))
@@ -840,7 +856,7 @@ $eloquent=$eloquent->get();
                     foreach ($students as $s) {
 
                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent,'updatetime'=>$dt->format('H:i:s d-m-Y')]);
                     }
 
                     $eloquent = DB::table('schools')
@@ -861,7 +877,7 @@ $eloquent=$eloquent->get();
                     foreach ($students as $s) {
 
                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent,'updatetime'=>$dt->format('H:i:s d-m-Y')]);
                     }
 
 
@@ -884,7 +900,7 @@ $eloquent=$eloquent->get();
                     foreach ($students as $s) {
 
                         DB::table('school_student_option')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent]);
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_index_1' => $s->school_index, 'school_index_2' => $s->school_index2, 'school_option_1' => $s->countstudent,'updatetime'=>$dt->format('H:i:s d-m-Y')]);
                     }
 
 

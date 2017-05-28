@@ -9,8 +9,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>
-            
+            <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>            
             <th style='width:10%'>{{ trans('pnd::pnd.school_code') }} </th>
             <th style='width:35%'>{{ trans('pnd::pnd.school_name') }}</th>  
             <th style='width:35%'>{{ trans('pnd::pnd.school_student_count') }}</th> 
