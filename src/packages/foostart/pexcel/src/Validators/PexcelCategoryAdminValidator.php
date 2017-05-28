@@ -36,7 +36,7 @@ class PexcelCategoryAdminValidator extends AbstractValidator
 
     public function messages() {
         self::$messages = [
-            'pexcel_category_name.required' => 'Yêu cầu nhập tên danh mục.'
+            'pexcel_category_name.required' => 'Yêu cầu nhập năm học.'
         ];
     }
 

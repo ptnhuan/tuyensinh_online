@@ -67,8 +67,10 @@ if ($addeditde == 0) {
                 @foreach($students as $student)
                 <tr>
                     <td>
+                         
                         <a href="{!! URL::route('admin_pnd.edit', ['id' => $student->student_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>
                         <a href="{!! URL::route('admin_pnd.delete',['id' =>  $student->student_id, '_token' => csrf_token()]) !!}" class="margin-left-5 delete"><i class="fa fa-trash-o fa-2x"></i></a>
+                   
                         <span class="clearfix"></span>
                     </td>
 

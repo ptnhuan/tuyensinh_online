@@ -621,12 +621,16 @@ $eloquent=$eloquent->get();
                     DB::table('school_student_level_2')->delete();
                      $obj_districts = new Districts();
                     
+                     $dt = new DateTime();
+  
                     foreach ($eloquent as $s) {
 
                          $add= $obj_districts->get_name_district($s->school_district_code);
                         
+                         
+                         
                         DB::table('school_student_level_2')->insert([
-                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_name_district' => $add, 'school_index' => $s->countstudent]);
+                            'school_code' => $s->school_code, 'school_name' => $s->school_name, 'school_name_district' => $add, 'school_index' => $s->countstudent,'updatetime'=> $s->$dt->format('Y-m-d H:i:s')]);
                     }
 
                     
@@ -925,6 +929,11 @@ $eloquent=$eloquent->get();
     public
     function update_student($input, $student_id = NULL)
     {
+        
+        
+         $obj_pexcel_category = new PexcelCategories();
+        $categories = $obj_pexcel_category->get_pexcels_categories_action();
+     // if ($categories->edit_level2 == 1) 
 
         if (empty($student_id)) {
             $student_id = $input['student_id'];
@@ -932,9 +941,21 @@ $eloquent=$eloquent->get();
 
         $student = self::find($student_id);
 
-        if (!empty($student)) {
+      
+        if (!empty($student) ) {
 
-            $student->student_first_name = $input['student_first_name'];
+                 if ($categories->edit_level2 == 1) {
+                        
+            $student->student_email = $input['student_email'];
+            $student->student_phone = $input['student_phone'];
+            $student->student_pass = $input['student_pass'];
+
+                $student->save();
+            }
+           
+            if ($categories->edit_level2 == 0) {
+           
+                 $student->student_first_name = $input['student_first_name'];
             $student->student_last_name = $input['student_last_name'];
             $student->student_sex = $input['student_sex'];
             $student->student_birth_day = $input['student_birth_day'];
@@ -967,16 +988,17 @@ $eloquent=$eloquent->get();
             $student->school_code_option_2 = $input['school_code_option_2'];
             $student->student_email = $input['student_email'];
             $student->student_phone = $input['student_phone'];
-            $student->student_user = $input['student_user'];
             $student->student_pass = $input['student_pass'];
 
-
-            $student->save();
+                $student->save();
+            }
 
             return $student;
         } else {
             return NULL;
+                  
         }
+      
     }
 
     public function user_update_student($input, $student_id = NULL)
@@ -1109,10 +1131,10 @@ $eloquent=$eloquent->get();
 
         //    $pexcels = $obj_pexcel->get_by_userId_categoryIds_first($input['user_id'], $categories->pexcel_category_id);
         //     $student['pexcel_id'] = $pexcels->pexcel_id;
-
-        $student = self::create($student);
-
-        $student = $this->createAccount($student);
+       
+            $student = self::create($student);
+            $student = $this->createAccount($student);
+   
         return $student;
     }
 
@@ -1126,7 +1148,14 @@ $eloquent=$eloquent->get();
 
     public function delete_student($student_id)
     {
-        $eloquent = self::where('student_id', $student_id)->delete();
+        $eloquent = null;
+        $obj_pexcel_category = new PexcelCategories();
+        $categories = $obj_pexcel_category->get_pexcels_categories_action();
+
+        if ($categories->delete_level2 == 0) {
+             
+            $eloquent = self::where('student_id', $student_id)->delete();
+        }
         return $eloquent;
     }
 

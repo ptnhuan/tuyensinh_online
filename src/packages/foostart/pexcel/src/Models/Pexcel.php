@@ -129,6 +129,7 @@ class Pexcel extends Model {
 
                     'pexcel_status' => $this->pstatus['new'],
         ]);
+        
         return $pexcel;
     }
 

@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-Trang quản trị bài viết
+Trang nhập thông tin dữ liệu học sinh từ Excel
 @stop
 @section('content')
 <div class="row">
@@ -114,7 +114,9 @@ Trang quản trị bài viết
                             <!-- DELETE BUTTON -->
 
                             <!-- SAVE BUTTON -->
+                           
                             {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
+                         
                             <!-- /SAVE BUTTON -->
 
                             {!! Form::close() !!}

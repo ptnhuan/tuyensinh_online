@@ -28,57 +28,155 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                 @if( isset($message) )
                 <div class="alert alert-success">{{$message}}</div>
                 @endif
+                {!! Form::open(['route'=>['admin_pexcel_category.post', 'id' => @$pexcel_category->pexcel_category_id],  'files'=>true, 'method' => 'pexcel'])  !!}
 
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <!-- SAMPLE CATEGORIES ID -->
-                            <h4>{!! trans('pexcel::pexcel.form_heading') !!}</h4>
-                            {!! Form::open(['route'=>['admin_pexcel_category.post', 'id' => @$pexcel_category->pexcel_category_id],  'files'=>true, 'method' => 'pexcel'])  !!}
+                            <div class="row">  
+                                <div class="col-md-3">
 
-                            <!--END SAMPLE CATEGORIES ID  -->
+                                    <!-- SAMPLE NAME TEXT-->
+                                    <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_category_name', 'value' => $pexcel_category_name])
+                                    <!-- /END SAMPLE NAME TEXT -->
+                                </div>
 
-                            <!-- SAMPLE NAME TEXT-->
-                            <?php $pexcel_category_name = $request->get('pexcel_category_name') ? $request->get('pexcel_category_name') : @$pexcel_category->pexcel_category_name ?>
-                            @include('pexcel::elements.input', ['name' => 'pexcel_category_name', 'value' => $pexcel_category_name])
-                            <!-- /END SAMPLE NAME TEXT -->
+                                <div class="col-md-3">
+                                    <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : @$pexcel_category->pexcel_category_status ?>
 
-                            <!-- POST CATEGORY LIST -->
-                            <div class="form-group">
-                                <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : @$pexcel_category->pexcel_category_status ?>
+                                    {!! Form::label('pexcel_category_status', trans('pexcel::pexcel.pexcel_category_status').':') !!}
 
-                                {!! Form::label('pexcel_category_status', trans('pexcel::pexcel.pexcel_category_status').':') !!}
+                                    {!! Form::select('pexcel_category_status', [99 => 'Sẵn sàng', 77 => 'Khóa'], $category_status, ['class' => 'form-control']) !!}
 
-                                {!! Form::select('pexcel_category_status', [99 => 'Sẵn sàng', 77 => 'Khóa'], $category_status, ['class' => 'form-control']) !!}
-
+                                </div>
                             </div>
-                            <!-- /END POST CATEGORY LIST -->
+                             <div class="row">  
+                               <div class="col-md-3">
 
-                            {!! Form::hidden('id',@$pexcel_category->pexcel_category_id) !!}
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'add_level2',
+                                                          'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                                          'category_id'=> @$pexcel_category->add_level2])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                <div class="col-md-3">
 
-                            <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_pexcel_category.delete',['id' => @$pexcel_category->pexcel_category_id, '_token' => csrf_token()]) !!}"
-                               class="btn btn-danger pull-right margin-left-5 delete">
-                                Xóa
-                            </a>
-                            <!-- DELETE BUTTON -->
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'edit_level2',
+                                                           'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                                          'category_id'=> @$pexcel_category->edit_level2])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                   <div class="col-md-3">
 
-                            <!-- SAVE BUTTON -->
-                            {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
-                            <!-- /SAVE BUTTON -->
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'delete_level2',
+                                                           'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                                          'category_id'=> @$pexcel_category->delete_level2])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                            </div>
+                             <div class="row">  
+                               <div class="col-md-3">
 
-                            {!! Form::close() !!}
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'add_level3',
+                                                          'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->add_level3])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'edit_level3',
+                                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->edit_level3])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                   <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'delete_level3',
+                                                          'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->delete_level3])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                            </div>
+                             <div class="row">  
+                               <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'add_levelstd',
+                                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->add_levels])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'edit_levelstd',
+                                                        'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->edit_levelstd])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                   <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'delete_levelstd',
+                                                           'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                                          'category_id'=> @$pexcel_category->delete_levelstd])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                            </div>
                         </div>
+
+                        <!-- /END POST CATEGORY LIST -->
+
+                        {!! Form::hidden('id',@$pexcel_category->pexcel_category_id) !!}
+
+                        <!-- DELETE BUTTON -->
+                        <a href="{!! URL::route('admin_pexcel_category.delete',['id' => @$pexcel_category->pexcel_category_id, '_token' => csrf_token()]) !!}"
+                           class="btn btn-danger pull-right margin-left-5 delete">
+                            Xóa
+                        </a>
+                        <!-- DELETE BUTTON -->
+
+                        <!-- SAVE BUTTON -->
+                        {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
+                        <!-- /SAVE BUTTON -->
+
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--SAMLE SEARCH-->
+        </div>
         <div class='col-md-4'>
             @include('pexcel::admin.pexcel_category_search')
         </div>
-        <!--/END SAMPLE SEARCH-->
     </div>
+
+
 </div>
+
 @stop

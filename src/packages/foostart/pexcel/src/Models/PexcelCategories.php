@@ -37,7 +37,7 @@ class PexcelCategories extends Model {
     }
 
      public function get_pexcels_categories_action($params = array()) {       
-
+    
         $eloquent = self::where('pexcel_category_status', 99)->first();
      
         return $eloquent;
@@ -64,6 +64,15 @@ class PexcelCategories extends Model {
 
             $pexcel->pexcel_category_name = $input['pexcel_category_name'];
             $pexcel->pexcel_category_status = $input['pexcel_category_status'];
+            $pexcel->add_level2 = $input['add_level2'];
+            $pexcel->edit_level2 = $input['edit_level2'];
+            $pexcel->delete_level2 = $input['delete_level2'];
+            $pexcel->add_level3 = $input['add_level3'];
+            $pexcel->edit_level3 = $input['edit_level3'];
+            $pexcel->delete_level3 = $input['delete_level3'];
+            $pexcel->add_levelstd = $input['add_levelstd'];
+            $pexcel->edit_levelstd = $input['edit_levelstd'];
+            $pexcel->delete_levelstd = $input['delete_levelstd'];
             $pexcel->pexcel_category_updated_at = time();
 
             $pexcel->save();
@@ -84,6 +93,15 @@ class PexcelCategories extends Model {
         $pexcel = self::create([
                     'pexcel_category_name' => $input['pexcel_category_name'],
                     'pexcel_category_status' => $input['pexcel_category_status'],
+                    'add_level2' => $input['add_level2'],
+                    'edit_level2' => $input['edit_level2'],
+                    'delete_level2' => $input['delete_level2'],
+                    'add_level3' => $input['add_level3'],
+                    'edit_level3' => $input['edit_level3'],
+                    'delete_level3' => $input['delete_level3'],
+                    'add_levelstd' => $input['add_levelstd'],
+                    'edit_levelstd' => $input['edit_levelstd'],
+                    'delete_levelstd' => $input['delete_levelstd'],
                     'pexcel_category_created_at' => time(),
                     'pexcel_category_updated_at' => time(),
                     'user_id' => $input['user_id'],
@@ -97,6 +115,7 @@ class PexcelCategories extends Model {
      * @return type
      */
     public function pluckSelect($category_id = NULL) {
+    
         $status_category = config('pexcel.status_category_lable');
         if ($category_id) {
             $categories = self::where('pexcel_category_id', '!=', $category_id)

@@ -89,6 +89,7 @@ class PexcelAdminController extends PexcelController {
                     'pexcel' => $pexcel,
                     'request' => $request,
                     'categories' => $this->obj_pexcel_categories->pluckSelect()->toArray(),
+                     
                 ));
                 return view('pexcel::admin.pexcel_edit', $this->data);
             }

@@ -12,8 +12,8 @@ return [
     /**
      * VALIDATORS
      */
-    'length_category_name_min' => 10,
-    'length_category_name_max' => 150,
+    'length_category_name_min' => 9,
+    'length_category_name_max' => 9,
 
 
     /**

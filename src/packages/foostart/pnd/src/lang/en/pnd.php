@@ -178,6 +178,7 @@ return [
     'message_add_successfully' => 'Thêm mới thành công',
     'message_add_unsuccessfully' => 'Thêm mới không thành công',
     'message_delete_successfully' => 'Xóa thành công',
+       'message_delete_unpermision' => 'Bạn không có quyền xóa',
     'message_find_failed' => 'Không tìm thấy',
     /**
      * Validator message
@@ -308,4 +309,19 @@ return [
     'school_prior_point_1' => 'Điểm tối đa UT-KK xét tuyển',
     'school_prior_point_2' => 'Điểm tối đa UT-KK thi tuyển',
     'school_prior_point_3' => 'Điểm tối đa UT-KK xét tuyển- thi tuyển',
+    
+    
+    //////////////////////////////////////
+    ////////////phan quyen////////////////
+    /////////////////
+     'add_level2' => 'Trường THCS thêm học sinh',
+     'edit_level2' => 'Trường THCS sửa học sinh',
+     'delete_level2' => 'Trường THCS xóa học sinh',
+     'add_level3' => 'Trường THPT thêm học sinh',
+     'edit_level3' => 'Trường THPT sửa học sinh',
+     'delete_level3' => 'Trường THPT xóa học sinh',
+    'add_levelstd' => 'Học sinh tự đăng ký',
+     'edit_levelstd' => 'Học sinh sửa thông tin',
+     'delete_levelstd' => 'Học sinh xóa đăng ký',
+    
 ];
