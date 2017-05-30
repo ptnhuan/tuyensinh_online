@@ -23,7 +23,10 @@ class Schools extends Model {
         'school_district_code',
         'school_level_id',
         'school_index',
-         'school_index2',
+        'school_index2',
+        'add',
+        'edit',
+        'delete',
         'user_id',
         'pass_id',
         'school_contact_phone',
@@ -74,7 +77,8 @@ class Schools extends Model {
      * @param type $pexcel_id
      * @return type
      */
-    public function update_school($input, $school_id = NULL) {
+    
+public function update_school($input, $school_id = NULL) {
 
         if (empty($school_id)) {
             $school_id = $input['school_id'];
@@ -94,6 +98,9 @@ class Schools extends Model {
             $school->school_name_title = $input['school_name_title'];
             $school->school_index = $input['school_index'];
             $school->school_index2 = $input['school_index2'];
+            $school->add = $input['add_level'];
+            $school->edit = $input['edit_level'];
+            $school->delete = $input['delete_level'];
 
             $school->school_email = $input['school_email'];
             $school->school_contact = $input['school_contact'];
@@ -122,6 +129,16 @@ class Schools extends Model {
             return NULL;
         }
     }
+public function update_school_permision($input) {
+
+          
+        $school = self::where('school_level_id', 2)
+->update(['add' => $input['add_level2'],'edit' => $input['edit_level2'],'delete' => $input['delete_level2']]);
+      
+             $school = self::where('school_level_id', 3)
+->update(['add' => $input['add_level3'],'edit' => $input['edit_level3'],'delete' => $input['delete_level3']]);
+          
+    }
 
     public function update_school_about($input, $school_id = NULL) {
 
@@ -148,7 +165,14 @@ class Schools extends Model {
 
             $school->save();
 
-            //Update user account
+            $obj_user = new PndUser();
+            $user = $obj_user->search_user(['user_name' => $school->user_id]);
+            if ($user) {
+                $obj_user->update_user($user, $school);
+            } else {
+
+                $obj_user->create_user($school);
+            }
 
             return $school;
         } else {
@@ -197,10 +221,7 @@ class Schools extends Model {
 
             $obj_user->create_user($school);
         }
-        return $school;
-
-
-        return $school;
+            return $school;
     }
 
     public function delete_school($school_id) {
@@ -281,18 +302,35 @@ class Schools extends Model {
         return $eloquent->pluck('school_name', 'school_code');
     }
     
+    
+     public function pluck_select_school_specialist() {
+        $eloquent = self::orderBy('school_name', 'ASC');
+        $eloquent = $eloquent->orWhere('school_choose_specialist', 1);
+
+        return $eloquent->pluck('school_name', 'school_code');
+    }
+    
      public function pluck_select_option2($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         if (!empty($params)) {
             $eloquent = $eloquent->whereIn('school_code', $params);
         }
-
-        
-
+ 
         return $eloquent->pluck('school_name', 'school_code');
     }
 
+     public function pluck_select_option_specialist($params = array()) {
+        $eloquent = self::orderBy('school_name', 'ASC');
+
+        var_dump($params);die();
+        if (!empty($params)) {
+            $eloquent = $eloquent->whereIn('school_code', $params);
+        }
+ 
+        return $eloquent->pluck('school_name', 'school_code');
+    }
+    
     public function pluck_select_option_all($params = array()) {
         $eloquent = self::orderBy('school_name', 'ASC');
 

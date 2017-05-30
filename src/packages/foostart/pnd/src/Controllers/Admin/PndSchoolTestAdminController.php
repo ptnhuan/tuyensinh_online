@@ -54,7 +54,8 @@ class PndSchoolTestAdminController extends PndController {
             'districts_search' => $districts_search,
             'params' => $params
         ));
-        return view('pnd::admin.pnd_school_test_list', $this->data);
+        return view('pnd::admin.management.pnd_school_test_list', $this->data);
+        
     }
 
     /**
@@ -110,7 +111,7 @@ class PndSchoolTestAdminController extends PndController {
             'request' => $request,
         ));
  
-        return view('pnd::admin.pnd_school_test_edit', $this->data);
+        return view('pnd::admin.management.pnd_school_test_edit', $this->data);
     }
 
     /**
@@ -195,7 +196,7 @@ class PndSchoolTestAdminController extends PndController {
             'request' => $request,
                 ), $data);
 
-        return view('pnd::admin.pnd_school_edit', $this->data);
+        return view('pnd::admin.management.pnd_school_edit', $this->data);
     }
 
     /**
@@ -277,7 +278,7 @@ class PndSchoolTestAdminController extends PndController {
             'request' => $request,
                 ), $data);
 
-        return view('pnd::admin.pnd_school_about', $this->data);
+        return view('pnd::admin.management.pnd_school_about', $this->data);
     }
 
     /**
@@ -314,33 +315,6 @@ class PndSchoolTestAdminController extends PndController {
         return Redirect::route("admin_pnd_school");
     }
 
-    public function parse(Request $request) {
-
-        $obj_parse = new Parse();
-        $obj_schools = new Schools();
-
-        $input = $request->all();
-
-        $school_id = $request->get('id');
-        $schools = $this->obj_schools->find($school_id);
-
-
-        $schools = $obj_parse->get_schools($schools);
-
-        /**
-         * Import data
-         */
-        $obj_schools->delete_old_data($schools->pexel_id);
-        $obj_schools->add_schools($schools, $schools->pnd_id);
-
-        $schools = $obj_schools->get_schools();
-
-        $this->data = array_merge($this->data, array(
-            'schools' => $schools,
-            'request' => $request,
-        ));
-
-        return view('pnd::admin.pnd_parse', $this->data);
-    }
+   
 
 }

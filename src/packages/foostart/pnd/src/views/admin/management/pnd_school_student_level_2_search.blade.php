@@ -15,7 +15,7 @@
 
                          
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <!--SCHOOL OPTION-->
 
                     @include('pnd::elements.pnd_select', ['name' => 'school_code_level',
@@ -26,9 +26,21 @@
                 </div>
             </div>
 
+             <div class="row">
+                <div class="col-md-12">
+                    <!--SCHOOL OPTION-->
+
+                    @include('pnd::elements.pnd_select', ['name' => 'school_option_specialist',
+                    'categories'=> !empty(@$school_option_specialist) ? $school_option_specialist  : array(),
+                    'category_id'=> $school_specialist_choose ])
+
+
+                </div>
+            </div>
+            
        
              <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <!--SCHOOL OPTION-->
 
                     @include('pnd::elements.pnd_select', ['name' => 'school_option123',
@@ -41,7 +53,7 @@
             
             
              <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <!--SCHOOL OPTION-->
 
                     @include('pnd::elements.pnd_select', ['name' => 'school_option1234',

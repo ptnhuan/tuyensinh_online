@@ -3,6 +3,8 @@
 namespace Foostart\Pexcel\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Foostart\Pnd\Models\Schools;
+use Foostart\Pnd\Models\Students;
 
 class PexcelCategories extends Model {
 
@@ -70,19 +72,25 @@ class PexcelCategories extends Model {
             $pexcel->add_level3 = $input['add_level3'];
             $pexcel->edit_level3 = $input['edit_level3'];
             $pexcel->delete_level3 = $input['delete_level3'];
-            $pexcel->add_levelstd = $input['add_levelstd'];
-            $pexcel->edit_levelstd = $input['edit_levelstd'];
-            $pexcel->delete_levelstd = $input['delete_levelstd'];
+            $pexcel->aed_student = $input['add_levelstd'];
+          
             $pexcel->pexcel_category_updated_at = time();
-
             $pexcel->save();
 
+            
+          $obj_student= new Students();
+          $obj_school= new Schools();
+          $school = $obj_school->update_school_permision($input);
+         $student= $obj_student->update_student_permision($input);
             return $pexcel;
         } else {
             return NULL;
         }
     }
 
+    
+    
+    
     /**
      *
      * @param type $input

@@ -13,7 +13,7 @@
                     {{trans('pnd::pnd.student_info')}}
                 </h3>
             </div>
-            {!! Form::open(['route'=>['user_pnd.post', 'id' => @$student->student_id],  'files'=>true, 'method' => 'post'])  !!}
+            {!! Form::open(['route'=>['user_pnd.post', 'id' => @$student->student_id, 'school_aed' => @$student->school_aed],  'files'=>true, 'method' => 'post'])  !!}
             <!--ERRORS POST-->
             @foreach($errors->all() as $error)
             <div class="alert alert-danger">{!! $error !!}</div>
@@ -24,7 +24,9 @@
             @if( isset($message) )
             <div class="alert alert-success">{{$message}}</div>
             @endif
-
+ 
+ 
+ 
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
@@ -382,7 +384,7 @@
 
                                     <!--/END INPUT-->
                                 </div>
-
+ {!! Form::hidden('school_aed',@$students->school_aed) !!}
                                 {!! Form::hidden('id',@$students->student_id) !!}
 
                                 <!-- SAVE BUTTON -->

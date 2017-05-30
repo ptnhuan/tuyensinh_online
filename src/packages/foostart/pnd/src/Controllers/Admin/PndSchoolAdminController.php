@@ -93,6 +93,42 @@ class PndSchoolAdminController extends PndController
         ));
         return view('pnd::admin.pnd_school_list', $this->data);
     }
+    
+     public function index_about_level_3(Request $request)
+    {
+$param_users = $request->all();
+        $this->isAuthentication();
+        $school_users = $this->current_user->user_name;
+        $param_users['user_name'] = $school_users;
+
+        $school = NULL;
+
+   
+        if (!empty($this->current_user->permissions)) {
+            
+            $school_id = $this->obj_schools->get_school_by_user($param_users)->school_id;
+        }
+
+        $districts = $this->obj_districts->pluck_select();
+        $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
+
+        if (!empty($school_id) && (is_int($school_id))) {
+
+            $school = $this->obj_schools->find($school_id);
+        }
+
+         
+       $this->data = array_merge($this->data, array(
+            'school' => $school,
+            'districts' => $districts,
+            'districts_search' => $districts_search,
+            'request' => $request,
+        ));
+
+        return view('pnd::admin.management.pnd_option_1_school_about', $this->data);
+    }
     /**
      *
      * @return type
@@ -391,6 +427,89 @@ class PndSchoolAdminController extends PndController
         ), $data);
  
         return view('pnd::admin.pnd_school_about', $this->data);
+    }
+
+     public function post_about_level_3(Request $request)
+    {
+   
+        $this->isAuthentication();
+
+        $this->obj_validator = new PndSchoolAboutAdminValidator();
+
+        $input = $request->all();
+
+        //$input['user_id'] = $this->current_user->id;
+
+        $school_id = (int)$request->get('id');
+
+        $districts = $this->obj_districts->pluck_select();
+        $districts_search = $this->obj_districts->pluck_select();
+        $districts_search = array('NULL' => '...') + $districts_search->toArray();
+
+        $schools = NULL;
+
+        $data = array();
+
+
+        if (!$this->obj_validator->adminValidate($input)) {
+
+            $data['errors'] = $this->obj_validator->getErrors();
+
+            if (!empty($school_id) && is_int($school_id)) {
+                $school = $this->obj_schools->find($school_id);
+            }
+        } else {
+            if (!empty($school_id) && is_int($school_id)) {
+
+                
+                
+                $school = $this->obj_schools->find($school_id);
+
+                if (!empty($school)) {
+
+                    $input['school_id'] = $school_id;
+                   
+                    $school = $this->obj_schools->update_school_about($input);
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
+
+                    return Redirect::route("admin_pnd_option_1_school_about", ["id" => $school->school_id]);
+                    //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
+                } else {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
+                }
+            } else {
+
+                $input = array_merge($input, array());
+
+                $schools = $this->obj_schools->add_school($input);
+
+                if (!empty($schools)) {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
+
+                    //  return Redirect::route("admin_pnd.parse", ["id" => $schools->pnd_id]);
+                    //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
+                } else {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
+                }
+            }
+        }
+
+        $this->data = array_merge($this->data, array(
+            'schools' => $schools,
+            'districts' => $districts,
+            'districts_search' => $districts_search,
+            'request' => $request,
+        ), $data);
+ 
+        return view('pnd::admin.pnd_option_1_school_about', $this->data);
     }
 
     /**

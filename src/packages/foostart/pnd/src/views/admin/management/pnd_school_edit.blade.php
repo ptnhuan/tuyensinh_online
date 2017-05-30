@@ -183,6 +183,38 @@
 
 
                                     </div>
+                                    <div class="row">  
+                                <div class="col-md-4">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'add_level',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$school->add])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-4">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'edit_level',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$school->edit])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-4">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'delete_level',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$school->delete])
+
+                                    <!--/END INPUT-->
+                                </div>
+                            </div>
 
                                     <div class="row">
 

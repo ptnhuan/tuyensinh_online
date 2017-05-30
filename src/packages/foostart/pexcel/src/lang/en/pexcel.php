@@ -31,7 +31,7 @@ return [
     'required' => 'is required',
     'search' => 'Tìm kiếm',
     'export' => 'Xuất dữ liệu',
-    'export_id' => 'Xuất tên đăng nhập',
+    'export_id' => 'Xuất mật khẩu',
     'pexcel_overview' => 'Mô tả ngắn',
     'pexcel_description' => 'Nội dung Tập tin',
     'pexcel_name_label' => 'Từ khóa:',

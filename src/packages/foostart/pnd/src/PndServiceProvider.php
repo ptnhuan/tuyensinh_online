@@ -158,13 +158,47 @@ class PndServiceProvider extends ServiceProvider
         /*
          * HỒ SƠ NGUYỆN VỌNG 1
          */
-        view()->composer(['pnd::admin.management.pnd_exam*'], function ($view) {
+        view()->composer(['pnd::admin.management.pnd_school_about','admin_pnd_school_test','pnd::admin.management.pnd_exam*','pnd::admin.management.pnd_option*'], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
             $is_action = empty($pnd_id) ? 'page_add' : 'page_edit';
 
             $view->with('sidebar_items', [
 
+                
+                 /**
+                 * About School
+                 */
+                //list
+                trans('pnd::pnd.page_school_about_list') => [
+                    'url' => URL::route('admin_pnd_option_1_school_about'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                /**
+                 * option 1
+                 */
+                //list
+                trans('pnd::pnd.page_option_1_list') => [
+                    'url' => URL::route('admin_pnd_option_1'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+ /**
+                 * option 2
+                 */
+                //list
+                trans('pnd::pnd.page_option_2_list') => [
+                    'url' => URL::route('admin_pnd_option_2'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                 /**
+                 * option ky nay
+                 */
+                //list
+                trans('pnd::pnd.page_option_list') => [
+                    'url' => URL::route('admin_pnd_option'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
                 /**
                  * Examine
                  */
@@ -197,11 +231,18 @@ class PndServiceProvider extends ServiceProvider
                     'url' => URL::route('admin_pnd_examine_point'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-
+ //list
+                trans('pnd::pnd.page_school_test_list') => [
+                    'url' => URL::route('admin_pnd_school_test'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
             ]);
         });
 
-        view()->composer(['pnd::admin.management.pnd_district*','pnd::admin.management.pnd_school*'
+      
+        
+       
+  view()->composer(['pnd::admin.management.pnd_district*','pnd::admin.management.pnd_school*'
             ,'pnd::admin.management.pnd_statistic*','pnd::admin.management.pnd_specialist*'], function ($view) {
             global $request;
             $pnd_id = $request->get('id');
@@ -287,6 +328,9 @@ class PndServiceProvider extends ServiceProvider
             ]);
         });
 
+        
+         
+        
         view()->composer(['laravel-authentication-acl::admin.user.edit',
             'laravel-authentication-acl::admin.user.groups',
             'laravel-authentication-acl::admin.user.list',

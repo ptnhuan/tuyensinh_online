@@ -41,6 +41,18 @@ class PndUser extends AclUser {
         return $user;
 
     }
+    
+     public function update_user_student($user, $student) {
+              
+        $user->email = $user->email;
+        $user->user_name = $student['student_user'];
+        $user->password = $student['student_pass'];
+        $user->save();
+        
+            
+        return $user;
+
+    }
      public function create_user($teacher) {
 
         $user = [

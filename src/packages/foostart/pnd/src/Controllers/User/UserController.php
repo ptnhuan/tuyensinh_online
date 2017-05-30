@@ -11,6 +11,7 @@ use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Validators\PndUserValidator;
 use Foostart\Pnd\Validators\PndUserkValidator;
+use Foostart\Pnd\Validators\PndUserkkValidator;
 use Illuminate\Http\Request;
 use URL,
     Route,
@@ -54,6 +55,7 @@ class UserController extends PndController {
 
         $student = $this->obj_students->get_student($params);
          $school_aed=$student->school_aed;
+       
         $specialists = $this->obj_specialists->pluck_select();
         $specialists = (object) array_merge(['NULL' => '...'], $specialists->toArray());
 
@@ -101,9 +103,10 @@ class UserController extends PndController {
 
      
 
-         $school_aed = (int) $request->get('school_aed');
-         
+       $school_aed = (int) $request->get('school_aed');
+  
        if ($school_aed==1 ){
+            
               $this->obj_validator = new PndUserValidator();
         $input = $request->only('student_first_name', 'student_last_name', 'student_email', 'student_sex', 'student_phone', 'student_birth_day', 'student_birth_month', 'student_birth_year', 'student_birth_place',
                 'school_code', 'school_district_code', 'student_class', 'student_capacity_6', 'student_conduct_6', 'student_capacity_7', 'student_conduct_7', 'student_capacity_8', 'student_conduct_8', 'student_capacity_9', 'student_conduct_9',
@@ -115,11 +118,18 @@ class UserController extends PndController {
                 $this->obj_validator = new PndUserkValidator();
         $input = $request->only('student_email',  'student_phone', 'student_pass');
         }
+        
+         if ($school_aed==2){
+                $this->obj_validator = new PndUserkkValidator();
+                 //$input = $request->only();
+        }
 
+        
 
         $input['user_id'] = $this->current_user->id;
 
         $student_id = (int) $request->get('id');
+        $input['school_aed'] = $school_aed;
 
         $student = NULL;
 
@@ -141,6 +151,7 @@ class UserController extends PndController {
                 if (!empty($student)) {
 
                     $input['student_id'] = $student_id;
+                   
 
                     $student = $this->obj_students->user_update_student_k($input);
 

@@ -84,37 +84,37 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                             <!--/END INPUT-->
                                         </div>
                             </div>
-                             <div class="row">  
-                               <div class="col-md-3">
-
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'add_level3',
-                                                          'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->add_level3])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
+                            <div class="row">  
                                 <div class="col-md-3">
 
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'edit_level3',
-                                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->edit_level3])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
-                                   <div class="col-md-3">
+                                    <!--INPUT-->
 
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'delete_level3',
-                                                          'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->delete_level3])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
+                                    @include('pnd::elements.pnd_select', ['name' => 'add_level3',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->add_level3])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-3">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'edit_level3',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->edit_level3])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-3">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'delete_level3',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->delete_level3])
+
+                                    <!--/END INPUT-->
+                                </div>
                             </div>
                              <div class="row">  
                                <div class="col-md-3">
@@ -122,31 +122,12 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                             <!--INPUT-->
                                             
                                               @include('pnd::elements.pnd_select', ['name' => 'add_levelstd',
-                                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->add_levels])
+                                                            'categories'=> ['2'=>'Không','0'=>'Chỉ thay đổi mật khẩu','1'=>'Sửa tất cả thông tin'],
+                                                          'category_id'=> @$pexcel_category->aed_student])
                                            
                                             <!--/END INPUT-->
                                         </div>
-                                <div class="col-md-3">
-
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'edit_levelstd',
-                                                        'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->edit_levelstd])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
-                                   <div class="col-md-3">
-
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'delete_levelstd',
-                                                           'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                                          'category_id'=> @$pexcel_category->delete_levelstd])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
+                               
                             </div>
                         </div>
 

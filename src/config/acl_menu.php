@@ -102,9 +102,9 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Hồ sơ nguyện vọng 1",
-            "route" => "admin_pnd_examine",
-            "link" => '/admin/pnd_examine',
+            "name" => "Hồ sơ tuyển sinh",
+            "route" => "admin_pnd_option_1",
+            "link" => '/admin/pnd_option_1',
             "permissions" => ['_superadmin','_mod-3']
         ],
         [
@@ -116,6 +116,16 @@ return [
             "link" => '/user/student/view',
             "permissions" => ['_student']
         ],
+        
+         [
+            /*
+             * Route to edit the current user profile
+             */
+            "name" => "Xem thông tin Hồ sơ tuyển sinh",
+            "route" => "admin_viewer",
+            "link" => '/admin/viewer',
+            "permissions" => ["_superadmin", "_permission-editor", "_viewer"]
+        ],
         [
             /*
              * Route to edit the current user profile
@@ -125,5 +135,6 @@ return [
             "link" => '/admin/manager',
             "permissions" => ["_superadmin", "_permission-editor"]
         ],
+        
     ]
 ];

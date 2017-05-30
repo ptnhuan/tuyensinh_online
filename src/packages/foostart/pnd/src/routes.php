@@ -75,9 +75,7 @@ Route::group(['middleware' => ['web'], 'prefix' => '', 'namespace' => 'Foostart\
  */
 Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
 
-   
-    
-    
+     
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
         ////////////////////////////////////////////////////////////////////////
@@ -131,7 +129,35 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndAdminController@getSchoolByDistrict'
         ]);
 
+        
+        
+        ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////PND VIEWER ROUTE///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
 
+        Route::get('/viewer', [
+            'as' => 'admin_viewer',
+            'uses' => 'PndAdminController@viewer_student_index'
+        ]);
+               
+         Route::get('/pnd_school_student/level_2', [
+            'as' => 'admin_pnd_school_student_level_2',
+            'uses' => 'PndAdminController@school_student_index'
+        ]);
+         
+        Route::get('/pnd_statistics/level_2', [
+            'as' => 'admin_pnd_statistics_level_2',
+            'uses' => 'PndStatisticsAdminController@index'
+        ]);
+        
+          Route::get('/pnd_statistics/level_3', [
+            'as' => 'admin_pnd_statistics_level_3',
+            'uses' => 'PndStatisticsAdminController@index_3'
+        ]);     
+        
+        
+        
+        
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -290,8 +316,58 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ]);
 
         ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////PND POINT EXAMINE ROUTE///////////////////////////////
+        ////////////////////////////PND OPTION  ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
+        
+          Route::get('/pnd_option_1_school_about', [
+            'as' => 'admin_pnd_option_1_school_about',
+            'uses' => 'PndSchoolAdminController@index_about_level_3'
+        ]);
+        Route::post('/pnd_option_1_school_about', [
+            'as' => 'admin_pnd_option_1_school_about.post',
+            'uses' => 'PndSchoolAdminController@post_about_level_3'
+        ]);
+         /**
+         * option 1
+         */
+        Route::get('/pnd_option_1', [
+            'as' => 'admin_pnd_option_1',
+            'uses' => 'PndAdminOptionController@index'
+        ]);
+        
+         Route::get('/pnd_option_1/edit', [
+            'as' => 'admin_pnd_option_1.edit',
+            'uses' => 'PndAdminOptionController@edit'
+        ]);
+           Route::get('/admin_pnd_option_1/edit', [
+            'as' => 'admin_pnd_option_1.post',
+            'uses' => 'PndAdminOptionController@post'
+        ]);
+           
+             Route::get('/pnd_option_1/delete', [
+            'as' => 'admin_pnd_option_1.delete',
+            'uses' => 'PndAdminOptionController@delete'
+        ]);
+             
+             
+              /**
+         * option 1
+         */
+        Route::get('/pnd_option_2', [
+            'as' => 'admin_pnd_option_2',
+            'uses' => 'PndAdminOptionController@index2'
+        ]);
+        
+            
+              /**
+         * option 1
+         */
+        Route::get('/pnd_option', [
+            'as' => 'admin_pnd_option',
+            'uses' => 'PndAdminOptionController@index3'
+        ]);
+        
+          
         /**
          * list
          */
@@ -370,21 +446,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          /**
          * set tatistics_level_2
          */
-       
-         Route::get('/pnd_school_student/level_2', [
-            'as' => 'admin_pnd_school_student_level_2',
-            'uses' => 'PndAdminController@school_student_index'
-        ]);
-         
-        Route::get('/pnd_statistics/level_2', [
-            'as' => 'admin_pnd_statistics_level_2',
-            'uses' => 'PndStatisticsAdminController@index'
-        ]);
-        
-          Route::get('/pnd_statistics/level_3', [
-            'as' => 'admin_pnd_statistics_level_3',
-            'uses' => 'PndStatisticsAdminController@index_3'
-        ]);
+
         
         
         

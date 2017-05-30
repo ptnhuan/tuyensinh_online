@@ -58,14 +58,14 @@
      
 
                 </div>
-               <div class="col-md-4">
+               <div class="col-md-5">
                     <!--SCHOOL OPTION-->
 
                   {!! Form::submit(trans('pexcel::pexcel.export').'', ["class" => "btn btn-info pull-right", 'name' => 'export']) !!}
     
 
                 </div>
-               <div class="col-md-5">
+               <div class="col-md-4">
                     <!--SCHOOL OPTION-->
      {!! Form::submit(trans('pexcel::pexcel.export_id').'', ["class" => "btn btn-info pull-right", 'name' => 'exportpass']) !!}
       

@@ -42,10 +42,10 @@ return [
     'login_viewhead' => 'HỆ THỐNG  THÔNG TIN TUYỂN SINH TRỰC TUYẾN',
     'login_contact_title' => 'Liên hệ:',
     'login_contact' => 'Phòng Khảo thí và Kiểm định CLGD',
-    'login_phone' => 'Điện thoại:057.3842060',
+    'login_phone' => ' ',
     'login_email' => 'Thư điện tử: ktkdclgd@phuyen.edu.vn',
 
-    'login_contact_support' => 'HotLine: 01236907788(An Pha)-0918127300(Thế Vấn)',
+    'login_contact_support' => ' ',
 
     'login_user' => 'Tên đăng nhập',
 

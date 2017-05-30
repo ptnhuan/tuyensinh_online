@@ -86,20 +86,17 @@
 
                                     </div>
                                     <div class="row">  
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_day','value'=> @$student->student_birth_day])
                                             <!--/END INPUT-->
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_month','value'=> @$student->student_birth_month])
                                             <!--/END INPUT-->
                                         </div>
-                                          <div class="col-md-1">
-                                            <!--INPUT-->
-                                                  <!--/END INPUT-->
-                                        </div>
+                                         
                                         <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'student_birth_year','value'=> @$student->student_birth_year])
