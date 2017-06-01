@@ -95,9 +95,9 @@ return [
             "name" => "Hồ sơ học sinh",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
-            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel','_mod-2']
+            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel', '_mod-2']
         ],
-        
+
         [
             /*
              * Route to edit the current user profile
@@ -105,7 +105,7 @@ return [
             "name" => "Hồ sơ tuyển sinh",
             "route" => "admin_pnd_option",
             "link" => '/admin/pnd_option',
-            "permissions" => ['_superadmin','_mod-3']
+            "permissions" => ['_superadmin', '_mod-3']
         ],
         [
             /*
@@ -116,8 +116,8 @@ return [
             "link" => '/user/student/view',
             "permissions" => ['_student']
         ],
-        
-         [
+
+        [
             /*
              * Route to edit the current user profile
              */
@@ -135,6 +135,19 @@ return [
             "link" => '/admin/manager',
             "permissions" => ["_superadmin", "_permission-editor"]
         ],
-        
+
+
+        [
+            /*
+             * GET DISTRICT
+             */
+            "name" => "",
+            "route" => "admin_pnd.school.district",
+            "link" => '/admin//pnd/school-by-district',
+            "permissions" => ["_superadmin",'_my-pexcel', '_all-mypexcel', '_mod-2', '_mod-3']
+        ],
+
+
+
     ]
 ];
