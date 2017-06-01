@@ -35,7 +35,7 @@ class PndUser extends AclUser {
                  $user->permissions = ["_mod-3" => 1];
         }
         
-        $user->permissions=null;
+            
         $user->email = $teacher->school_email;
         $user->user_name = $teacher->user_id;
         $user->password = $teacher->pass_id;
