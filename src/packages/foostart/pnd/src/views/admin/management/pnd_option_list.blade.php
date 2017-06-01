@@ -36,20 +36,22 @@
                 <!--ERRORS-->
                 <div class="panel-body">
 
-                    @include('pnd::admin.management.pnd_option_1_item')
+                    @include('pnd::admin.management.pnd_option_item')
 
                 </div>
             </div>
         </div>
    
-        <div class="col-md-4">
-            @include('pnd::admin.management.pnd_option_search')
-  @include('pnd::admin.management.pnd_option_statistics')
+        <div class="col-md-4"  >
 
+            @include('pnd::admin.management.pnd_option_search')
+            @include('pnd::admin.management.pnd_option_statistics')          
+     @if(($params['school_code'] == 9900 ) )
+            @include('pnd::admin.management.pnd_option_statistics_specialist')
+            @endif
         </div>
         
-
-       
+        
     </div>
 </div>
 @stop

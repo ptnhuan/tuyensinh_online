@@ -38,9 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            @include('pnd::admin.management.pnd_specialist_search',['name_search'=>'_class_specifics'])
-        </div>
+         
     </div>
 </div>
 @stop

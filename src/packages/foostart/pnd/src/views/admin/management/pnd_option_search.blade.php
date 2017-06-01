@@ -26,8 +26,21 @@
                 </div>
             </div>
 
-       
-             
+         @if(($params['school_code'] == 9900 ) )
+              
+            
+         <div class="row">
+                <div class="col-md-12">
+                    <!--SCHOOL OPTION-->
+
+                    @include('pnd::elements.pnd_select', ['name' => 'school_option_specialist',
+                    'categories'=> !empty(@$school_option_specialist) ? $school_option_specialist  : array(),
+                    'category_id'=> $school_specialist_choose ])
+
+
+                </div>
+            </div>
+                @endif
 
 
         </div>
@@ -38,6 +51,8 @@
         {!! Form::close() !!}
     </div>
 
+    
+    
    
 </div>
 

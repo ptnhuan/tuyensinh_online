@@ -20,7 +20,11 @@ if ($addeditde == 0) {
 
             <thead>
                 <tr>
-                     
+                     <th style='width:4%'>
+                        <div class="item_left">
+                            {{ trans('pexcel::pexcel.operations') }}
+                        </div>
+                    </th>
                     <th>STT</th>
                     <th>Họ và tên</th>
                     <th>Giới tính</th>
@@ -56,13 +60,20 @@ if ($addeditde == 0) {
             </thead>
 
             <tbody>
+                
                 <?php
                 $nav = $students->toArray();
                 $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
                 ?>
                 @foreach($students as $student)
                 <tr>
-                    
+                  <td>
+                         
+                        <a href="{!! URL::route('admin_pnd_option.edit', ['id' => $student->student_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>
+                        <a href="{!! URL::route('admin_pnd_option.delete',['id' =>  $student->student_id, '_token' => csrf_token()]) !!}" class="margin-left-5 delete"><i class="fa fa-trash-o fa-2x"></i></a>
+                     
+                        <span class="clearfix"></span>
+                    </td>    
                     <td>
                         <?php
                         echo $counter;
@@ -153,7 +164,7 @@ if ($addeditde == 0) {
 
 @section('sub_page_scripts')
 <script type='text/javascript'>
-    $('.table-data').width(32 * 77);
+    $('.table-data').width(33 * 77);
 
     $(".delete").click(function () {
         return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");

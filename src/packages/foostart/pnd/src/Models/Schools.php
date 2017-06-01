@@ -131,14 +131,34 @@ public function update_school($input, $school_id = NULL) {
     }
 public function update_school_permision($input) {
 
-          
-        $school = self::where('school_level_id', 2)
-->update(['add' => $input['add_level2'],'edit' => $input['edit_level2'],'delete' => $input['delete_level2']]);
       
-             $school = self::where('school_level_id', 3)
+        $school = self::where('school_level_id', 2)
+                ->update(['add' => $input['add_level2'], 'edit' => $input['edit_level2'], 'delete' => $input['delete_level2'], 'pexcel_edit' => $input['pexcel_edit']]);
+
+        
+          $eloquent = self::orderBy('school_name', 'ASC')->where('school_level_id', 2)->get();
+         
+        foreach ($eloquent as $s) {
+             
+              $obj_user = new PndUser();
+            $user = $obj_user->search_user(['user_name' => $s['user_id']]);
+         
+            if ($user) {
+                              $obj_user->update_user_level_2($user, $s, $input['pexcel_edit']);
+            }
+        }
+
+            
+
+        $school = self::where('school_level_id', 3)
 ->update(['add' => $input['add_level3'],'edit' => $input['edit_level3'],'delete' => $input['delete_level3']]);
           
     }
+    
+     
+    
+    
+    
 
     public function update_school_about($input, $school_id = NULL) {
 
@@ -268,7 +288,9 @@ public function update_school_permision($input) {
         $eloquent = self::orderBy('school_name', 'ASC');
 
         if (!empty($params['school_district_code'])) {
-            $eloquent = $eloquent->where('school_district_code', $params['school_district_code']);
+           
+            $eloquent = $eloquent->where('school_district_code', $params['school_district_code']); 
+            
         }
         if (!empty($params['school_choose_specialist'])) {
             $eloquent = $eloquent->where('school_choose_specialist', $params['school_choose_specialist']);

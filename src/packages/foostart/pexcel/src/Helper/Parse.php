@@ -104,7 +104,7 @@ class Parse
                     ));
                 }
             });
-        })->download('xlsx');
+        })->download('xls');
     }
 
     public function export_data_students($data,$schoolname) {
@@ -142,7 +142,7 @@ class Parse
                 $fromrow++;
             }
   
-        })->download('xlsx');
+        })->download('xls');
     }
     
      public function export_data_student_user_pass($data,$schoolname) {
@@ -180,7 +180,7 @@ class Parse
                 $fromrow++;
             }
   
-        })->download('xlsx');
+        })->download('xls');
     }
 public function export_data_school_students($data) {
 
@@ -216,7 +216,7 @@ public function export_data_school_students($data) {
                 $fromrow++;
             }
   
-        })->download('xlsx');
+        })->download('xls');
     }
     
     public function export_data_school_option_students($data) {
@@ -253,6 +253,6 @@ public function export_data_school_students($data) {
                 $fromrow++;
             }
   
-        })->download('xlsx');
+        })->download('xls');
     }
 }

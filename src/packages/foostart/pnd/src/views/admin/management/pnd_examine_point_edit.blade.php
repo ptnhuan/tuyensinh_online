@@ -134,7 +134,7 @@
         </div>
 
         <div class='col-md-4'>
-            @include('pnd::admin.pnd_search',['name_search'=>'_class_specifics'])
+            @include('pnd::admin.management.pnd_examine_point_search',['name_search'=>'_class_specifics'])
         </div>
 
         <script type='text/javascript'>

@@ -15,7 +15,7 @@
 
                 <thead>
                     <tr>
-                        <td>Tổng số học sinh: <?php echo $statistics['sum']; ?> hồ sơ</td>
+                         <th  >Tổng số học sinh: <?php echo $statistics['sum']; ?> hồ sơ</th>
 
                     </tr>
                     <tr>
@@ -40,10 +40,31 @@
                     @endforeach
 
                     <tr>
-                        <td>-Đăng ký trường chuyên:<?php echo $statistics['lvc']; ?> hồ sơ</td>
+                       <th  >Đăng ký trường chuyên:<?php echo $statistics['lvc']; ?> hồ sơ</th>
                     </tr>
+                      <tr>
+                        <td>- Trong đó, lớp chuyên như sau:</td>
+
+                    </tr>
+                     <tr>
+                        <th  >Lớp chuyên </th>  
+                        <th  >Số lượng</th> 
+
+                    </tr>
+                     @foreach($statistics_all_specialist as $school)
                     <tr>
-                        <td>-Đăng ký DTNT:<?php echo $statistics['dtnt']; ?> hồ sơ</td>
+
+
+                        <td>+{!! @$school->school_class_name !!}  </td>    
+                        <td>{!! @$school->school_class_count !!} hồ sơ</td>     
+
+
+                    </tr>
+                    @endforeach
+                    
+                   
+                    <tr>
+                        <th>Đăng ký DTNT:<?php echo $statistics['dtnt']; ?> hồ sơ</th>
                     </tr>
                 <div class="paginator">
 

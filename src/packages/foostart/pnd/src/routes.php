@@ -128,7 +128,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd.school.district',
             'uses' => 'PndAdminController@getSchoolByDistrict'
         ]);
-
+       
         
         
         ////////////////////////////////////////////////////////////////////////
@@ -137,7 +137,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
 
         Route::get('/viewer', [
             'as' => 'admin_viewer',
-            'uses' => 'PndAdminController@viewer_student_index'
+            'uses' => 'PndAdminController@school_student_index'
         ]);
                
          Route::get('/pnd_school_student/level_2', [
@@ -215,7 +215,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          * list
          */
         Route::get('/pnd_school_test', [
-            'as' => 'admin_pnd_school_test',
+            'as' => 'admin_pnd_exame_school_test',
             'uses' => 'PndSchoolTestAdminController@index'
         ]);
 
@@ -223,7 +223,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          * edit-add
          */
         Route::get('/pnd_school_test/edit', [
-            'as' => 'admin_pnd_school_test.edit',
+            'as' => 'admin_pnd_exame_school_test.edit',
             'uses' => 'PndSchoolTestAdminController@edit'
         ]);
 
@@ -231,7 +231,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          * pnd
          */
         Route::post('/pnd_school_test/edit', [
-            'as' => 'admin_pnd_school_test.post',
+            'as' => 'admin_pnd_exame_school_test.post',
             'uses' => 'PndSchoolTestAdminController@post'
         ]);
 
@@ -239,7 +239,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
          * delete
          */
         Route::get('/pnd_school_test/delete', [
-            'as' => 'admin_pnd_school_test.delete',
+            'as' => 'admin_pnd_exame_school_test.delete',
             'uses' => 'PndSchoolTestAdminController@delete'
         ]);
 
@@ -335,19 +335,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndAdminOptionController@index'
         ]);
         
-         Route::get('/pnd_option_1/edit', [
-            'as' => 'admin_pnd_option_1.edit',
-            'uses' => 'PndAdminOptionController@edit'
-        ]);
-           Route::get('/admin_pnd_option_1/edit', [
-            'as' => 'admin_pnd_option_1.post',
-            'uses' => 'PndAdminOptionController@post'
-        ]);
-           
-             Route::get('/pnd_option_1/delete', [
-            'as' => 'admin_pnd_option_1.delete',
-            'uses' => 'PndAdminOptionController@delete'
-        ]);
+        
              
              
               /**
@@ -357,9 +345,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_option_2',
             'uses' => 'PndAdminOptionController@index2'
         ]);
-        
-            
-              /**
+                                /**
          * option 1
          */
         Route::get('/pnd_option', [
@@ -367,7 +353,32 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndAdminOptionController@index3'
         ]);
         
-          
+           
+           
+            Route::get('/pnd_option_student/edit', [
+            'as' => 'admin_pnd_option.edit',
+            'uses' => 'PndAdminOptionController@edit'
+        ]);
+
+        /**
+         * pnd
+         */
+        Route::post('/pnd_option_student/edit', [
+             'as' => 'admin_pnd_option.post',
+            'uses' => 'PndAdminOptionController@post'
+        ]);
+
+           
+           
+           
+           
+           
+           
+           
+             Route::get('/pnd_option/delete', [
+            'as' => 'admin_pnd_option.delete',
+            'uses' => 'PndAdminOptionController@delete'
+        ]);
         /**
          * list
          */

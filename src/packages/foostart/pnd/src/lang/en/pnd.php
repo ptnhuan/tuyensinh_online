@@ -102,7 +102,7 @@ return [
     'school_online' => 'Cấp lại mật khẩu',
     'school_number_room' => 'Số Thí sinh/phòng thi',
     'school_option' => 'Chọn nguyện vọng',
-     'school_option_specialist' => 'Chọn trường chuyên biệt',
+     'school_option_specialist' => 'Môn chuyên',
      'school_option123' => 'Chọn trường đăng ký nguyện vọng 1',
      'school_option1234' => 'Chọn trường đăng ký nguyện vọng 2',
          'school_class123' => 'Chọn lớp đăng ký',
@@ -246,8 +246,8 @@ return [
     'student_conduct_9' => "Hạnh kiểm lớp 9",
 
     'student_average' => "TBCN Lớp 9",
-    'student_average_1' => "TBCN Toán",
-    'student_average_2' => "TBCN Văn",
+    'student_average_1' =>"TBCN Văn",
+    'student_average_2' =>  "TBCN Toán",
     'student_graduate' => "TN THCS",
     'student_score_prior' => "Điểm cộng",
     'student_score_prior_comment' => "Ghi chú",
@@ -330,5 +330,6 @@ return [
     'add_levelstd' => 'Quyền học sinh',
      'edit_levelstd' => 'Học sinh sửa thông tin',
      'delete_levelstd' => 'Học sinh xóa đăng ký',
+     'pexcel_edit' => 'Nhập Excel',
     
 ];

@@ -11,7 +11,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty(@$students->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
+                        {!! !empty(@$student->student_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_add') !!}
                     </h3>
                 </div>
 
@@ -398,10 +398,10 @@
 
                             </div>
 
-                            {!! Form::hidden('id',@$students->student_id) !!}
+                            {!! Form::hidden('id',@$student->student_id) !!}
 
                             <!-- DELETE BUTTON -->
-                            <a href="{!! URL::route('admin_pnd.delete',['id' => @$students->student_id, '_token' => csrf_token()]) !!}"
+                            <a href="{!! URL::route('admin_pnd.delete',['id' => @$student->student_id, '_token' => csrf_token()]) !!}"
                                class="btn btn-danger pull-right margin-left-5 delete">
                                 Xóa
                             </a>

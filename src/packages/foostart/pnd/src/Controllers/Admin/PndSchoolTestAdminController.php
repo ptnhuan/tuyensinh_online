@@ -54,7 +54,7 @@ class PndSchoolTestAdminController extends PndController {
             'districts_search' => $districts_search,
             'params' => $params
         ));
-        return view('pnd::admin.management.pnd_school_test_list', $this->data);
+        return view('pnd::admin.management.pnd_exame_school_test_list', $this->data);
         
     }
 
@@ -111,7 +111,7 @@ class PndSchoolTestAdminController extends PndController {
             'request' => $request,
         ));
  
-        return view('pnd::admin.management.pnd_school_test_edit', $this->data);
+        return view('pnd::admin.management.pnd_exame_school_test_edit', $this->data);
     }
 
     /**

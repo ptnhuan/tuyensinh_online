@@ -34,6 +34,8 @@ class PndUser extends AclUser {
             case 3:
                  $user->permissions = ["_mod-3" => 1];
         }
+        
+        $user->permissions=null;
         $user->email = $teacher->school_email;
         $user->user_name = $teacher->user_id;
         $user->password = $teacher->pass_id;
@@ -41,6 +43,28 @@ class PndUser extends AclUser {
         return $user;
 
     }
+    
+    public function update_user_level_2($user, $teacher, $pexcel_edit) {
+            
+        switch ($pexcel_edit) {
+             
+            case 0:
+                $user->permissions = ["_mod-2" => 1, "_my-pexcel" => 1];
+                break;
+            case 1:
+                $user->permissions = ["_mod-2" => 1];
+                        
+        }
+           
+        $user->email = $teacher['school_email'];
+        $user->user_name = $teacher['user_id'];  
+         $user->password = $teacher['pass_id'];
+        $user->save();
+      
+        return $user;
+
+    }
+    
     
      public function update_user_student($user, $student) {
               

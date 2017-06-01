@@ -103,8 +103,8 @@ return [
              * Route to edit the current user profile
              */
             "name" => "Hồ sơ tuyển sinh",
-            "route" => "admin_pnd_option_1",
-            "link" => '/admin/pnd_option_1',
+            "route" => "admin_pnd_option",
+            "link" => '/admin/pnd_option',
             "permissions" => ['_superadmin','_mod-3']
         ],
         [

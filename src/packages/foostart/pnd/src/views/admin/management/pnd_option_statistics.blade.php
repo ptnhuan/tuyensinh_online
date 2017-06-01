@@ -18,12 +18,7 @@
                     <td>Tổng số học sinh: <?php echo $statistics['sum']; ?> hồ sơ</td>
                           
                 </tr>
-         
-                 
-                <div class="paginator">
-    
-</div>
-
+          
             </thead>
              </table>
 

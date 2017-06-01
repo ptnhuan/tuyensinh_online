@@ -73,6 +73,7 @@ class PexcelCategories extends Model {
             $pexcel->edit_level3 = $input['edit_level3'];
             $pexcel->delete_level3 = $input['delete_level3'];
             $pexcel->aed_student = $input['add_levelstd'];
+            $pexcel->pexcel_edit = $input['pexcel_edit'];
           
             $pexcel->pexcel_category_updated_at = time();
             $pexcel->save();
@@ -110,6 +111,7 @@ class PexcelCategories extends Model {
                     'add_levelstd' => $input['add_levelstd'],
                     'edit_levelstd' => $input['edit_levelstd'],
                     'delete_levelstd' => $input['delete_levelstd'],
+                    'pexcel_edit' => $input['pexcel_edit'],
                     'pexcel_category_created_at' => time(),
                     'pexcel_category_updated_at' => time(),
                     'user_id' => $input['user_id'],

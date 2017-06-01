@@ -51,6 +51,16 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                     {!! Form::select('pexcel_category_status', [99 => 'Sẵn sàng', 77 => 'Khóa'], $category_status, ['class' => 'form-control']) !!}
 
                                 </div>
+                                <div class="col-md-3">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'pexcel_edit',
+                                                          'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                                          'category_id'=> @$pexcel_category->pexcel_edit])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
                             </div>
                              <div class="row">  
                                <div class="col-md-3">
