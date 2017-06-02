@@ -49,10 +49,12 @@ class PndUser extends AclUser {
         switch ($pexcel_edit) {
              
             case 0:
-                $user->permissions = ["_mod-2" => 1, "_my-pexcel" => 1];
+                $user->permissions = ["" => 1];
+             //   $user->permissions = ["_mod-2" => 1, "_my-pexcel" => 1];
                 break;
             case 1:
-                $user->permissions = ["_mod-2" => 1];
+               // $user->permissions = ["_mod-2" => 1];
+                  $user->permissions = ["" => 1];
                         
         }
            

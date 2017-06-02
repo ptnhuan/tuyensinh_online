@@ -145,6 +145,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndAdminController@school_student_index'
         ]);
          
+         Route::get('/pnd_school_student/level_3', [
+            'as' => 'admin_pnd_school_student_level_3',
+            'uses' => 'PndAdminController@school_student_index_3'
+        ]);
+         
         Route::get('/pnd_statistics/level_2', [
             'as' => 'admin_pnd_statistics_level_2',
             'uses' => 'PndStatisticsAdminController@index'

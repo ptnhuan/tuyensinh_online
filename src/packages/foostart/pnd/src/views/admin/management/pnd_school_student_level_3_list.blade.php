@@ -17,7 +17,7 @@
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list_level_2') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list_level_3') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -36,18 +36,18 @@
                 <!--ERRORS-->
                 <div class="panel-body">
 
-                    @include('pnd::admin.management.pnd_school_student_level_2_item')
+                    @include('pnd::admin.management.pnd_school_student_level_3_item')
 
                 </div>
             </div>
         </div>
    
         <div class="col-md-4">
-            @include('pnd::admin.management.pnd_school_student_level_2_search')
+            @include('pnd::admin.management.pnd_school_student_level_3_search')
             
-              @include('pnd::admin.management.pnd_specialist_school_level_2_search')
+              @include('pnd::admin.management.pnd_specialist_school_level_3_search')
                                                
-          @include('pnd::admin.management.pnd_school_student_level_2_statistics')
+          @include('pnd::admin.management.pnd_school_student_level_3_statistics')
   
         </div>
          <div class="panel-body">

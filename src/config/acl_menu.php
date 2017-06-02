@@ -92,7 +92,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Hồ sơ học sinh",
+            "name" => "Hồ sơ THCS",
             "route" => "admin_pnd",
             "link" => '/admin/pnd',
             "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel','_mod-2']
@@ -102,7 +102,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Hồ sơ tuyển sinh",
+            "name" => "Hồ sơ THPT",
             "route" => "admin_pnd_option",
             "link" => '/admin/pnd_option',
             "permissions" => ['_superadmin','_mod-3']
@@ -121,7 +121,7 @@ return [
             /*
              * Route to edit the current user profile
              */
-            "name" => "Xem thông tin Hồ sơ tuyển sinh",
+            "name" => "Hồ sơ tuyển sinh",
             "route" => "admin_viewer",
             "link" => '/admin/viewer',
             "permissions" => ["_superadmin", "_permission-editor", "_viewer"]

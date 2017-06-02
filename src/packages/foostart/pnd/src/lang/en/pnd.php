@@ -23,6 +23,8 @@ return [
      * **************************************************************************
      */
     'page_list' => 'Danh sách học sinh',
+    'page_list_level_3' => 'Danh sách học sinh Dự thi Nguyện vọng 1',
+    'page_list_level_2' => 'Danh sách học sinh tuyển sinh nguyện vọng 1',
     'page_add' => 'Thêm học sinh',
     'page_edit' => 'Cập nhật item',
     'page_search' => 'Tìm kiếm thông tin học sinh',
@@ -40,7 +42,8 @@ return [
     'page_school_about_list' => 'Thông tin đơn vị',
     'page_school_test_list' => 'Hội đồng coi thi',
     
-     'page_school_student_level_2_list' => 'Dữ liệu học sinh THCS',
+     'page_school_student_level_2_list' => 'Dữ liệu Nguyện vọng',
+     'page_school_student_level_3' => 'Dữ liệu Tuyển sinh',
       'page_school_statistics_level_2_list' => 'Thống kê dữ liệu THCS',
       'page_school_statistics_level_3_list' => 'Thống kê dữ liệu THPT',
     
