@@ -63,6 +63,14 @@ class PndExamWorkAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
+        
+         $school = $this->obj_schools->get_school_by_user($params);
+
+
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+        }
         //PEXCEL
         if (!empty($params['id'])) {
             $pexcel = $this->obj_pexcel->find($params['id']);
@@ -86,17 +94,12 @@ class PndExamWorkAdminController extends PndController {
                 }
             }
         } else {
+            
             $students = $this->obj_students->get_all_students($params);
         }
         //END PEXCEL
 
-        $school = $this->obj_schools->get_school_by_user($params);
-
-
-        if (!empty($school)) {
-            $params['school_code'] = $school->school_code;
-            $params['school_id'] = $school->school_id;
-        }
+       
 
         $this->data = array_merge($this->data, array(
             'students' => !empty($students) ? $students : '',
@@ -118,7 +121,15 @@ class PndExamWorkAdminController extends PndController {
         $params = $request->all();
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
+$params['this'] = $this;
+         $school = $this->obj_schools->get_school_by_user($params);
 
+
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+        }
+        
         $students_point = $this->obj_students->get_all_identifi_students($params);
         $students = $this->obj_students->get_all_students($params);
 
