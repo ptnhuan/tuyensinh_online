@@ -74,6 +74,16 @@ class PndAdminController extends PndController {
             $addeditde = 1;
         }
 
+        
+          $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['add'] = $school->add;
+            $params['edit'] = $school->edit;
+            $params['delete'] = $school->delete;
+        }
+        
         if (isset($params['school_option123'])) {
             
         } else {

@@ -402,11 +402,19 @@ class Students extends Model {
             if ($params['this']->is_admin || $params['this']->is_all|| $params['this']->is_level_3) {//user is admin
                 $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
             } else if ($params['this']->is_my || $params['this']->is_level_2) {
+                                
                 $pexcels = $obj_pexcel->get_by_userId_categoryIds($params, $category_ids);
+            
+                
+                
+                
             } else {
                 return;
             }
 
+            if ($params['school_code']<>"999"){
+            
+            
             if ($pexcels) {
                 $pexcel_ids = [];
                 foreach ($pexcels as $pexcel) {
@@ -471,6 +479,77 @@ class Students extends Model {
                     return $students;
                 }
             }
+            }else{
+                // su dung cho truong quang lai    
+                
+                 $pexcels = $obj_pexcel->get_all_by_categoryIds($category_ids);
+                  $pexcel_ids = [];
+                foreach ($pexcels as $pexcel) {
+                    $pexcel_ids[] = $pexcel->pexcel_id;
+                }
+                
+                 
+                    $eloquent = self::orderBy('student_id', 'ASC')
+                            ->whereIn('pexcel_id', $pexcel_ids);
+                    $eloquent->where('school_code', $params['school_code']);
+                  
+                    if (!empty($params['keyword'])) {
+
+                        $eloquent = $eloquent->where(function ($where) use ($params) {
+                            $where->where('student_first_name', 'like', '%' . $params['keyword'] . '%')
+                                    ->orWhere('student_last_name', 'like', '%' . $params['keyword'] . '%');
+                        });
+                    }
+
+                    if (!empty($params['school_class123'])) {
+                        if ($params['school_class123'] <> "NULL") {
+                            $eloquent = $eloquent->where('student_class', $params['school_class123']);
+                        }
+                    }
+
+                    if (!empty($params['school_option123'])) {
+                        if ($params['school_option123'] <> "NULL") {
+
+                            if (($params['school_option123'] == "9900" || $params['school_option123'] == "9901")) {
+
+                                $eloquent = $eloquent->where('school_code_option', $params['school_option123']);
+                            } else {
+
+                                if (!empty($params['school_option123'])) {
+                                    $eloquent = $eloquent->where('school_code_option_1', $params['school_option123']);
+                                }
+                            }
+                        }
+                    }
+                    if (!empty($params['school_option1234'])) {
+                        if ($params['school_option1234'] <> "NULL") {
+
+
+                            if (!empty($params['school_option1234'])) {
+
+                                $eloquent = $eloquent->where('school_code_option_2', $params['school_option1234']);
+                            }
+                        }
+                    }
+
+                    if ($params['this']->is_level_3) {
+                        $eloquent = $eloquent->where('school_code_option_1', $params['school_code']);
+                    }
+
+                    if (!empty($params['export'])) {
+
+                        $students = $eloquent->get();
+                    } else {
+
+                        $students = $eloquent->paginate(config('pexcel.per_page_students'));
+                    }
+
+                    return $students;
+                
+            }
+            
+            
+            
         }
     }
 
