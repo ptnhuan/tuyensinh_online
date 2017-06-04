@@ -14,6 +14,7 @@ use Foostart\Pexcel\Models\Pexcel;
 use Foostart\Pnd\Models\Students;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pexcel\Helper\Parse;
+use Foostart\Pnd\Models\Schools;
 /**
  * Validators
  */
@@ -24,11 +25,14 @@ class PexcelAdminController extends PexcelController {
     private $obj_pexcel = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
+      private $obj_schools = NULL;
+     
 
     public function __construct() {
 
         $this->obj_pexcel = new Pexcel();
         $this->obj_pexcel_categories = new PexcelCategories();
+          $this->obj_schools = new Schools();
     }
 
     /**
@@ -89,7 +93,6 @@ class PexcelAdminController extends PexcelController {
                     'pexcel' => $pexcel,
                     'request' => $request,
                     'categories' => $this->obj_pexcel_categories->pluckSelect()->toArray(),
-                     
                 ));
                 return view('pexcel::admin.pexcel_edit', $this->data);
             }
@@ -105,6 +108,10 @@ class PexcelAdminController extends PexcelController {
 
         $this->isAuthentication();
 
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
         $this->obj_validator = new PexcelAdminValidator();
 
         $input = $request->all();
@@ -116,6 +123,16 @@ class PexcelAdminController extends PexcelController {
         $pexcel = NULL;
 
         $data = array();
+
+
+
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['pexcel_edit'] = $school->pexcel_edit;
+        }
+
 
         if (!$this->obj_validator->adminValidate($input)) {
 
@@ -133,8 +150,12 @@ class PexcelAdminController extends PexcelController {
                 if (!empty($pexcel)) {
 
                     $input['pexcel_id'] = $pexcel_id;
-                    $pexcel = $this->obj_pexcel->update_pexcel($input);
 
+                    if ($this->obj_schools->get_school_by_user($params)->pexcel_edit == 0) {
+
+
+                        $pexcel = $this->obj_pexcel->update_pexcel($input);
+                    }
                     //Message
                     $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
 
@@ -149,7 +170,9 @@ class PexcelAdminController extends PexcelController {
                 $input = array_merge($input, array(
                 ));
 
-                $pexcel = $this->obj_pexcel->add_pexcel($input);
+                if ($this->obj_schools->get_school_by_user($params)->pexcel_edit == 0) {
+                    $pexcel = $this->obj_pexcel->add_pexcel($input);
+                }
 
                 if (!empty($pexcel)) {
 
@@ -181,8 +204,17 @@ class PexcelAdminController extends PexcelController {
     public function delete(Request $request) {
 
         $this->isAuthentication();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
 
-
+        
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['pexcel_edit'] = $school->pexcel_edit;
+        }
         $pexcel = NULL;
         $pexcel_id = $request->get('id');
 
@@ -190,22 +222,23 @@ class PexcelAdminController extends PexcelController {
         if (!empty($pexcel_id)) {
 
             $pexcel = $this->obj_pexcel->find($pexcel_id);
+            if ($this->obj_schools->get_school_by_user($params)->pexcel_edit == 0) {
+                if (!empty($pexcel)) {
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
 
-            if (!empty($pexcel)) {
-                //Message
-                $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+                    if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
 
-                if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+                        $obj_student = new Students();
 
-                    $obj_student = new Students();
+                        $obj_student->deleteStudentsByPexcelId($pexcel->pexcel_id);
 
-                    $obj_student->deleteStudentsByPexcelId($pexcel->pexcel_id);
-
-                    $pexcel->delete();
+                        $pexcel->delete();
+                    }
                 }
+            } else {
+                
             }
-        } else {
-
         }
 
         $this->data = array_merge($this->data, array(

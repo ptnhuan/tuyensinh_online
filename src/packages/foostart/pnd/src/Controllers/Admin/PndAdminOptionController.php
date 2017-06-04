@@ -670,17 +670,12 @@ if (isset($params['school_option_specialist'])) {
             $params['school_option1234'] = "";
         }
 
-
         if (isset($params['school_code_level'])) {
             
         } else {
             $params['school_code_level'] = "NULL";
         }
-
-
-
-
-
+ 
         $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_code_level(3)->toArray();
 
         $school_option1234 = array('NULL' => '') + $this->obj_schools->pluck_select_code_level(3)->toArray();

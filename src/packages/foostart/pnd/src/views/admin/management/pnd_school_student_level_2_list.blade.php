@@ -17,7 +17,7 @@
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_search') : trans('pnd::pnd.page_list_level_2') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
