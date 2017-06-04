@@ -135,6 +135,16 @@ return [
             "link" => '/admin/manager',
             "permissions" => ["_superadmin", "_permission-editor"]
         ],
+
+        [
+            /*
+             * Get district
+             */
+            "name" => "",
+            "route" => "admin_pnd.school.district",
+            "link" => '/admin/ajax/school-by-district',
+            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel','_mod-2','_mod-3']
+        ],
         
     ]
 ];

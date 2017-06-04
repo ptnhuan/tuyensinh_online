@@ -124,7 +124,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         /**
          * get school by district
          */
-        Route::post('/pnd/school-by-district', [
+        Route::post('/ajax/school-by-district', [
             'as' => 'admin_pnd.school.district',
             'uses' => 'PndAdminController@getSchoolByDistrict'
         ]);
