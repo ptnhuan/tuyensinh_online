@@ -4,6 +4,7 @@
 {!! trans('pnd::pnd.pnd_title') !!}
 @stop
 @section('content')
+ 
 <div class="row">
     <div class="col-md-12">
 

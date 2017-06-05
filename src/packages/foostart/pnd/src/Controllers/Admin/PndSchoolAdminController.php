@@ -244,7 +244,7 @@ $param_users = $request->all();
 
         //$input['user_id'] = $this->current_user->id;
 
-        $school_id = (int)$request->get('id');
+        $school_id = (int) $request->get('id');
 
         $districts = $this->obj_districts->pluck_select();
         $districts_search = $this->obj_districts->pluck_select();
@@ -253,7 +253,7 @@ $param_users = $request->all();
         $schools = NULL;
 
         $data = array();
- $usermail= array();
+        $usermail = array();
 
         if (!$this->obj_validator->adminValidate($input)) {
 
@@ -269,12 +269,12 @@ $param_users = $request->all();
 
                 if (!empty($school)) {
 
-                      
+
                     $input['school_id'] = $school_id;
-                    
+
                     $school = $this->obj_schools->update_school($input);
 
-                   if ($input['school_online']==1){
+                    if ($input['school_online'] == 1) {
                 
                    $usermail['email'] = $input['school_email'];
                     $usermail['name'] = "Đơn vị ".$input['school_name'];

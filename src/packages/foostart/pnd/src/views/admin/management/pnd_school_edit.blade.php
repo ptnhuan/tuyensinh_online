@@ -184,7 +184,18 @@
 
                                     </div>
                                     <div class="row">  
-                                <div class="col-md-4">
+                                        
+                                          <div class="col-md-2">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'pexcel_edit',
+                                                          'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                                          'category_id'=> @$school->pexcel_edit])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
+                                <div class="col-md-2">
 
                                     <!--INPUT-->
 

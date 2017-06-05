@@ -136,10 +136,10 @@ class PndAdminController extends PndController {
          * IMPORT FROM PEXCEL TO STUDENTS
          */
         if (!empty($params['id'])) {
+   
+            if ($params['add'] == 0) {
 
-            if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
-
-
+             
                 $pexcel = $this->obj_pexcel->find($params['id']);
 
                 if ($pexcel && ($this->is_admin || ($pexcel->user_id == $this->current_user->id))) {
@@ -516,6 +516,8 @@ class PndAdminController extends PndController {
      * @return type
      */
     public function edit(Request $request) {
+        
+      
         $this->isAuthentication();
 
 
@@ -557,10 +559,6 @@ class PndAdminController extends PndController {
             $params['school_option1234'] = "";
         }
 
-
-
-
-
         if ($params['this']->is_my) {
 
             $params_option = $this->obj_students->get_student_option($params);
@@ -597,7 +595,7 @@ class PndAdminController extends PndController {
         $school_student_school_option_1 = $this->obj_students->statistics_all_student_school_option_1($params);
         
         
-       
+
 
         //PEXCEL
         if (!empty($params['id'])) {
@@ -609,9 +607,9 @@ class PndAdminController extends PndController {
             if ($student) {
                 $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
-
+     
                 if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
-                ) {
+                ) {    
                     
                 } elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
                     $school = $this->obj_schools->get_school_by_user($params);
@@ -622,7 +620,9 @@ class PndAdminController extends PndController {
                 } else {
                     return;
                 }
+               
             }
+            
         }
          if (!empty($student)) {
             $statistics['sum'] = $this->obj_students->statistics_all_students($params, 0);
@@ -650,7 +650,7 @@ class PndAdminController extends PndController {
             'request' => $request,
             'pexcels' => $pexcels,
         ));
-
+       
         return view('pnd::admin.pnd_edit', $this->data);
     }
 
