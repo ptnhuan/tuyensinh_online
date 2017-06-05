@@ -415,7 +415,7 @@ class PndAdminController extends PndController {
 
         if (isset($params['export'])) {
 
-            $students = $this->obj_students->get_all_school_students($params);
+            $students = $this->obj_students->get_all_school_students_level_2($params);
 
             if (!empty($students)) {
                 $obj_parse = new Parse();

@@ -45,7 +45,7 @@ return [
     'login_phone' => ' ',
     'login_email' => 'Thư điện tử: ktkdclgd@phuyen.edu.vn',
 
-    'login_contact_support' => ' ',
+    'login_contact_support' => 'Liên hệ:leanpha@phuyen.edu.vn ',
 
     'login_user' => 'Tên đăng nhập',
 
