@@ -601,27 +601,17 @@ class PndAdminController extends PndController {
         if (!empty($params['id'])) {
 
             $student = $this->obj_students->find($params['id']);
-
-
+         
 
             if ($student) {
                 $pexcel = $this->obj_pexcel->find($student->pexcel_id);
-
-     
-                if (empty($pexcel) || ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
-                ) {    
-                    
-                } elseif ($this->is_level_3) {// kiểm tra nguyện vọng 1 của học sinh có nằm trong danh sách trường hiện tại hay k
-                    $school = $this->obj_schools->get_school_by_user($params);
-
-                    if (empty($school) || $student->school_code_option_1 != $school->school_code) {
-                        return;
-                    }
+  
+                if (!empty($pexcel)) {    
+                                                      
                 } else {
                     return;
                 }
-               
-            }
+                        }
             
         }
          if (!empty($student)) {
@@ -725,7 +715,7 @@ class PndAdminController extends PndController {
             if (!empty($student_id) && is_int($student_id)) {
 
                 $student = $this->obj_students->find($student_id);
-
+              
                 if (!empty($student)) {
 
                     $input['student_id'] = $student_id;
@@ -742,6 +732,8 @@ class PndAdminController extends PndController {
                             $input['delete'] = $params['delete'];
 
                             $student = $this->obj_students->update_student($input);
+                            
+                            
                         }
 
 //Message

@@ -44,11 +44,14 @@ class Schools extends Model {
 
         //pexcel_name
         if (!empty($params['school_level_id'])) {
+          
             $eloquent->where('school_level_id', $params['school_level_id']);
         }
-
-        if (!empty($params['districts_search'])) {
-            $eloquent->where('school_district_code', $params['districts_search']);
+      
+        if ($params['districts_search'] <> "NULL") {
+            if (!empty($params['districts_search'])) {
+                $eloquent->where('school_district_code', $params['districts_search']);
+            }
         }
         if (!empty($params['school_label'])) {
 

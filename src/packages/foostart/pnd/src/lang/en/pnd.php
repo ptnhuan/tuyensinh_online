@@ -145,6 +145,7 @@ return [
     'student_date' => 'Sinh ngày',
     'student_name' => 'Họ và tên',
     'page_categories' => 'Tìm kiếm thông tin học sinh',
+    'message_update_unsuccessfully' => 'Cập nhật không thành công',
  
     'page_statisticss' => 'Thống kê tổng',
     'page_statistics' => 'Thống kê trường',

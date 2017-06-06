@@ -429,10 +429,12 @@ if (isset($params['school_option_specialist'])) {
         /**
          * IMPORT FROM PEXCEL TO STUDENTS
          */
+        
+        
         if (!empty($params['id'])) {
 
             if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
-
+             
 
                 $pexcel = $this->obj_pexcel->find($params['id']);
 
@@ -652,6 +654,7 @@ if (isset($params['school_option_specialist'])) {
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
+              $params['edit'] = $school->edit;
         }
 
         if (isset($params['school_class123'])) {
@@ -717,6 +720,8 @@ if (isset($params['school_option_specialist'])) {
 
             $student = $this->obj_students->find($params['id']);
         }
+        
+         
         $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
@@ -760,6 +765,14 @@ if (isset($params['school_option_specialist'])) {
         $params['this'] = $this;
         $input['user_id'] = $this->current_user->id;
         $student_id = (int) $request->get('id');
+         $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+              $input['edit'] = $school->edit;
+        }
+        
+        
 
         // $school_student_school_option_1 = $this->obj_students->statistics_all_student_school_option_1($params);
 
@@ -842,8 +855,9 @@ if (isset($params['school_option_specialist'])) {
 
                     $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
-                    if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
-                    ) {
+                    if (!empty($pexcel) && ($this->is_admin || ( $this->is_level_3))
+                    ) {  
+                      
                         $student = $this->obj_students->update_student($input);
                         //Message
                         $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
