@@ -4,7 +4,7 @@
 @stop
 
 @section('title')
-{!! trans('pnd::pnd.school_exam_identifi') !!}
+{!! trans('pnd::pnd.page_exam_room_list') !!}
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_examinepoint_search') : trans('pnd::pnd.page_examinepoint_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_exam_room_list') : trans('pnd::pnd.page_exam_room_list') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,12 +34,30 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
+                    
+                       <?php if ( $params['school_code']==9900){?>
+                      @include('pnd::admin.management.pnd_exam_room_chuyen_item')
+                    <?php }else{?>
                     @include('pnd::admin.management.pnd_exam_room_item')
+                    <?php }?>
+                    
+                   
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             @include('pnd::admin.management.pnd_exam_room_filter',['name_search'=>'_examine_point'])
+            
+           
+            
+              <?php if ( $params['school_code']==9900){?>
+                 @include('pnd::admin.management.pnd_exam_room_list_chuyen_filter',['name_search'=>'_examine_point'])
+                    <?php }else{?>
+                @include('pnd::admin.management.pnd_exam_room_list_filter',['name_search'=>'_examine_point'])
+                    <?php }?>
+                    
+            
+            
         </div>
     </div>
 </div>

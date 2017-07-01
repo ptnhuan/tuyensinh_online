@@ -11,6 +11,7 @@ use Route,
  * Models
  */
 use Foostart\Pexcel\Models\Pexcel;
+use Foostart\Pexcel\Models\Pexcel_update;
 use Foostart\Pnd\Models\Students;
 use Foostart\Pexcel\Models\PexcelCategories;
 use Foostart\Pexcel\Helper\Parse;
@@ -23,16 +24,20 @@ use Foostart\Pexcel\Validators\PexcelAdminValidator;
 class PexcelAdminController extends PexcelController {
 
     private $obj_pexcel = NULL;
+    private $obj_pexcel_update = NULL;
     private $obj_pexcel_categories = NULL;
     private $obj_validator = NULL;
       private $obj_schools = NULL;
+ 
      
 
     public function __construct() {
 
         $this->obj_pexcel = new Pexcel();
+        $this->obj_pexcel_update = new Pexcel_update();
         $this->obj_pexcel_categories = new PexcelCategories();
           $this->obj_schools = new Schools();
+     
     }
 
     /**
@@ -70,6 +75,37 @@ class PexcelAdminController extends PexcelController {
         ));
         return view('pexcel::admin.pexcel_list', $this->data);
     }
+    public function index_update(Request $request) {
+      
+        $this->isAuthentication();
+
+        $params = $request->all();
+
+
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+
+        /**
+         * EXPORT
+         */
+        if (isset($params['export'])) {
+            $pexcels = $this->obj_pexcel_update->get_pexcels($params);
+            $obj_parse = new Parse();
+            $obj_parse->export_data($pexcels, 'pexcels');
+
+            unset($params['export']);
+        }
+        ////////////////////////////////////////////////////////////////////////
+
+        $pexcels = $this->obj_pexcel_update->get_pexcels($params);
+
+        $this->data = array_merge($this->data, array(
+            'pexcels' => $pexcels,
+            'request' => $request,
+            'params' => $params
+        ));
+        return view('pexcel::admin.update_pexcel_list', $this->data);
+    }
 
     /**
      *
@@ -96,6 +132,29 @@ class PexcelAdminController extends PexcelController {
                 ));
                 return view('pexcel::admin.pexcel_edit', $this->data);
             }
+        }
+    }
+    public function edit_update(Request $request) {
+
+        $this->isAuthentication();
+
+        if ($this->current_user) {
+            $pexcel = NULL;
+            $pexcel_id = (int) $request->get('id');
+
+
+            if (!empty($pexcel_id) && (is_int($pexcel_id))) {
+                $pexcel = $this->obj_pexcel_update->find($pexcel_id);
+            }
+          
+            //if ($this->is_admin || $this->is_all || $this->is_my || ($pexcel->user_id == $this->current_user->id)) {
+                $this->data = array_merge($this->data, array(
+                    'pexcel' => $pexcel,
+                    'request' => $request,
+                    'categories' => @$this->obj_pexcel_categories->pluckSelect()->toArray(),
+                ));
+                return view('pexcel::admin.update_pexcel_edit', $this->data);
+         //   }
         }
     }
 
@@ -196,6 +255,100 @@ class PexcelAdminController extends PexcelController {
 
         return view('pexcel::admin.pexcel_edit', $this->data);
     }
+    public function post_update(Request $request) {
+     
+        $this->isAuthentication();
+
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
+        $this->obj_validator = new PexcelAdminValidator();
+
+        $input = $request->all();
+
+        $input['user_id'] = $this->current_user->id;
+
+        $pexcel_id = (int) $request->get('id');
+
+        $pexcel = NULL;
+
+        $data = array();
+
+
+
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['pexcel_edit'] = $school->pexcel_edit;
+        }
+
+
+        if (!$this->obj_validator->adminValidate($input)) {
+
+            $data['errors'] = $this->obj_validator->getErrors();
+    
+            if (!empty($pexcel_id) && is_int($pexcel_id)) {
+                $pexcel = $this->obj_pexcel->find($pexcel_id);
+            }
+            
+       
+        } else {
+  
+            if (!empty($pexcel_id) && is_int($pexcel_id)) {
+
+                $pexcel = $this->obj_pexcel_update->find($pexcel_id);
+           
+                if (!empty($pexcel)) {
+
+                    $input['pexcel_id'] = $pexcel_id;
+
+                    if ($this->obj_schools->get_school_by_user($params)->pexcel_edit == 0) {
+
+
+                        $pexcel = $this->obj_pexcel_update->update_pexcel($input);
+                    }
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_successfully'));
+ 
+                    return Redirect::route("admin_update_pexcel.parse", ["id" => $pexcel->pexcel_id]);
+                } else {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_update_unsuccessfully'));
+                }
+            } else {
+
+                $input = array_merge($input, array(
+                ));
+
+                if ($this->obj_schools->get_school_by_user($params)->pexcel_edit == 0) {
+                    $pexcel = $this->obj_pexcel_update->add_pexcel($input);
+                }
+
+                if (!empty($pexcel)) {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_successfully'));
+
+                    return Redirect::route("admin_update_pexcel.parse", ["id" => $pexcel->pexcel_id]);
+                    //return Redirect::route("admin_pexcel.edit", ["id" => $pexcel->pexcel_id]);
+                } else {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_add_unsuccessfully'));
+                }
+            }
+        }
+
+        $this->data = array_merge($this->data, array(
+            'pexcel' => $pexcel,
+            'request' => $request,
+                ), $data);
+
+        return view('pexcel::admin.update_pexcel_edit', $this->data);
+    }
 
     /**
      *
@@ -247,6 +400,49 @@ class PexcelAdminController extends PexcelController {
 
         return Redirect::route("admin_pexcel");
     }
+    public function delete_update(Request $request) {
+
+        $this->isAuthentication();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
+        
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['pexcel_edit'] = $school->pexcel_edit;
+        }
+        $pexcel = NULL;
+        $pexcel_id = $request->get('id');
+
+
+        if (!empty($pexcel_id)) {
+
+            $pexcel = $this->obj_pexcel_update->find($pexcel_id);
+            
+                if (!empty($pexcel)) {
+                    //Message
+                    $this->addFlashMessage('message', trans('pexcel::pexcel.message_delete_successfully'));
+
+                    if ($this->is_admin || $this->is_all || ($pexcel->user_id == $this->current_user->id)) {
+
+                        
+
+                        $pexcel->delete();
+                    }
+                }
+           
+            
+        }
+
+        $this->data = array_merge($this->data, array(
+            'pexcel' => $pexcel,
+        ));
+
+        return Redirect::route("admin_update_pexcel");
+    }
 
     public function parse(Request $request) {
         $obj_parse = new Parse();
@@ -281,6 +477,95 @@ class PexcelAdminController extends PexcelController {
         ));
 
         return view('pexcel::admin.pexcel_parse', $this->data);
+    }
+    public function parse_update(Request $request) {
+        
+         $this->isAuthentication();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
+        
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+            $params['pexcel_edit'] = $school->pexcel_edit;
+        }
+        $obj_parse = new Parse();
+        $obj_students = new Students();
+
+        $input = $request->all();
+       
+        
+        if (!empty($input['idupdate'])) {
+             $pexcel_id = $request->get('idupdate');
+                              
+
+                $pexcel = $this->obj_pexcel_update->find($input['idupdate']);
+
+                if ($pexcel && ($this->is_admin || ($pexcel->user_id == $this->current_user->id))) {
+
+                    $pexcel_status = config('pexcel.status');
+
+                    //if ($pexcel->pexcel_status == $pexcel_status['new']) {
+ 
+                        $students = (array) json_decode($pexcel->pexcel_value);
+
+                        $pexcel->pexcel_status = $pexcel_status['confirmed'];
+                        $pexcel->save();
+                     
+                        $obj_student = new Students();
+   
+                        $obj_student->update_pexcel_students($students, $params['school_code']);
+                        
+                     
+
+                        
+                  //  }
+                
+            }
+        }else{
+            
+             $pexcel_id = $request->get('id');
+        }
+        
+
+        $pexcel = $this->obj_pexcel_update->find($pexcel_id);
+
+        $pexcel_category = $this->obj_pexcel_categories->find($pexcel->pexcel_category_id);
+
+        $pexcel->pexcel_category_name = $pexcel_category->pexcel_category_name;
+
+        $students = $obj_parse->read_data_update($pexcel);
+
+        $pexcel->pexcel_value = json_encode($students);
+        unset($pexcel->pexcel_category_name);
+        $pexcel->save();
+
+        
+        
+         
+        
+        
+        
+        
+        
+        
+        
+        $config = config('pexcel.status_str');
+    
+        /**
+         * Import data
+         */
+        $this->data = array_merge($this->data, array(
+            'students' => $students,
+            'request' => $request,
+            'pexcel' => $pexcel,
+            'config' => $config,
+        ));
+
+        return view('pexcel::admin.update_pexcel_parse', $this->data);
     }
 
 }

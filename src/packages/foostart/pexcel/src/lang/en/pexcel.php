@@ -3,34 +3,48 @@
 return [
 
     "package_name" => 'pexcel',
-    "package_description" => 'Quản lý file',
+    "package_description" => 'Quản lý Tập tin',
     "order" => '#',
     "operations" => 'Thao tác',
     'pexcel_category_name_label' => 'Từ khóa:',
     'package_name' => 'Đăng bài',
-    'pexcel_title' => 'Trang quản lý file đã gửi',
+    'pexcel_title' => 'Trang quản lý Tập tin đã gửi',
     /**
      * Page
      */
 
-    'page_list' => 'Danh sách file đã gửi',
-    'page_add' => 'Thêm file mới',
-    'page_edit' => 'Cập nhật file',
-    'page_search' => 'Tìm kiếm file',
-    'page_category'=> 'Danh mục file',
+    'page_list' => 'Danh sách tập tin Excel',
+    'page_listu' => 'Danh sách tập tin cập nhật',
+    'page_add' => 'Thêm Tập tin mới',
+    'page_edit' => 'Cập nhật Tập tin',
+    'page_search' => 'Tìm kiếm Tập tin',
+    'page_category'=> 'Danh mục Tập tin',
+      'message_update_unsuccessfully' => 'Cập nhật không thành công',
 
     /**
      * Form
      */
     'form_heading' => 'Tạo khóa học mới',
+    'form_headinge' => 'Tạo danh sách mới',
+    'form_headingu' => 'Điều chỉnh nội dung mới',
     'form_add' => 'Tạo Tập tin mới',
+    'form_addu' => 'Tạo Tập tin cập nhật mới',
     'form_edit' => 'Cập nhật Tập tin',
+    'form_editu' => 'Cập nhật Tập tin cần cập nhật',
     'name' => 'Tiêu đề Tập tin',
     'slug' => 'Slug',
     'pexcel_required_name' => 'Required name',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
     'export' => 'Xuất dữ liệu',
+    'export_ny' => 'Xuất Niêm yết phòng thi',
+    'export_gt' => 'Xuất Ghi tên dự thi',
+    'export_tb' => 'Xuất Thu bài thi',
+    'export_gbt' => 'Giấy báo thi',
+    'export_in' => 'Xuất Hội đồng coi thi',
+    'export_inde' => 'Xuất In đề thi',
+    'export_tb' => 'Xuất Thu bài thi',
+    'export_indentifi' => 'Xuất danh sách điều chỉnh',
     'export_id' => 'Xuất mật khẩu',
     'pexcel_overview' => 'Mô tả ngắn',
     'pexcel_description' => 'Nội dung Tập tin',
@@ -38,9 +52,12 @@ return [
     'pexcel_name_placeholder' => 'Từ khóa',
     'pexcel_category_name'=> 'Năm học',
     'pexcel_image_choose' => 'Chọn Tập tin',
-    'pexcel_item_file' => 'File',
+    'pexcel_item_file' => 'Tập tin',
     'slideshow_name' => 'Slideshow',
-    'pexcel_category_name' => 'Năm học',
+    'pexcel_category_ngaythi' => 'Kỳ thi ngày',
+    'pexcel_category_taptrung' => 'Thời gian tập trung',
+    'pexcel_category_ngayky' => 'Tiêu đề ngày ký',
+    'pexcel_category_kythi' => 'Kỳ thi',
 
     /**
      * Message

@@ -194,8 +194,8 @@ $param_users = $request->all();
         $this->data = array_merge($this->data, array(
             'school' => $school,
             'districts' => $districts,
-              'school_level_choose'=>$school->school_level_id,
-             'districts_code_choose' => $school->school_district_code,
+              'school_level_choose'=>@$school->school_level_id,
+             'districts_code_choose' => @$school->school_district_code,
             'districts_search' => $districts_search,
             'request' => $request,
         ));
@@ -320,7 +320,7 @@ $param_users = $request->all();
 
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
-
+                    return Redirect::route("admin_pnd_school.edit", ["id" => $schools->school_id]);
                     //  return Redirect::route("admin_pnd.parse", ["id" => $schools->pnd_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {

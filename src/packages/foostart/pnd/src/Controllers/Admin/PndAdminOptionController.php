@@ -13,11 +13,13 @@ use Route,
  */
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Models\Schools;
+use Foostart\Pnd\Models\SchoolTests;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\PndUser;
 use Foostart\Pexcel\Models\Pexcel;
+use Foostart\Pnd\Models\Examines;
 /**
  * Validators
  */
@@ -26,21 +28,24 @@ use Foostart\Pnd\Validators\PndAdminValidator;
 class PndAdminOptionController extends PndController {
 
     private $obj_students = NULL;
+    private $obj_schoolTests = NULL;
     private $obj_schools = NULL;
     private $obj_categories = NULL;
     private $obj_validator = NULL;
     private $obj_districts = null;
     private $obj_specialists = null;
     private $obj_pexcel = NULL;
+    private $obj_examines = NULL;
 
     public function __construct() {
 
         $this->obj_students = new Students();
+        $this->obj_schoolTests = new SchoolTests();
         $this->obj_schools = new Schools();
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
         $this->obj_specialists = new Specialists();
-
+        $this->obj_examines = new Examines();
         $this->obj_pexcel = new Pexcel();
     }
 
@@ -159,7 +164,7 @@ class PndAdminOptionController extends PndController {
 
 
         $students = $this->obj_students->get_all_option_1_students($params);
-
+        
         if (!empty($students)) {
             $statistics['sum'] = $this->obj_students->statistics_all_option1_students($params, 0);
             $statistics['lvc'] = $this->obj_students->statistics_all_option1_students($params, 1);
@@ -362,13 +367,13 @@ class PndAdminOptionController extends PndController {
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
 
- 
+
         $school = $this->obj_schools->get_school_by_user($params);
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
         } else {
-            $params['school_code']="";
+            $params['school_code'] = "";
         }
 
 
@@ -397,7 +402,7 @@ class PndAdminOptionController extends PndController {
         } else {
             $params['school_code_level'] = "NULL";
         }
-if (isset($params['school_option_specialist'])) {
+        if (isset($params['school_option_specialist'])) {
             
         } else {
             $params['school_option_specialist'] = "NULL";
@@ -429,12 +434,10 @@ if (isset($params['school_option_specialist'])) {
         /**
          * IMPORT FROM PEXCEL TO STUDENTS
          */
-        
-        
-        if (!empty($params['id'])) {
-
-            if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
+        if (!empty($params['idupdate'])) {
              
+            if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
+
 
                 $pexcel = $this->obj_pexcel->find($params['id']);
 
@@ -459,7 +462,7 @@ if (isset($params['school_option_specialist'])) {
             }
         }
 
-   $statistics_all_specialist = $this->obj_students->statistics_all_specialist($params);
+        $statistics_all_specialist = $this->obj_students->statistics_all_specialist($params);
         $students = $this->obj_students->get_all_option_students($params);
 
         if (!empty($students)) {
@@ -478,8 +481,8 @@ if (isset($params['school_option_specialist'])) {
             $school_code_level = array('NULL' => '') + $this->obj_students->school_option1_student_level_2($params)->toArray();
         }
 
-         $params_option_specialist = $this->obj_specialists->pluck_select();
-          $school_option_specialist = array('...' => '...') + $params_option_specialist->toArray();
+        $params_option_specialist = $this->obj_specialists->pluck_select();
+        $school_option_specialist = array('...' => '...') + $params_option_specialist->toArray();
         //END PEXCEL
         $school_student_school_option_1 = $this->obj_students->statistics_all_student_school_option_1($params);
         $pexcels = $this->obj_students->sendPexcels();
@@ -489,9 +492,9 @@ if (isset($params['school_option_specialist'])) {
             'students' => !empty($students) ? $students : '',
             'categories' => $categories,
             'school_level_choose' => $params['school_code_level'],
-              'school_option_specialist' => $school_option_specialist,
-                 'statistics_all_specialist' => !empty($statistics_all_specialist) ? $statistics_all_specialist : '',
-             'school_specialist_choose' => $params['school_option_specialist'],
+            'school_option_specialist' => $school_option_specialist,
+            'statistics_all_specialist' => !empty($statistics_all_specialist) ? $statistics_all_specialist : '',
+            'school_specialist_choose' => $params['school_option_specialist'],
             'addeditde' => $addeditde,
             'statistics' => $statistics,
             'request' => $request,
@@ -499,8 +502,143 @@ if (isset($params['school_option_specialist'])) {
             'pexcels' => array('0' => '...') + $pexcels->toArray(),
         ));
 
-     
+
         return view('pnd::admin.management.pnd_option_list', $this->data);
+    }
+ public function absent(Request $request) {
+
+       $this->isAuthentication();
+
+        $params = $request->all();
+        $params_option = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
+
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+        } else {
+            $params['school_code'] = "";
+        }
+
+
+
+        $addeditde = 0;
+
+        if (!empty($this->current_user->permissions)) {
+            $addeditde = $this->obj_schools->get_school_by_user($params)->school_aed;
+        }//
+        if ($this->obj_categories->get_pexcels_categories_action()->add_level3 == 1) {
+            $addeditde = 1;
+        }
+
+
+        $school_option12 = "";
+        $statistics = "";
+
+        /**
+         * EXPORT TO FILE EXCEL
+         */
+        // kiem tra them xoa sua 
+
+
+        if (isset($params['school_subject_code'])) {
+            
+        } else {
+            $params['school_subject_code'] = "NULL";
+        }
+        if (isset($params['school_option_specialist'])) {
+            
+        } else {
+            $params['school_option_specialist'] = "NULL";
+        }
+
+      
+        
+        /**
+         * IMPORT FROM PEXCEL TO STUDENTS
+         */
+        if (!empty($params['insert_absent'])) {
+
+            if ($params['school_specialist']<>"..."){
+            
+            $params['student_identifi_name'] =$params['keysbd'];
+            $params['school_subject_code'] = $params['school_specialist'];
+            $params['school_subject_name'] =  $this->obj_specialists->get_mon_subject( $params['school_subject_code']);
+            
+            if ($params['school_subject_code']){
+            $this->obj_students->add_absent_students($params);
+            }
+            }
+        }
+
+          if (!empty($params['search'])) {
+ if ($params['school_specialist']<>"..."){
+            $params['student_identifi_name'] = $params['keysbd'];
+            $params['school_subject_code'] = $params['school_specialist'];
+            $params['school_subject_name'] =  $this->obj_specialists->get_mon_subject( $params['school_subject_code']);
+         
+ }
+        }
+
+          if (isset($params['export'])) {
+
+            $students = $this->obj_students->get_all_absent_students($params);
+
+            if (!empty($students)) {
+                $obj_parse = new Parse();
+                $obj_parse->export_data_absent_students($students, $this->obj_schools->get_school_by_user($params)->school_name);
+            }
+
+            unset($params['export']);
+        }
+
+        
+        $statistics_all_specialist = $this->obj_students->statistics_all_specialist($params);
+        $students = $this->obj_students->get_all_absent_students($params);
+
+     
+        
+        if (!empty($students)) {
+            $statistics['sum'] = $this->obj_students->statistics_all_option_all_students($params, 0);
+        } else {
+            $statistics['sum'] = 0;
+        }
+
+       
+
+        $params_option_specialist = $this->obj_specialists->pluck_select();
+        $school_option_specialist = array('...' => '...') + $params_option_specialist->toArray();
+        
+        $school_code_level = $this->obj_specialists->pluck_select_subject();
+        $school_code_level = array('...' => '') + $school_code_level->toArray();
+        
+        
+        
+        //END PEXCEL
+        $school_student_school_option_1 = $this->obj_students->statistics_all_student_school_option_1($params);
+        $pexcels = $this->obj_students->sendPexcels();
+        $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
+        $this->data = array_merge($this->data, array(
+            'school_code_level' => !empty($school_code_level) ? $school_code_level : '',
+            'students' => !empty($students) ? $students : '',
+            'categories' => $categories,
+            'school_subject_code' => $params['school_subject_code'],
+            'school_option_specialist' => $school_option_specialist,
+            'statistics_all_specialist' => !empty($statistics_all_specialist) ? $statistics_all_specialist : '',
+            'school_specialist_choose' => $params['school_option_specialist'],
+            'addeditde' => $addeditde,
+            'statistics' => $statistics,
+            'request' => $request,
+            'params' => $params,
+            'pexcels' => array('0' => '...') + $pexcels->toArray(),
+        ));
+
+        
+        return view('pnd::admin.management.pnd_exame_school_student_absent_list', $this->data);
     }
 
     public function school_student_index(Request $request) {
@@ -654,7 +792,7 @@ if (isset($params['school_option_specialist'])) {
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
-              $params['edit'] = $school->edit;
+            $params['edit'] = $school->edit;
         }
 
         if (isset($params['school_class123'])) {
@@ -678,15 +816,12 @@ if (isset($params['school_option_specialist'])) {
         } else {
             $params['school_code_level'] = "NULL";
         }
- 
+
         $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_code_level(3)->toArray();
 
         $school_option1234 = array('NULL' => '') + $this->obj_schools->pluck_select_code_level(3)->toArray();
 
         $school_class123 = ""; //array('NULL' => '') + $this->obj_students->pluck_select_class($params)->toArray();
-
-
-
 
         $specialists = $this->obj_specialists->pluck_select();
 
@@ -720,8 +855,8 @@ if (isset($params['school_option_specialist'])) {
 
             $student = $this->obj_students->find($params['id']);
         }
-        
-         
+
+
         $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
             'student' => $student,
@@ -742,7 +877,7 @@ if (isset($params['school_option_specialist'])) {
             'pexcels' => $pexcels,
         ));
 
-    
+
         return view('pnd::admin.management.pnd_option_edit', $this->data);
     }
 
@@ -765,21 +900,28 @@ if (isset($params['school_option_specialist'])) {
         $params['this'] = $this;
         $input['user_id'] = $this->current_user->id;
         $student_id = (int) $request->get('id');
-         $school = $this->obj_schools->get_school_by_user($params);
+        $school = $this->obj_schools->get_school_by_user($params);
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
-              $input['edit'] = $school->edit;
+            $input['edit'] = $school->edit;
         }
-        
-        
+        if ($this->is_admin == true) {
+
+            $input['edit'] = 0;
+        }
+
 
         // $school_student_school_option_1 = $this->obj_students->statistics_all_student_school_option_1($params);
 
         $student = NULL;
 
         $data = array();
-
+        if (isset($params['school_option_specialist'])) {
+            
+        } else {
+            $params['school_option_specialist'] = "NULL";
+        }
         if (isset($params['school_class123'])) {
             
         } else {
@@ -856,8 +998,10 @@ if (isset($params['school_option_specialist'])) {
                     $pexcel = $this->obj_pexcel->find($student->pexcel_id);
 
                     if (!empty($pexcel) && ($this->is_admin || ( $this->is_level_3))
-                    ) {  
-                      
+                    ) {
+
+
+
                         $student = $this->obj_students->update_student($input);
                         //Message
                         $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
@@ -1001,8 +1145,25 @@ if (isset($params['school_option_specialist'])) {
      * Get school by district
      */
 
-    public
-            function getSchoolByDistrict(Request $request) {
+    public function getSchoolByDistrict(Request $request) {
+
+        $input = $request->all();
+        $input['school_level_id'] = 2;
+        $schools = $this->obj_schools->pluck_select($input);
+
+        $html = null;
+        if (!empty($schools)) {
+
+            foreach ($schools as $key => $school) {
+                $selected = ($key == $request['school_current']) ? "selected" : "";
+                $html .= '<option ' . $selected . ' value="' . $key . '">' . $school . '</option>';
+            }
+        }
+
+        return $html;
+    }
+
+    public function getSchoolByDistrict_test(Request $request) {
 
         $input = $request->all();
         $input['school_level_id'] = 2;
@@ -1042,6 +1203,215 @@ if (isset($params['school_option_specialist'])) {
 
 
         return false;
+    }
+
+    public function room_list(Request $request) {
+
+        $this->isAuthentication();
+
+        $params = $request->all();
+        $params_option = $request->all();
+        $params['user_name'] = $this->current_user->user_name;
+        $params['user_id'] = $this->current_user->id;
+        $params['this'] = $this;
+
+
+        $school = $this->obj_schools->get_school_by_user($params);
+        if (!empty($school)) {
+            $params['school_code'] = $school->school_code;
+            $params['school_id'] = $school->school_id;
+        } else {
+            $params['school_code'] = "";
+        }
+
+
+
+
+        $school_option12 = "";
+        $statistics = "";
+
+        /**
+         * EXPORT TO FILE EXCEL
+         */
+        // kiem tra them xoa sua 
+
+
+        if (isset($params['school_test_name'])) {
+            $params['school_test_code'] = $params['school_test_name'];
+        } else {
+            $params['school_test_name'] = "NULL";
+        }
+        if (isset($params['school_number_room_list'])) {
+            
+        } else {
+            $params['school_number_room_list'] = "NULL";
+        }
+
+        if (isset($params['export'])) {
+
+            if ($params['school_test_name'] <> "NULL") {
+                if ($params['school_number_room_list'] <> "NULL") {
+                    $students = $this->obj_students->get_all_sort_students($params);
+
+                    if (!empty($students)) {
+                        $obj_parse = new Parse();
+                          if ($params['school_code'] == 9900) {
+                            $obj_parse->export_data_room_chuyen_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                        } else {
+                            $obj_parse->export_data_room_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                        }
+                    }
+
+                    unset($params['export']);
+                }
+            }
+        }
+
+        if (isset($params['export_gt'])) {
+            if ($params['school_test_name'] <> "NULL") {
+                if ($params['school_number_room_list'] <> "NULL") {
+                    $students = $this->obj_students->get_all_sort_students($params);
+
+                    if (!empty($students)) {
+                        $obj_parse = new Parse();
+                           if ($params['school_code'] == 9900) {
+                         $obj_parse->export_data_room_ghiten_chuyen_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                      } else {
+                         $obj_parse->export_data_room_ghiten_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                     }
+                        
+                        
+                        
+                        }
+
+                    unset($params['export_gt']);
+                }
+            }
+        }
+
+        if (isset($params['export_tb'])) {
+            if ($params['school_test_name'] <> "NULL") {
+                if ($params['school_number_room_list'] <> "NULL") {
+                    $students = $this->obj_students->get_all_sort_students($params);
+
+                    if (!empty($students)) {
+                        $obj_parse = new Parse();
+                        $obj_parse->export_data_room_thubai_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                    }
+
+                    unset($params['export_tb']);
+                }
+            }
+        }
+
+        if (isset($params['export_gbt'])) {
+            if ($params['school_test_name'] <> "NULL") {
+                if ($params['school_number_room_list'] <> "NULL") {
+                    $students = $this->obj_students->get_all_sort_students($params);
+
+                    if (!empty($students)) {
+                        $obj_parse = new Parse();
+                        $obj_parse->export_data_room_giaybaothi_students($students, $this->obj_schools->get_school_by_user($params)->school_name, $this->obj_schoolTests->get_school_test_by_code($params)->school_test_name_title, $params['school_code'], $params['school_test_code'], $params['school_number_room_list']);
+                    }
+
+                    unset($params['export_gbt']);
+                }
+            }
+        }
+
+        if (isset($params['export_indentifi'])) {
+
+            $students = $this->obj_students->get_all_sort_students($params);
+
+            if (!empty($students)) {
+                $obj_parse = new Parse();
+                $obj_parse->export_data_school_option_dieuchinh_students($students, $this->obj_schools->get_school_by_user($params)->school_name);
+            }
+
+            unset($params['export_indentifi']);
+        }
+
+        if (isset($params['export_in'])) {
+
+            $students = $this->obj_examines->list_room_student($params);
+
+            if (!empty($students)) {
+                $obj_parse = new Parse();
+
+                if ($params['school_code'] == 9900) {
+                    $obj_parse->export_data_hoidong_coithi_chuyen($students, $this->obj_schools->get_school_by_user($params)->school_name, $params['school_code']);
+                } else {
+                    $obj_parse->export_data_hoidong_coithi($students, $this->obj_schools->get_school_by_user($params)->school_name, $params['school_code']);
+                }
+            }
+
+            unset($params['export_in']);
+        }
+
+        if (isset($params['export_inde'])) {
+       
+
+
+            if ($params['school_code'] == 9900) {
+                $students = $this->obj_examines->list_room_student($params);
+                if (!empty($students)) {
+
+                    $obj_parse = new Parse();
+
+                    $obj_parse->export_data_print_exame_chuyen($students, $this->obj_schools->get_school_by_user($params)->school_name, $params['school_code']);
+                }
+            } else {
+                $students = $this->obj_schoolTests->list_room_print_exame($params);
+                if (!empty($students)) {
+                    $obj_parse = new Parse();
+                    $obj_parse->export_data_print_exame($students);
+                }
+            }
+
+
+
+
+
+
+            unset($params['export_inde']);
+        }
+        /**
+         * IMPORT FROM PEXCEL TO STUDENTS
+         */
+        $statistics_all_specialist = $this->obj_students->statistics_all_specialist($params);
+        $students = $this->obj_students->get_all_sort_students($params);
+
+
+        if ($params['this']->is_level_3) {
+
+
+            $school_code_level = array('NULL' => '') + $this->obj_examines->pluck_select_school_test($params)->toArray();
+            $school_option_specialist = array('NULL' => '') + $this->obj_examines->pluck_select_number_test($params)->toArray();
+        }
+
+
+        $pexcels = $this->obj_students->sendPexcels();
+        $categories = $this->obj_categories->pluckSelect(@$params['pexcel_category_id']);
+
+        $student_list_room = $this->obj_examines->list_room_student($params);
+
+
+        $this->data = array_merge($this->data, array(
+            'school_code_level' => !empty($school_code_level) ? $school_code_level : '',
+            'students' => !empty($students) ? $students : '',
+            'categories' => $categories,
+            'school_level_choose' => $params['school_test_name'],
+            'school_option_specialist' => $school_option_specialist,
+            'statistics_all_specialist' => !empty($statistics_all_specialist) ? $statistics_all_specialist : '',
+            'school_specialist_choose' => $params['school_number_room_list'],
+            'list_room' => !empty($student_list_room) ? $student_list_room : '',
+            'request' => $request,
+            'params' => $params,
+            'pexcels' => array('0' => '...') + $pexcels->toArray(),
+        ));
+
+
+        return view('pnd::admin.management.pnd_exame_school_room_list', $this->data);
     }
 
 }

@@ -7,6 +7,7 @@ use Foostart\Pnd\Controllers\Admin\PndController;
 use Foostart\Pnd\Models\Districts;
 use Foostart\Pnd\Models\PexcelCategories;
 use Foostart\Pnd\Models\Schools;
+use Foostart\Pnd\Models\SchoolTests;
 use Foostart\Pnd\Models\Specialists;
 use Foostart\Pnd\Models\Students;
 use Foostart\Pnd\Validators\PndUserValidator;
@@ -23,6 +24,7 @@ class UserController extends PndController {
     public $authentication = NULL;
     public $is_members = FALSE;
     public $current_user = NULL;
+        private $obj_schoolTests = NULL;
     public $is_admin = FALSE;
     private $obj_students = NULL;
     private $obj_schools = NULL;
@@ -38,7 +40,7 @@ class UserController extends PndController {
         $this->obj_categories = new PexcelCategories();
         $this->obj_districts = new Districts();
         $this->obj_specialists = new Specialists();
-
+ $this->obj_schoolTests = new SchoolTests();
         $this->obj_pexcel = new Pexcel();
     }
 
@@ -47,6 +49,7 @@ class UserController extends PndController {
      * @return type
      */
     public function index(Request $request) {
+  
         $this->isAuthentication();
 
         $params = $request->all();
@@ -54,6 +57,7 @@ class UserController extends PndController {
         $params['user_id'] = $this->current_user->id;
 
         $student = $this->obj_students->get_student($params);
+           
          $school_aed=$student->school_aed;
        
         $specialists = $this->obj_specialists->pluck_select();
@@ -76,9 +80,24 @@ class UserController extends PndController {
             $params['school_id'] = $school->school_id;
         }
 
-
+        $info=$this->obj_categories->get_pexcels_categories_action();
+        
+        if (($student->school_code_option==9900)or($student->school_code_option==9901)){
+        
+       $info_test= $this->obj_schoolTests->get_school_test_by_school_code($student->school_code_option,$student->school_code_test) ;
+        }else
+        {
+            
+              $info_test= $this->obj_schoolTests->get_school_test_by_school_code($student->school_code_option_1,$student->school_code_test) ;
+        }
+              
+        $params['option_1'] =$this->obj_schools->pluck_school_name_code($student->school_code_option_1)->school_name;
+        $params['option_2'] =$this->obj_schools->pluck_school_name_code($student->school_code_option_2)->school_name;
+       
         $this->data = array_merge($this->data, array(
             'student' => $student,
+            'info' => $info,
+            'info_test' => $info_test,
             'specialists' => $specialists,
             'school_levels_3' => $school_levels_3,
             'school_levels_specialist' => $school_levels_specialist,

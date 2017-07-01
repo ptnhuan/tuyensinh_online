@@ -1,7 +1,7 @@
 @extends('laravel-authentication-acl::admin.layouts.base-2cols')
 
 @section('title')
-{!! trans('pnd::pnd.school_test_title') !!}
+{!! trans('pnd::pnd.page_school_test_list') !!}
 @stop
 @section('content')
 <div class="row">
@@ -11,10 +11,10 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title bariol-thin">
-                        {!! !empty($schools->school_test_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_school__edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_school_test_add') !!}
+                        {!! !empty(@$school->school_test_id) ? '<i class="fa fa-pencil"></i>'.trans('pnd::pnd.form_school_test_edit') : '<i class="fa fa-users"></i>'.trans('pnd::pnd.form_school_test_add') !!}
                     </h3>
                 </div>
-
+ 
                 <!--ERRORS POST-->
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger">{!! $error !!}</div>
@@ -36,7 +36,6 @@
                             {!! Form::open(['route'=>['admin_pnd_exame_school_test.post', 'id' => @$school->school_test_id],  'files'=>true, 'method' => 'post'])  !!}
 
 
-
                             <!--QUICK TABS-->
                             <ul class="nav nav-tabs">
 
@@ -48,6 +47,14 @@
                                 </li>
                                 <!--/END TAB HOME-->
 
+                                <!--TAB ATTRIBUTES-->
+                                <li>
+                                    <a data-toggle="tab" href="#attributes">
+                                        {!! trans('pnd::pnd.tab_attributes') !!}
+                                    </a>
+                                </li>
+                                <!--/END TAB ATTRIBUTES-->
+
                             </ul>
                             <!--/END QUICK TABS-->
 
@@ -56,181 +63,170 @@
 
                                 <!--TAB OVERVIEW-->
                                 <div id="home" class="tab-pane fade in active">
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                  
+                                    
+                                    <div class="row">  
+                                       <div class="col-md-2">
                                             <!--INPUT-->
-                                           
-                                           
-                                            @include('pnd::elements.pnd_select', ['name' => 'school_id_test',
-                                            'categories'=> !empty(@$school_levels_3) ? $school_levels_3  : array(),
-                                            'category_id'=>$school_id_test])
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_code','value'=> @$school->school_test_code])
+                                            <!--/END INPUT-->
 
+                                        </div>
+                                         <div class="col-md-6">
 
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_name','value'=> @$school->school_test_name])
                                             <!--/END INPUT-->
                                         </div>
+                                         
+                                        
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_name_title','value'=> @$school->school_test_name_title])
+                                            <!--/END INPUT-->
+
+                                        </div>
+                                         <div class="col-md-8">
+
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_address','value'=> @$school->school_test_address])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <!--INPUT-->
+                                        <div class="col-md-4">
+
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_phone','value'=> @$school->school_test_phone])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        
+                                       
+
 
                                     </div>
-                                </div>
-
-                                    <div id="home" class="tab-pane fade in active">
-                                        <div class="row">
-                                            
-                                             <div class="col-md-3">
+ 
+  
+                                     
+                                    <div class="row">  
+                                     
+                                         
+                                        <div class="col-md-4">
                                             <!--INPUT-->
-                                                                      
-                                            @include('pnd::elements.pnd_select', ['name' => 'school_district_code',
-                                            'categories'=> !empty(@$districts) ? $districts  : array(),
-                                            'category_id'=>@$student->school_district_code])
-
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_chutich','value'=> @$school->school_test_chutich])
                                             <!--/END INPUT-->
 
                                         </div>
-
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-4">
                                             <!--INPUT-->
-                                           
-                                               @include('pnd::elements.pnd_select', ['name' => 'school_code',
-                                                    'categories'=> !empty(@$school_all) ? $school_all  : array(),
-                                                    'category_id'=>@$student->school_code])
-                                                    
-                                           
-                                            <!--/END INPUT-->
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_test_phone_chutich','value'=> @$school->school_test_phone_chutich])
+                                             <!--/END INPUT-->
+
                                         </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'user_id','value'=> @$school->user_id])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'pass_id','value'=> @$school->pass_id])
-                                                <!--/END INPUT-->
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_code','value'=> @$school->school_code])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-2">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_code_room','value'=> @$school->school_code_room])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_name','value'=> @$school->school_name])
-                                                <!--/END INPUT-->
-
-                                            </div>
-                                            <div class="col-md-4">
-
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_address','value'=> @$school->school_address])
-                                                <!--/END INPUT-->
-                                            </div>
-                                        </div>
-                                        <div class="row">
-
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_name_title','value'=> @$school->school_name_title])
-                                                <!--/END INPUT-->
-
-                                            </div>
+                                        
+                                          <div class="col-md-4">
                                             <!--INPUT-->
-                                            <div class="col-md-4">
-
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_phone','value'=> @$school->school_phone])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_email','value'=> @$school->school_email])
-                                                <!--/END INPUT-->
-                                            </div>
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_test_email_chutich','value'=> @$school->school_test_email_chutich])
+                                             <!--/END INPUT-->
 
                                         </div>
-                                        <div class="row">
-
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_contact_phone','value'=> @$school->school_contact_phone])
-                                                <!--/END INPUT-->
-                                            </div>
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_contact_email','value'=> @$school->school_contact_email])
-                                                <!--/END INPUT-->
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <!--INPUT-->
-                                                @include('pnd::elements.pnd_input', ['name' => 'school_number_room','value'=> @$school->school_number_room])
-                                                <!--/END INPUT-->
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-                                        </div>
-
                                         <!--/END INPUT-->
-
                                     </div>
-                                    <!--/END TAB OVERVIEW-->
+                                    
+                                        
+                                    <div class="row">  
+                                     
+                                         
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_test_thuky','value'=> @$school->school_test_thuky])
+                                            <!--/END INPUT-->
 
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_test_phone_thuky','value'=> @$school->school_test_phone_thuky])
+                                             <!--/END INPUT-->
+
+                                        </div>
+                                        
+                                          <div class="col-md-4">
+                                            <!--INPUT-->
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_test_email_thuky','value'=> @$school->school_test_email_thuky])
+                                             <!--/END INPUT-->
+
+                                        </div>
+                                        <!--/END INPUT-->
+                                    </div>
+                                    
+                                    
+                                       <div class="row">  
+                                     
+                                         
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_number_room','value'=> @$school->school_number_room])
+                                            <!--/END INPUT-->
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_number_room_to','value'=> @$school->school_number_room_to])
+                                             <!--/END INPUT-->
+
+                                        </div>
+                                        
+                                          <div class="col-md-4">
+                                            <!--INPUT-->
+                                             @include('pnd::elements.pnd_input', ['name' => 'school_number_room_from','value'=> @$school->school_number_room_from])
+                                             <!--/END INPUT-->
+
+                                        </div>
+                                        <!--/END INPUT-->
+                                    </div>
                                 </div>
+                                <!--/END TAB OVERVIEW-->
 
-                                {!! Form::hidden('id',@$schools->school_test_id) !!}
+                                <!--TAB ATTRIBUTES-->
+                                <div id="attributes" class="tab-pane fade">
+                                    <!--SELECT-->
 
-                                <!-- DELETE BUTTON -->
-                                <a href="{!! URL::route('admin_pnd_exame_school_test.delete',['id' => @$schools->school_test_id, '_token' => csrf_token()]) !!}"
-                                   class="btn btn-danger pull-right margin-left-5 delete">
-                                    Xóa
-                                </a>
-                                <!-- DELETE BUTTON -->
+                                    <!--/END SELECT-->
+                                </div>
+                                <!--TAB ATTRIBUTES-->
 
-                                <!-- SAVE BUTTON -->
-                               {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
-                                <!-- /SAVE BUTTON -->
 
-                                {!! Form::close() !!}
                             </div>
+
+                            
+                            {!! Form::hidden('school_code',@$school_id_test) !!}
+
+                            <!-- DELETE BUTTON -->
+                            
+                            <!-- DELETE BUTTON -->
+
+                            <!-- SAVE BUTTON -->
+                            {!! Form::submit('Lưu', array("class"=>"btn btn-info pull-right ")) !!}
+                            <!-- /SAVE BUTTON -->
+
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class='col-md-4'>
-                @include('pnd::admin.management.pnd_exame_school_test_search',['name_search'=>'_schools'])
-            </div>
-
         </div>
+
+        
+
     </div>
-    @stop
+</div>
+@stop
 
-    @section('sub_page_scripts')
+@section('sub_page_scripts')
 
-    {!! HTML::script('js/tinymce/tinymce.min.js') !!}
-    {!! HTML::script('js/tinymce/tinymce-config.js') !!}
-    {!! HTML::script('vendor/laravel-filemanager/js/lfm_pnd.js') !!}
+{!! HTML::script('js/tinymce/tinymce.min.js') !!}
+{!! HTML::script('js/tinymce/tinymce-config.js') !!}
+{!! HTML::script('vendor/laravel-filemanager/js/lfm.js') !!}
 
-    <script type='text/javascript'>
+<script type='text/javascript'>
     $(document).ready(function () {
         
         $('#lfm').filemanager('file');
@@ -245,14 +241,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '<?php echo URL::route('admin_pnd.school.district') ?>',
+                url: '<?php echo URL::route('admin_pnd.school.district-test') ?>',
                 data:{
                     _token: '{{csrf_token()}}',
                     school_district_code: This.val(),
-                    school_current: '<?php echo @$school->school_code ?>',
+                    school_current: '<?php echo @$student->school_test_code?>',
                 },
                 success:function(result){ 
-                    $('#school_code').html(result);
+                    $('#school_test_code').html(result);
                 }
             });
     }

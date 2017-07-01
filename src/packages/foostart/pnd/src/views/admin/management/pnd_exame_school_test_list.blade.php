@@ -40,6 +40,13 @@
         </div>
         <div class="col-md-4">
             @include('pnd::admin.management.pnd_exame_school_test_search',['name_search'=>'_schools'])
+            
+               <?php if ( $params['school_code']==9900){?>
+                       @include('pnd::admin.management.pnd_exame_school_room_chuyen_list_filter',['name_search'=>'_examine_point'])
+                    <?php }else{?>
+                     @include('pnd::admin.management.pnd_exam_room_list_filter',['name_search'=>'_examine_point'])
+                    <?php }?>
+             
         </div>
     </div>
 </div>

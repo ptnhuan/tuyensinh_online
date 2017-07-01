@@ -10,7 +10,8 @@
                     <th>STT</th>
                     <th>Số báo danh</th>   
                     <th>Phòng thi</th> 
-                    <th>Họ và tên</th>          
+                    <th>Họ </th>          
+                    <th>Tên</th>          
                     <th>HL L6</th>
                     <th>HK L6</th>
                     <th>Điểm L6</th>
@@ -45,7 +46,8 @@
                     </td>
                     <td>{!! @$student->	student_identifi_name!!}</td>
                     <td>{!! @$student->student_room!!}</td>
-                    <td>{!! @$student->student_first_name .' '. @$student->student_last_name !!}</td>
+                    <td>{!! @$student->student_first_name   !!}</td>
+                    <td>{!!   @$student->student_last_name !!}</td>
                     <td>{!! @$student->student_capacity_6!!}</td>
                     <td>{!! @$student->student_conduct_6!!}</td>
                     <td>{!! @$student->student_point_6!!}</td>                
@@ -107,7 +109,7 @@
 
 @section('sub_page_scripts')
 <script type='text/javascript'>
-    $('.table-data').width(19 * 77);
+    $('.table-data').width(20 * 77);
 
     $(".delete").click(function () {
         return confirm("{{ trans('pexcel::pexcel.delete_confirm') }}");

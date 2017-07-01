@@ -121,7 +121,7 @@ class PndSpecialistAdminController extends PndController
                     //Message
                     $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
                    
-                    return Redirect::route("admin_pnd_specialist.edit", ["id" => $specialist->$school_class_id]);
+                 //   return Redirect::route("admin_pnd_specialist.edit", ["id" => $specialist->$school_class_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $schools->pnd_id]);
                 } else {
 

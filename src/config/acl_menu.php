@@ -79,6 +79,18 @@ return [
             "link" => '/admin/pexcel',
             "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel']
         ],
+        
+         [
+            /*
+             * Route to edit the current user profile
+             */
+            "name" => "Cập nhật thông tin học sinh",
+            "route" => "update_pexcel",
+            "link" => '/admin/update_pexcel',
+            "permissions" => ['_superadmin','_mod-3']
+        ],
+        
+        
         [
             /*
              * Route to edit the current user profile
@@ -135,16 +147,16 @@ return [
             "link" => '/admin/manager',
             "permissions" => ["_superadmin", "_permission-editor"]
         ],
-
-        [
-            /*
-             * Get district
-             */
-            "name" => "",
-            "route" => "admin_pnd.school.district",
-            "link" => '/admin/ajax/school-by-district',
-            "permissions" => ['_superadmin', '_my-pexcel', '_all-mypexcel','_mod-2','_mod-3']
-        ],
-        
+//
+//        [
+//            /*
+//             * Get district
+//             */
+//            "name" => "",
+//            "route" => "admin_pnd.school.district",
+//            "link" => '/admin/ajax/school-by-district',
+//            "permissions" => ["_superadmin", "_my-pexcel", "_all-mypexcel" ,"_mod-2" ,"_mod-3"]
+//        ],
+//        
     ]
 ];

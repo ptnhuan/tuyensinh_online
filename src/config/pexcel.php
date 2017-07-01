@@ -41,6 +41,80 @@ return [
     /**
      * FIELDS
      */
+    'field_dcs' => [
+        'student_identifi_name' => 2,
+        'student_room' => 3,
+        'student_first_name' => 4,
+        'student_last_name' => 5,
+        'student_sex' => 6,
+        'student_birth_day' => 7,
+        'student_birth_month' => 8,
+        'student_birth_year' => 9,
+        'student_birth_place' => 10,
+        'school_code' => 11,
+        'school_district_code' => 12,
+        'student_class' => 13,
+        'student_capacity_6' => 14,
+        'student_conduct_6' => 15,
+        'student_capacity_7' => 16,
+        'student_conduct_7' => 17,
+        'student_capacity_8' => 18,
+        'student_conduct_8' => 19,
+        'student_capacity_9' => 20,
+        'student_conduct_9' => 21,
+        'student_average' => 22,
+        'student_average_1' => 23,
+        'student_average_2' => 24,
+        'student_graduate' => 25,
+        'student_score_prior' => 26,
+        'student_score_prior_comment' => 27,
+        'student_nominate' => 28,
+        'school_code_option' => 29,
+        'school_class_code' => 30,
+        'school_code_option_1' => 31,
+        'school_code_option_2' => 32,
+        'student_email' => 33,
+        'student_phone' => 34
+    ],
+
+    'column_dcs' => [
+        'stt_id' => 'A',
+          'student_identifi_name' => 'B',
+        'student_room' => 'C',
+        'student_first_name' => 'D',
+        'student_last_name' => 'E',
+        'student_sex' => 'F',
+        'student_birth_day' => 'G',
+        'student_birth_month' => 'H',
+        'student_birth_year' => 'I',
+        'student_birth_place' => 'J',
+        'school_code' => 'K',
+        'school_district_code' => 'L',
+        'student_class' => 'M',
+        'student_capacity_6' => 'N',
+        'student_conduct_6' => 'O',
+        'student_capacity_7' => 'P',
+        'student_conduct_7' => 'Q',
+        'student_capacity_8' => 'R',
+        'student_conduct_8' => 'S',
+        'student_capacity_9' => 'T',
+        'student_conduct_9' => 'U',
+        'student_average' => 'V',
+        'student_average_1' => 'W',
+        'student_average_2' => 'X',
+        'student_graduate' => 'Y',
+        'student_score_prior' => 'Z',
+        'student_score_prior_comment' => 'AA',
+        'student_nominate' => 'AB',
+        'school_code_option' => 'AC',
+        'school_class_code' => 'AD',
+        'school_code_option_1' => 'AE',
+        'school_code_option_2' => 'AF',
+        'student_email' => 'AG',
+        'student_phone' => 'AH',
+    ],
+    'write_dc_from' => 10,
+    
     'fields' => [
         'student_first_name' => 2,
         'student_last_name' => 3,
@@ -192,4 +266,238 @@ return [
        
     ],
     'write_from_student_users' => 8,
+    
+    
+    
+    /**
+     * SAVE TO NIEM YET PHONG THI
+     */
+     
+    /**
+     * FIELDS
+     */
+    'field_niemyets' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 3,
+        'student_last_name' => 4,
+        'student_id'  => 5,
+        'student_sex' => 6,     
+        'student_birth_place' => 7,
+        'school_code' => 8,
+        'student_score_prior' => 9,
+        'student_score_prior_comment' => 10,
+      
+    ],
+
+    'column_niemyets' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'C',
+        'student_last_name' => 'D',
+        'student_id' => 'E',
+        'student_sex' => 'F',
+        'student_birth_place' => 'G',
+        'school_code' => 'H',
+        'student_score_prior' => 'I',
+        'student_score_prior_comment' => 'J',
+        
+    ],
+    'write_niemyet' => 7,
+    
+    'field_niemyetsc' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 3,
+        'student_last_name' => 4,
+        'student_id'  => 5,
+        'student_sex' => 6,     
+        'student_birth_place' => 7,
+        'school_code' => 8,
+        'student_score_prior' => 9,
+        'student_score_prior_comment' => 10,
+      
+    ],
+
+    'column_niemyetsc' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'C',
+        'student_last_name' => 'D',
+        'student_id' => 'E',
+        'student_sex' => 'F',
+        'student_birth_place' => 'G',
+        'school_code' => 'H',
+        'student_score_prior' => 'I',
+        'school_code_option_1' => 'J',
+        
+    ],
+    'write_niemyetc' => 7,
+    
+    
+    'field_ghitens' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 6,
+        'student_last_name' => 7,
+        'student_id'  => 8,        
+        'student_birth_place' => 9,
+        'school_code' => 10,
+        'student_score_prior' => 11,
+        'school_code_option_1' => 12,
+      
+    ],
+
+    'column_ghitens' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'F',
+        'student_last_name' => 'G',
+        'student_id' => 'H',
+        'student_birth_place' => 'I',
+        'school_code' => 'J',
+        'student_score_prior' => 'K',
+        'student_score_prior_comment' => 'L',
+        
+    ],
+    'write_ghiten' => 8,
+    
+      'field_ghitensc' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 7,
+        'student_last_name' => 8,
+        'student_id'  => 9,        
+        'student_birth_place' => 10,
+        'school_code' => 11,
+        'student_score_prior' => 12,
+       
+      
+    ],
+
+    'column_ghitensc' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'G',
+        'student_last_name' => 'H',
+        'student_id' => 'I',
+        'student_birth_place' => 'J',
+        'school_code' => 'K',
+        'student_score_prior' => 'L',
+      
+        
+    ],
+    'write_ghitenc' => 8,
+    
+     'field_thubais' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 3,
+        'student_last_name' => 4,
+       
+      
+    ],
+
+    'column_thubais' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'C',
+        'student_last_name' => 'D',
+         
+        
+    ],
+    'write_thubai' => 11,
+    
+    
+     'field_giaybaothis' => [
+        'student_identifi_name' => 2,
+        'student_first_name' => 3,
+        'student_last_name' => 4,
+        'student_id'  => 5,
+        'student_sex' => 6,     
+        'student_birth_place' => 7,
+        'school_code' => 8,
+        'student_score_prior' => 9,
+        'student_score_prior_comment' => 10,
+      
+    ],
+
+    'column_giaybaothis' => [
+        'stt_id' => 'A',
+        'student_identifi_name' => 'B',
+        'student_first_name' => 'C',
+        'student_last_name' => 'D',
+        'student_id' => 'E',
+        'student_sex' => 'F',
+        'student_birth_place' => 'G',
+        'school_code' => 'H',
+        'student_score_prior' => 'I',
+        'student_score_prior_comment' => 'J',
+        
+    ],
+    'write_giaybaothi' =>1,
+    
+    
+     'field_updates' => [
+
+        'student_identifi_name' => 2,
+        'student_room' => 3,
+        'student_first_name' =>4 ,
+        'student_last_name' => 5,
+
+        'student_sex' => 6,
+
+        'student_birth_day' => 7,
+        'student_birth_month' => 8,
+        'student_birth_year' => 9,
+
+        'student_birth_place' => 10,
+
+        'school_code' => 11,
+        'school_district_code' => 12,
+
+        'student_class' => 13,
+
+        'student_capacity_6' => 14,
+        'student_conduct_6' => 15,
+
+        'student_capacity_7' => 16,
+        'student_conduct_7' => 17,
+
+        'student_capacity_8' => 18,
+        'student_conduct_8' => 19,
+
+        'student_capacity_9' => 20,
+        'student_conduct_9' => 21,
+
+        'student_average' => 22,
+        'student_average_1' => 23,
+        'student_average_2' => 24,
+        'student_graduate' => 25,
+
+        'student_score_prior' => 26,
+        'student_score_prior_comment' => 27,
+
+        'student_nominate' => 28,
+
+        'school_code_option' => 29,
+        'school_class_code' => 30,
+
+        'school_code_option_1' => 31,
+        'school_code_option_2' => 32,
+
+        'student_email' => 33,
+        'student_phone' => 34
+    ],
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ];

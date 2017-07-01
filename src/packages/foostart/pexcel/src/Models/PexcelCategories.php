@@ -72,17 +72,30 @@ class PexcelCategories extends Model {
             $pexcel->add_level3 = $input['add_level3'];
             $pexcel->edit_level3 = $input['edit_level3'];
             $pexcel->delete_level3 = $input['delete_level3'];
+            $pexcel->keylook_identifi = $input['keylook_identifi'];
+            $pexcel->keylook_room = $input['keylook_room'];
+            $pexcel->keylook_test = $input['keylook_test'];
             $pexcel->aed_student = $input['add_levelstd'];
             $pexcel->pexcel_edit = $input['pexcel_edit'];
-          
+            $pexcel->keylook_identifi = $input['keylook_identifi'];
+            $pexcel->aed_student = $input['add_levelstd'];
+            $pexcel->pexcel_edit = $input['pexcel_edit'];
+
             $pexcel->pexcel_category_updated_at = time();
+            $pexcel->pexcel_category_ngayky = $input['pexcel_category_ngayky'];
+            $pexcel->pexcel_category_taptrung = $input['pexcel_category_taptrung'];
+            $pexcel->pexcel_category_ngaythi = $input['pexcel_category_ngaythi'];
+            $pexcel->pexcel_category_kythi = $input['pexcel_category_kythi'];
+
+
+
             $pexcel->save();
 
-            
-          $obj_student= new Students();
-          $obj_school= new Schools();
-          $school = $obj_school->update_school_permision($input);
-         $student= $obj_student->update_student_permision($input);
+
+            $obj_student = new Students();
+            $obj_school = new Schools();
+            $school = $obj_school->update_school_permision($input);
+            $student = $obj_student->update_student_permision($input);
             return $pexcel;
         } else {
             return NULL;
@@ -108,6 +121,9 @@ class PexcelCategories extends Model {
                     'add_level3' => $input['add_level3'],
                     'edit_level3' => $input['edit_level3'],
                     'delete_level3' => $input['delete_level3'],
+                    'keylook_identifi' => $input['keylook_identifi'],
+                    'keylook_room' => $input['keylook_room'],
+                    'keylook_test' => $input['keylook_test'],
                     'add_levelstd' => $input['add_levelstd'],
                     'edit_levelstd' => $input['edit_levelstd'],
                     'delete_levelstd' => $input['delete_levelstd'],
@@ -115,6 +131,10 @@ class PexcelCategories extends Model {
                     'pexcel_category_created_at' => time(),
                     'pexcel_category_updated_at' => time(),
                     'user_id' => $input['user_id'],
+                    'pexcel_category_ngayky' => $input['pexcel_category_ngayky'],
+                    'pexcel_category_taptrung' => $input['pexcel_category_taptrung'],
+                    'pexcel_category_ngaythi' => $input['pexcel_category_ngaythi'],
+                    'pexcel_category_kythi' => $input['pexcel_category_kythi'],
         ]);
         return $pexcel;
     }

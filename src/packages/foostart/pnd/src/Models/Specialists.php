@@ -3,14 +3,15 @@
 namespace Foostart\Pnd\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class Specialists extends Model {
 
     protected $table = 'school_classes';
     public $timestamps = false;
     protected $fillable = [
         'school_class_code',
-        'school_class_name'     
+        'school_class_name' ,    
+        'school_class_order'     
     ];
     protected $primaryKey = 'school_class_id';
 
@@ -20,7 +21,7 @@ class Specialists extends Model {
      * @return type
      */
     public function get_specialists($params = array()) {
-        $eloquent = self::orderBy('school_class_name', 'ASC');
+        $eloquent = self::orderBy('school_class_order', 'ASC');
 
          if (!empty($params['specialist_label'])) {
                      
@@ -39,6 +40,22 @@ class Specialists extends Model {
         return $pexcels;
     }
 
+    
+     public function get_sbd_specialists() {
+        $eloquent = self::orderBy('school_class_order', 'ASC');
+        $pexcels = $eloquent->get();
+
+        return $pexcels;
+    }
+    
+
+    public function get_mon_specialists($mamon) {
+        $eloquent = self::orderBy('school_class_order', 'ASC')->where('school_class_code', $mamon);
+        $pexcels = $eloquent->first();
+      
+        return $pexcels['school_class_name'];
+    }
+    
     /**
      *
      * @param type $input
@@ -57,6 +74,7 @@ class Specialists extends Model {
 
             $specialist->school_class_code = $input['school_class_code'];
             $specialist->school_class_name = $input['school_class_name'];
+            $specialist->school_class_order = $input['school_class_order'];
            
             
             $specialist->save();
@@ -104,4 +122,23 @@ class Specialists extends Model {
         return $eloquent->pluck('school_class_name', 'school_class_code');
     }
    
+     public function get_school_subject() {
+            $eloquent = DB::table('school_subject')->orderBy('school_class_id', 'ASC');
+      
+        $pexcels = $eloquent->get();
+
+        return $pexcels;
+    }
+    
+   public function pluck_select_subject() {
+        $eloquent = DB::table('school_subject')->orderBy('school_class_id', 'ASC');     
+        return $eloquent->pluck('school_class_name', 'school_class_code');
+    }
+   
+    public function get_mon_subject($mamon) {
+        $eloquent =DB::table('school_subject')->where('school_class_code', $mamon);
+        $pexcels = $eloquent->first();    
+        
+        return $pexcels->school_class_name;
+    }
 }

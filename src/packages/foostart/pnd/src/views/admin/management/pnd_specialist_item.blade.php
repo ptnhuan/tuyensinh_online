@@ -16,6 +16,7 @@
             <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>
             <th style='width:30%'>{{ trans('pnd::pnd.school_class_code') }}</th>
             <th style='width:15%'>{{ trans('pnd::pnd.school_class_name') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_class_order') }}</th>
           
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
@@ -35,6 +36,8 @@
                 </td>
                 <td>{!! @$specialist-> school_class_code !!}</td>
                 <td>{!! @$specialist->school_class_name !!}</td>
+                <td>{!! @$specialist->school_class_name !!}</td>
+                <td>{!! @$specialist->school_class_order !!}</td>
                 
                 <td>
                     <a href="{!! URL::route('admin_pnd_specialist.edit', ['id' => $specialist->school_class_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>

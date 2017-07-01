@@ -132,11 +132,23 @@
                                         </div>
 
                                     </div>
-                                    <div class="row">
-
-
+                                   <div class="row">
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich','value'=> @$school->school_contact_chutich])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich_phone','value'=> @$school->school_contact_chutich_phone])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich_email','value'=> @$school->school_contact_chutich_email])
+                                            <!--/END INPUT-->
+                                        </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-4">
                                             <!--INPUT-->
@@ -156,13 +168,13 @@
                                     </div>
 
                                     <div class="row">
-                                        
-                                          <div class="col-md-2">
+
+                                        <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_index','value'=> @$school->school_index])
                                             <!--/END INPUT-->
                                         </div>
-                                           <div class="col-md-2">
+                                        <div class="col-md-2">
                                             <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_index2','value'=> @$school->school_index2])
                                             <!--/END INPUT-->
@@ -172,8 +184,8 @@
                                             @include('pnd::elements.pnd_input', ['name' => 'school_number_room','value'=> @$school->school_number_room])
                                             <!--/END INPUT-->
                                         </div>
-                                        
-                                       
+
+
 
                                         <div class="col-md-4">
                                             <!--SCHOOL OPTION-->
@@ -184,49 +196,99 @@
 
                                     </div>
                                     <div class="row">  
-                                        
-                                          <div class="col-md-2">
+
+                                        <div class="col-md-4">
 
                                             <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'pexcel_edit',
-                                                          'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
-                                                          'category_id'=> @$school->pexcel_edit])
-                                           
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'pexcel_edit',
+                                            'categories'=> ['0'=>'Cho phép','1'=>'Không cho phép'],
+                                            'category_id'=> @$school->pexcel_edit])
+
                                             <!--/END INPUT-->
                                         </div>
-                                <div class="col-md-2">
+                                        <div class="col-md-4">
 
-                                    <!--INPUT-->
+                                            <!--INPUT-->
 
-                                    @include('pnd::elements.pnd_select', ['name' => 'add_level',
-                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                    'category_id'=> @$school->add])
+                                            @include('pnd::elements.pnd_select', ['name' => 'add_level',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->add])
 
-                                    <!--/END INPUT-->
-                                </div>
-                                <div class="col-md-4">
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
 
-                                    <!--INPUT-->
+                                            <!--INPUT-->
 
-                                    @include('pnd::elements.pnd_select', ['name' => 'edit_level',
-                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                    'category_id'=> @$school->edit])
+                                            @include('pnd::elements.pnd_select', ['name' => 'edit_level',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->edit])
 
-                                    <!--/END INPUT-->
-                                </div>
-                                <div class="col-md-4">
+                                            <!--/END INPUT-->
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">  
+                                        <div class="col-md-4">
 
-                                    <!--INPUT-->
+                                            <!--INPUT-->
 
-                                    @include('pnd::elements.pnd_select', ['name' => 'delete_level',
-                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
-                                    'category_id'=> @$school->delete])
+                                            @include('pnd::elements.pnd_select', ['name' => 'delete_level',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->delete])
 
-                                    <!--/END INPUT-->
-                                </div>
-                            </div>
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
 
+                                            <!--INPUT-->
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'school_examination',
+                                            'categories'=> ['0'=>'Xét tuyển','1'=>'Thi tuyển','2'=>'Thi tuyển-xét tuyển'],
+                                            'category_id'=> @$school->school_examination])
+
+                                            <!--/END INPUT-->
+                                        </div>
+
+
+                                    </div>
+
+                                     <div class="row">  
+                                        <div class="col-md-4">
+
+                                            <!--INPUT-->
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'keylook_identifi',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->keylook_identifi])
+
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <!--INPUT-->
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'keylook_room',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->keylook_room])
+
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <!--INPUT-->
+
+                                            @include('pnd::elements.pnd_select', ['name' => 'keylook_test',
+                                            'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                            'category_id'=> @$school->keylook_test])
+
+                                            <!--/END INPUT-->
+                                        </div>
+                                      
+
+
+                                    </div>
                                     <div class="row">
 
                                     </div>

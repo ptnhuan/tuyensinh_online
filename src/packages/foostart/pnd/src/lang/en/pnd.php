@@ -41,11 +41,15 @@ return [
     'page_school_test_list' => 'Hội đồng coi thi',
     'page_school_about_list' => 'Thông tin đơn vị',
     'page_school_test_list' => 'Hội đồng coi thi',
+    'page_school_examination' => 'Xét chỉ tiêu nguyện vọng 1',
+    'page_school_examination2' => 'Xét chỉ tiêu nguyện vọng 2',
     
      'page_school_student_level_2_list' => 'Dữ liệu Nguyện vọng',
      'page_school_student_level_3' => 'Dữ liệu Tuyển sinh',
       'page_school_statistics_level_2_list' => 'Thống kê dữ liệu THCS',
       'page_school_statistics_level_3_list' => 'Thống kê dữ liệu THPT',
+      'page_school_statistics_test' => 'Thống kê Hội đồng Coi thi',
+      'page_school_statistics_inde' => 'Thống kê dữ liệu In đề thi',
     
     
     'page_school_about_list' => 'Thông tin đơn vị',
@@ -54,15 +58,22 @@ return [
     'page_option_2_list' => 'Hồ sơ nguyện vọng 2',
     'page_option_list' => 'Hồ sơ dự thi chính thức',
     'page_exam_room_list' => 'Xếp phòng thi',
+    'page_exam_room_listk' => 'Khóa Xếp phòng thi',
     'page_exam_identification' => 'Đánh số báo danh',
     'page_examine_point_list' => 'Điểm quy đổi',
+    'page_option_point_list' => 'Điểm quy đổi',
     'page_district_list' => 'Danh sách huyện',
     'page_district_search' => 'Tìm kiếm thông tin huyện',
     'page_specialist_list' => 'Danh sách lớp chuyên',
     'page_specialist_search' => 'Tìm kiếm thông tin lớp chuyên',
     'page_examine_filter' => 'Tính điểm bình quân xét tuyển',
+    'page_examine_order_filter' => 'Xét tuyển theo chỉ tiêu tuyển sinh NV1',
+    'page_examine_order2_filter' => 'Xét tuyển theo chỉ tiêu tuyển sinh NV2',
     'page_exam_indentifi_filter' => 'Đánh số báo danh',
+    'page_exam_indentifi_filterk' => 'Khóa Đánh số báo danh',
     'page_exam_room_filter' => 'Xếp phòng thi',
+    'page_school_room_list' => 'Danh sách Niêm yết phòng thi',
+    'page_school_room_vangthi_list' => 'Danh sách Vắng thi',
     /**
      * Form
      */
@@ -79,6 +90,7 @@ return [
     'slug' => 'Slug',
     'required' => 'is required',
     'search' => 'Tìm kiếm',
+    'insert_absent' => 'Thêm vắng thi',
     'pnd_title' => 'Quản lý thông tin học sinh',
     'pnd_overview' => 'Mô tả ngắn',
     'pnd_description' => 'Nội dung',
@@ -89,6 +101,7 @@ return [
     'pnd_title' => 'Quản lý thông tin học sinh',
     'slideshow_name' => 'Slideshow',
     'school_title' => 'Quản lý thông tin trường học',
+    'school_title_test' => 'Thông tin hội đồng coi thi',
     'school_code' => 'Mã trường THCS',
     'school_code_room' => 'Số báo danh',
     'school_name_title' => 'Tên trường viết tắt',
@@ -101,11 +114,13 @@ return [
       'school_dk1' => 'Đăng ký NV1',
       'school_dk2' => 'Đăng ký NV2',
     'school_email' => 'Thư điện tử',
+    'pexcel_update' => 'Cập nhật dữ liệu',
     'school_student_count' => 'Số lượng',
     'school_online' => 'Cấp lại mật khẩu',
     'school_number_room' => 'Số Thí sinh/phòng thi',
     'school_option' => 'Chọn nguyện vọng',
      'school_option_specialist' => 'Môn chuyên',
+     'school_specialist' => 'Môn thi',
      'school_option123' => 'Chọn trường đăng ký nguyện vọng 1',
      'school_option1234' => 'Chọn trường đăng ký nguyện vọng 2',
          'school_class123' => 'Chọn lớp đăng ký',
@@ -117,8 +132,11 @@ return [
     'school_level_label' => 'Chọn Trường cấp',
     'search_student' => 'Tìm kiếm ',
     'pexcel_category_id' => 'Khóa học',
-    'school_contact' => 'Liên hệ quản trị',
+    'school_contact' => 'Liên hệ quản trị/thư ký',
+    'school_contact_chutich' => 'Chủ tịch hội đồng tuyển sinh',
     'school_district_label' => 'Huyện',
+    'school_contact_chutich_phone' => 'Điện thoại Chủ tịch HĐTS',
+    'school_contact_chutich_email' => 'Thư điện tử Chủ tịch HĐTS',
     'school_contact_phone' => 'Điện thoại quản trị',
     'school_contact_email' => 'Thư điện tử quản trị',
     'school_district_title' => 'Quản lý thông tin huyện',
@@ -132,6 +150,7 @@ return [
     'school_class_title' => 'Quản lý thông tin lớp chuyên',
     'school_class_code' => 'Mã lớp chuyên',
     'school_class_name' => 'Tên lớp chuyên',
+    'school_class_order' => 'Số thứ tự báo danh',
 
     'page_specialist' => 'Tìm kiếm Môn chuyên',
     'specialist_label' => 'Nhập từ khóa',
@@ -145,10 +164,12 @@ return [
     'student_date' => 'Sinh ngày',
     'student_name' => 'Họ và tên',
     'page_categories' => 'Tìm kiếm thông tin học sinh',
+    'page_sbd' => 'Nhập số báo danh vắng thi',
     'message_update_unsuccessfully' => 'Cập nhật không thành công',
  
     'page_statisticss' => 'Thống kê tổng',
     'page_statistics' => 'Thống kê trường',
+    'page_statisticss' => 'THỐNG KÊ PHÒNG THI CHUYÊN',
     'pnd_categories_label' => 'Danh mục',
     'tab_info_main' => 'Thông tin',
      'tab_info_sbd' => 'Thông tin kỳ thi/Kết quả',
@@ -158,6 +179,8 @@ return [
     'student_info' => 'Thông tin học sinh',
     'filter' => 'Lọc',
     'filter_examine' => 'Tính điểm xét tuyển',
+    'filter_order_examine' => 'Xét tuyển nguyện vọng 1',
+    'filter_order2_examine' => 'Xét tuyển nguyện vọng 2',
     'filter_exam_identifi' => 'Đánh số báo danh',
     
        /**
@@ -167,16 +190,20 @@ return [
     
     
     'school_test_title' => 'Quản lý thông tin trường học',
-    'school_test_code' => 'Mã trường THCS',
+    'school_test_code' => 'Mã trường',
     'school_test_code_room' => 'Số báo danh',
     'school_test_name_title' => 'Tên trường viết tắt',
     'school_id_test' => 'Tên Hội đồng coi thi',
+    'school_test_name' => 'Tên Hội đồng coi thi',
      'school_test' => 'Tên Hội đồng tuyển sinh',
     'school_test_address' => 'Địa chỉ',
     'school_test_phone' => 'Điện thoại',
     'school_test_email' => 'Thư điện tử',
     'school_test_number_room' => 'Số Thí sinh/phòng thi',
     'form_school_test_add' => 'Tạo mới hội đồng coi thi',
+    'form_school_test_edit' => 'Cập nhật hội đồng coi thi',
+    'page_exam_room_test_list' => 'Xếp hội đồng coi thi',
+    'page_exam_room_test_listk' => 'Khóa Xếp hội đồng coi thi',
     
     
     /**
@@ -212,6 +239,7 @@ return [
     ///////////////////////////STUDENTS///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     'keyword' => 'Từ khóa',
+    'keysbd' => 'Số báo danh',
     'student_first_name' => "Họ học sinh",
     'student_last_name' => "Tên học sinh",
     'student_sex' => "Giới tính",
@@ -274,11 +302,25 @@ return [
     'school_code_option_1' => "Mã nguyện vọng 1",
     'school_code_option_2' => "Mã nguyện vọng 2",
 
-    'student_email' => "Thư điện tử",
+    'school_test_chutich' => "Chủ tịch coi thi",
+    'school_test_thuky' => "Thư ký 1",
+    'school_test_email_chutich' => "Thư điện tử chủ tịch",
+    'school_test_phone_chutich' => "Số điện thoại chủ tịch",
+    
+     'school_test_email_thuky' => "Thư điện tử thư ký",
+    'school_test_phone_thuky' => "Số điện thoại thư ký",
+    'school_number_room' => "Tổng số phòng",
+    'school_number_room_to' => "Từ phòng thi số",
+    'school_number_room_from' => "Đến phòng thi số",
+    'school_number_room_test' => "PHÒNG THI ",
+    'school_number_room_list' => "Phòng thi số ",
+    
+     'student_email' => "Thư điện tử",
     'student_phone' => "Số điện thoại",
     'student_user' => "Tên đăng nhập",
     'student_pass' => "Mật khẩu",
  
+    
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////////CATEGORIES///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -301,7 +343,9 @@ return [
     ////////////////////////////////////////////////////////////////////////////
     'school_point_title' => 'Điểm quy đổi',
     'school_exam_identifi' => 'Đánh số báo danh',
+   
     'school_exam_examine' => 'Tính điểm Xét tuyển',
+    'school_exam_examine_order' => 'Xét tuyển theo chỉ tiêu tuyển sinh',
     'page_category_list' => 'Danh mục',
     'page_examinepoint_list' => 'Điểm quy đổi',
     'add_examine_point' => 'Thêm điểm quy đổi',
@@ -325,15 +369,22 @@ return [
      'add_level2' => 'Trường THCS thêm học sinh',
      'edit_level2' => 'Trường THCS sửa học sinh',
      'delete_level2' => 'Trường THCS xóa học sinh',
+     'keylook_identifi' => 'Khóa đánh số báo danh',
+     'keylook_test' => 'Khóa xếp hội đồng coi thi',
+     'keylook_room' => 'Khóa xếp phòng thi',
      'add_level3' => 'Trường THPT thêm học sinh',
      'edit_level3' => 'Trường THPT sửa học sinh',
      'delete_level3' => 'Trường THPT xóa học sinh',
      'add_level' => 'Thêm học sinh',
+     'keylook_identifi' => 'Đánh báo danh',
+     'keylook_test' => 'Xếp hội đồng coi thi',
+     'keylook_room' => 'Xếp phòng thi',
      'edit_level' => 'Sửa học sinh',
      'delete_level' => 'Xóa học sinh',
     'add_levelstd' => 'Quyền học sinh',
      'edit_levelstd' => 'Học sinh sửa thông tin',
      'delete_levelstd' => 'Học sinh xóa đăng ký',
      'pexcel_edit' => 'Nhập Excel',
+      'school_examination' => 'Loại hình tuyển sinh',
     
 ];

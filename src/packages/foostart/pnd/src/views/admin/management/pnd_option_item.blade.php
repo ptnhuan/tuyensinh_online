@@ -26,7 +26,8 @@ if ($addeditde == 0) {
                         </div>
                     </th>
                     <th>STT</th>
-                    <th>Họ và tên</th>
+                    <th>Họ </th>
+                    <th>Tên</th>
                     <th>Giới tính</th>
                     <th>Sinh ngày</th>
                     <th>Nơi sinh</th>
@@ -81,7 +82,8 @@ if ($addeditde == 0) {
                         ?>
                     </td>
 
-                    <td>{!! @$student->student_first_name .' '. @$student->student_last_name !!}</td>
+                    <td>{!! @$student->student_first_name  !!}</td>
+                    <td>{!!  @$student->student_last_name !!}</td>
                     <td>{!! @$student->student_sex!!}</td>
                     <td>{!! @$student->student_birth_day.'/'.@$student->student_birth_month.'/'.@$student->student_birth_year!!}</td>
 

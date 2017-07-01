@@ -30,7 +30,7 @@ Trang nhập thông tin dữ liệu học sinh từ Excel
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <!--SAMPLE TITLE FORM EDIT-->
-                            <h4>{!! trans('pexcel::pexcel.form_heading') !!}</h4>
+                            <h4>{!! trans('pexcel::pexcel.form_headinge') !!}</h4>
                             <!--END SAMPLE TITLE FORM EDIT-->
 
                             {!! Form::open(['route'=>['admin_pexcel.post', 'id' => @$pexcel->pexcel_id],  'files'=>true, 'method' => 'post'])  !!}

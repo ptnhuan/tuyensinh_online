@@ -74,10 +74,27 @@ Route::group(['middleware' => ['web'], 'prefix' => '', 'namespace' => 'Foostart\
  * ADMINISTRATOR
  */
 Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foostart\Pnd\Controllers\Admin'], function () {
-
-     
+  
+      Route::post('/ajax/school-by-district', [
+            'as' => 'admin_pnd.school.district',
+            'uses' => 'PndAdminController@getSchoolByDistrict'
+        ]);
+      
+       Route::post('/ajax/school-by-district-test', [
+            'as' => 'admin_pnd.school.district-test',
+             'uses' => 'PndAdminController@getSchoolByDistrictTest'
+        ]);
     Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
 
+        
+        /**
+         * get school by district
+         */
+       
+       
+        
+        
+        
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PEXCEL ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -87,6 +104,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         Route::get('/pnd', [
             'as' => 'admin_pnd',
             'uses' => 'PndAdminController@index'
+        ]);
+        Route::get('/pnd_upcate', [
+            'as' => 'admin_pnd_update',
+            'uses' => 'PndAdminController@index_update'
         ]);
 
         /**
@@ -121,16 +142,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndAdminController@search'
         ]);
 
-        /**
-         * get school by district
-         */
-        Route::post('/ajax/school-by-district', [
-            'as' => 'admin_pnd.school.district',
-            'uses' => 'PndAdminController@getSchoolByDistrict'
-        ]);
-       
-        
-        
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND VIEWER ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -159,6 +170,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_statistics_level_3',
             'uses' => 'PndStatisticsAdminController@index_3'
         ]);     
+          Route::get('/pnd_statistics/etest', [
+            'as' => 'admin_pnd_statistics_level_test',
+            'uses' => 'PndStatisticsAdminController@index_test'
+        ]);     
+        
         
         
         
@@ -213,6 +229,23 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ]);
 
         
+             ////////////////////////////////////////////////////////////////////////
+        ////////////////////////////DANH SACH NIEM YET PHONG THI///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        /**
+         * list
+         */
+        Route::get('/page_school_room_list', [
+            'as' => 'admin_pnd_exame_school_room_list',
+            'uses' => 'PndAdminOptionController@room_list'
+        ]);
+        Route::get('/page_school_room_absent_list', [
+            'as' => 'admin_pnd_exame_school_room_absent_list',
+            'uses' => 'PndAdminOptionController@absent'
+        ]);
+         
+
+        
           ////////////////////////////////////////////////////////////////////////
         ////////////////////////////PND SCHOOL TEST ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -239,6 +272,13 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_exame_school_test.post',
             'uses' => 'PndSchoolTestAdminController@post'
         ]);
+        
+        
+         Route::get('/pnd_school_test/test', [
+            'as' => 'admin_pnd_exame_school_test.order',
+            'uses' => 'PndSchoolTestAdminController@order'
+        ]);
+        
 
         /**
          * delete
@@ -324,10 +364,16 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
         ////////////////////////////PND OPTION  ROUTE///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         
+          Route::get('/pnd_option_point_view', [
+            'as' => 'admin_pnd_option_point_view',
+            'uses' => 'PndExaminepointAdminController@index_view'
+        ]);
+        
           Route::get('/pnd_option_1_school_about', [
             'as' => 'admin_pnd_option_1_school_about',
             'uses' => 'PndSchoolAdminController@index_about_level_3'
         ]);
+          
         Route::post('/pnd_option_1_school_about', [
             'as' => 'admin_pnd_option_1_school_about.post',
             'uses' => 'PndSchoolAdminController@post_about_level_3'
@@ -339,8 +385,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_option_1',
             'uses' => 'PndAdminOptionController@index'
         ]);
-        
-        
+              
              
              
               /**
@@ -435,7 +480,15 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'uses' => 'PndExamWorkAdminController@index'
         ]);
 
-
+        Route::get('/pnd_examine_order', [
+            'as' => 'admin_pnd_examine_order',
+            'uses' => 'PndExamWorkAdminController@order'
+        ]);
+        
+        Route::get('/pnd_examine_order2', [
+            'as' => 'admin_pnd_examine_order2',
+            'uses' => 'PndExamWorkAdminController@order2'
+        ]);
         /**
          * set point
          */
@@ -443,8 +496,21 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Foos
             'as' => 'admin_pnd_examine.point',
             'uses' => 'PndExamWorkAdminController@point'
         ]);
-        
-          /**
+
+        /**
+         * set point
+         */
+        Route::get('/pnd_examine/order', [
+            'as' => 'admin_pnd_examine.order',
+            'uses' => 'PndExamWorkAdminController@point_order'
+        ]);
+
+          Route::get('/pnd_examine/order2', [
+            'as' => 'admin_pnd_examine.order2',
+            'uses' => 'PndExamWorkAdminController@point_order2'
+        ]);
+
+        /**
          * set indentifi
          */
         Route::get('/pnd_examine/identifi', [

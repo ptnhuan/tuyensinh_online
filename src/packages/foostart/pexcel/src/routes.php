@@ -109,6 +109,14 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
             'uses' => 'PexcelAdminController@index'
         ]);
 
+        
+         Route::get('admin/update_pexcel', [
+            'as' => 'admin_update_pexcel',
+            'uses' => 'PexcelAdminController@index_update'
+        ]);
+        
+        
+        
         /**
          * edit-add
          */
@@ -116,13 +124,29 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
             'as' => 'admin_pexcel.edit',
             'uses' => 'PexcelAdminController@edit'
         ]);
+        Route::get('admin/update_pexcel/edit', [
+            'as' => 'admin_update_pexcel.edit',
+            'uses' => 'PexcelAdminController@edit_update'
+        ]);
 
+         Route::get('admin/pexcel/edit_update', [
+            'as' => 'admin_pexcel.edit_update',
+            'uses' => 'PexcelAdminController@edit'
+        ]);
+
+        
+        
         /**
          * pexcel
          */
         Route::post('admin/pexcel/edit', [
             'as' => 'admin_pexcel.post',
             'uses' => 'PexcelAdminController@post'
+        ]);
+        
+        Route::post('admin/update_pexcel/edit', [
+            'as' => 'admin_update_pexcel.post',
+            'uses' => 'PexcelAdminController@post_update'
         ]);
 
         /**
@@ -132,6 +156,10 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
             'as' => 'admin_pexcel.delete',
             'uses' => 'PexcelAdminController@delete'
         ]);
+        Route::get('admin/update_pexcel/delete', [
+            'as' => 'admin_update_pexcel.delete',
+            'uses' => 'PexcelAdminController@delete_update'
+        ]);
 
         /**
          * parse
@@ -140,6 +168,12 @@ Route::group(['middleware' => ['web'],  'namespace' => 'Foostart\Pexcel\Controll
             'as' => 'admin_pexcel.parse',
             'uses' => 'PexcelAdminController@parse'
         ]);
+        
+        Route::get('admin/update_pexcel/parse', [
+            'as' => 'admin_update_pexcel.parse',
+            'uses' => 'PexcelAdminController@parse_update'
+        ]);
+   
 
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////CATEGORIES ROUTE////////////////////////////

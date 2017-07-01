@@ -73,6 +73,10 @@
                                     <!--INPUT-->
                                     @include('pnd::elements.pnd_input', ['name' => 'school_class_name','value'=> @$specialist->school_class_name])
                                     <!--/END INPUT-->
+                                    
+                                    <!--INPUT-->
+                                    @include('pnd::elements.pnd_input', ['name' => 'school_class_order','value'=> @$specialist->school_class_order])
+                                    <!--/END INPUT-->
 
                                       
                                     

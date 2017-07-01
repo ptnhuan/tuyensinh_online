@@ -14,42 +14,43 @@
     <thead>
         <tr>
             <th style='width:5%'>{{ trans('pnd::pnd.order') }}</th>
-                  <th style='width:35%'>{{ trans('pnd::pnd.school_test_name') }}</th>             
-            <th style='width:10%'>{{ trans('pnd::pnd.school_test_phone') }}</th>
-            <th style='width:15%'>{{ trans('pnd::pnd.school_test_email') }}</th>
+            <th style='width:5%'>{{ trans('pnd::pnd.school_test_code') }}</th>             
+            <th style='width:35%'>{{ trans('pnd::pnd.school_test_name') }}</th>             
+            <th style='width:10%'>{{ trans('pnd::pnd.school_number_room') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_number_room_to') }}</th>
+            <th style='width:15%'>{{ trans('pnd::pnd.school_number_room_from') }}</th>
             <th style='width:20%'>{{ trans('pnd::pnd.operations') }}</th>
         </tr>
     </thead>
     <tbody>
-        <?php
-        $nav = $schools->toArray();
-        $counter = ($nav['current_page'] - 1) * $nav['per_page'] + 1;
-        ?>
-        @foreach($schools as $school)
+         <?php
+         $i=0;
+         ?>
+        @foreach($schooltests as $school)
         <tr>
             <td>
                 <?php
-                echo $counter;
-                $counter++
+                $i=$i+1;
+                echo $i;
                 ?>
             </td>
-                        <td>{!! @$school->school_test_name !!}</td>           
-            <td>{!! @$school->school_test_phone !!}</td>
-            <td>{!! @$school->school_test_email !!}</td>
+            <td>{!! @$school->school_test_code !!}</td>           
+            <td>{!! @$school->school_test_name !!}</td>           
+            <td>{!! @$school->school_number_room !!}</td>
+            <td>{!! @$school->school_number_room_to !!}</td>
+            <td>{!! @$school->school_number_room_from !!}</td>
 
 
             <td>
-                <a href="{!! URL::route('admin_pnd_exame_school_test.edit', ['id' => $school->school_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>
-                <a href="{!! URL::route('admin_pnd_exame_school_test.delete',['id' =>  $school->school_id, '_token' => csrf_token()]) !!}" class="margin-left-5 delete"><i class="fa fa-trash-o fa-2x"></i></a>
+                <a href="{!! URL::route('admin_pnd_exame_school_test.edit', ['id' => $school->school_test_id]) !!}"><i class="fa fa-edit fa-2x"></i></a>
+                <a href="{!! URL::route('admin_pnd_exame_school_test.delete',['id' =>  $school->school_test_id, '_token' => csrf_token()]) !!}" class="margin-left-5 delete"><i class="fa fa-trash-o fa-2x"></i></a>
                 <span class="clearfix"></span>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-<div class="paginator">
-    {!! $schools->appends($request->except(['page']) )->render() !!}
-</div>
+ 
 
 @else
 <span class="text-warning">

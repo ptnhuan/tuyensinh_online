@@ -16,7 +16,7 @@
             <div class="panel panel-info">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_examinepoint_search') : trans('pnd::pnd.page_examinepoint_list') !!}</h3>
+                    <h3 class="panel-title bariol-thin"><i class="fa fa-group"></i> {!! $request->all() ? trans('pnd::pnd.page_examinepoint_search') : trans('pnd::pnd.school_exam_identifi') !!}</h3>
                 </div>
 
                 <!--MESSAGE-->
@@ -34,7 +34,11 @@
                 @endif
                 <!--ERRORS-->
                 <div class="panel-body"> 
+                    <?php  if ($params['school_code']==9900){?>
+                       @include('pnd::admin.management.pnd_exam_identifi_chuyen_item')
+                    <?php }else{?>
                     @include('pnd::admin.management.pnd_exam_identifi_item')
+                    <?php }?>
                 </div>
             </div>
         </div>

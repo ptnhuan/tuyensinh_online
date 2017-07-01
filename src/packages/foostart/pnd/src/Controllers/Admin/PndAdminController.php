@@ -49,7 +49,7 @@ class PndAdminController extends PndController {
      * @return type
      */
     public function index(Request $request) {
-
+  
         $this->isAuthentication();
 
         $params = $request->all();
@@ -57,7 +57,7 @@ class PndAdminController extends PndController {
         $params['user_name'] = $this->current_user->user_name;
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
-
+        $params['school_code'] = "";
         $school_option12 = "";
         $statistics = "";
 
@@ -186,7 +186,6 @@ class PndAdminController extends PndController {
 
 
         if ($params['this']->is_my) {
-
 
             $params_option = $this->obj_students->get_student_option($params);
             $school_option123 = array('NULL' => '') + $this->obj_schools->pluck_select_option($params_option)->toArray();
@@ -661,7 +660,7 @@ class PndAdminController extends PndController {
         $params['user_id'] = $this->current_user->id;
         $params['this'] = $this;
         $input['user_id'] = $this->current_user->id;
-         $school = $this->obj_schools->get_school_by_user($params);
+        $school = $this->obj_schools->get_school_by_user($params);
         if (!empty($school)) {
             $params['school_code'] = $school->school_code;
             $params['school_id'] = $school->school_id;
@@ -670,9 +669,9 @@ class PndAdminController extends PndController {
             $params['delete'] = $school->delete;
         }
 
-        
-        
-        
+
+
+
         $student_id = (int) $request->get('id');
         if (!empty($students)) {
             $statistics['sum'] = $this->obj_students->statistics_all_students($params, 0)->count();
@@ -704,6 +703,7 @@ class PndAdminController extends PndController {
         } else {
             $params['school_option1234'] = "";
         }
+        
         if (!$this->obj_validator->adminValidate($input)) {
 
             $data['errors'] = $this->obj_validator->getErrors();
@@ -711,11 +711,13 @@ class PndAdminController extends PndController {
             if (!empty($student_id) && is_int($student_id)) {
                 $student = $this->obj_students->find($student_id);
             }
+            
+            
         } else {
             if (!empty($student_id) && is_int($student_id)) {
 
                 $student = $this->obj_students->find($student_id);
-              
+
                 if (!empty($student)) {
 
                     $input['student_id'] = $student_id;
@@ -725,65 +727,70 @@ class PndAdminController extends PndController {
                     if (!empty($pexcel) && ($this->is_admin || ($pexcel->user_id == $this->current_user->id) || ($student->student_user == $this->current_user->user_name && $student->pexcel_id == $pexcel->pexcel_id))
                     ) {
 
-                        if ($this->obj_schools->get_school_by_user($params)->edit == 0) {
+                        if ($this->is_admin) {
 
-                            $input['add'] = $params['add'];
-                            $input['edit'] = $params['edit'];
-                            $input['delete'] = $params['delete'];
+                            $input['add'] = 1;
+                            $input['edit'] = 1;
+                            $input['delete'] = 1;
 
                             $student = $this->obj_students->update_student($input);
+                        } else {
+
+                            if ($this->obj_schools->get_school_by_user($params)->edit == 0) {
+
+                                $input['add'] = $params['add'];
+                                $input['edit'] = $params['edit'];
+                                $input['delete'] = $params['delete'];
+
+                                $student = $this->obj_students->update_student($input);
                             
                             
+                            }
                         }
+                    }
 
 //Message
-                        $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_successfully'));
 
-                        return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
-                    } else {
+                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                } else {
 
-                        $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
 
-                        return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
-                    }
+                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
+                }
+                //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
+             var_dump(1);die();
+        }  
+      
+            $input = array_merge($input, array());
+
+            $obj_pexcel = new Pexcel();
+
+            $input['pexcel_id'] = $obj_pexcel->get_pexcels_by_user_id_first($input['user_id'])->pexcel_id;
+
+            //   if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
+
+            if ($this->obj_schools->get_school_by_user($params)->add == 0) {
+                $student = $this->obj_students->add_student($input);
+
+                if (!empty($student)) {
+
+                    //Message
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
+
+                    return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
                     //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
                 } else {
 
                     //Message
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_update_unsuccessfully'));
+                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
                 }
             } else {
 
-                $input = array_merge($input, array());
-
-                $obj_pexcel = new Pexcel();
-
-
-
-                $input['pexcel_id'] = $obj_pexcel->get_pexcels_by_user_id_first($input['user_id'])->pexcel_id;
-
-                //   if ($this->obj_categories->get_pexcels_categories_action()->add_level2 == 0) {
-
-                if ($this->obj_schools->get_school_by_user($params)->add == 0) {
-                    $student = $this->obj_students->add_student($input);
-
-                    if (!empty($student)) {
-
-                        //Message
-                        $this->addFlashMessage('message', trans('pnd::pnd.message_add_successfully'));
-
-                        return Redirect::route("admin_pnd.edit", ["id" => $student->student_id]);
-                        //return Redirect::route("admin_pnd.edit", ["id" => $students->pnd_id]);
-                    } else {
-
-                        //Message
-                        $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
-                    }
-                } else {
-
-                    $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
-                }
+                $this->addFlashMessage('message', trans('pnd::pnd.message_add_unsuccessfully'));
             }
+       
         }
         $pexcels = $this->obj_students->sendPexcels();
         $this->data = array_merge($this->data, array(
@@ -857,12 +864,28 @@ class PndAdminController extends PndController {
      */
 
     
-    public
-            function getSchoolByDistrict(Request $request) {
-     
+    public function getSchoolByDistrict(Request $request) { 
         $input = $request->all();
         $input['school_level_id'] = 2;
         $schools = $this->obj_schools->pluck_select($input);
+
+        $html = null;
+        if (!empty($schools)) {
+
+            foreach ($schools as $key => $school) {
+                $selected = ($key == $request['school_current']) ? "selected" : "";
+                $html .= '<option ' . $selected . ' value="' . $key . '">' . $school . '</option>';
+            }
+        }
+
+        return $html;
+    }
+    
+    
+      public function getSchoolByDistrictTest(Request $request) { 
+        $input = $request->all();
+        $input['school_level_id'] = 2;
+        $schools = $this->obj_schools->pluck_select_Level_23($input);
 
         $html = null;
         if (!empty($schools)) {

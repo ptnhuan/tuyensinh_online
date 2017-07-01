@@ -24,9 +24,9 @@
             @if( isset($message) )
             <div class="alert alert-success">{{$message}}</div>
             @endif
- 
- 
- 
+
+
+
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
@@ -384,7 +384,7 @@
 
                                     <!--/END INPUT-->
                                 </div>
- {!! Form::hidden('school_aed',@$students->school_aed) !!}
+                                {!! Form::hidden('school_aed',@$students->school_aed) !!}
                                 {!! Form::hidden('id',@$students->student_id) !!}
 
                                 <!-- SAVE BUTTON -->
@@ -398,303 +398,237 @@
                             <!--TAB ATTRIBUTES-->
                             <div id="attributes" class="tab-pane fade">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        &nbsp;
-                                        <!--/END INPUT-->
-
-                                    </div>
-
-                                    <div class="col-md-6">
-
-                                        <!--INPUT-->
-
-
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-                                    </div>
-
-                                </div>
-  <div class="row">
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                       ĐIỂM XÉT TUYỂN
-                                        <!--/END INPUT-->
-
-                                    </div>
-
-                                    <div class="col-md-6">
-
-                                        <!--INPUT-->
-
-
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-                                    </div>
-
-                                </div>
-    <div class="row">
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        &nbsp;
-                                        <!--/END INPUT-->
-
-                                    </div>
-
-                                    <div class="col-md-6">
-
-                                        <!--INPUT-->
-
-
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
+                                    <div class="col-md-3">                                       
+                                        &nbsp;                                     
 
                                     </div>
 
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-3">
 
-                                    <!--INPUT-->
+                                        <b>ĐIỂM XÉT TUYỂN</b>
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        &nbsp;
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+
                                     <div class="col-md-3"   >
-                                        <!--INPUT-->
-
-                                        <tr> Điểm lớp 6: <?php echo $student->student_point_6;?></tr>
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <!--INPUT-->
-    <tr> Điểm lớp 7: <?php echo $student->student_point_7;?></tr>
 
 
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-    <tr> Điểm lớp 8: <?php echo $student->student_point_8;?></tr>
+                                        <tr>  <b>Điểm lớp 6:</b> <?php echo $student->student_point_6; ?></tr>
+
 
                                     </div>
                                     <div class="col-md-3">
 
-    <tr> Điểm lớp 9: <?php echo $student->student_point_9;?></tr>
+
+                                        <tr> <b> Điểm lớp 7:</b> <?php echo $student->student_point_7; ?></tr>
+
+
+
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <tr>  <b>Điểm lớp 8: </b><?php echo $student->student_point_8; ?></tr>
+
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <tr>  <b>Điểm lớp 9: </b><?php echo $student->student_point_9; ?></tr>
                                     </div>
 
 
-
-                                    <!--/END INPUT-->
                                 </div>
                                 <div class="row">
 
                                     <div class="col-md-3">
                                         &nbsp;
-                                 
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
 
                                     </div>
 
-                                    <!--/END INPUT-->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
 
-                                         <tr> Điểm ưu tiên-khuyến khích: <?php echo $student->student_score_prior;?></tr>
+                                        <tr>  <b>Điểm ưu tiên-khuyến khích: </b><?php echo $student->student_score_prior; ?></tr>
 
                                     </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
 
-
-                                    </div>
-                                    <!--INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <!--INPUT-->
-
-
-                                        <!--/END INPUT-->
-                                    </div>
-
-                                    <!--/END INPUT-->
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                         &nbsp;
-
+                                        &nbsp;
+                                        <hr ></hr>
                                     </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-
-                                    </div>
-                                    <!--/END INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                      THÔNG TIN THI TUYỂN
+                                       <b>  THÔNG TIN THI TUYỂN</b>
 
                                     </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-
-                                    </div>
-                                    <!--/END INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                         &nbsp;
+                                        &nbsp;
 
                                     </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-
-                                    </div>
-                                    <!--/END INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <TR>Số báo danh:<?php echo $student->student_identifi_name;?><TR>
+                                    <div class="col-md-5">
+                                        <TR> <b>-Đúng:</b><?php echo $info->pexcel_category_taptrung; ?><TR>
 
                                     </div>
-                                    <div class="col-md-3">
-                                        <TR>Phòng thi:<?php echo $student->student_room;?><TR>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
+                                  
 
-                                        <!--/END INPUT-->
-
-
-                                    </div>
-                                    <!--/END INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-                                    </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-3">
-                                         &nbsp;
+                                        &nbsp;
 
                                     </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
-
-                                    </div>
-                                    <!--/END INPUT-->
-                                    <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-                                    </div>
                                 </div>
+                                
+                                  <div class="row">
+                                   
+                                    <div class="col-md-5">
+                                        <TR> <b>-Có mặt tại:Trường </b><?php echo $info_test->school_test_name; ?><TR>
+                                    </div>
+                                   
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-3">
-                                         &nbsp;
+                                        &nbsp;
+
+                                    </div>
+
+                                </div>
+                                
+                                  <div class="row">
+                                   
+                                    <div class="col-md-5">
+                                        <TR> <b>-Địa chỉ:</b><?php echo $info_test->school_test_address; ?><TR>
+                                    </div>
+
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-md-3">
+                                        &nbsp;
+
+                                    </div>
+
+                                </div>
+                                
+                                  <div class="row">
+                                   
+                                    <div class="col-md-10">
+                                        <TR> <b>-Để làm thủ tục tham dự kỳ thi: </b><?php echo $info->pexcel_category_kythi; ?><TR>
+                                    </div>
+                                   
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        &nbsp;
+
+                                    </div>
+
+                                </div>
+                                
+                                  <div class="row">
+                                   
+                                    <div class="col-md-10">
+                                        <TR> <b>-Khóa thi ngày:</b><?php echo $info->pexcel_category_ngaythi; ?><TR>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        &nbsp;
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <TR> <b>-Số báo danh:</b><?php echo $student->student_identifi_name; ?><TR>
 
                                     </div>
                                     <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
-
+                                        <TR> <b>-Phòng thi:</b><?php echo $student->student_room; ?><TR>
                                     </div>
+
+                                </div>
+                                
+                                 <div class="row">
                                     <div class="col-md-3">
-                                        <!--INPUT-->
-
-                                        <!--/END INPUT-->
-
+                                        &nbsp;
 
                                     </div>
-                                    <!--/END INPUT-->
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-5">
+                                        <TR> <b>-Nguyện vọng 1:</b> <?php echo $params['option_1'] ; ?><TR>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <TR> <b>-Nguyện vọng 2:</b><?php echo @$params['option_2'] ; ?><TR>
+                                    </div>
+
+                                </div>
+                                
+                                 <div class="row">
                                     <div class="col-md-3">
-                                        <!--INPUT-->
-                                        <!--/END INPUT-->
+                                        &nbsp;
+
                                     </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <TR><b>-Điểm thi TOÁN: </b> <TR>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <TR><b>-Điểm thi Văn:</b> <TR>
+                                    </div>
+                                
+                                    <div class="col-md-2">
+                                        <TR><b>-Điểm thi Anh văn:</b> <TR>
+                                    </div>
+
                                 </div>
                             </div>
-                            <!--TAB ATTRIBUTES-->
-
 
                         </div>
 

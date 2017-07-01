@@ -140,6 +140,23 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich','value'=> @$school->school_contact_chutich])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich_phone','value'=> @$school->school_contact_chutich_phone])
+                                            <!--/END INPUT-->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
+                                            @include('pnd::elements.pnd_input', ['name' => 'school_contact_chutich_email','value'=> @$school->school_contact_chutich_email])
+                                            <!--/END INPUT-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <!--INPUT-->
                                             @include('pnd::elements.pnd_input', ['name' => 'school_contact','value'=> @$school->school_contact])
                                             <!--/END INPUT-->
                                         </div>

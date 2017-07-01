@@ -42,8 +42,49 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                     @include('pexcel::elements.input', ['name' => 'pexcel_category_name', 'value' => $pexcel_category_name])
                                     <!-- /END SAMPLE NAME TEXT -->
                                 </div>
+                                
 
                                 <div class="col-md-3">
+
+                                    <!-- SAMPLE NAME TEXT-->
+                                    <?php $pexcel_category_ngaythi = $request->get('pexcel_category_ngaythi') ? $request->get('pexcel_category_ngaythi') : @$pexcel_category->pexcel_category_ngaythi ?>
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_category_ngaythi', 'value' => $pexcel_category_ngaythi])
+                                    <!-- /END SAMPLE NAME TEXT -->
+                                </div>
+                                  <div class="col-md-6">
+
+                                    <!-- SAMPLE NAME TEXT-->
+                                    <?php $pexcel_category_kythi = $request->get('pexcel_category_kythi') ? $request->get('pexcel_category_kythi') : @$pexcel_category->pexcel_category_kythi ?>
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_category_kythi', 'value' => $pexcel_category_kythi])
+                                    <!-- /END SAMPLE NAME TEXT -->
+                                </div>
+                                 
+                            </div>
+                            
+                            <div class="row">  
+                                
+                               
+                                 <div class="col-md-6">
+
+                                    <!-- SAMPLE NAME TEXT-->
+                                    <?php $pexcel_category_ngayky = $request->get('pexcel_category_ngayky') ? $request->get('pexcel_category_ngayky') : @$pexcel_category->pexcel_category_ngayky ?>
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_category_ngayky', 'value' => $pexcel_category_ngayky])
+                                    <!-- /END SAMPLE NAME TEXT -->
+                                </div>
+
+                               
+                                 <div class="col-md-6">
+
+                                    <!-- SAMPLE NAME TEXT-->
+                                    <?php $pexcel_category_taptrung = $request->get('pexcel_category_taptrung') ? $request->get('pexcel_category_taptrung') : @$pexcel_category->pexcel_category_taptrung ?>
+                                    @include('pexcel::elements.input', ['name' => 'pexcel_category_taptrung', 'value' => $pexcel_category_taptrung])
+                                    <!-- /END SAMPLE NAME TEXT -->
+                                </div>
+                            </div>
+                             <div class="row">  
+                                
+
+                                <div class="col-md-4">
                                     <?php $category_status = $request->get('pexcel_category_status') ? $request->get('pexcel_category_status') : @$pexcel_category->pexcel_category_status ?>
 
                                     {!! Form::label('pexcel_category_status', trans('pexcel::pexcel.pexcel_category_status').':') !!}
@@ -51,7 +92,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                     {!! Form::select('pexcel_category_status', [99 => 'Sẵn sàng', 77 => 'Khóa'], $category_status, ['class' => 'form-control']) !!}
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
 
                                             <!--INPUT-->
                                             
@@ -61,9 +102,19 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                            
                                             <!--/END INPUT-->
                                         </div>
+                                  <div class="col-md-4">
+
+                                            <!--INPUT-->
+                                            
+                                              @include('pnd::elements.pnd_select', ['name' => 'add_levelstd',
+                                                            'categories'=> ['2'=>'Không','0'=>'Chỉ thay đổi mật khẩu','1'=>'Sửa tất cả thông tin'],
+                                                          'category_id'=> @$pexcel_category->aed_student])
+                                           
+                                            <!--/END INPUT-->
+                                        </div>
                             </div>
                              <div class="row">  
-                               <div class="col-md-3">
+                               <div class="col-md-4">
 
                                             <!--INPUT-->
                                             
@@ -73,7 +124,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                            
                                             <!--/END INPUT-->
                                         </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
 
                                             <!--INPUT-->
                                             
@@ -83,7 +134,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                            
                                             <!--/END INPUT-->
                                         </div>
-                                   <div class="col-md-3">
+                                   <div class="col-md-4">
 
                                             <!--INPUT-->
                                             
@@ -95,7 +146,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                         </div>
                             </div>
                             <div class="row">  
-                                <div class="col-md-3">
+                                <div class="col-md-4">
 
                                     <!--INPUT-->
 
@@ -105,7 +156,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
 
                                     <!--/END INPUT-->
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
 
                                     <!--INPUT-->
 
@@ -115,7 +166,7 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
 
                                     <!--/END INPUT-->
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
 
                                     <!--INPUT-->
 
@@ -126,19 +177,39 @@ Admin area: {{ trans('pexcel::pexcel.page_edit') }}
                                     <!--/END INPUT-->
                                 </div>
                             </div>
-                             <div class="row">  
-                               <div class="col-md-3">
+                            <div class="row">  
+                                <div class="col-md-4">
 
-                                            <!--INPUT-->
-                                            
-                                              @include('pnd::elements.pnd_select', ['name' => 'add_levelstd',
-                                                            'categories'=> ['2'=>'Không','0'=>'Chỉ thay đổi mật khẩu','1'=>'Sửa tất cả thông tin'],
-                                                          'category_id'=> @$pexcel_category->aed_student])
-                                           
-                                            <!--/END INPUT-->
-                                        </div>
-                               
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'keylook_identifi',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->keylook_identifi])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-4">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'keylook_room',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->keylook_room])
+
+                                    <!--/END INPUT-->
+                                </div>
+                                <div class="col-md-4">
+
+                                    <!--INPUT-->
+
+                                    @include('pnd::elements.pnd_select', ['name' => 'keylook_test',
+                                    'categories'=> ['1'=>'Không cho phép','0'=>'Cho phép'],
+                                    'category_id'=> @$pexcel_category->keylook_test])
+
+                                    <!--/END INPUT-->
+                                </div>
                             </div>
+                             
                         </div>
 
                         <!-- /END POST CATEGORY LIST -->

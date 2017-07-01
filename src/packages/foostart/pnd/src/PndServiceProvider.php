@@ -167,8 +167,9 @@ class PndServiceProvider extends ServiceProvider {
             'pnd::admin.management.pnd_option_statistics*',
               'pnd::admin.management.pnd_option_list*',
             'pnd::admin.management.pnd_option_item*',
-            'pnd::admin.management.pnd_option_edit*',        
-           
+            'pnd::admin.management.pnd_option_edit*',              
+              'pnd::admin.management.pnd_option_point*',
+                      
             
             ], function ($view) {
             global $request;
@@ -184,7 +185,13 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_option_1_school_about'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
-                /**
+               
+                
+                  trans('pnd::pnd.page_option_point_list') => [
+                    'url' => URL::route('admin_pnd_option_point_view'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                 /**
                  * option 1
                  */
                 //list
@@ -235,6 +242,29 @@ class PndServiceProvider extends ServiceProvider {
                 //list
                 trans('pnd::pnd.page_school_test_list') => [
                     'url' => URL::route('admin_pnd_exame_school_test'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                //danh sách niem yết
+                trans('pnd::pnd.page_school_room_list') => [
+                    'url' => URL::route('admin_pnd_exame_school_room_list'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                //thong tin vang thi
+                trans('pnd::pnd.page_school_room_vangthi_list') => [
+                    'url' => URL::route('admin_pnd_exame_school_room_absent_list'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                 //xet tuyen theo chi tieu
+                trans('pnd::pnd.page_school_examination') => [
+                  'url' => URL::route('admin_pnd_examine_order'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
+                 //xet tuyen theo chi tieu
+                trans('pnd::pnd.page_school_examination2') => [
+                  'url' => URL::route('admin_pnd_examine_order2'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
             ]);
@@ -368,6 +398,11 @@ class PndServiceProvider extends ServiceProvider {
                     'url' => URL::route('admin_pnd_statistics_level_3'),
                     "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
                 ],
+                trans('pnd::pnd.page_school_statistics_test') => [
+                    'url' => URL::route('admin_pnd_statistics_level_test'),
+                    "icon" => '<i class="fa fa-bars" aria-hidden="true"></i>'
+                ],
+                
             ]);
         });
     }
